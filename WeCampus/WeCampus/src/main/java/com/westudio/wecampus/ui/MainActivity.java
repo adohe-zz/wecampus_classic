@@ -1,8 +1,10 @@
-package com.westudio.wecampus;
+package com.westudio.wecampus.ui;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+
+import com.westudio.wecampus.R;
 
 public class MainActivity extends Activity {
 

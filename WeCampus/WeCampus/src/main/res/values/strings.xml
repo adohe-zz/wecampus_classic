@@ -5,4 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <!-- Authenticate Part -->
+    <string name="authenticate_error">Invalid authTokenType</string>
+    `
 </resources>

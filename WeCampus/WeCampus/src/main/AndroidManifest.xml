@@ -9,12 +9,14 @@
         android:targetSdkVersion="16" />
 
     <application
+        android:name=".ui.base.BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-            android:name="com.westudio.wecampus.MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +24,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+    <!-- Add Account Service-->
+    <service
+        android:name=".service.AuthenticationService"
+        android:enabled="true"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="android.accounts.AccountAuthenticator"></action>
+        </intent-filter>
+        <meta-data
+            android:name="android.accounts.AccountAuthenticator"
+            android:resource="@xml/authenticator">
+        </meta-data>
+    </service>
+
     </application>
 
 </manifest>
