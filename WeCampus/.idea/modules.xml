@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../library/ABS/ABS.iml" filepath="$PROJECT_DIR$/../library/ABS/ABS.iml" />
       <module fileurl="file://$PROJECT_DIR$/WeCampus/WeCampus-WeCampus.iml" filepath="$PROJECT_DIR$/WeCampus/WeCampus-WeCampus.iml" />
     </modules>
   </component>

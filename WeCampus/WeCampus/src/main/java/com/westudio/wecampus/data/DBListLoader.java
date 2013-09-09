@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by nankonami on 13-9-7.
+ * Load data from database
  */
 public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
 

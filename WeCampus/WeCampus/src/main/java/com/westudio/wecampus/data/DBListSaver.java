@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 
 /**
  * Created by nankonami on 13-9-7.
+ * Save data into database
  */
 public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callable<Void> {
 

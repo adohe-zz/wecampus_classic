@@ -79,7 +79,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+            <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
               <folding />
             </state>
           </provider>
@@ -88,7 +88,19 @@
       <file leaf-file-name="BaseApplication.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="14" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="870">
+            <state line="28" column="49" selection-start="827" selection-end="827" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1005">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#755#771#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WeCampusApi.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/net/WeCampusApi.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="186" selection-end="186" vertical-scroll-proportion="0.21565495" vertical-offset="0" max-vertical-offset="626">
               <folding />
             </state>
           </provider>
@@ -97,64 +109,10 @@
       <file leaf-file-name="Utility.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="12" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="420">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthenticationService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/service/AuthenticationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="43" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="465">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Authenticator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Authenticator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="26" selection-start="3414" selection-end="3414" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="1725">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBListSaver.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListSaver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="7" selection-start="1765" selection-end="1765" vertical-scroll-proportion="1.845048" vertical-offset="0" max-vertical-offset="1680">
+            <state line="16" column="22" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="21" selection-start="290" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="660">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBListLoader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="5" selection-start="3112" selection-end="3305" vertical-scroll-proportion="0.0" vertical-offset="1504" max-vertical-offset="2130">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WeCampus/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="34" selection-start="134" selection-end="142" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="765">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -206,7 +164,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/com/westudio/wecampus/ui/MainActivity.java" />
-        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/MainActivity.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/res/values/strings.xml" />
@@ -214,10 +171,14 @@
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/service/AuthenticationService.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/res/xml/authenticator.xml" />
-        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBHelper.java" />
-        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseApplication.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListLoader.java" />
         <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListSaver.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DatabaseConfigUtil.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBHelper.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseFragment.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseApplication.java" />
+        <option value="$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/net/WeCampusApi.java" />
       </list>
     </option>
   </component>
@@ -318,6 +279,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -352,7 +335,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -366,7 +349,117 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wecampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wecampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wecampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WeCampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wecampus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -383,7 +476,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/WeCampus/libs/ormlite-core-4.45.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/WeCampus/libs/volley.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -533,7 +626,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -551,7 +644,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2649919" sideWeight="0.6712538" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2649919" sideWeight="0.6712538" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -575,27 +668,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="12" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="420">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/service/AuthenticationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="4" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="40" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="330" />
@@ -612,13 +684,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="626">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="5" selection-start="310" selection-end="310" vertical-scroll-proportion="0.21565495" vertical-offset="0" max-vertical-offset="626" />
@@ -629,61 +694,102 @@
         <state line="2" column="46" selection-start="167" selection-end="167" vertical-scroll-proportion="0.047923323" vertical-offset="0" max-vertical-offset="626" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="34" selection-start="134" selection-end="142" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="14" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Authenticator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="26" selection-start="3414" selection-end="3414" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1725">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="12" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <folding />
+        <state line="105" column="26" selection-start="3414" selection-end="3414" vertical-scroll-proportion="2.4959216" vertical-offset="0" max-vertical-offset="1680">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/service/AuthenticationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="43" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+        <state line="22" column="43" selection-start="517" selection-end="517" vertical-scroll-proportion="0.4313099" vertical-offset="0" max-vertical-offset="626">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="5" selection-start="3112" selection-end="3305" vertical-scroll-proportion="0.0" vertical-offset="1504" max-vertical-offset="2130">
+        <state line="16" column="51" selection-start="412" selection-end="412" vertical-scroll-proportion="0.38338658" vertical-offset="0" max-vertical-offset="2145">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="34" selection-start="134" selection-end="142" vertical-scroll-proportion="0.047923323" vertical-offset="0" max-vertical-offset="765">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="21" selection-start="290" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
+        <state line="27" column="56" selection-start="811" selection-end="811" vertical-scroll-proportion="0.5511182" vertical-offset="0" max-vertical-offset="626">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DatabaseConfigUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="43" selection-start="382" selection-end="382" vertical-scroll-proportion="0.3115016" vertical-offset="0" max-vertical-offset="626">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/data/DBListSaver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="7" selection-start="1765" selection-end="1765" vertical-scroll-proportion="1.845048" vertical-offset="0" max-vertical-offset="1680">
+        <state line="14" column="33" selection-start="364" selection-end="364" vertical-scroll-proportion="0.33546326" vertical-offset="0" max-vertical-offset="1695">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="8" selection-start="221" selection-end="221" vertical-scroll-proportion="0.22022839" vertical-offset="0" max-vertical-offset="675">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="626">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/util/Utility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="22" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/ui/base/BaseApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="49" selection-start="827" selection-end="827" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1005">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#755#771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeCampus/src/main/java/com/westudio/wecampus/net/WeCampusApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="186" selection-end="186" vertical-scroll-proportion="0.21565495" vertical-offset="0" max-vertical-offset="626">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -744,7 +850,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -764,7 +869,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>ormlite-core-4.45</last-edited>
+          <last-edited>volley</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
