@@ -69,12 +69,9 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="FlurryAgent" level="project" />
-    <orderEntry type="library" name="gson-2.2.3" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-13.0.0" level="project" />
     <orderEntry type="library" name="ormlite-android-4.45" level="project" />
     <orderEntry type="library" name="ormlite-core-4.45" level="project" />
-    <orderEntry type="library" name="volley" level="project" />
-    <orderEntry type="library" name="android-support-v4" level="project" />
   </component>
 </module>
 
