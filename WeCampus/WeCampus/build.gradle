@@ -23,5 +23,14 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:13.0.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:support-v4:18.0.+'
+    compile files('libs/volley.jar')
+    compile files('libs/ormlite-android-4.45.jar')
+    compile files('libs/ormlite-core-4.45.jar')
+    compile files('libs/FlurryAgent.jar')
+}
+
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
 }
