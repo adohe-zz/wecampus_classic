@@ -8,6 +8,7 @@ import com.westudio.wecampus.util.Authenticator;
 
 /**
  * Created by nankonami on 13-9-7.
+ * Authentication service class
  */
 public class AuthenticationService extends Service {
 

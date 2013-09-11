@@ -23,14 +23,14 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
     private Class<T> mClass;
     private Bundle args;
 
-    public DBListSaver(Context context, Class<T> classType, List<T> data, Bundle args) {
+    public DBListSaver(Context context, Class<T> clazz, List<T> data, Bundle args) {
         super(context);
-        this.mClass = classType;
+        this.mClass = clazz;
         this.mData = data;
         this.args = args;
         dbHelper = BaseApplication.getInstance().getDbHelper();
         try {
-            mDao = dbHelper.getDao(classType);
+            mDao = dbHelper.getDao(clazz);
         } catch (SQLException e) {
             e.printStackTrace();
         }

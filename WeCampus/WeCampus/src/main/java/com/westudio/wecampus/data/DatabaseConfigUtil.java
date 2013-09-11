@@ -10,6 +10,12 @@ import java.sql.SQLException;
  */
 public class DatabaseConfigUtil extends OrmLiteConfigUtil {
 
+    /**
+     * Write database configuration txt
+     * @param args
+     * @throws IOException
+     * @throws SQLException
+     */
     public static void main(String[] args) throws IOException, SQLException {
         writeConfigFile("ormlite_config.txt");
     }

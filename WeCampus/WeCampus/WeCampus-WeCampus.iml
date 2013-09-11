@@ -74,6 +74,7 @@
     <orderEntry type="library" name="ormlite-core-4.45" level="project" />
     <orderEntry type="library" name="abs" level="project" />
     <orderEntry type="library" name="volley" level="project" />
+    <orderEntry type="library" name="gson-2.2.3" level="project" />
   </component>
 </module>
 
