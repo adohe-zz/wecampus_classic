@@ -35,7 +35,7 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         application = this;
-        dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
+        //dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
         RequestQueue queue = Volley.newRequestQueue(this);
     }
 
