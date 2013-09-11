@@ -7,5 +7,7 @@
 
     <!-- Authenticate Part -->
     <string name="authenticate_error">Invalid authTokenType</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
     `
 </resources>
