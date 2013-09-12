@@ -25,7 +25,8 @@
          The drawer is given a fixed width in dp and extends the full height of
          the container. A solid background is used for contrast
          with the content view. -->
-    <ListView
+
+    <!--ListView
         android:id="@+id/left_drawer"
         android:paddingTop="@dimen/abs__action_bar_default_height"
         android:layout_width="240dp"
@@ -34,6 +35,13 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#111"/>
+        android:background="#ffffff"/-->
+
+    <FrameLayout
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#ffffff"/>
 
 </android.support.v4.widget.DrawerLayout>
