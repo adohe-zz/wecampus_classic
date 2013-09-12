@@ -22,9 +22,10 @@ public class BaseApplication extends Application {
     private DBHelper dbHelper;
 
     //static constants
-    public static String ACCOUNT_TYPE = "com.westudio.wecampus";
+    public static final String ACCOUNT_TYPE = "com.westudio.wecampus";
+    public static final String AUTHTOKEN_TYPE = "com.westudio.wecampus";
 
-    private final LruCache<String, Bitmap> mImageCache = new LruCache<String, Bitmap>(20);
+    public boolean hasAccount;
 
     public static BaseApplication getInstance() {
         return application;
@@ -37,6 +38,7 @@ public class BaseApplication extends Application {
         application = this;
         //dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
         RequestQueue queue = Volley.newRequestQueue(this);
+        hasAccount = false;
     }
 
     @Override

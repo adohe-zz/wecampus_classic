@@ -20,11 +20,11 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
     private List<T> mData = null;
     private DBHelper dbHelper = null;
 
-    public DBListLoader(Context context, Class<T> classType) {
+    public DBListLoader(Context context, Class<T> clazz) {
         super(context);
         dbHelper = BaseApplication.getInstance().getDbHelper();
         try {
-            mDao = dbHelper.getDao(classType);
+            mDao = dbHelper.getDao(clazz);
         } catch (SQLException e) {
             e.printStackTrace();
         }
