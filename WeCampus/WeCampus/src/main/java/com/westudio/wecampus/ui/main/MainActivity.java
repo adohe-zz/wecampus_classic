@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -41,11 +40,11 @@ public class MainActivity extends SherlockFragmentActivity {
                 R.string.drawer_close  /* "close drawer" description for accessibility */
         ) {
             public void onDrawerClosed(View view) {
-                Toast.makeText(MainActivity.this, R.string.drawer_close, Toast.LENGTH_SHORT).show();
+
             }
 
             public void onDrawerOpened(View drawerView) {
-                Toast.makeText(MainActivity.this, R.string.drawer_open, Toast.LENGTH_SHORT).show();
+                
             }
         };
 
