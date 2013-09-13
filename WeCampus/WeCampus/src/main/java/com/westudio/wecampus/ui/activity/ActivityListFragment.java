@@ -1,14 +1,20 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.app.Activity;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.adapter.ActivityAdapter;
+import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
+import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -17,10 +23,17 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
 
 /**
  * Created by martian on 13-9-11.
+ * Fragment that display the activity list
  */
-public class ActivityListFragment extends Fragment implements OnRefreshListener {
+public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
+
+    private Activity activity;
+    private ListView listView;
+
+    private ActivityAdapter adapter;
 
     public static ActivityListFragment newInstance(Bundle args) {
         ActivityListFragment f = new ActivityListFragment();
@@ -29,15 +42,34 @@ public class ActivityListFragment extends Fragment implements OnRefreshListener 
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.activity = activity;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activities, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.activity_list);
-        listView.setAdapter(new ActivityAdapter(getActivity()));
-        mPullToRefreshAttacher = ((MainActivity) getActivity()).getPullToRefreshAttacher();
+        listView = (ListView) view.findViewById(R.id.activity_list);
+        adapter = new ActivityAdapter(activity, listView);
+        CardsAnimationAdapter animationAdapter = new CardsAnimationAdapter(activity, adapter);
+        listView.setAdapter(animationAdapter);
+        mPullToRefreshAttacher = ((MainActivity)activity).getPullToRefreshAttacher();
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
         ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -63,5 +95,20 @@ public class ActivityListFragment extends Fragment implements OnRefreshListener 
                 mPullToRefreshAttacher.setRefreshComplete();
             }
         }.execute();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
     }
 }

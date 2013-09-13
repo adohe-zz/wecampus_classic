@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by martian on 13-9-11.
  */
-public class ActivityAdapter extends BaseAdapter{
+public class ActivitiesAdapter extends BaseAdapter{
     private List<String> data;
     private Context context;
 
-    public ActivityAdapter(Context context) {
+    public ActivitiesAdapter(Context context) {
         this.context = context;
     }
 
