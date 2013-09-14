@@ -1,46 +1,46 @@
 package com.westudio.wecampus.ui.activity;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.westudio.wecampus.R;
-
-import java.util.List;
+import com.westudio.wecampus.modle.Activity;
 
 /**
  * Created by martian on 13-9-11.
  */
-public class ActivityAdapter extends BaseAdapter{
-    private List<String> data;
-    private Context context;
+public class ActivityAdapter extends CursorAdapter {
+    private LayoutInflater mLayoutInflater;
 
-    public ActivityAdapter(Context context) {
-        this.context = context;
+    private ListView mListView;
+
+    public ActivityAdapter(Context context, ListView listView) {
+        super(context, null, false);
+        mLayoutInflater = ((android.app.Activity)context).getLayoutInflater();
+        mListView = listView;
     }
 
     @Override
-    public int getCount() {
-        return 9;
+    public Object getItem(int position) {
+        mCursor.moveToPosition(position);
+        return Activity.fromCursor(mCursor);
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        return mLayoutInflater.inflate(R.layout.row_activity_list, null);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.row_activity_list, viewGroup, false);
-
-        return view;
+    public void bindView(View view, Context context, Cursor cursor) {
+        Activity ac = Activity.fromCursor(mCursor);
+        TextView tv = (TextView) view.findViewById(R.id.text);
+        tv.setText(ac.getId() + "");
     }
 }

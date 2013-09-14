@@ -38,7 +38,7 @@ public class SplashActivity extends Activity {
                         public void run(AccountManagerFuture<Bundle> result) {
                             try {
                                 Bundle bundle = result.getResult();
-                                BaseApplication application = BaseApplication.getInstance();
+                                BaseApplication application = (BaseApplication) getApplication();
                                 application.hasAccount = true;
 
                                 finish();

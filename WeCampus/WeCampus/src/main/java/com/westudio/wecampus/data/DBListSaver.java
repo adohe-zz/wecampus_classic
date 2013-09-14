@@ -1,3 +1,4 @@
+/*
 package com.westudio.wecampus.data;
 
 import android.content.Context;
@@ -11,10 +12,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+*/
 /**
  * Created by nankonami on 13-9-7.
  * Save data into database
- */
+ *//*
+
 public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callable<Void> {
 
     private Dao<T, ID> mDao = null;
@@ -36,10 +39,12 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
         }
     }
 
-    /**
+    */
+/**
      * Background task
      * @return
-     */
+     *//*
+
     @Override
     public Void loadInBackground() {
         try {
@@ -56,9 +61,11 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
         super.onCanceled(data);
     }
 
-    /**
+    */
+/**
      * Handles a request to start the loader
-     */
+     *//*
+
     @Override
     protected void onStartLoading() {
         super.onStopLoading();
@@ -66,17 +73,21 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
         forceLoad();
     }
 
-    /**
+    */
+/**
      * Handles a request to stop the loader
-     */
+     *//*
+
     @Override
     protected void onStopLoading() {
         cancelLoad();
     }
 
-    /**
+    */
+/**
      * Handles a request to completely reset the loader
-     */
+     *//*
+
     @Override
     protected void onReset() {
         super.onReset();
@@ -87,11 +98,13 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
         onReleaseResource(mData);
     }
 
-    /**
+    */
+/**
      * Helper function to take care of releasing resources associated
      * with an actively data set
      * @param data
-     */
+     *//*
+
     protected void onReleaseResource(List<T> data) {
 
     }
@@ -105,3 +118,4 @@ public class DBListSaver<T, ID> extends AsyncTaskLoader<Void> implements Callabl
         return null;
     }
 }
+*/

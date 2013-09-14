@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
@@ -16,8 +17,7 @@ import com.westudio.wecampus.data.DBHelper;
  */
 public class BaseApplication extends Application {
 
-    //Singleton
-    private static  BaseApplication application;
+    private static Context mContext;
 
     private DBHelper dbHelper;
 
@@ -27,18 +27,14 @@ public class BaseApplication extends Application {
 
     public boolean hasAccount;
 
-    public static BaseApplication getInstance() {
-        return application;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        application = this;
         //dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
         RequestQueue queue = Volley.newRequestQueue(this);
         hasAccount = false;
+        mContext = getApplicationContext();
     }
 
     @Override
@@ -59,5 +55,9 @@ public class BaseApplication extends Application {
 
     public DBHelper getDbHelper() {
         return dbHelper;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 }
