@@ -6,7 +6,12 @@ package com.westudio.wecampus.util;
  */
 public class HttpUtil {
 
-    public static final String getActivityList() {
+    /**
+     * Get the url for request activity
+     * @param page
+     * @return
+     */
+    public static final String getActivityList(final int page) {
         return null;
     }
 }

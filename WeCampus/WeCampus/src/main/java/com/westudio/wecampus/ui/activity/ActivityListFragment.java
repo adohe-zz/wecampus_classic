@@ -11,7 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.model.Activities;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.adapter.ActivityAdapter;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseFragment;
@@ -26,7 +30,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
  * Fragment that display the activity list
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activities> {
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
@@ -109,6 +113,24 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
+    }
+
+    /**
+     * Request activity for each page
+     * @param page
+     */
+    private void requestActivity(final int page) {
+        WeCampusApi.getActivityList(page, this, this);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+
+    }
+
+    @Override
+    public void onResponse(Activities activities) {
 
     }
 }

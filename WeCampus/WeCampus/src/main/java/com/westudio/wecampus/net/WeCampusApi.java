@@ -1,24 +1,45 @@
 package com.westudio.wecampus.net;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.westudio.wecampus.data.model.Activities;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
+import com.westudio.wecampus.util.HttpUtil;
 
 /**
  * Created by nankonami on 13-9-9.
  */
 public class WeCampusApi {
-    private static RequestQueue requestQueue;
+
+    private static RequestQueue requestQueue = newRequestQueue();
     private ImageLoader imageLoader;
 
-    public WeCampusApi(RequestQueue requestQueue) {
-        this.requestQueue = requestQueue;
+    public WeCampusApi() {
         this.imageLoader = new ImageLoader(requestQueue, new BitmapLruCache());
     }
 
-    public static void getActivityList() {
-        requestQueue.add(null);
+    /**
+     * GET ACTIVITY LIST
+     * @param page
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityList(final int page, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        requestQueue.add(new GsonRequest(Request.Method.GET, HttpUtil.getActivityList(page), Activities.class,
+                listener, errorListener));
     }
 
+    /**
+     * When you call the Volley.newRequestQueue you have no
+     * need to call the start method
+     * @return
+     */
+    private static final RequestQueue newRequestQueue() {
+        return Volley.newRequestQueue(BaseApplication.getInstance().getContext());
+    }
 }
