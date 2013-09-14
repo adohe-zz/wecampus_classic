@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.modle.Activity;
+import com.westudio.wecampus.data.model.Activity;
 
 /**
  * Created by martian on 13-9-11.

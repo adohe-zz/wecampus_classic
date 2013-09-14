@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
 
-import com.westudio.wecampus.modle.Activity;
+import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.util.database.Column;
 import com.westudio.wecampus.util.database.SQLiteTable;
 

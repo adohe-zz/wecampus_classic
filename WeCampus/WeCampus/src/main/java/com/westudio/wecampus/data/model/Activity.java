@@ -1,4 +1,4 @@
-package com.westudio.wecampus.modle;
+package com.westudio.wecampus.data.model;
 
 import android.database.Cursor;
 

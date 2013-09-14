@@ -19,8 +19,6 @@ public class BaseApplication extends Application {
 
     private static Context mContext;
 
-    private DBHelper dbHelper;
-
     //static constants
     public static final String ACCOUNT_TYPE = "com.westudio.wecampus";
     public static final String AUTHTOKEN_TYPE = "com.westudio.wecampus";
@@ -31,7 +29,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
         RequestQueue queue = Volley.newRequestQueue(this);
         hasAccount = false;
         mContext = getApplicationContext();
@@ -51,10 +48,6 @@ public class BaseApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-    }
-
-    public DBHelper getDbHelper() {
-        return dbHelper;
     }
 
     public static Context getContext() {
