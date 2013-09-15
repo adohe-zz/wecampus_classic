@@ -44,7 +44,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     private android.app.Activity activity;
     private ListView listView;
 
-    private ActivityDataHelper activityDataHelper;
 
     public static ActivityListFragment newInstance(Bundle args) {
         ActivityListFragment f = new ActivityListFragment();
@@ -64,7 +63,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         //TODO:which context this should use?
         super.onCreate(savedInstanceState);
         dataHelper = new ActivityDataHelper(this.activity);
-        activityDataHelper = new ActivityDataHelper(this.activity);
     }
 
     @Override
@@ -171,8 +169,19 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     }
 
     @Override
-    public void onResponse(Activity.ActivityRequestData activityRequestData) {
-        Utility.log(TAG, activityRequestData.getNextPager() + "");
-        activityDataHelper.bulkInsert(activityRequestData.getActivities());
+    public void onResponse(final Activity.ActivityRequestData activityRequestData) {
+        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object... params) {
+                mDataHelper.bulkInsert(activityRequestData.getActivities());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                Toast.makeText(getActivity(), "InsertSuccess", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
