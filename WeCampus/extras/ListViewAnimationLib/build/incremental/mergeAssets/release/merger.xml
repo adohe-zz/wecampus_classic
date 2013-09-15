@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/nankonami/Documents/AndroidStudio/wecampus_android/WeCampus/extras/ListViewAnimationLib/assets" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/Users/nankonami/Documents/AndroidStudio/wecampus_android/WeCampus/extras/ListViewAnimationLib/src/release/assets" />
+    </dataSet>
+
+</merger>
