@@ -35,7 +35,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
  * Fragment that display the activity list
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
-        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity> {
+        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityRequestData> {
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private ActivityAdapter mAdapter;
@@ -43,6 +43,8 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     private android.app.Activity activity;
     private ListView listView;
+
+    private ActivityDataHelper activityDataHelper;
 
     public static ActivityListFragment newInstance(Bundle args) {
         ActivityListFragment f = new ActivityListFragment();
@@ -59,7 +61,10 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //TODO:which context this should use?
         super.onCreate(savedInstanceState);
+        dataHelper = new ActivityDataHelper(this.activity);
+        activityDataHelper = new ActivityDataHelper(this.activity);
     }
 
     @Override
@@ -140,6 +145,10 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
+        if(cursor != null && cursor.getCount() == 0) {
+            requestActivity(1);
+        }
+        requestActivity(1);
     }
 
     @Override
@@ -162,7 +171,8 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     }
 
     @Override
-    public void onResponse(Activity activities) {
-
+    public void onResponse(Activity.ActivityRequestData activityRequestData) {
+        Utility.log(TAG, activityRequestData.getNextPager() + "");
+        activityDataHelper.bulkInsert(activityRequestData.getActivities());
     }
 }

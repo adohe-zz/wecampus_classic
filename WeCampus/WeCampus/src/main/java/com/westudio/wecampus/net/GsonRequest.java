@@ -7,6 +7,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
+import com.westudio.wecampus.util.Utility;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
@@ -14,6 +18,8 @@ import java.io.UnsupportedEncodingException;
  * Created by nankonami on 13-9-10.
  */
 public class GsonRequest<T> extends Request<T> {
+
+    private static final String TAG = "GSONREQUEST";
 
     private Class<T> clazz;
     private Gson mGson;
@@ -32,11 +38,15 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
+            JSONObject jsonObject = new JSONObject(data);
+            return Response.success(mGson.fromJson(jsonObject.getJSONObject("Data").toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
+        return null;
     }
 
     @Override

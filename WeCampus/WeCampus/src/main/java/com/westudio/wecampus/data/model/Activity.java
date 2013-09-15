@@ -4,6 +4,8 @@ import android.database.Cursor;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 /**
  * Created by martian on 13-9-13.
  */
@@ -125,5 +127,27 @@ public class Activity {
 
     public String getCreatedAt() {
         return CreatedAt;
+    }
+
+    public static class ActivityRequestData {
+        private int NextPager;
+        private ArrayList<Activity> Activities;
+
+
+        public int getNextPager() {
+            return NextPager;
+        }
+
+        public void setNextPager(int nextPager) {
+            NextPager = nextPager;
+        }
+
+        public ArrayList<Activity> getActivities() {
+            return Activities;
+        }
+
+        public void setActivities(ArrayList<Activity> activities) {
+            Activities = activities;
+        }
     }
 }

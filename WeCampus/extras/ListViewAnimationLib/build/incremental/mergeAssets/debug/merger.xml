@@ -2,17 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-<<<<<<< HEAD
         <source path="/Users/nankonami/Documents/AndroidStudio/wecampus_android/WeCampus/extras/ListViewAnimationLib/assets" />
     </dataSet>
     <dataSet config="debug" >
         <source path="/Users/nankonami/Documents/AndroidStudio/wecampus_android/WeCampus/extras/ListViewAnimationLib/src/debug/assets" />
-=======
-        <source path="/Users/jam/Documents/Mine/wecampus_android/WeCampus/extras/ListViewAnimationLib/assets" />
-    </dataSet>
-    <dataSet config="debug" >
-        <source path="/Users/jam/Documents/Mine/wecampus_android/WeCampus/extras/ListViewAnimationLib/src/debug/assets" />
->>>>>>> 327e7f1a0423565d4f46fde39c41474ed104cf06
     </dataSet>
 
 </merger>

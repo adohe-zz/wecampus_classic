@@ -30,7 +30,7 @@ public class WeCampusApi {
      */
     public static void getActivityList(final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        requestQueue.add(new GsonRequest(Request.Method.GET, HttpUtil.getActivityList(page), Activity.class,
+        requestQueue.add(new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(page), Activity.ActivityRequestData.class,
                 listener, errorListener));
     }
 
