@@ -5,7 +5,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.westudio.wecampus.data.model.Activities;
+import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.HttpUtil;
@@ -30,7 +30,7 @@ public class WeCampusApi {
      */
     public static void getActivityList(final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        requestQueue.add(new GsonRequest(Request.Method.GET, HttpUtil.getActivityList(page), Activities.class,
+        requestQueue.add(new GsonRequest(Request.Method.GET, HttpUtil.getActivityList(page), Activity.class,
                 listener, errorListener));
     }
 
@@ -40,6 +40,6 @@ public class WeCampusApi {
      * @return
      */
     private static final RequestQueue newRequestQueue() {
-        return Volley.newRequestQueue(BaseApplication.getInstance().getContext());
+        return Volley.newRequestQueue(BaseApplication.getContext());
     }
 }

@@ -40,6 +40,13 @@
         </meta-data>
     </service>
 
+    <provider
+        android:name=".data.DataProvider"
+        android:authorities="com.westudio.provider"
+        android:exported="false">
+        <grant-uri-permission android:pathPattern=".*"/>
+    </provider>
+
     </application>
 
 </manifest>

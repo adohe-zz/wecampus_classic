@@ -1,3 +1,4 @@
+/*
 package com.westudio.wecampus.data;
 
 import android.content.Context;
@@ -10,10 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by nankonami on 13-9-7.
  * Load data from database
- */
+ *//*
+
 public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
 
     private Dao<T, ID> mDao = null;
@@ -44,9 +47,11 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
         return null;
     }
 
-    /**
+    */
+/**
      * Handles a request to start the loader
-     */
+     *//*
+
     @Override
     protected void onStartLoading() {
         if(mData != null) {
@@ -57,10 +62,12 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
         }
     }
 
-    /**
+    */
+/**
      * Called when there is new data to delivered to the client.
      * @param data
-     */
+     *//*
+
     @Override
     public void deliverResult(List<T> data) {
         if(isReset()) {
@@ -88,9 +95,11 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
         }
     }
 
-    /**
+    */
+/**
      * Handles a request to completely reset the Loader
-     */
+     *//*
+
     @Override
     protected void onReset() {
         super.onReset();
@@ -106,19 +115,23 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
         }
     }
 
-    /**
+    */
+/**
      * Handles a request to stop the loader
-     */
+     *//*
+
     @Override
     protected void onStopLoading() {
         //Attempt to cancel the current loader task
         cancelLoad();
     }
 
-    /**
+    */
+/**
      * Handles a request to cancel the loader
      * @param data
-     */
+     *//*
+
     @Override
     public void onCanceled(List<T> data) {
         super.onCanceled(data);
@@ -126,12 +139,15 @@ public class DBListLoader<T, ID> extends AsyncTaskLoader<List<T>> {
         onReleaseResource(data);
     }
 
-    /**
+    */
+/**
      * Helper function to take care of releasing resources associated
      * with an actively data set
      * @param data
-     */
+     *//*
+
     protected void onReleaseResource(List<T> data) {
 
     }
 }
+*/

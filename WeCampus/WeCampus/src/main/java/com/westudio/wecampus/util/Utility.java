@@ -3,6 +3,8 @@ package com.westudio.wecampus.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.File;
@@ -113,5 +115,14 @@ public class Utility {
         }
         in.close();
         out.close();
+    }
+
+    public static <Params, Progress, Result> void executeAsyncTask(
+            AsyncTask<Params, Progress, Result> task, Params... params) {
+        if (Build.VERSION.SDK_INT >= 11) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            task.execute(params);
+        }
     }
 }

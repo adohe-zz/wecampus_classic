@@ -17,12 +17,7 @@ import com.westudio.wecampus.data.DBHelper;
  */
 public class BaseApplication extends Application {
 
-    //Singleton
-    private static  BaseApplication application;
-
-    private static Context context;
-
-    private DBHelper dbHelper;
+    private static Context mContext;
 
     //static constants
     public static final String ACCOUNT_TYPE = "com.westudio.wecampus";
@@ -30,19 +25,13 @@ public class BaseApplication extends Application {
 
     public boolean hasAccount;
 
-    //Get the application instance
-    public static BaseApplication getInstance() {
-        return application;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        application = this;
-        context = application.getApplicationContext();
-
+        RequestQueue queue = Volley.newRequestQueue(this);
         hasAccount = false;
+        mContext = getApplicationContext();
     }
 
     @Override
@@ -61,12 +50,7 @@ public class BaseApplication extends Application {
         super.onLowMemory();
     }
 
-    public DBHelper getDbHelper() {
-        return dbHelper;
-    }
-
-    //Get the application context
-    public Context getContext() {
-        return context;
+    public static Context getContext() {
+        return mContext;
     }
 }

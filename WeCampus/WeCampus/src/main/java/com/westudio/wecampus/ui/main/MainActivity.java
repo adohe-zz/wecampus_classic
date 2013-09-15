@@ -44,7 +44,7 @@ public class MainActivity extends SherlockFragmentActivity {
             }
 
             public void onDrawerOpened(View drawerView) {
-                
+
             }
         };
 
