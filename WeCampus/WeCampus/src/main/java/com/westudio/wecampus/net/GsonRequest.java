@@ -24,6 +24,7 @@ public class GsonRequest<T> extends Request<T> {
     private Class<T> clazz;
     private Gson mGson;
     private Response.Listener listener;
+    private Response.ErrorListener errorListener;
 
     public GsonRequest(int method, String url, Class<T> clazz,
                        Response.Listener successListener, Response.ErrorListener errorListener) {
@@ -32,6 +33,7 @@ public class GsonRequest<T> extends Request<T> {
         this.clazz = clazz;
         this.mGson = new Gson();
         this.listener = successListener;
+        this.errorListener = errorListener;
     }
 
     @Override
@@ -39,7 +41,11 @@ public class GsonRequest<T> extends Request<T> {
         try {
             String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             JSONObject jsonObject = new JSONObject(data);
-            return Response.success(mGson.fromJson(jsonObject.getJSONObject("Data").toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
+            if(Integer.valueOf(jsonObject.getJSONObject("Status").getString("Id")) != 0) {
+                return Response.error(new VolleyError(jsonObject.getJSONObject("Status").getString("Memo")));
+            } else {
+                return Response.success(mGson.fromJson(jsonObject.getJSONObject("Data").toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
+            }
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JSONException e) {

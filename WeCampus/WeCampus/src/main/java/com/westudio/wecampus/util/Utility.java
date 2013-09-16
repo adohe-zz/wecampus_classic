@@ -27,9 +27,9 @@ public class Utility {
      * @param tag
      * @param message
      */
-    public static void log(String tag, String message) {
+    public static void log(String tag, Object message) {
         if(IS_DEBUG) {
-            Log.d(tag, message);
+            Log.d(tag, message.toString());
         }
     }
 

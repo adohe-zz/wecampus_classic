@@ -62,7 +62,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     public void onCreate(Bundle savedInstanceState) {
         //TODO:which context this should use?
         super.onCreate(savedInstanceState);
-        dataHelper = new ActivityDataHelper(this.activity);
     }
 
     @Override
@@ -78,29 +77,8 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
         ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
-        //TODO****Test ActivityDataHelper
-        String json = "{\"Id\":755,\"Image\":\"http://we.tongji.edu.cn\"}";
         mDataHelper = new ActivityDataHelper(BaseApplication.getContext());
         getLoaderManager().initLoader(0, null, this);
-        com.westudio.wecampus.data.model.Activity ac = com.westudio.wecampus.data.model.Activity.fromJson(json);
-        final List<Activity> lstAc = new ArrayList<Activity>();
-        for (int i = 0; i < 12; i++) {
-            lstAc.add(ac);
-        }
-        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object... params) {
-                mDataHelper.bulkInsert(lstAc);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                Toast.makeText(getActivity(), "InsertSuccess", Toast.LENGTH_SHORT).show();
-            }
-        });
-        //*****Test ActivityDataHelper
 
         return view;
     }
@@ -146,7 +124,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         if(cursor != null && cursor.getCount() == 0) {
             requestActivity(1);
         }
-        requestActivity(1);
     }
 
     @Override
@@ -165,7 +142,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        Utility.log("test", volleyError.getMessage());
     }
 
     @Override
