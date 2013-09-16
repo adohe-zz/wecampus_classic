@@ -117,6 +117,14 @@ public class Utility {
         out.close();
     }
 
+    /**
+     * Execute the async task
+     * @param task
+     * @param params
+     * @param <Params>
+     * @param <Progress>
+     * @param <Result>
+     */
     public static <Params, Progress, Result> void executeAsyncTask(
             AsyncTask<Params, Progress, Result> task, Params... params) {
         if (Build.VERSION.SDK_INT >= 11) {
@@ -124,5 +132,21 @@ public class Utility {
         } else {
             task.execute(params);
         }
+    }
+
+    public static String getActivityCategoryAccordingChannelId(int channel_id) {
+        String category = "";
+
+        if(channel_id == 1) {
+            category = "category1";
+        } else if(channel_id == 2) {
+            category = "category2";
+        } else if(channel_id == 3) {
+            category = "category3";
+        } else {
+            category = "category4";
+        }
+
+        return category;
     }
 }
