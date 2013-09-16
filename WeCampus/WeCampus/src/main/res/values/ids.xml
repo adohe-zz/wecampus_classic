@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="activity_list_item">false</item>
+    <item type="id" name="activity_list_item_tag">false</item>
+    <item type="id" name="activity_list_item_title">false</item>
+    <item type="id" name="activity_list_item_time">false</item>
+    <item type="id" name="activity_list_item_location">false</item>
+    <item type="id" name="activity_list_item_like">false</item>
+    <item type="id" name="activity_list_item_image">false</item>
+</resources>
