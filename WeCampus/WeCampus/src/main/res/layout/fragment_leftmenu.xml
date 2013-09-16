@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- user profile -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="177dp">
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/menu_header_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/edit_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/ic_menu_edit"/>
+
+                    <ImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/test_avatar"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_centerHorizontal="true"/>
+
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_avatar"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:text="蔡思雨"
+                        />
+
+                    <TextView
+                        android:text="热爱移动互联网额。"
+                        android:id="@+id/text_user_words"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:layout_below="@id/text_user_name"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#ffffff"
+                        android:textSize="11sp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"/>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <!-- activity -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp">
+
+                <TextView
+                    android:id="@+id/text_menu_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_activity"
+                    android:drawableLeft="@drawable/ic_menu_activity"
+                    style="@style/LeftMenuItemText"/>
+            </RelativeLayout>
+
+            <!-- people -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp">
+
+                <TextView
+                    android:id="@+id/text_menu_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/LeftMenuItemText"
+                    android:text="@string/menu_people"
+                    android:drawableLeft="@drawable/ic_menu_friends"/>
+            </RelativeLayout>
+
+            <!-- square -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp">
+
+                <TextView
+                    android:id="@+id/text_menu_square"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/LeftMenuItemText"
+                    android:text="@string/menu_square"
+                    android:drawableLeft="@drawable/ic_menu_find"/>
+            </RelativeLayout>
+
+            <!-- settings -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp">
+
+                <TextView
+                    android:id="@+id/text_menu_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/LeftMenuItemText"
+                    android:text="@string/menu_settings"
+                    android:drawableLeft="@drawable/ic_menu_settings"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

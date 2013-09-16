@@ -52,8 +52,12 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
-        Fragment f = ActivityListFragment.newInstance(null);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+        Fragment activityFragment = ActivityListFragment.newInstance(null);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
+
+        Fragment menuFragment = LeftMenuFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
+
     }
 
     @Override
