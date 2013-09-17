@@ -18,6 +18,8 @@ public class WeCampusApi {
     private static RequestQueue requestQueue = newRequestQueue();
     private ImageLoader imageLoader;
 
+    private static DiskBasedCache mDiskCache = (DiskBasedCache)requestQueue.getCache();
+    
     public WeCampusApi() {
         this.imageLoader = new ImageLoader(requestQueue, new BitmapLruCache());
     }
@@ -41,5 +43,16 @@ public class WeCampusApi {
      */
     private static final RequestQueue newRequestQueue() {
         return Volley.newRequestQueue(BaseApplication.getContext());
+    }
+    
+    private static final RequestQueue newRequestQueue() {
+        RequestQueue queue = new RequestQueue(openCache());
+        queue.start();
+        
+        return queue;
+    }
+    
+    private static final Cache openCache() {
+        return new DiskBasedCache();
     }
 }
