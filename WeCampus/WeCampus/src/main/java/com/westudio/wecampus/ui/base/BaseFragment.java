@@ -21,8 +21,6 @@ public class BaseFragment extends SherlockFragment {
 
     public StartMode startMode;
 
-    public BaseDataHelper dataHelper;
-
     protected int getCurrentState(Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {

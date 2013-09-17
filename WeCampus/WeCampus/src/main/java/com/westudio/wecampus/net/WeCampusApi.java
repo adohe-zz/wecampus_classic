@@ -1,5 +1,7 @@
 package com.westudio.wecampus.net;
 
+import android.os.Bundle;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +25,16 @@ public class WeCampusApi {
     }
 
     /**
+     * Add common request parameter
+     * @return
+     */
+    private static Bundle getBundle() {
+        Bundle bundle = new Bundle();
+
+        return bundle;
+    }
+
+    /**
      * GET ACTIVITY LIST
      * @param page
      * @param listener
@@ -30,7 +42,9 @@ public class WeCampusApi {
      */
     public static void getActivityList(final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        requestQueue.add(new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(page), Activity.ActivityRequestData.class,
+        Bundle bundle = getBundle();
+
+        requestQueue.add(new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
                 listener, errorListener));
     }
 
