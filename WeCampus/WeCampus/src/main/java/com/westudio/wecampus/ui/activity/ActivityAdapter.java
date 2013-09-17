@@ -48,9 +48,9 @@ public class ActivityAdapter extends CursorAdapter {
             Activity activity = Activity.fromCursor(mCursor);
 
             holder.text_title.setText(activity.getTitle());
-            holder.text_time.setText("test");
-            holder.text_location.setText("test");
-            holder.text_tag.setText(Utility.getActivityCategoryAccordingChannelId(activity.getChannel_Id()));
+            holder.text_time.setText(activity.getBegin());
+            holder.text_location.setText(activity.getLocation());
+            holder.text_tag.setText(Utility.getCatByChannelId(activity.getChannel_Id()));
             holder.text_like.setText(String.valueOf(activity.getLike()));
         }
     }

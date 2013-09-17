@@ -3,6 +3,7 @@ package com.westudio.wecampus.data.model;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
+import com.westudio.wecampus.data.ActivityDataHelper;
 
 import java.util.ArrayList;
 
@@ -10,51 +11,51 @@ import java.util.ArrayList;
  * Created by martian on 13-9-13.
  */
 public class Activity {
-    private int Id;
+    public int Id;
 
-    private String Begin;
-
-    private String End;
-
-    private String Title;
-
-    private String Location;
-
-    private int Channel_Id;
-
-    private String Organizer;
-
-    private String OrganizerAvatar;
-
-    private String Status;
-
-    private String Image;
-
-    private String CreatedAt;
-
-    private String Description;
-
-    private int Like;
-
-    private boolean CanLike;
-
-    private int Schedule;
-
-    private boolean CanSchedule;
-
-    private int FriendsCount;
-
-    private int AccountId;
+    public String Begin;
+    public String End;
+    public String Title;
+    public String Location;
+    public int Channel_Id;
+    public String Organizer;
+    public String OrganizerAvatar;
+    public String Status;
+    public String Image;
+    public String CreatedAt;
+    public String Description;
+    public int Like;
+    public boolean CanLike;
+    public int Schedule;
+    public boolean CanSchedule;
+    public int FriendsCount;
+    public int AccountId;
 
     public static Activity fromJson(String json) {
         return new Gson().fromJson(json, Activity.class);
     }
 
     public static Activity fromCursor(Cursor cursor) {
-        Activity activity = new Activity();
-
-
-        return activity;
+        Activity ac = new Activity();
+        ac.Id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ID));
+        ac.Begin = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.BEGIN));
+        ac.End = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.END));
+        ac.Title = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.TITLE));
+        ac.Location = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.LOCATION));
+        ac.Channel_Id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CHANNEL_ID));
+        ac.Organizer = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ORGANIZER));
+        ac.OrganizerAvatar = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ORGANIZER_AVATAR));
+        ac.Status = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.STATUS));
+        ac.Image = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.IMAGE));
+        ac.CreatedAt = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CRTEATE_AT));
+        ac.Description = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.DESCRIPTION));
+        ac.Like = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.LIKE));
+        ac.CanLike = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_LIKE)) > 0;
+        ac.Schedule = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.SCHEDULE));
+        ac.CanSchedule = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_SCHEDULE)) > 0;
+        ac.FriendsCount = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.FRIEND_COUNT));
+        ac.AccountId = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ACCOUNT_ID));
+        return ac;
     }
 
     public int getId() {
