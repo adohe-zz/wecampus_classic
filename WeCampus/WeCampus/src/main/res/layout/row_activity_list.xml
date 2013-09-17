@@ -4,14 +4,11 @@
     android:id="@id/activity_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="8dp"
     android:background="@drawable/listitem_activity_selector">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="177dp"
+        android:layout_height="187dp"
         android:id="@id/activity_list_item_image"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
