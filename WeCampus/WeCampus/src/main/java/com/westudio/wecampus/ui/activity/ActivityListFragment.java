@@ -21,10 +21,8 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
@@ -44,6 +42,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     private android.app.Activity activity;
     private ListView listView;
 
+    private LoadingFooter loadingFooter;
 
     public static ActivityListFragment newInstance(Bundle args) {
         ActivityListFragment f = new ActivityListFragment();
@@ -69,9 +68,14 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         View view = inflater.inflate(R.layout.fragment_activities, container, false);
 
         listView = (ListView) view.findViewById(R.id.activity_list);
+        View header = new View(activity);
+        loadingFooter = new LoadingFooter(activity);
         mAdapter = new ActivityAdapter(activity, listView);
         CardsAnimationAdapter animationAdapter = new CardsAnimationAdapter(activity, mAdapter);
         animationAdapter.setListView(listView);
+
+        listView.addHeaderView(header);
+        listView.addFooterView(loadingFooter.getView());
         listView.setAdapter(animationAdapter);
         mPullToRefreshAttacher = ((MainActivity)activity).getPullToRefreshAttacher();
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
@@ -137,7 +141,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
      * @param page
      */
     private void requestActivity(final int page) {
-        WeCampusApi.getActivityList(page, this, this);
+        WeCampusApi.getActivityList(this, page, this, this);
     }
 
     @Override

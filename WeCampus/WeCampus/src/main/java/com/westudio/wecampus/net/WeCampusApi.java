@@ -1,15 +1,26 @@
 package com.westudio.wecampus.net;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 
+import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
+import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
 
 /**
@@ -17,11 +28,16 @@ import com.westudio.wecampus.util.HttpUtil;
  */
 public class WeCampusApi {
 
-    private static RequestQueue requestQueue = newRequestQueue();
-    private ImageLoader imageLoader;
+    //The default memory cache size
+    private static final int MEM_CACHE_SIZE = 1024 * 1024 * ((ActivityManager)BaseApplication.getContext().
+            getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass() / 3;
 
-    public WeCampusApi() {
-        this.imageLoader = new ImageLoader(requestQueue, new BitmapLruCache());
+    private static RequestQueue requestQueue = newRequestQueue();
+    private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
+
+    private static DiskBasedCache diskBasedCache = (DiskBasedCache)requestQueue.getCache();
+
+    private WeCampusApi() {
     }
 
     /**
@@ -34,18 +50,9 @@ public class WeCampusApi {
         return bundle;
     }
 
-    /**
-     * GET ACTIVITY LIST
-     * @param page
-     * @param listener
-     * @param errorListener
-     */
-    public static void getActivityList(final int page, Response.Listener listener,
-                Response.ErrorListener errorListener) {
-        Bundle bundle = getBundle();
-
-        requestQueue.add(new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
-                listener, errorListener));
+    //Open the disk cache
+    private static Cache openCache() {
+        return new DiskBasedCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10 * 1024 * 1024);
     }
 
     /**
@@ -54,6 +61,68 @@ public class WeCampusApi {
      * @return
      */
     private static final RequestQueue newRequestQueue() {
-        return Volley.newRequestQueue(BaseApplication.getContext());
+        RequestQueue queue = new RequestQueue(openCache(), new BasicNetwork(new HurlStack()));
+        queue.start();
+        return queue;
+    }
+
+    /**
+     * GET ACTIVITY LIST
+     * @param page
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityList(Object tag, final int page, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Bundle bundle = getBundle();
+
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener) {
+        return requestImage(imageUrl, listener, 0, 0);
+    }
+
+    public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener,
+                int maxWidth, int maxHeight) {
+        return imageLoader.get(imageUrl, listener, maxWidth, maxHeight);
+    }
+
+    public static ImageLoader.ImageListener getImageListener(final ImageView imageView, final Drawable defaultImageDrawable,
+                final Drawable errorImageDrawable) {
+        return new ImageLoader.ImageListener() {
+            @Override
+            public void onResponse(ImageLoader.ImageContainer response, boolean b) {
+                if(response.getBitmap() != null) {
+                    if(!b && defaultImageDrawable != null) {
+                        TransitionDrawable transitionDrawable = new TransitionDrawable(
+                                new Drawable[]{
+                                        defaultImageDrawable,
+                                        new BitmapDrawable(BaseApplication.getContext().getResources(), response.getBitmap())
+                                }
+                        );
+                        transitionDrawable.setCrossFadeEnabled(true);
+                        imageView.setImageDrawable(transitionDrawable);
+                        transitionDrawable.startTransition(100);
+                    } else {
+                        imageView.setImageDrawable(defaultImageDrawable);
+                    }
+                } else if(defaultImageDrawable != null) {
+                    imageView.setImageDrawable(defaultImageDrawable);
+                }
+            }
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                if(errorImageDrawable != null) {
+                    imageView.setImageDrawable(errorImageDrawable);
+                }
+            }
+        };
     }
 }

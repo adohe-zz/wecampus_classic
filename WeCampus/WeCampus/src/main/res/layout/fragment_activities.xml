@@ -15,8 +15,17 @@
         <ListView
             android:id="@+id/activity_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:choiceMode="singleChoice"
+            android:scrollingCache="true"
+            android:smoothScrollbar="true"
             android:dividerHeight="15dp"
+            android:drawSelectorOnTop="true"
             android:divider="@android:color/transparent" />
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
