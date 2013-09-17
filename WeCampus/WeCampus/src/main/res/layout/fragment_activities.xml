@@ -19,12 +19,12 @@
             android:headerDividersEnabled="true"
             android:footerDividersEnabled="true"
             android:scrollbarStyle="outsideOverlay"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:choiceMode="singleChoice"
             android:scrollingCache="true"
             android:smoothScrollbar="true"
-            android:dividerHeight="15dp"
+            android:dividerHeight="13dp"
             android:drawSelectorOnTop="true"
             android:divider="@android:color/transparent" />
 

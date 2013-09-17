@@ -7,10 +7,13 @@ import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.ui.intro.IntroActivity;
 
 import java.io.IOException;
 
@@ -52,7 +55,14 @@ public class SplashActivity extends Activity {
                         }
                     }, null);
         } else {
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    SplashActivity.this.finish();
+                    Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
+                    startActivity(intent);
+                }
+            }, 1000);
         }
     }
 }

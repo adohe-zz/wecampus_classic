@@ -4,61 +4,66 @@
     android:id="@id/activity_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="8dp"
     android:background="@drawable/listitem_activity_selector">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="187dp"
         android:id="@id/activity_list_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/testimage" />
+        android:background="#c9c9c9" />
 
     <TextView
+        android:id="@id/activity_list_item_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@id/activity_list_item_tag"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:gravity="center_vertical"
         android:paddingLeft="15dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:paddingRight="15dp"
         android:background="@drawable/tag_background"
+        android:textIsSelectable="false"
         style="@style/ActivityTagStyle" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@id/activity_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="6dp"
         android:layout_below="@id/activity_list_item_image"
-        android:layout_alignParentLeft="true" />
+        android:singleLine="true"
+        android:ellipsize="end" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@id/activity_list_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_below="@id/activity_list_item_title"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignLeft="@id/activity_list_item_title" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@id/activity_list_item_location"
-        android:layout_below="@id/activity_list_item_time"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@id/activity_list_item_like"
+        android:layout_marginTop="4dp"
         android:layout_below="@id/activity_list_item_time"
-        android:layout_alignParentRight="true" />
+        android:layout_alignLeft="@id/activity_list_item_title" />
+
+    <TextView
+        android:id="@id/activity_list_item_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/activity_list_item_time"
+        android:layout_alignBottom="@id/activity_list_item_location"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

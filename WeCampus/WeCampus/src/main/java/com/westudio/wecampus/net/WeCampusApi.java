@@ -23,6 +23,8 @@ import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
 
+import java.io.File;
+
 /**
  * Created by nankonami on 13-9-9.
  */
@@ -67,6 +69,15 @@ public class WeCampusApi {
     }
 
     /**
+     * Get cached image from the file
+     * @param url
+     * @return
+     */
+    public static File getCachedImage(String url) {
+        return diskBasedCache.getFileForKey(url);
+    }
+
+    /**
      * GET ACTIVITY LIST
      * @param page
      * @param listener
@@ -85,15 +96,36 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    /**
+     * Request Image from net
+     * @param imageUrl
+     * @param listener
+     * @return
+     */
     public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener) {
         return requestImage(imageUrl, listener, 0, 0);
     }
 
+    /**
+     * Request Image from net
+     * @param imageUrl
+     * @param listener
+     * @param maxWidth
+     * @param maxHeight
+     * @return
+     */
     public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener,
                 int maxWidth, int maxHeight) {
         return imageLoader.get(imageUrl, listener, maxWidth, maxHeight);
     }
 
+    /**
+     * The default image listener
+     * @param imageView
+     * @param defaultImageDrawable
+     * @param errorImageDrawable
+     * @return
+     */
     public static ImageLoader.ImageListener getImageListener(final ImageView imageView, final Drawable defaultImageDrawable,
                 final Drawable errorImageDrawable) {
         return new ImageLoader.ImageListener() {

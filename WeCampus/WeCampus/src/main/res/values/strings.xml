@@ -14,4 +14,8 @@
     <string name="menu_square">广场</string>
     <string name="menu_settings">设置</string>
     `
+    <!-- Intro Part -->
+    <string name="access_without_login">Not Now</string>
+    <string name="login_sign">Sign/Login</string>
+
 </resources>
