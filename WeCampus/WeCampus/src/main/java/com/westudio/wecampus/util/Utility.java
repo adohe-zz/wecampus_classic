@@ -134,7 +134,12 @@ public class Utility {
         }
     }
 
-    public static String getActivityCategoryAccordingChannelId(int channel_id) {
+    /**
+     * get activity category according to the channel id
+     * @param channel_id
+     * @return
+     */
+    public static String getCatByChannelId(int channel_id) {
         String category = "";
 
         if(channel_id == 1) {
