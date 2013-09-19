@@ -33,6 +33,7 @@ dependencies {
     compile files('libs/ormlite-core-4.45.jar')
     compile files('libs/FlurryAgent.jar')
     compile project(':extras:ListViewAnimationLib')
+    compile project(':extras:IndexableListView')
 }
 
 tasks.withType(Compile) {

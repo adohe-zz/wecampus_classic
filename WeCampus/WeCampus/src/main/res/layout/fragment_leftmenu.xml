@@ -78,6 +78,7 @@
 
             <!-- activity -->
             <RelativeLayout
+                android:id="@+id/activity_section"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:clickable="true"
@@ -100,6 +101,7 @@
 
             <!-- people -->
             <RelativeLayout
+                android:id="@+id/user_section"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:clickable="true"
@@ -122,6 +124,7 @@
 
             <!-- square -->
             <RelativeLayout
+                android:id="@+id/square_section"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:clickable="true"
@@ -144,6 +147,7 @@
 
             <!-- settings -->
             <RelativeLayout
+                android:id="@+id/settings_section"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:clickable="true"
