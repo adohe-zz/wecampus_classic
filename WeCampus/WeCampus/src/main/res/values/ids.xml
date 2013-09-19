@@ -14,5 +14,14 @@
     <item type="id" name="intro_image">false</item>
     <item type="id" name="intro_no_login">false</item>
     <item type="id" name="intro_login_sign">false</item>
+    <item type="id" name="intro_viewpager_container">false</item>
+    <item type="id" name="intro_viewpager">false</item>
 
+    <!-- Login Fragment -->
+    <item type="id" name="login_edt_email">false</item>
+    <item type="id" name="login_edt_pwd">false</item>
+    <item type="id" name="login_forget_pwd">false</item>
+    <item type="id" name="btn_register">false</item>
+    <item type="id" name="btn_login">false</item>
+    <item type="id" name="ly_login_input">false</item>
 </resources>

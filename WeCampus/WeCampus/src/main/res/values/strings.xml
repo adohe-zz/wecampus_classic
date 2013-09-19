@@ -18,4 +18,12 @@
     <string name="access_without_login">Not Now</string>
     <string name="login_sign">Sign/Login</string>
 
+    <!-- Login Part -->
+    <string name="input_email">邮箱</string>
+    <string name="input_pwd">密码</string>
+    <string name="input_tips">请输入</string>
+    <string name="btn_register">注册</string>
+    <string name="btn_login">登录</string>
+    <string name="forget_pwd">忘记密码</string>
+
 </resources>

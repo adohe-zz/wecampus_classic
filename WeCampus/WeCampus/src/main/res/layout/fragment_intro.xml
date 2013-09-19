@@ -2,22 +2,28 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/intro_activity_bg">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@id/intro_image"
+    <RelativeLayout
+        android:id="@id/intro_viewpager_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_signup"/>
+        android:layout_alignParentTop="true">
+
+        <android.support.v4.view.ViewPager
+            android:id="@id/intro_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@id/intro_no_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/access_without_login"
-        android:layout_below="@id/intro_image"
+        android:layout_below="@id/intro_viewpager_container"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="5dp" />

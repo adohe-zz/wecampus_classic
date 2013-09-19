@@ -18,6 +18,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
@@ -89,6 +90,31 @@ public class WeCampusApi {
 
         Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
                 listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Common network request api
+     * @param request
+     * @param tag
+     */
+    public static void executeRequest(Request request, Object tag) {
+        if(tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }
+
+    public static void login(Object tag, String email, String pwd, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Bundle bundle = getBundle();
+
+        Request request = new GsonRequest<User>(Request.Method.GET, null, User.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
