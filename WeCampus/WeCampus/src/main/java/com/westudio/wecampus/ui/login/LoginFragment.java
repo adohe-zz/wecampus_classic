@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +73,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_register) {
-
+            FragmentTransaction fragmentTransaction = ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
+            fragmentTransaction.replace(R.id.auth_container, RegisterFragment.newInstance(null), AuthActivity.REGISTER_FRAGMENT_TAG);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         } else if(v.getId() == R.id.btn_login) {
             String email = edtEmail.getText().toString();
             String pwd = edtPwd.getText().toString();

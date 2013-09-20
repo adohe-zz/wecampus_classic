@@ -26,4 +26,6 @@
     <color name="login_btn_bg">#eb6f65</color>
     <color name="divider_bg">#bdbdbd</color>
     <color name="login_textview_bg">#3e454d</color>
+    <color name="rege_title_color">#999999</color>
+    <color name="rege_tips_two_bg">#666666</color>
 </resources>

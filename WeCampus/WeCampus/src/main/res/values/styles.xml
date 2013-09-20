@@ -29,4 +29,25 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="RegisterTextView">
+        <item name="android:textColor">@color/login_textview_bg</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="RegisterEditTextHint">
+        <item name="android:textColor">@color/rege_title_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="RegisterTitle" parent="RegisterEditTextHint">
+        <item name="android:textSize">21sp</item>
+    </style>
+
+    <style name="RegisterTips">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
 </resources>
