@@ -23,4 +23,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="LoginTextView">
+        <item name="android:textColor">@color/login_textview_bg</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

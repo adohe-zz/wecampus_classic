@@ -8,10 +8,12 @@ import android.widget.Button;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.main.MainActivity;
 
 /**
  * Created by nankonami on 13-9-11.
+ * The Introduction activity
  */
 public class IntroActivity extends SherlockFragmentActivity implements View.OnClickListener{
 
@@ -24,6 +26,8 @@ public class IntroActivity extends SherlockFragmentActivity implements View.OnCl
         this.setContentView(R.layout.activity_intro);
 
         setUpActionBar();
+
+        initWidget();
     }
 
     private void setUpActionBar() {
@@ -45,8 +49,12 @@ public class IntroActivity extends SherlockFragmentActivity implements View.OnCl
             intent.setClass(this, MainActivity.class);
             finish();
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_up_in, R.anim.push_out);
         } else if(v.getId() == R.id.intro_login_sign) {
-
+            intent.setClass(this, AuthActivity.class);
+            finish();
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_up_in, R.anim.push_out);
         }
     }
 }

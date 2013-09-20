@@ -24,4 +24,7 @@
     <item type="id" name="btn_register">false</item>
     <item type="id" name="btn_login">false</item>
     <item type="id" name="ly_login_input">false</item>
+    <item type="id" name="ly_login_input_one">false</item>
+    <item type="id" name="ly_login_input_two">false</item>
+    <item type="id" name="ly_login_button">false</item>
 </resources>
