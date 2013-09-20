@@ -67,7 +67,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             }
             case R.id.square_section: {
-
+                mainActivity.changeContent(MainActivity.ContentType.SQUARE);
                 break;
             }
             case R.id.settings_section: {

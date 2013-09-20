@@ -25,5 +25,10 @@
     <string name="btn_register">注册</string>
     <string name="btn_login">登录</string>
     <string name="forget_pwd">忘记密码</string>
+    <string name="all_kinds_of_activity">所有活动分类</string>
+    <string name="section_entertainment">文娱活动</string>
+    <string name="section_lecture">学术讲座</string>
+    <string name="section_contest">校园赛事</string>
+    <string name="section_recruiting">企业招聘</string>
 
 </resources>

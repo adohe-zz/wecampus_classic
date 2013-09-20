@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
+import com.westudio.wecampus.ui.square.SquareFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -102,6 +103,8 @@ public class MainActivity extends SherlockFragmentActivity {
                 clazz = ActivityListFragment.class;
             } else if (type == ContentType.USERS) {
                 clazz = UsersListFragment.class;
+            } else if (type == ContentType.SQUARE) {
+                clazz = SquareFragment.class;
             }
             Fragment f = Fragment.instantiate(this, clazz.getName());
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
