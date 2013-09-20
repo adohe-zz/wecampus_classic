@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.util.ImageUtil;
@@ -16,7 +17,9 @@ import com.westudio.wecampus.util.ImageUtil;
  * Created by martian on 13-9-15.
  * This Fragment is for main menu in the app drawer
  */
-public class LeftMenuFragment extends Fragment{
+public class LeftMenuFragment extends Fragment implements View.OnClickListener{
+
+    private RelativeLayout mActivitySection, mUserSection, mSquareSection, mSettingsSection;
 
     public static LeftMenuFragment newInstance() {
         LeftMenuFragment f = new LeftMenuFragment();
@@ -33,11 +36,44 @@ public class LeftMenuFragment extends Fragment{
         bm = ImageUtil.getRoundedCornerBitmap(bm);
         avatar.setImageBitmap(bm);
 
+        //list
+        mActivitySection = (RelativeLayout) view.findViewById(R.id.activity_section);
+        mUserSection = (RelativeLayout) view.findViewById(R.id.user_section);
+        mSquareSection = (RelativeLayout) view.findViewById(R.id.square_section);
+        mSettingsSection = (RelativeLayout) view.findViewById(R.id.settings_section);
+        mActivitySection.setOnClickListener(this);
+        mUserSection.setOnClickListener(this);
+        mSquareSection.setOnClickListener(this);
+        mSettingsSection.setOnClickListener(this);
+
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View view) {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        switch (view.getId()) {
+            case R.id.activity_section: {
+                mainActivity.changeContent(MainActivity.ContentType.ACTIVITY);
+                break;
+            }
+            case R.id.user_section: {
+                mainActivity.changeContent(MainActivity.ContentType.USERS);
+                break;
+            }
+            case R.id.square_section: {
+                mainActivity.changeContent(MainActivity.ContentType.SQUARE);
+                break;
+            }
+            case R.id.settings_section: {
+
+                break;
+            }
+        }
     }
 }

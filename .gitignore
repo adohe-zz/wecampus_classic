@@ -37,11 +37,4 @@ local.properties
 WeCampus/gradle/wrapper/wrapper.properties
 
 WeCampus/extras/ListViewAnimationLib/build/bundles/release/classes.jar
-WeCampus/extras/ListViewAnimationLib/build/incremental/aidl/debug/inputs.data
-WeCampus/extras/ListViewAnimationLib/build/incremental/aidl/release/inputs.data
-WeCampus/extras/ListViewAnimationLib/build/incremental/mergeAssets/debug/merger.xml
-WeCampus/extras/ListViewAnimationLib/build/incremental/mergeAssets/release/merger.xml
-WeCampus/extras/ListViewAnimationLib/build/incremental/mergeResources/debug/merger.xml
-WeCampus/extras/ListViewAnimationLib/build/incremental/mergeResources/release/merger.xml
-WeCampus/extras/ListViewAnimationLib/build/incremental/packageResources/release/merger.xml
-WeCampus/extras/ListViewAnimationLib/build/libs/ListViewAnimationLib.aar
+build

@@ -2,6 +2,8 @@ package com.westudio.wecampus.ui.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -11,15 +13,24 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
+import com.westudio.wecampus.ui.square.SquareFragment;
+import com.westudio.wecampus.ui.user.UsersListFragment;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
 public class MainActivity extends SherlockFragmentActivity {
+    public static final int MSG_SWITCH_CONTENT = 9009;
+
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggleCompat mDrawerToggle;
     private PullToRefreshAttacher mPullToRefreshAttacher;
+    private ContentType mCurrentContent = ContentType.ACTIVITY;
 
+
+    public enum ContentType {
+        ACTIVITY, USERS, SQUARE, SETTINGS;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,5 +92,25 @@ public class MainActivity extends SherlockFragmentActivity {
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {
         return mPullToRefreshAttacher;
+    }
+
+    public void changeContent(ContentType type) {
+        if (mCurrentContent != type) {
+            mCurrentContent = type;
+
+            Class<?> clazz = null;
+            if (type == ContentType.ACTIVITY) {
+                clazz = ActivityListFragment.class;
+            } else if (type == ContentType.USERS) {
+                clazz = UsersListFragment.class;
+            } else if (type == ContentType.SQUARE) {
+                clazz = SquareFragment.class;
+            }
+            Fragment f = Fragment.instantiate(this, clazz.getName());
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+        }
+
+        mDrawerLayout.closeDrawers();
+
     }
 }
