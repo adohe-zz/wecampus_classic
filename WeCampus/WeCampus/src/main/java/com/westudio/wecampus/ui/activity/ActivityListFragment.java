@@ -8,6 +8,8 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -83,6 +85,40 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
         mDataHelper = new ActivityDataHelper(BaseApplication.getContext());
         getLoaderManager().initLoader(0, null, this);
+
+        //Set the listview scroll listener
+        listView.setOnScrollListener( new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(loadingFooter.getState() == LoadingFooter.State.Loading ||
+                        loadingFooter.getState() == LoadingFooter.State.TheEnd ) {
+                    return;
+                }
+
+
+            }
+        });
+
+        //Set the listview item click listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        //Set the listview long click listener
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
+            }
+        });
 
         return view;
     }

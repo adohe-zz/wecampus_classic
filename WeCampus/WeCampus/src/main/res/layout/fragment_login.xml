@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@id/ly_login_input">
+
+        <EditText
+            android:id="@id/login_edt_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_alignBottom="@id/ly_login_input"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="28dp" />
+
+        <EditText
+            android:id="@id/login_edt_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_below="@id/ly_login_input"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_register"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/ly_login_input"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp" />
+
+    <Button
+        android:id="@id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_login"
+        android:layout_alignTop="@id/btn_register"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@id/login_forget_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forget_pwd"
+        android:layout_below="@id/btn_register"
+        android:layout_centerHorizontal="true"
+        android:clickable="true" />
+
+
+</RelativeLayout>
