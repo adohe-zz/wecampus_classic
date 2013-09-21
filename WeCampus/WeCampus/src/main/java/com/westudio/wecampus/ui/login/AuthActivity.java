@@ -8,11 +8,12 @@ import com.westudio.wecampus.R;
 
 /**
  * Created by nankonami on 13-9-18.
+ * The login/register activity
  */
 public class AuthActivity extends SherlockFragmentActivity {
 
-    private static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
-    private static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
+    public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
+    public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
 
     private String mEmail;
     private String mPwd;

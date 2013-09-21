@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rege_step_two_title"
+        android:id="@id/rege_step_two_title"
+        android:layout_centerHorizontal="true"
+        style="@style/RegisterTitle" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/rege_step_two_avatar"
+        android:layout_below="@id/rege_step_two_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/register_avatar"
+        android:contentDescription="@string/imageDescription" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rege_step_two_avatar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:id="@id/rege_step_two_ly">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/rege_step_two_true_name"
+                android:gravity="center"
+                android:layout_weight="1"
+                style="@style/RegisterTextView" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@id/rege_step_two_true_name"
+                android:layout_weight="3"
+                android:background="#00000000"
+                android:hint="@string/input_tips" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.3dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:background="@color/divider_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/rege_step_two_academy"
+                android:gravity="center"
+                android:layout_weight="1"
+                style="@style/RegisterTextView" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@id/rege_step_two_academy"
+                android:layout_weight="3"
+                android:background="#00000000"
+                android:hint="@string/rege_choose_school" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.3dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:background="@color/divider_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/rege_step_two_description"
+                android:gravity="center"
+                android:layout_weight="1"
+                style="@style/RegisterTextView" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@id/rege_step_two_description"
+                android:layout_weight="3"
+                android:background="#00000000"
+                android:hint="@string/rege_description" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rege_finish"
+        android:id="@id/rege_step_two_submit"
+        android:layout_below="@id/rege_step_two_ly"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/login_btn_bg"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/rege_skip"
+        android:id="@+id/textView"
+        android:layout_below="@id/rege_step_two_submit"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
