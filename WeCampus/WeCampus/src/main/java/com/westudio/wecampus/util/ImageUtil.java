@@ -6,12 +6,18 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.os.Build;
 
 /**
  * Created by martian on 13-9-15.
  */
 public class ImageUtil {
 
+    /**
+     * Get Circle Bitmap
+     * @param bitmap
+     * @return
+     */
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
         int x = bitmap.getWidth();
         Bitmap output = Bitmap.createBitmap(x,
@@ -32,5 +38,18 @@ public class ImageUtil {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
+    }
+
+    /**
+     * Get the size of a bitmap
+     * @param bitmap
+     * @return
+     */
+    public static int getBitmapSize(Bitmap bitmap) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return bitmap.getByteCount();
+        }
+
+        return bitmap.getRowBytes() * bitmap.getHeight();
     }
 }

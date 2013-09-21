@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
 
@@ -52,6 +54,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        updateActionBar();
     }
 
     @Override
@@ -73,9 +77,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.rege_btn_register) {
-
+            FragmentTransaction fragmentTransaction = ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
+            fragmentTransaction.replace(R.id.auth_container, UpdateProfileFragment.newInstance(null), AuthActivity.UPDATE_PROFILE_TAG);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         } else if(v.getId() == R.id.rege_tips_two) {
-            
+
         }
     }
 
@@ -87,5 +95,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         boolean result = true;
 
         return result;
+    }
+
+    /**
+     * Update the action bar title
+     */
+    private void updateActionBar() {
+        ActionBar actionBar = ((AuthActivity)activity).getSupportActionBar();
+        actionBar.setTitle(R.string.rege_actionbar_title);
     }
 }

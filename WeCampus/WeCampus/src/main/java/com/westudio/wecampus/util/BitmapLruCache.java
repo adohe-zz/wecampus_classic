@@ -41,7 +41,7 @@ public class BitmapLruCache extends LruCache<String, Bitmap> implements ImageLoa
 
     @Override
     protected int sizeOf(String key, Bitmap value) {
-        return value.getRowBytes() * value.getHeight() / 1024;
+        return ImageUtil.getBitmapSize(value);
     }
 
     @Override
@@ -51,6 +51,7 @@ public class BitmapLruCache extends LruCache<String, Bitmap> implements ImageLoa
 
     @Override
     public void putBitmap(String s, Bitmap bitmap) {
+        Utility.log("test", "put into memo");
         put(s, bitmap);
     }
 

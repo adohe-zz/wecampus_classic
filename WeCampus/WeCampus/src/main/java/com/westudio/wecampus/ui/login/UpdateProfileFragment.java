@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
 
 /**
@@ -13,6 +15,20 @@ import com.westudio.wecampus.ui.base.BaseFragment;
  */
 public class UpdateProfileFragment extends BaseFragment {
     private Activity activity;
+
+    public static UpdateProfileFragment newInstance(Bundle bundle) {
+        UpdateProfileFragment fragment = new UpdateProfileFragment();
+
+        if(bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
+        return fragment;
+    }
+
+    public UpdateProfileFragment() {
+
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -24,10 +40,22 @@ public class UpdateProfileFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        updateActionBar();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_register_two, container, false);
+
+        return view;
+    }
+
+    /**
+     * Update the Action Bar Title
+     */
+    private void updateActionBar() {
+        ActionBar actionBar = ((AuthActivity)activity).getSupportActionBar();
+        actionBar.setTitle(R.string.rege_actionbar_title);
     }
 }

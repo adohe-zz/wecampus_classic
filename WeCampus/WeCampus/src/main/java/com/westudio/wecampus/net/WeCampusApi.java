@@ -23,6 +23,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.Utility;
 
 import java.io.File;
 
@@ -54,7 +55,7 @@ public class WeCampusApi {
     }
 
     //Open the disk cache
-    private static Cache openCache() {
+    private static final Cache openCache() {
         return new DiskBasedCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10 * 1024 * 1024);
     }
 
@@ -66,6 +67,7 @@ public class WeCampusApi {
     private static final RequestQueue newRequestQueue() {
         RequestQueue queue = new RequestQueue(openCache(), new BasicNetwork(new HurlStack()));
         queue.start();
+
         return queue;
     }
 
@@ -129,6 +131,9 @@ public class WeCampusApi {
      * @return
      */
     public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener) {
+        if(getCachedImage(imageUrl) != null) {
+            Utility.log("test", "has cached");
+        }
         return requestImage(imageUrl, listener, 0, 0);
     }
 
@@ -157,6 +162,7 @@ public class WeCampusApi {
         return new ImageLoader.ImageListener() {
             @Override
             public void onResponse(ImageLoader.ImageContainer response, boolean b) {
+                Utility.log("test", "requestImage");
                 if(response.getBitmap() != null) {
                     if(!b && defaultImageDrawable != null) {
                         TransitionDrawable transitionDrawable = new TransitionDrawable(
@@ -169,9 +175,10 @@ public class WeCampusApi {
                         imageView.setImageDrawable(transitionDrawable);
                         transitionDrawable.startTransition(100);
                     } else {
-                        imageView.setImageDrawable(defaultImageDrawable);
+                        imageView.setImageBitmap(response.getBitmap());
                     }
                 } else if(defaultImageDrawable != null) {
+                    Utility.log("test", "set default");
                     imageView.setImageDrawable(defaultImageDrawable);
                 }
             }

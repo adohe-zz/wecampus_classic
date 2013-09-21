@@ -32,6 +32,7 @@
     <string name="section_recruiting">企业招聘</string>
 
     <!-- Register Part -->
+    <string name="rege_actionbar_title">注册</string>
     <string name="rege_title">欢迎加入WeCampus!</string>
     <string name="rege_school">学校</string>
     <string name="rege_email">邮箱</string>

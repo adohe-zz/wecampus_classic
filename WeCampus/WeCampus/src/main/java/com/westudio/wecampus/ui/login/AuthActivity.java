@@ -14,6 +14,7 @@ public class AuthActivity extends SherlockFragmentActivity {
 
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
     public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
+    public static final String UPDATE_PROFILE_TAG = "UPDATE_PROFILE";
 
     private String mEmail;
     private String mPwd;

@@ -29,6 +29,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
     public static LoginFragment newInstance(Bundle bundle) {
         LoginFragment loginFragment = new LoginFragment();
+
         if(bundle != null) {
             loginFragment.setArguments(bundle);
         }
@@ -36,12 +37,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         return loginFragment;
     }
 
-    private LoginFragment() {
+    public LoginFragment() {
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         this.activity = activity;
     }
 
@@ -82,13 +84,19 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
             String email = edtEmail.getText().toString();
             String pwd = edtPwd.getText().toString();
             if(checkValidation(email, pwd)) {
-
+                ((AuthActivity)activity).handleLogin(email, pwd);
             }
         } else if(v.getId() == R.id.login_forget_pwd) {
 
         }
     }
 
+    /**
+     * Check the input parameters validation
+     * @param email
+     * @param pwd
+     * @return
+     */
     private boolean checkValidation(String email, String pwd) {
         boolean result = true;
 
