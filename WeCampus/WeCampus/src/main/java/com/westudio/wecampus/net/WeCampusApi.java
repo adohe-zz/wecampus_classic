@@ -169,7 +169,7 @@ public class WeCampusApi {
                         imageView.setImageDrawable(transitionDrawable);
                         transitionDrawable.startTransition(100);
                     } else {
-                        imageView.setImageDrawable(defaultImageDrawable);
+                        imageView.setImageBitmap(response.getBitmap());
                     }
                 } else if(defaultImageDrawable != null) {
                     imageView.setImageDrawable(defaultImageDrawable);

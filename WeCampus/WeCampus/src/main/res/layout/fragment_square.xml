@@ -73,10 +73,11 @@
                 android:layout_height="@dimen/square_section_height"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@android:color/white">
+                android:clickable="true"
+                android:background="@drawable/square_section_background">
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="@dimen/square_color_mark_width"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:background="#ea4140"
@@ -113,10 +114,11 @@
                 android:layout_height="@dimen/square_section_height"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@android:color/white">
+                android:clickable="true"
+                android:background="@drawable/square_section_background">
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="@dimen/square_color_mark_width"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:background="#29a18a"
@@ -153,10 +155,11 @@
                 android:layout_height="@dimen/square_section_height"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@android:color/white">
+                android:clickable="true"
+                android:background="@drawable/square_section_background">
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="@dimen/square_color_mark_width"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:background="#e77e23"
@@ -193,10 +196,11 @@
                 android:layout_height="@dimen/square_section_height"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@android:color/white">
+                android:clickable="true"
+                android:background="@drawable/square_section_background">
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="@dimen/square_color_mark_width"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:background="#157efb"
@@ -215,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="18px"
+                    android:layout_marginRight="18dp"
                     android:layout_alignParentRight="true"/>
 
                 <View
