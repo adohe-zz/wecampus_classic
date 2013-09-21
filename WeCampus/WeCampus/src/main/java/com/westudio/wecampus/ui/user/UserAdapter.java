@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
+import com.westudio.wecampus.util.PinYin;
 import com.woozzu.android.util.StringMatcher;
 
 import java.util.List;
@@ -63,16 +64,15 @@ public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
         for (int i = section; i >= 0; i--) {
             for (int j = 0; j < getCount(); j++) {
                 if (i == 0) {
-                    // For numeric section
-                    for (int k = 0; k <= 9; k++) {
-                        if (StringMatcher.match(String.valueOf(getItem(j).Name.charAt(0)),
-                                String.valueOf(k))) {
-                            return j;
-                        }
+                    // not English nor Chinese
+                    char c = getItem(j).Name.charAt(0);
+                    if ((c < 19968 && c > 171941) && (c < 'a' && c > 'z')
+                            && (c < 'A' && c > 'Z')) {
+                        return j;
                     }
                 } else {
-                    if (StringMatcher.match(String.valueOf(getItem(j).Name.charAt(0)),
-                            String.valueOf(mSections.charAt(i)))) {
+                    if (PinYin.match(String.valueOf(getItem(j).Name.charAt(0)),
+                            mSections.charAt(i))) {
                         return j;
                     }
                 }

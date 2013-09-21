@@ -26,6 +26,7 @@
             android:smoothScrollbar="true"
             android:dividerHeight="13dp"
             android:drawSelectorOnTop="true"
+            android:listSelector="@drawable/selectable_background_we"
             android:divider="@android:color/transparent" />
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
