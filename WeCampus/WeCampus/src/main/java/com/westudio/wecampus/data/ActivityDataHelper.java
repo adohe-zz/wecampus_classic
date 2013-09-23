@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
+import android.util.Log;
 
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.database.Column;
 import com.westudio.wecampus.util.database.SQLiteTable;
 
@@ -40,7 +42,11 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.ORGANIZER, activity.getOrganizer());
         values.put(ActivityDBInfo.ORGANIZER_AVATAR, activity.getOrganizerAvatar());
         values.put(ActivityDBInfo.STATUS, activity.getStatus());
-        values.put(ActivityDBInfo.IMAGE, activity.getImage());
+        if(activity.getImage().length() == 0) {
+            values.put(ActivityDBInfo.IMAGE, activity.getImage());
+        } else {
+            values.put(ActivityDBInfo.IMAGE, activity.getImage().substring(0, activity.getImage().indexOf("?")));
+        }
         values.put(ActivityDBInfo.CRTEATE_AT, activity.getCreatedAt());
         values.put(ActivityDBInfo.DESCRIPTION, activity.getDescription());
         values.put(ActivityDBInfo.LIKE, activity.getLike());

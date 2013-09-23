@@ -13,17 +13,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.net.GsonRequest;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -80,6 +83,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         listView.addFooterView(loadingFooter.getView());
         listView.setAdapter(animationAdapter);
         mPullToRefreshAttacher = ((MainActivity)activity).getPullToRefreshAttacher();
+
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
         ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 

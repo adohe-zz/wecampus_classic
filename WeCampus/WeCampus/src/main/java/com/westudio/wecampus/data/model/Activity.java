@@ -6,11 +6,14 @@ import com.google.gson.Gson;
 import com.westudio.wecampus.data.ActivityDataHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by martian on 13-9-13.
  */
 public class Activity {
+    private static final HashMap<Integer, Activity> CACHE = new HashMap<Integer, Activity>();
+
     public int Id;
 
     public String Begin;
@@ -35,7 +38,20 @@ public class Activity {
         return new Gson().fromJson(json, Activity.class);
     }
 
+    private static void addToCache(Activity activity) {
+        CACHE.put(activity.getId(), activity);
+    }
+
+    private static Activity getFromCache(int id) {
+        return CACHE.get(id);
+    }
+
     public static Activity fromCursor(Cursor cursor) {
+        int id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ID));
+        Activity activity = getFromCache(id);
+        if(activity != null) {
+            return activity;
+        }
         Activity ac = new Activity();
         ac.Id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ID));
         ac.Begin = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.BEGIN));
@@ -55,6 +71,7 @@ public class Activity {
         ac.CanSchedule = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_SCHEDULE)) > 0;
         ac.FriendsCount = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.FRIEND_COUNT));
         ac.AccountId = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ACCOUNT_ID));
+        addToCache(ac);
         return ac;
     }
 

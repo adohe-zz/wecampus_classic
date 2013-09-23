@@ -51,7 +51,6 @@ public class BitmapLruCache extends LruCache<String, Bitmap> implements ImageLoa
 
     @Override
     public void putBitmap(String s, Bitmap bitmap) {
-        Utility.log("test", "put into memo");
         put(s, bitmap);
     }
 
