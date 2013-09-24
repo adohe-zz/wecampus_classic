@@ -35,6 +35,7 @@ dependencies {
     compile files('libs/FlurryAgent.jar')
     compile project(':extras:ListViewAnimationLib')
     compile project(':extras:IndexableListView')
+    compile project(':extras:ViewPagerIndicator')
 }
 
 tasks.withType(Compile) {

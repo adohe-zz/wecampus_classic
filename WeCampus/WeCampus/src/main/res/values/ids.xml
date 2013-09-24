@@ -16,6 +16,8 @@
     <item type="id" name="intro_login_sign">false</item>
     <item type="id" name="intro_viewpager_container">false</item>
     <item type="id" name="intro_viewpager">false</item>
+    <item type="id" name="intro_viewpager_indicator">false</item>
+    <item type="id" name="intro_fragment_container">false</item>
 
     <!-- Login Fragment -->
     <item type="id" name="login_edt_email">false</item>

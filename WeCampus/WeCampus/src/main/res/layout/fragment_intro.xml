@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,34 +6,58 @@
     <RelativeLayout
         android:id="@id/intro_viewpager_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:layout_alignParentTop="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/intro_bg"
+            android:contentDescription="@string/imageDescription" />
 
         <android.support.v4.view.ViewPager
             android:id="@id/intro_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true" />
+
+        <com.viewpagerindicator.UnderlinePageIndicator
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@id/intro_viewpager_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/vp_indicator_bg"
+            app:selectedColor="@color/vp_indicator_selected" />
 
     </RelativeLayout>
 
-    <Button
-        android:id="@id/intro_no_login"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/access_without_login"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_below="@id/intro_viewpager_container"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="5dp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@id/intro_login_sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_sign"
-        android:layout_alignTop="@id/intro_no_login"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp" />
+        <Button
+            android:id="@id/intro_no_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/access_without_login"
+            android:background="@drawable/btn_selectable_background_we" />
+
+        <Button
+            android:id="@id/intro_login_sign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/login_sign" />
+
+    </LinearLayout>
 
 </RelativeLayout>

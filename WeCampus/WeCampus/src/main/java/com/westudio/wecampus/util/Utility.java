@@ -1,11 +1,14 @@
 package com.westudio.wecampus.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -153,5 +156,51 @@ public class Utility {
         }
 
         return category;
+    }
+
+    /**
+     * Get The Screen Width
+     * @param activity
+     * @return
+     */
+    public static int getScreentWidth(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        display.getMetrics(dm);
+        return dm.widthPixels;
+    }
+
+    /**
+     * Get The Screen Height
+     * @param activity
+     * @return
+     */
+    public static int getScreentHeight(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        display.getMetrics(dm);
+        return dm.heightPixels;
+    }
+
+    /**
+     * Convert dp to px
+     * @param context
+     * @param dpValue
+     * @return
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * Convert px to dp
+     * @param context
+     * @param pxValue
+     * @return
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 }
