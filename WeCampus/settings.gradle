@@ -1,1 +1,1 @@
-include ':WeCampus', ':extras:ListViewAnimationLib', 'extras:IndexableListView'
+include ':WeCampus', ':extras:ListViewAnimationLib', 'extras:IndexableListView', 'extras:ViewPagerIndicator'

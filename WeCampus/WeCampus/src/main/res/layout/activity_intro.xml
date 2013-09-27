@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/intro_activity_bg">
-
-    <ImageView
-        android:id="@id/intro_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_signup"/>
-
-    <Button
-        android:id="@id/intro_no_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/access_without_login"
-        android:layout_below="@id/intro_image"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="5dp" />
-
-    <Button
-        android:id="@id/intro_login_sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_sign"
-        android:layout_alignTop="@id/intro_no_login"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp" />
-
-</RelativeLayout>
+    android:id="@id/intro_fragment_container" />

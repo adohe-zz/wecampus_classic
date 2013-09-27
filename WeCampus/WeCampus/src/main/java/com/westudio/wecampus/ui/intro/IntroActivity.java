@@ -15,46 +15,25 @@ import com.westudio.wecampus.ui.main.MainActivity;
  * Created by nankonami on 13-9-11.
  * The Introduction activity
  */
-public class IntroActivity extends SherlockFragmentActivity implements View.OnClickListener{
+public class IntroActivity extends SherlockFragmentActivity {
 
-    private Button btnNotNow;
-    private Button btnLogin;
+    private static String INTRO_FRAGMENT = "intro_fragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_intro);
 
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.intro_fragment_container, IntroFragment.newInstance(null), INTRO_FRAGMENT)
+                .commit();
+
         setUpActionBar();
 
-        initWidget();
     }
 
     private void setUpActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-    }
-
-    private void initWidget() {
-        btnNotNow = (Button)findViewById(R.id.intro_no_login);
-        btnNotNow.setOnClickListener(this);
-        btnLogin = (Button)findViewById(R.id.intro_login_sign);
-        btnLogin.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        if(v.getId() == R.id.intro_no_login) {
-            intent.setClass(this, MainActivity.class);
-            finish();
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_up_in, R.anim.push_out);
-        } else if(v.getId() == R.id.intro_login_sign) {
-            intent.setClass(this, AuthActivity.class);
-            finish();
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_up_in, R.anim.push_out);
-        }
     }
 }

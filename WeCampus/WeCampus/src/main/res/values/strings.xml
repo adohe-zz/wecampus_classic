@@ -15,8 +15,8 @@
     <string name="menu_settings">设置</string>
     `
     <!-- Intro Part -->
-    <string name="access_without_login">Not Now</string>
-    <string name="login_sign">Sign/Login</string>
+    <string name="access_without_login">随便看看</string>
+    <string name="login_sign">注册/登录</string>
 
     <!-- Login Part -->
     <string name="input_email">邮   箱</string>

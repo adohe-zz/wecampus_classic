@@ -7,7 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
-import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;

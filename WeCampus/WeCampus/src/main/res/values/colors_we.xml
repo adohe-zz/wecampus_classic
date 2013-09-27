@@ -28,6 +28,8 @@
     <color name="login_textview_bg">#3e454d</color>
     <color name="rege_title_color">#999999</color>
     <color name="rege_tips_two_bg">#666666</color>
+    <color name="vp_indicator_bg">#595959</color>
+    <color name="vp_indicator_selected">#0cc2cb</color>
 
     <!-- Main color for text -->
     <color name="text_color_primary">#3e454d</color>

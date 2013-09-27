@@ -2,6 +2,7 @@ package com.westudio.wecampus.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -51,5 +52,25 @@ public class ImageUtil {
         }
 
         return bitmap.getRowBytes() * bitmap.getHeight();
+    }
+
+    /**
+     * Resize bitmap
+     * @param bitmap
+     * @param height
+     * @param width
+     * @return
+     */
+    public static Bitmap resizeBitmap(Bitmap bitmap, final int height, final int width) {
+        int oldHeight = bitmap.getHeight();
+        int oldWidth = bitmap.getWidth();
+
+        float scaleHeight = ((float)height) / oldHeight;
+        float scaleWidth = ((float)width) / oldWidth;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
     }
 }

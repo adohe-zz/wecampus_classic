@@ -1,10 +1,13 @@
 package com.westudio.wecampus.ui.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+import android.util.DisplayMetrics;
+import android.view.Display;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -24,6 +27,8 @@ public class BaseApplication extends Application {
     public static final String AUTHTOKEN_TYPE = "com.westudio.wecampus";
 
     public boolean hasAccount;
+
+    public DisplayMetrics displayMetrics;
 
     @Override
     public void onCreate() {
@@ -52,5 +57,17 @@ public class BaseApplication extends Application {
 
     public static Context getContext() {
         return mContext;
+    }
+
+    public DisplayMetrics getDisplayMetrics(Activity activity) {
+        if(displayMetrics != null) {
+            return displayMetrics;
+        } else {
+            Display display = activity.getWindowManager().getDefaultDisplay();
+            DisplayMetrics dm = new DisplayMetrics();
+            display.getMetrics(dm);
+            this.displayMetrics = dm;
+            return displayMetrics;
+        }
     }
 }

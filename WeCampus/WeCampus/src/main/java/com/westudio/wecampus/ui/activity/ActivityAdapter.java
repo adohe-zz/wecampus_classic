@@ -52,24 +52,22 @@ public class ActivityAdapter extends CursorAdapter {
 
         ViewHolder holder = getHolder(view);
 
-        if(holder != null) {
-            if(holder.imageRequest != null) {
-                holder.imageRequest.cancelRequest();
-            }
-
-            view.setEnabled(!mListView.isItemChecked(cursor.getPosition()
-                    + mListView.getFooterViewsCount()));
-
-            Activity activity = Activity.fromCursor(mCursor);
-
-            holder.imageRequest = WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(holder.imageView,
-                    defaultDrawable, defaultDrawable));
-            holder.text_title.setText(activity.getTitle());
-            holder.text_time.setText(activity.getBegin());
-            holder.text_location.setText(activity.getLocation());
-            holder.text_tag.setText(Utility.getCatByChannelId(activity.getChannel_Id()));
-            holder.text_like.setText(String.valueOf(activity.getLike()));
+        if(holder.imageRequest != null) {
+            holder.imageRequest.cancelRequest();
         }
+
+        view.setEnabled(!mListView.isItemChecked(cursor.getPosition()
+                + mListView.getHeaderViewsCount()));
+
+        Activity activity = Activity.fromCursor(cursor);
+        holder.imageRequest = WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(holder.imageView,
+                defaultDrawable, defaultDrawable));
+        holder.text_title.setText(activity.getTitle());
+        holder.text_time.setText(activity.getBegin());
+        holder.text_location.setText(activity.getLocation());
+        holder.text_tag.setText(Utility.getCatByChannelId(activity.getChannel_Id()));
+        holder.text_like.setText(String.valueOf(activity.getLike()));
+
     }
 
     private ViewHolder getHolder(final View view) {

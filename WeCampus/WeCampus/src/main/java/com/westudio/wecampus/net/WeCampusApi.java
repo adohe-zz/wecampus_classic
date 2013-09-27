@@ -23,7 +23,6 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
-import com.westudio.wecampus.util.Utility;
 
 import java.io.File;
 
@@ -55,7 +54,7 @@ public class WeCampusApi {
     }
 
     //Open the disk cache
-    private static final Cache openCache() {
+    private static Cache openCache() {
         return new DiskBasedCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10 * 1024 * 1024);
     }
 
@@ -64,7 +63,7 @@ public class WeCampusApi {
      * need to call the start method
      * @return
      */
-    private static final RequestQueue newRequestQueue() {
+    private static RequestQueue newRequestQueue() {
         RequestQueue queue = new RequestQueue(openCache(), new BasicNetwork(new HurlStack()));
         queue.start();
 
@@ -131,9 +130,6 @@ public class WeCampusApi {
      * @return
      */
     public static ImageLoader.ImageContainer requestImage(String imageUrl, ImageLoader.ImageListener listener) {
-        if(getCachedImage(imageUrl) != null) {
-            Utility.log("test", "has cached");
-        }
         return requestImage(imageUrl, listener, 0, 0);
     }
 
@@ -161,10 +157,9 @@ public class WeCampusApi {
                 final Drawable errorImageDrawable) {
         return new ImageLoader.ImageListener() {
             @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean b) {
-                Utility.log("test", "requestImage");
+            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                 if(response.getBitmap() != null) {
-                    if(!b && defaultImageDrawable != null) {
+                    if(!isImmediate && defaultImageDrawable != null) {
                         TransitionDrawable transitionDrawable = new TransitionDrawable(
                                 new Drawable[]{
                                         defaultImageDrawable,
@@ -178,7 +173,6 @@ public class WeCampusApi {
                         imageView.setImageBitmap(response.getBitmap());
                     }
                 } else if(defaultImageDrawable != null) {
-                    Utility.log("test", "set default");
                     imageView.setImageDrawable(defaultImageDrawable);
                 }
             }
