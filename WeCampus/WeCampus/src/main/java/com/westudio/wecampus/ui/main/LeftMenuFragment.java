@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.main;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.user.MyProfileActivity;
 import com.westudio.wecampus.util.ImageUtil;
 
 /**
@@ -35,6 +37,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
         Bitmap bm = ((BitmapDrawable)avatar.getDrawable()).getBitmap();
         bm = ImageUtil.getRoundedCornerBitmap(bm);
         avatar.setImageBitmap(bm);
+        avatar.setOnClickListener(this);
 
         //list
         mActivitySection = (RelativeLayout) view.findViewById(R.id.activity_section);
@@ -72,6 +75,10 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
             }
             case R.id.settings_section: {
 
+                break;
+            }
+            case R.id.img_avatar: {
+                startActivity(new Intent(getActivity(), MyProfileActivity.class));
                 break;
             }
         }

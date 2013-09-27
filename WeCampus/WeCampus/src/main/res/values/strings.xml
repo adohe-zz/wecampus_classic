@@ -53,5 +53,8 @@
     <string name="rege_step_two_description">个性签名</string>
 
     <string name="imageDescription">ImageView</string>
+    <string name="activity_join">参加的活动</string>
+    <string name="activity_like">喜欢的活动</string>
+    <string name="org_like">喜欢的公共组织</string>
 
 </resources>

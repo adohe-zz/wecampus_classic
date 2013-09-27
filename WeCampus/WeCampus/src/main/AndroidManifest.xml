@@ -53,6 +53,13 @@
             android:label="@string/btn_login">
         </activity>
 
+        <!-- My profile activity -->
+        <activity
+            android:name=".ui.user.MyProfileActivity"
+            android:label="@string/hello_world" >
+
+        </activity>
+
         <!-- Add Account Service-->
         <service
             android:name=".service.AuthenticationService"
