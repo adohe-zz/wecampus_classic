@@ -2,7 +2,6 @@ package com.westudio.wecampus.ui.intro;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -10,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.viewpagerindicator.UnderlinePageIndicator;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
-import com.westudio.wecampus.util.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,13 +66,15 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_intro, container, false);
         List<View> viewList = new ArrayList<View>();
+        String[] words = getResources().getStringArray(R.array.intro_words);
 
         for(int i = 0; i < BG_IMAGE_IDS.length; i++) {
-            ImageView imageView = new ImageView(activity);
-            imageView = (ImageView)inflater.inflate(R.layout.page_intro, null);
-            Drawable drawable = getResources().getDrawable(BG_IMAGE_IDS[i]);
-            imageView.setBackgroundResource(BG_IMAGE_IDS[i]);
-            viewList.add(imageView);
+            LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.page_intro, null);
+            ImageView imageView = (ImageView) linearLayout.findViewById(R.id.picture);
+            imageView.setImageResource(BG_IMAGE_IDS[i]);
+            TextView tvIntro = (TextView) linearLayout.findViewById(R.id.words);
+            tvIntro.setText(words[i]);
+            viewList.add(linearLayout);
         }
 
         viewPager = (ViewPager)view.findViewById(R.id.intro_viewpager);

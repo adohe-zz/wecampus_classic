@@ -57,4 +57,10 @@
     <string name="activity_like">喜欢的活动</string>
     <string name="org_like">喜欢的公共组织</string>
 
+    <string-array name="intro_words">
+        <item>校园活动，一网打尽</item>
+        <item>爱你所爱</item>
+        <item>透过公共组织找到共同兴趣</item>
+    </string-array>
+
 </resources>

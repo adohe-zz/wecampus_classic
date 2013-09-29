@@ -34,4 +34,5 @@
     <!-- Main color for text -->
     <color name="text_color_primary">#3e454d</color>
     <color name="text_color_secondary">#6a6a6a</color>
+    <color name="text_color_white">#ffffff</color>
 </resources>

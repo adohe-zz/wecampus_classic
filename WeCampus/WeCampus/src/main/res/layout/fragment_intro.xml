@@ -6,8 +6,9 @@
     <RelativeLayout
         android:id="@id/intro_viewpager_container"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="72dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -36,11 +37,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_below="@id/intro_viewpager_container"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <Button
