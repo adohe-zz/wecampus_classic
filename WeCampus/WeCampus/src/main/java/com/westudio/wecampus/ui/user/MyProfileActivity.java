@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,7 +15,7 @@ import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.PinnedHeaderListView;
 
 /**
- * Created by jam on 13-9-21.
+ * Created by martian on 13-9-21.
  * This Activity is used to display the profile of current user
  */
 public class MyProfileActivity extends BaseDetailActivity {
@@ -42,6 +43,9 @@ public class MyProfileActivity extends BaseDetailActivity {
                 mPinnedHeader.setVisibility(View.GONE);
             }
         });
+
+        registerSwipeToCloseListener(lv);
+
     }
 
     public class TestAdapter extends BaseAdapter {
@@ -78,4 +82,5 @@ public class MyProfileActivity extends BaseDetailActivity {
             return view;
         }
     }
+
 }
