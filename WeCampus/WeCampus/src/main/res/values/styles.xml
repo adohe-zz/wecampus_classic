@@ -25,14 +25,14 @@
 
     <style name="LoginTextView">
         <item name="android:textColor">@color/login_textview_bg</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="RegisterTextView">
         <item name="android:textColor">@color/login_textview_bg</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="RegisterEditTextHint">
@@ -43,6 +43,10 @@
 
     <style name="RegisterTitle" parent="RegisterEditTextHint">
         <item name="android:textSize">21sp</item>
+    </style>
+
+    <style name="RegisterTitleTwo" parent="RegisterEditTextHint">
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="RegisterTips">

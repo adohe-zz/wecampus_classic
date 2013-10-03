@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:id="@id/ly_login_input_one"
             android:orientation="horizontal">
 
@@ -36,7 +36,7 @@
                 android:id="@id/login_edt_email"
                 android:layout_weight="3"
                 android:hint="@string/input_tips"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:background="#00000000" />
 
         </LinearLayout>
@@ -50,7 +50,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:id="@id/ly_login_input_two">
 
             <TextView
@@ -67,7 +67,7 @@
                 android:inputType="textPassword"
                 android:id="@id/login_edt_pwd"
                 android:layout_weight="3"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:hint="@string/input_tips"
                 android:background="#00000000" />
 
@@ -89,6 +89,7 @@
             android:text="@string/btn_register"
             android:id="@id/btn_register"
             android:layout_weight="1"
+            android:textSize="18sp"
             android:background="@android:color/white" />
 
         <Button
@@ -98,7 +99,9 @@
             android:text="@string/btn_login"
             android:id="@id/btn_login"
             android:layout_weight="1"
-            android:background="@color/login_btn_bg" />
+            android:textSize="18sp"
+            android:textColor="@color/text_color_white"
+            android:background="@drawable/btn_selectable_background_we" />
 
     </LinearLayout>
 

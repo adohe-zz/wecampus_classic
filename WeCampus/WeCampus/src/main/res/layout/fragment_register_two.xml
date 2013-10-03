@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
     android:paddingTop="15dp">
@@ -12,7 +13,7 @@
         android:text="@string/rege_step_two_title"
         android:id="@id/rege_step_two_title"
         android:layout_centerHorizontal="true"
-        style="@style/RegisterTitle" />
+        style="@style/RegisterTitleTwo" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rege_step_two_avatar"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@android:color/white"
         android:id="@id/rege_step_two_ly">
 
@@ -53,7 +54,8 @@
                 android:id="@id/rege_step_two_true_name"
                 android:layout_weight="3"
                 android:background="#00000000"
-                android:hint="@string/input_tips" />
+                android:hint="@string/input_tips"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -83,7 +85,8 @@
                 android:id="@id/rege_step_two_academy"
                 android:layout_weight="3"
                 android:background="#00000000"
-                android:hint="@string/rege_choose_school" />
+                android:hint="@string/rege_choose_school"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -113,7 +116,8 @@
                 android:id="@id/rege_step_two_description"
                 android:layout_weight="3"
                 android:background="#00000000"
-                android:hint="@string/rege_description" />
+                android:hint="@string/rege_description"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

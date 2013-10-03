@@ -52,7 +52,8 @@
                         android:id="@id/rege_edt_school"
                         android:layout_weight="3"
                         android:background="#00000000"
-                        android:hint="@string/rege_choose_school" />
+                        android:hint="@string/rege_choose_school"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -83,7 +84,8 @@
                         android:layout_weight="3"
                         android:background="#00000000"
                         android:hint="@string/input_tips"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -114,7 +116,8 @@
                         android:layout_weight="3"
                         android:background="#00000000"
                         android:hint="@string/input_tips"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -144,7 +147,8 @@
                         android:id="@id/rege_edt_nickname"
                         android:layout_weight="3"
                         android:background="#00000000"
-                        android:hint="@string/rege_nickname_tips" />
+                        android:hint="@string/rege_nickname_tips"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -174,7 +178,8 @@
                         android:id="@id/rege_edt_sex"
                         android:layout_weight="3"
                         android:background="#00000000"
-                        android:hint="@string/rege_choose_school" />
+                        android:hint="@string/rege_choose_school"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 

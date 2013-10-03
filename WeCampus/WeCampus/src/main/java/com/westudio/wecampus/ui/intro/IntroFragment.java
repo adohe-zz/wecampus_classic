@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.viewpagerindicator.UnderlinePageIndicator;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.main.MainActivity;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
     private ViewPager viewPager;
     private UnderlinePageIndicator pageIndicator;
     private Button btnNotNow;
-    private Button btnogin;
+    private Button btLogin;
 
     private Activity activity;
 
@@ -86,6 +87,8 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
 
         btnNotNow = (Button) view.findViewById(R.id.intro_no_login);
         btnNotNow.setOnClickListener(this);
+        btLogin = (Button) view.findViewById(R.id.intro_login_sign);
+        btLogin.setOnClickListener(this);
 
         return view;
     }
@@ -95,6 +98,11 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.intro_no_login: {
                 startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+                break;
+            }
+            case R.id.intro_login_sign : {
+                startActivity(new Intent(getActivity(), AuthActivity.class));
                 getActivity().finish();
                 break;
             }
