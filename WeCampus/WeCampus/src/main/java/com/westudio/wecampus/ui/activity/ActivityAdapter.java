@@ -60,6 +60,7 @@ public class ActivityAdapter extends CursorAdapter {
                 + mListView.getHeaderViewsCount()));
 
         Activity activity = Activity.fromCursor(cursor);
+        Utility.log("image url", activity.getImage());
         holder.imageRequest = WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
         holder.text_title.setText(activity.getTitle());

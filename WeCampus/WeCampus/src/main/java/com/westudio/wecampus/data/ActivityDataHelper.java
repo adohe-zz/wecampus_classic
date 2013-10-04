@@ -42,11 +42,7 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.ORGANIZER, activity.getOrganizer());
         values.put(ActivityDBInfo.ORGANIZER_AVATAR, activity.getOrganizerAvatar());
         values.put(ActivityDBInfo.STATUS, activity.getStatus());
-        if(activity.getImage().length() == 0) {
-            values.put(ActivityDBInfo.IMAGE, activity.getImage());
-        } else {
-            values.put(ActivityDBInfo.IMAGE, activity.getImage().substring(0, activity.getImage().indexOf("?")));
-        }
+        values.put(ActivityDBInfo.IMAGE, activity.getImage());
         values.put(ActivityDBInfo.CRTEATE_AT, activity.getCreatedAt());
         values.put(ActivityDBInfo.DESCRIPTION, activity.getDescription());
         values.put(ActivityDBInfo.LIKE, activity.getLike());

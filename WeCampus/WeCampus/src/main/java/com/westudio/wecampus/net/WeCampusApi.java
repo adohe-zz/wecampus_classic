@@ -23,6 +23,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.database.ResponseDiskCache;
 
 import java.io.File;
 
@@ -55,7 +56,7 @@ public class WeCampusApi {
 
     //Open the disk cache
     private static Cache openCache() {
-        return new DiskBasedCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10 * 1024 * 1024);
+        return new ResponseDiskCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10*1024*1024);
     }
 
     /**
