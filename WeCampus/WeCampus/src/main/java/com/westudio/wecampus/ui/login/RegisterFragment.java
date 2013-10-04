@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseFragment;
 
 /**
@@ -83,7 +85,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         } else if(v.getId() == R.id.rege_tips_two) {
-
+            startActivity(new Intent(activity, TermsOfUseActivity.class));
+            activity.finish();
         }
     }
 

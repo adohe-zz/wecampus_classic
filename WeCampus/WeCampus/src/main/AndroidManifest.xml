@@ -53,6 +53,12 @@
             android:label="@string/btn_login">
         </activity>
 
+        <!-- Terms of Use Activity -->
+        <activity
+            android:name=".ui.about.TermsOfUseActivity"
+            android:label="@string/terms_of_use">
+        </activity>
+
         <!-- My profile activity -->
         <activity
             android:name=".ui.user.MyProfileActivity"

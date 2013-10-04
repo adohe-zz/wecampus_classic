@@ -22,6 +22,8 @@
     <!-- Login Fragment -->
     <item type="id" name="login_edt_email">false</item>
     <item type="id" name="login_edt_pwd">false</item>
+    <item type="id" name="login_tv_email">false</item>
+    <item type="id" name="login_tv_pwd">false</item>
     <item type="id" name="login_forget_pwd">false</item>
     <item type="id" name="btn_register">false</item>
     <item type="id" name="btn_login">false</item>
@@ -43,6 +45,7 @@
     <item type="id" name="rege_tips_two">false</item>
     <item type="id" name="rege_step_two_ly">false</item>
     <item type="id" name="rege_step_two_title">false</item>
+    <item type="id" name="rege_step_two_title_two">false</item>
     <item type="id" name="rege_step_two_avatar">false</item>
     <item type="id" name="rege_step_two_true_name">false</item>
     <item type="id" name="rege_step_two_academy">false</item>

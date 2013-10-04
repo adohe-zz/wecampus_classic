@@ -97,13 +97,13 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.intro_no_login: {
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                getActivity().finish();
+                startActivity(new Intent(activity, MainActivity.class));
+                activity.finish();
                 break;
             }
             case R.id.intro_login_sign : {
-                startActivity(new Intent(getActivity(), AuthActivity.class));
-                getActivity().finish();
+                startActivity(new Intent(activity, AuthActivity.class));
+                //activity.finish();
                 break;
             }
         }

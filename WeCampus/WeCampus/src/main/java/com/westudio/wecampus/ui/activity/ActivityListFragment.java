@@ -202,7 +202,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);
                 mPullToRefreshAttacher.setRefreshComplete();
-                Toast.makeText(getActivity(), "InsertSuccess", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -17,8 +17,6 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 
-import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
-
 /**
  * Created by nankonami on 13-9-18.
  */

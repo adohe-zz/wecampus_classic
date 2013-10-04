@@ -22,6 +22,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@id/login_tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/input_email"
@@ -54,6 +55,7 @@
             android:id="@id/ly_login_input_two">
 
             <TextView
+                android:id="@id/login_tv_pwd"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/input_pwd"
@@ -112,6 +114,7 @@
         android:id="@id/login_forget_pwd"
         android:layout_below="@id/ly_login_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        style="@style/ForgetPwdTextView"/>
 
 </RelativeLayout>

@@ -26,6 +26,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private Button btnReg;
     private Button btnLogin;
     private TextView tvForgetPwd;
+    private TextView tvPwd;
+    private TextView tvEmail;
 
     public static LoginFragment newInstance(Bundle bundle) {
         LoginFragment loginFragment = new LoginFragment();
@@ -63,6 +65,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         btnLogin.setOnClickListener(this);
         tvForgetPwd = (TextView)view.findViewById(R.id.login_forget_pwd);
         tvForgetPwd.setOnClickListener(this);
+        tvPwd = (TextView)view.findViewById(R.id.login_tv_pwd);
+        tvPwd.setText("密        码");
+        tvEmail = (TextView)view.findViewById(R.id.login_tv_email);
+        tvEmail.setText("邮        箱");
 
         return view;
     }

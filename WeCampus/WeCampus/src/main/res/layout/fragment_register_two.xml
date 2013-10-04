@@ -15,11 +15,20 @@
         android:layout_centerHorizontal="true"
         style="@style/RegisterTitleTwo" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rege_step_two_title_two"
+        android:id="@id/rege_step_two_title_two"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rege_step_two_title"
+        style="@style/RegisterTitleTwo" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@id/rege_step_two_avatar"
-        android:layout_below="@id/rege_step_two_title"
+        android:layout_below="@id/rege_step_two_title_two"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:src="@drawable/register_avatar"
@@ -138,10 +147,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:text="@string/rege_skip"
-        android:id="@+id/textView"
+        android:id="@id/rege_step_two_skip"
         android:layout_below="@id/rege_step_two_submit"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        style="@style/ForgetPwdTextView" />
 
 </RelativeLayout>

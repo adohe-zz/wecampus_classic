@@ -54,4 +54,10 @@
         <item name="android:textSize">11sp</item>
     </style>
 
+    <style name="ForgetPwdTextView">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/rege_title_color</item>
+    </style>
+
 </resources>

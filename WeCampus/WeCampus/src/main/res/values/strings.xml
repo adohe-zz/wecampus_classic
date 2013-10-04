@@ -19,7 +19,7 @@
     <string name="login_sign">注册/登录</string>
 
     <!-- Login Part -->
-    <string name="input_email">邮    箱</string>
+    <string name="input_email">邮        箱</string>
     <string name="input_pwd">密    码</string>
     <string name="input_tips">请输入&#8230;</string>
     <string name="btn_register">注册</string>
@@ -47,12 +47,15 @@
     <string name="rege_finish">完成</string>
     <string name="rege_description">简单描述下自己</string>
     <string name="rege_skip">跳过>></string>
-    <string name="rege_step_two_title">注册成功！你可以先完善一些个人资料这些信息会对你的好友开放</string>
+    <string name="rege_step_two_title">注册成功! 你可以先完善一些个人资料</string>
+    <string name="rege_step_two_title_two">这些信息会对你的好友开放</string>
     <string name="rege_step_two_true_name">真实姓名</string>
     <string name="rege_step_two_academy">学    院</string>
     <string name="rege_step_two_description">个性签名</string>
 
     <string name="imageDescription">ImageView</string>
+    <string name="terms_of_use">用户协议</string>
+
     <string name="activity_join">参加的活动</string>
     <string name="activity_like">喜欢的活动</string>
     <string name="org_like">喜欢的公共组织</string>
