@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.westudio.wecampus.ui.view.ScrollViewWithVP
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@id/detail_viewpager_container"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true">
+
+            <android.support.v4.view.ViewPager
+                android:id="@id/detail_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/vp_indicator_selected" />
+
+            <com.viewpagerindicator.UnderlinePageIndicator
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@id/detail_viewpager_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                app:selectedColor="@color/vp_indicator_selected" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_viewpager_container">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:id="@id/detail_tv_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/detail_tv_time"
+                android:layout_below="@id/detail_tv_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/detail_tv_location"
+                android:layout_below="@id/detail_tv_time"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/detail_tv_title"
+                android:layout_below="@id/detail_tv_location"/>
+
+            <Button
+                android:id="@id/detail_btn_attent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_btn_attent"
+                android:layout_below="@id/detail_tv_location"
+                android:layout_alignParentRight="true" />
+
+
+            <View
+                android:id="@id/detail_divider_one"
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_below="@id/detail_btn_attent"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <RelativeLayout
+                android:id="@id/detail_rl_org"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_divider_one">
+
+            </RelativeLayout>
+
+            <View
+                android:id="@id/detail_divider_two"
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_below="@id/detail_rl_org"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <TextView
+                android:id="@id/detail_tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_divider_two"/>
+            
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</com.westudio.wecampus.ui.view.ScrollViewWithVP>

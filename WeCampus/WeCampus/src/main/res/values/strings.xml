@@ -53,6 +53,9 @@
     <string name="rege_step_two_academy">学    院</string>
     <string name="rege_step_two_description">个性签名</string>
 
+    <!-- Activity Detail Part -->
+    <string name="detail_btn_attent">已参加</string>
+
     <string name="imageDescription">ImageView</string>
     <string name="terms_of_use">用户协议</string>
 

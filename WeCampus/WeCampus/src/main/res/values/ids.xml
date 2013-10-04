@@ -53,4 +53,19 @@
     <item type="id" name="rege_step_two_submit">false</item>
     <item type="id" name="rege_step_two_skip">false</item>
 
+    <!-- Activity Detail Part -->
+    <item type="id" name="detail_viewpager_container">false</item>
+    <item type="id" name="detail_viewpager">false</item>
+    <item type="id" name="detail_viewpager_indicator">false</item>
+    <item type="id" name="detail_tv_title">false</item>
+    <item type="id" name="detail_tv_time">false</item>
+    <item type="id" name="detail_tv_location">false</item>
+    <item type="id" name="detail_tv_like">false</item>
+    <item type="id" name="detail_tv_content">false</item>
+    <item type="id" name="detail_tv_organization">false</item>
+    <item type="id" name="detail_btn_attent">false</item>
+    <item type="id" name="detail_divider_one">false</item>
+    <item type="id" name="detail_rl_org">false</item>
+    <item type="id" name="detail_divider_two">false</item>
+
 </resources>
