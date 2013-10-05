@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by nankonami on 13-9-18.
+ * Custom ViewPager Adapter
  */
 public class IntroImageAdapter extends PagerAdapter {
 

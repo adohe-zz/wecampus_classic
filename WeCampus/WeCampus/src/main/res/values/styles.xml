@@ -60,4 +60,32 @@
         <item name="android:textColor">@color/rege_title_color</item>
     </style>
 
+    <style name="DetailTextView">
+        <item name="android:textColor">@color/rege_title_color</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DetailTextOrg" parent="DetailTextView">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="DetailTextTitle">
+        <item name="android:textColor">@color/login_textview_bg</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="DetailTextTicket">
+        <item name="android:textColor">@color/detail_ticket</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="DetailTextContent">
+        <item name="android:textColor">@color/detail_content</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
 </resources>

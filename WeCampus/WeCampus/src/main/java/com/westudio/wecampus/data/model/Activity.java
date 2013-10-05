@@ -12,6 +12,7 @@ import java.util.HashMap;
  * Created by martian on 13-9-13.
  */
 public class Activity {
+
     private static final HashMap<Integer, Activity> CACHE = new HashMap<Integer, Activity>();
 
     public int Id;

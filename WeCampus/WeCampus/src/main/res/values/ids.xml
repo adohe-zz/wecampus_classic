@@ -57,15 +57,23 @@
     <item type="id" name="detail_viewpager_container">false</item>
     <item type="id" name="detail_viewpager">false</item>
     <item type="id" name="detail_viewpager_indicator">false</item>
+    <item type="id" name="detail_viewpager_pic">false</item>
     <item type="id" name="detail_tv_title">false</item>
     <item type="id" name="detail_tv_time">false</item>
     <item type="id" name="detail_tv_location">false</item>
     <item type="id" name="detail_tv_like">false</item>
+    <item type="id" name="detail_tv_read">false</item>
     <item type="id" name="detail_tv_content">false</item>
     <item type="id" name="detail_tv_organization">false</item>
+    <item type="id" name="detail_tv_ticket">false</item>
+    <item type="id" name="detail_tv_company">false</item>
+    <item type="id" name="detail_img_pointer">false</item>
     <item type="id" name="detail_btn_attent">false</item>
     <item type="id" name="detail_divider_one">false</item>
     <item type="id" name="detail_rl_org">false</item>
     <item type="id" name="detail_divider_two">false</item>
+    <item type="id" name="detail_divider_three">false</item>
+    <item type="id" name="detail_menu_share">false</item>
+    <item type="id" name="detail_menu_like">false</item>
 
 </resources>

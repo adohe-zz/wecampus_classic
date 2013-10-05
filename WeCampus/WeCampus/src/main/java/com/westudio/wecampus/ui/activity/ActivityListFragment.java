@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -112,7 +113,9 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(activity, ActivityDetailActivity.class);
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
             }
         });
 
