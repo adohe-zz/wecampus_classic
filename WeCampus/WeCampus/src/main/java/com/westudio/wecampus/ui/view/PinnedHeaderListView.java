@@ -16,7 +16,7 @@ import com.westudio.wecampus.R;
 /**
  * Created by jam on 13-9-23.
  */
-public class PinnedHeaderListView extends ListView{
+public class PinnedHeaderListView extends ListView {
 
     private OnHeaderOffScreenListener mHeaderOffScreenListener;
 

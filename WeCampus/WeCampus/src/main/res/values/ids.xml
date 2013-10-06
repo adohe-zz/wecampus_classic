@@ -76,4 +76,12 @@
     <item type="id" name="detail_menu_share">false</item>
     <item type="id" name="detail_menu_like">false</item>
 
+    <!-- User Profile Part -->
+    <item type="id" name="user_profile_like">false</item>
+    <item type="id" name="user_profile_name">false</item>
+    <item type="id" name="user_profile_words">false</item>
+    <item type="id" name="user_profile_avatar">false</item>
+    <item type="id" name="user_profile_watch">false</item>
+    <item type="id" name="user_profile_listview">false</item>
+
 </resources>

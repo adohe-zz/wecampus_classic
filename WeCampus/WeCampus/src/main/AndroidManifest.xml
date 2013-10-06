@@ -71,6 +71,12 @@
             android:label="@string/detail_label">
         </activity>
 
+        <!-- User Profile Activity -->
+        <activity
+            android:name=".ui.user.UserProfileActivity"
+            android:label="@string/hello_world">
+        </activity>
+
         <!-- Add Account Service-->
         <service
             android:name=".service.AuthenticationService"

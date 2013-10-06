@@ -9,7 +9,9 @@
 
     <item android:id="@id/detail_menu_like"
         android:title="@string/detail_menu_like"
-        android:icon="@drawable/detail_menu_like"
-        android:showAsAction="always" />
+        android:icon="@drawable/detail_like"
+        android:showAsAction="always"
+        android:checkable="true"
+        android:checked="false"/>
 
 </menu>

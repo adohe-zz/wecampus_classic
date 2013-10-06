@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="177dp">
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/menu_header_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@id/user_profile_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="12" />
+
+        <ImageView
+            android:id="@id/user_profile_avatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/test_avatar"
+            android:padding="2dp"
+            android:background="@drawable/menu_avatar_bg"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@id/user_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_profile_avatar"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="蔡思雨"
+            />
+
+        <TextView
+            android:text="热爱移动互联网额。"
+            android:id="@id/user_profile_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_below="@id/user_profile_name"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="11sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

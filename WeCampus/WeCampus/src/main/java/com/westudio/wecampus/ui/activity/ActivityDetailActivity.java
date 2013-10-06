@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -96,11 +97,28 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.detail_menu_share:
+                showShareDialog();
                 return true;
             case R.id.detail_menu_like:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Display the share dialog
+     */
+    private void showShareDialog() {
+        String title = getResources().getString(R.string.app_name);
+        String content = getResources().getString(R.string.share);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Intent.EXTRA_SUBJECT, title);
+        intent.putExtra(Intent.EXTRA_TEXT, content);
+        intent.putExtra(Intent.EXTRA_TITLE, title);
+        startActivity(Intent.createChooser(intent, content));
     }
 }

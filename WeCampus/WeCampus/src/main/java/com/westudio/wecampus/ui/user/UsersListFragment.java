@@ -1,10 +1,13 @@
 package com.westudio.wecampus.ui.user;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
@@ -25,6 +28,8 @@ public class UsersListFragment extends BaseFragment {
 
     private IndexableListView mUserList;
     private UserAdapter mAdapter;
+
+    private Activity activity;
 
     public static UsersListFragment newInstance() {
         UsersListFragment f = new UsersListFragment();
@@ -62,7 +67,19 @@ public class UsersListFragment extends BaseFragment {
         mAdapter = new UserAdapter(getActivity(), users);
         mUserList.setAdapter(mAdapter);
         mUserList.setFastScrollEnabled(true);
+        mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(activity, UserProfileActivity.class));
+            }
+        });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
     }
 }
