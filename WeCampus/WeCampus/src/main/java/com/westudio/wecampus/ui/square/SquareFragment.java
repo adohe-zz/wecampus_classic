@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
 
 /**
@@ -26,6 +29,19 @@ public class SquareFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_square, container, false);
+
+
+        // set banners
+        NetworkImageView banner1 = (NetworkImageView) view.findViewById(R.id.banner1);
+        NetworkImageView banner2 = (NetworkImageView) view.findViewById(R.id.banner2);
+        NetworkImageView banner3 = (NetworkImageView) view.findViewById(R.id.banner3);
+        ImageLoader imageLoader = WeCampusApi.getImageLoader();
+
+
+
+        banner1.setImageUrl("http://img3.douban.com/view/photo/photo/public/p1534863856.jpg", imageLoader);
+        banner2.setImageUrl("http://img3.douban.com/view/photo/photo/public/p2147894217.jpg", imageLoader);
+        banner3.setImageUrl("http://img3.douban.com/view/photo/photo/public/p1954976120.jpg", imageLoader);
 
         return view;
     }

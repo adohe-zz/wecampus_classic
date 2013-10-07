@@ -186,4 +186,8 @@ public class WeCampusApi {
         };
     }
 
+    public static ImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
 }

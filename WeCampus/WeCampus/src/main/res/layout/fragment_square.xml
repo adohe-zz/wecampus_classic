@@ -31,10 +31,11 @@
                 android:layout_height="180dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/banner1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -43,16 +44,18 @@
                     android:orientation="horizontal"
                     android:layout_weight="1" >
 
-                    <ImageView
+                    <com.android.volley.toolbox.NetworkImageView
                         android:id="@+id/banner2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:layout_weight="1"/>
 
-                    <ImageView
+                    <com.android.volley.toolbox.NetworkImageView
                         android:id="@+id/banner3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:layout_weight="1"/>
 
                 </LinearLayout>
