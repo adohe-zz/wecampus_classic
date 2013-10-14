@@ -66,6 +66,7 @@
     <string name="activity_join">参加的活动</string>
     <string name="activity_like">喜欢的活动</string>
     <string name="org_like">喜欢的公共组织</string>
+    <string name="search_hint">搜索活动、用户、公共组织</string>
 
     <string-array name="intro_words">
         <item>校园活动，一网打尽</item>
