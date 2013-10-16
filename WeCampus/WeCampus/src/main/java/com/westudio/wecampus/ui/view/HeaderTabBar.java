@@ -54,21 +54,28 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
         mTab1.setOnClickListener(this);
         mTab2.setOnClickListener(this);
         mTab3.setOnClickListener(this);
-
+        mTab1.setSelected(true);
     }
 
     @Override
     public void onClick(View view) {
+        view.setSelected(true);
         switch (view.getId()) {
             case R.id.tab1: {
+                mTab2.setSelected(false);
+                mTab3.setSelected(false);
                 mOnTabSelectedListener.onFirstTabSelected();
                 break;
             }
             case R.id.tab2: {
+                mTab1.setSelected(false);
+                mTab3.setSelected(false);
                 mOnTabSelectedListener.onSecondTabSelected();
                 break;
             }
             case R.id.tab3: {
+                mTab2.setSelected(false);
+                mTab1.setSelected(false);
                 mOnTabSelectedListener.onThirdTabSelected();
                 break;
             }
@@ -81,5 +88,25 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
 
     public void setmOnTabSelectedListener(OnTabSelectedListener mOnTabSelectedListener) {
         this.mOnTabSelectedListener = mOnTabSelectedListener;
+    }
+
+    public void setSelected(int position, boolean selected) {
+        switch(position) {
+            case 0:
+                mTab1.setSelected(selected);
+                mTab2.setSelected(!selected);
+                mTab3.setSelected(!selected);
+                break;
+            case 1:
+                mTab2.setSelected(selected);
+                mTab1.setSelected(!selected);
+                mTab3.setSelected(!selected);
+                break;
+            case 2:
+                mTab3.setSelected(selected);
+                mTab2.setSelected(!selected);
+                mTab1.setSelected(!selected);
+                break;
+        }
     }
 }

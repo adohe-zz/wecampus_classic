@@ -25,6 +25,9 @@ public class PinnedHeaderListView extends ListView {
     // The distance from top of the ListView to the top of the header
     private int mHeaderTabBarOffset;
 
+    private HeaderTabBar mPinnedHeader;
+    private HeaderTabBar mHeader;
+
     public interface OnHeaderOffScreenListener {
 
         /** Callback when the list header is move off screen */
@@ -61,15 +64,52 @@ public class PinnedHeaderListView extends ListView {
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.my_profile_header, this, false);
         this.addHeaderView(header, null , false);
         final LinearLayout headerFrame = (LinearLayout) header.findViewById(R.id.profile_header);
-        final HeaderTabBar tabBar = (HeaderTabBar) header.findViewById(R.id.header_tab_bar);
+        mHeader = (HeaderTabBar) header.findViewById(R.id.header_tab_bar);
 
         headerFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mHeaderTabBarOffset = headerFrame.getHeight() - tabBar.getHeight();
+                mHeaderTabBarOffset = headerFrame.getHeight() - mHeader.getHeight();
             }
         });
 
+        mHeader.setmOnTabSelectedListener(new HeaderTabBar.OnTabSelectedListener() {
+            @Override
+            public void onFirstTabSelected() {
+                mPinnedHeader.setSelected(0, true);
+            }
+
+            @Override
+            public void onSecondTabSelected() {
+                mPinnedHeader.setSelected(1, true);
+            }
+
+            @Override
+            public void onThirdTabSelected() {
+                mPinnedHeader.setSelected(2, true);
+            }
+        });
+
+    }
+
+    public void setmPinnedHeader(HeaderTabBar mPinnedHeader) {
+        this.mPinnedHeader = mPinnedHeader;
+        mPinnedHeader.setmOnTabSelectedListener(new HeaderTabBar.OnTabSelectedListener() {
+            @Override
+            public void onFirstTabSelected() {
+                mHeader.setSelected(0, true);
+            }
+
+            @Override
+            public void onSecondTabSelected() {
+                mHeader.setSelected(1, true);
+            }
+
+            @Override
+            public void onThirdTabSelected() {
+                mHeader.setSelected(2, true);
+            }
+        });
     }
 
     private OnScrollListener mOnScrollListener = new OnScrollListener() {
