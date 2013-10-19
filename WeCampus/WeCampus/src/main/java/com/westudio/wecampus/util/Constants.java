@@ -10,6 +10,6 @@ public class Constants {
     }
 
 
-    public static final int SWIPE_MIN_DISTANCE = 160;
-    public static final int SWIPE_MIN_VELOCITY = 200;
+    public static final int SWIPE_MIN_DISTANCE = 200;
+    public static final int SWIPE_MIN_VELOCITY = 300;
 }

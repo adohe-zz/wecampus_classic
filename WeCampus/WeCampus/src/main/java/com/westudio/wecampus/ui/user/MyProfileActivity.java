@@ -30,6 +30,7 @@ public class MyProfileActivity extends BaseDetailActivity {
         mPinnedHeader = (HeaderTabBar) findViewById(R.id.pinned_header);
 
         PinnedHeaderListView lv = (PinnedHeaderListView) findViewById(R.id.listview);
+        lv.setmPinnedHeader(mPinnedHeader);
         lv.setAdapter(new TestAdapter(this));
         lv.setHeaderOffScreenListener(new PinnedHeaderListView.OnHeaderOffScreenListener() {
             @Override
