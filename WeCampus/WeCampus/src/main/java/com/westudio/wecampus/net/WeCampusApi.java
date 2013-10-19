@@ -14,18 +14,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
-
-import java.io.File;
 
 /**
  * Created by nankonami on 13-9-9.
@@ -84,6 +82,23 @@ public class WeCampusApi {
 
         Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
                 listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get school list
+     * @param tag
+     * @param page
+     * @param listener
+     * @param errorListener
+     */
+    public static void getSchoolList(Object tag, final int page, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<School>(Request.Method.GET, HttpUtil.getSchoolList(), School.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

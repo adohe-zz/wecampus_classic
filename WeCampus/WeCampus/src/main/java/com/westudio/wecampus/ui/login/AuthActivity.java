@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -15,6 +16,8 @@ public class AuthActivity extends SherlockFragmentActivity {
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
     public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
     public static final String UPDATE_PROFILE_TAG = "UPDATE_PROFILE";
+
+    public static final int PICK_SCHOOL_REQUEST = 1;
 
     private String mEmail;
     private String mPwd;
@@ -34,6 +37,12 @@ public class AuthActivity extends SherlockFragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getSupportFragmentManager().findFragmentByTag(REGISTER_FRAGMENT_TAG).onActivityResult(requestCode, resultCode, data);
     }
 
     private void setUpActionBar() {

@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
+import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +46,7 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
+        Utility.log("hrere", "here");
         try {
             String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             JSONObject jsonObject = new JSONObject(data);

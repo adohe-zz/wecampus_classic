@@ -15,6 +15,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-9-20.
@@ -24,11 +25,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     private Activity activity;
 
-    private EditText edtSchool;
+    private TextView edtSchool;
     private EditText edtEmail;
     private EditText edtPwd;
     private EditText edtNickName;
-    private EditText edtSex;
+    private TextView edtSex;
     private TextView tvSchool;
     private TextView tvEmail;
     private TextView tvPwd;
@@ -68,11 +69,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        edtSchool = (EditText)view.findViewById(R.id.rege_edt_school);
+        edtSchool = (TextView)view.findViewById(R.id.rege_edt_school);
+        edtSchool.setOnClickListener(this);
         edtEmail = (EditText)view.findViewById(R.id.rege_edt_email);
         edtPwd = (EditText)view.findViewById(R.id.rege_edt_pwd);
         edtNickName = (EditText)view.findViewById(R.id.rege_edt_nickname);
-        edtSex = (EditText)view.findViewById(R.id.rege_edt_sex);
+        edtSex = (TextView)view.findViewById(R.id.rege_edt_sex);
+        edtSex.setOnClickListener(this);
         tvSchool = (TextView)view.findViewById(R.id.rege_tv_school);
         tvSchool.setText("学        校");
         tvEmail = (TextView)view.findViewById(R.id.rege_tv_email);
@@ -94,6 +97,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.rege_btn_register) {
+            //TODO:Handle Register Event
             FragmentTransaction fragmentTransaction = ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
             fragmentTransaction.replace(R.id.auth_container, UpdateProfileFragment.newInstance(null), AuthActivity.UPDATE_PROFILE_TAG);
@@ -101,8 +105,17 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             fragmentTransaction.commit();
         } else if(v.getId() == R.id.rege_tips_two) {
             startActivity(new Intent(activity, TermsOfUseActivity.class));
-            activity.finish();
+        } else if(v.getId() == R.id.rege_edt_school) {
+            activity.startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
+        } else if(v.getId() == R.id.rege_edt_sex) {
+
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Utility.log("get", "result");
     }
 
     /**

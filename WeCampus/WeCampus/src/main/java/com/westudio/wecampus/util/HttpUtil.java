@@ -68,6 +68,14 @@ public class HttpUtil {
     }
 
     /**
+     * Get the url for request school
+     * @return
+     */
+    public static final String getSchoolList() {
+        return "http://api.wecampus.net/v1/schools";
+    }
+
+    /**
      * Encrypt the password with Hash Algorithm
      * @param password
      * @return

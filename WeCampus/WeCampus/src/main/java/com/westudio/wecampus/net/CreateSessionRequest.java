@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * Created by nankonami on 13-10-19.
+ * Create Session Request
  */
 public class CreateSessionRequest<T> extends GsonRequest<T> {
 
@@ -53,14 +54,13 @@ public class CreateSessionRequest<T> extends GsonRequest<T> {
 
     @Override
     public String getBodyContentType() {
-        return "appliction/json";
+        return "application/json";
     }
 
     @Override
     public byte[] getBody() throws AuthFailureError {
         JSONObject jsonObject = new JSONObject();
         try {
-
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
                 jsonObject.put(entry.getKey(), URLEncoder.encode(entry.getValue(), getParamsEncoding()));
             }

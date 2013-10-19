@@ -27,7 +27,7 @@ import java.util.List;
 public class IntroFragment extends BaseFragment implements View.OnClickListener{
 
     private static final int[] BG_IMAGE_IDS = {
-            R.drawable.intro_pager_01, R.drawable.intro_pager_02, R.drawable.intro_pager_03
+            R.drawable.welcome1, R.drawable.welcome2, R.drawable.welcome3
     };
 
     private View view;
