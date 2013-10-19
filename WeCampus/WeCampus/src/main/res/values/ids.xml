@@ -36,10 +36,15 @@
     <item type="id" name="rege_title">false</item>
     <item type="id" name="ly_rege">false</item>
     <item type="id" name="rege_edt_school">false</item>
+    <item type="id" name="rege_tv_school">false</item>
     <item type="id" name="rege_edt_email">false</item>
+    <item type="id" name="rege_tv_email">false</item>
     <item type="id" name="rege_edt_pwd">false</item>
+    <item type="id" name="rege_tv_pwd">false</item>
     <item type="id" name="rege_edt_nickname">false</item>
+    <item type="id" name="rege_tv_nickname">false</item>
     <item type="id" name="rege_edt_sex">false</item>
+    <item type="id" name="rege_tv_sex">false</item>
     <item type="id" name="rege_btn_register">false</item>
     <item type="id" name="rege_tips_one">false</item>
     <item type="id" name="rege_tips_two">false</item>
@@ -49,6 +54,7 @@
     <item type="id" name="rege_step_two_avatar">false</item>
     <item type="id" name="rege_step_two_true_name">false</item>
     <item type="id" name="rege_step_two_academy">false</item>
+    <item type="id" name="rege_step_two_tv_academy">false</item>
     <item type="id" name="rege_step_two_description">false</item>
     <item type="id" name="rege_step_two_submit">false</item>
     <item type="id" name="rege_step_two_skip">false</item>

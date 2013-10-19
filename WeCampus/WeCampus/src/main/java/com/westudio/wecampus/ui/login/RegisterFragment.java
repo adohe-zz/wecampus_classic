@@ -29,6 +29,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private EditText edtPwd;
     private EditText edtNickName;
     private EditText edtSex;
+    private TextView tvSchool;
+    private TextView tvEmail;
+    private TextView tvPwd;
+    private TextView tvNickName;
+    private TextView tvSex;
     private Button btnSubmit;
     private TextView tvTipsTwo;
 
@@ -68,6 +73,16 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edtPwd = (EditText)view.findViewById(R.id.rege_edt_pwd);
         edtNickName = (EditText)view.findViewById(R.id.rege_edt_nickname);
         edtSex = (EditText)view.findViewById(R.id.rege_edt_sex);
+        tvSchool = (TextView)view.findViewById(R.id.rege_tv_school);
+        tvSchool.setText("学        校");
+        tvEmail = (TextView)view.findViewById(R.id.rege_tv_email);
+        tvEmail.setText("邮        箱");
+        tvPwd = (TextView)view.findViewById(R.id.rege_tv_pwd);
+        tvPwd.setText("密        码");
+        tvNickName = (TextView)view.findViewById(R.id.rege_tv_nickname);
+        tvNickName.setText("昵        称");
+        tvSex = (TextView)view.findViewById(R.id.rege_tv_sex);
+        tvSex.setText("性        别");
         btnSubmit = (Button)view.findViewById(R.id.rege_btn_register);
         btnSubmit.setOnClickListener(this);
         tvTipsTwo = (TextView)view.findViewById(R.id.rege_tips_two);

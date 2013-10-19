@@ -25,6 +25,14 @@ public class GsonRequest<T> extends Request<T> {
     private Response.Listener listener;
     private Response.ErrorListener errorListener;
 
+    /**
+     * Constructor used for GET/DELETE/PATCH
+     * @param method
+     * @param url
+     * @param clazz
+     * @param successListener
+     * @param errorListener
+     */
     public GsonRequest(int method, String url, Class<T> clazz,
                        Response.Listener successListener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);

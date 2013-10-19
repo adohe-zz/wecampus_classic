@@ -39,8 +39,6 @@ public class WeCampusApi {
     private static RequestQueue requestQueue = newRequestQueue();
     private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
 
-    private static DiskBasedCache diskBasedCache = (DiskBasedCache)requestQueue.getCache();
-
     private WeCampusApi() {
     }
 
@@ -54,7 +52,10 @@ public class WeCampusApi {
         return bundle;
     }
 
-    //Open the disk cache
+    /**
+     * Open the disk cache for the response
+     * @return
+     */
     private static Cache openCache() {
         return new ResponseDiskCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10*1024*1024);
     }
@@ -69,15 +70,6 @@ public class WeCampusApi {
         queue.start();
 
         return queue;
-    }
-
-    /**
-     * Get cached image from the file
-     * @param url
-     * @return
-     */
-    public static File getCachedImage(String url) {
-        return diskBasedCache.getFileForKey(url);
     }
 
     /**
@@ -96,19 +88,6 @@ public class WeCampusApi {
         if(tag != null) {
             request.setTag(tag);
         }
-        requestQueue.add(request);
-    }
-
-    /**
-     * Common network request api
-     * @param request
-     * @param tag
-     */
-    public static void executeRequest(Request request, Object tag) {
-        if(tag != null) {
-            request.setTag(tag);
-        }
-
         requestQueue.add(request);
     }
 
