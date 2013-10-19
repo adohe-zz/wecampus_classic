@@ -91,11 +91,19 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
-    public static void login(Object tag, String email, String pwd, Response.Listener listener,
+    /**
+     * Login
+     * @param tag
+     * @param account
+     * @param pwd
+     * @param schoolID
+     * @param listener
+     * @param errorListener
+     */
+    public static void login(Object tag, String account, String pwd, int schoolID, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Bundle bundle = getBundle();
-
-        Request request = new GsonRequest<User>(Request.Method.GET, null, User.class, listener, errorListener);
+        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd, schoolID,
+                User.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
