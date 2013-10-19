@@ -106,7 +106,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         } else if(v.getId() == R.id.rege_tips_two) {
             startActivity(new Intent(activity, TermsOfUseActivity.class));
         } else if(v.getId() == R.id.rege_edt_school) {
-            activity.startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
+            startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
         } else if(v.getId() == R.id.rege_edt_sex) {
 
         }
