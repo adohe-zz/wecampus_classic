@@ -59,9 +59,9 @@
             android:label="@string/terms_of_use">
         </activity>
 
-        <!-- My profile activity -->
+        <!-- My Homepage activity -->
         <activity
-            android:name=".ui.user.MyProfileActivity"
+            android:name=".ui.user.MyHomepageActivity"
             android:label="@string/hello_world" >
         </activity>
 
@@ -71,10 +71,16 @@
             android:label="@string/detail_label">
         </activity>
 
-        <!-- User Profile Activity -->
+        <!-- User Homepage Activity -->
         <activity
-            android:name=".ui.user.UserProfileActivity"
-            android:label="@string/hello_world">
+            android:name=".ui.user.UserHomepageActivity"
+            android:label="@null">
+        </activity>
+
+        <!-- My Profile Activity -->
+        <activity
+            android:name=".ui.user.MyProfileActivity"
+            android:label="@string/user_profile">
         </activity>
 
         <!-- Add Account Service-->

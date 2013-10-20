@@ -14,7 +14,7 @@ import com.westudio.wecampus.ui.view.LoadingFooter;
  * Created by nankonami on 13-10-6.
  * User Profile Activity
  */
-public class UserProfileActivity extends BaseDetailActivity {
+public class UserHomepageActivity extends BaseDetailActivity {
 
     private ListView listView;
     private ActivityAdapter activityAdapter;
@@ -23,7 +23,7 @@ public class UserProfileActivity extends BaseDetailActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userprofile);
+        setContentView(R.layout.activity_user_homepage);
 
         listView = (ListView)findViewById(R.id.user_profile_listview);
         View header = new View(this);
