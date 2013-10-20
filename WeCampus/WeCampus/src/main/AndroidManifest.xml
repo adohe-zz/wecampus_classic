@@ -83,6 +83,12 @@
             android:label="@string/user_profile">
         </activity>
 
+        <!-- Choose School Activity -->
+        <activity
+            android:name=".ui.login.PickSchoolActivity"
+            android:label="@string/choose_school">
+        </activity>
+
         <!-- Add Account Service-->
         <service
             android:name=".service.AuthenticationService"

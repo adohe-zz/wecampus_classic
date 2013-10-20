@@ -14,18 +14,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
-
-import java.io.File;
 
 /**
  * Created by nankonami on 13-9-9.
@@ -38,8 +36,6 @@ public class WeCampusApi {
 
     private static RequestQueue requestQueue = newRequestQueue();
     private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
-
-    private static DiskBasedCache diskBasedCache = (DiskBasedCache)requestQueue.getCache();
 
     private WeCampusApi() {
     }
@@ -54,7 +50,10 @@ public class WeCampusApi {
         return bundle;
     }
 
-    //Open the disk cache
+    /**
+     * Open the disk cache for the response
+     * @return
+     */
     private static Cache openCache() {
         return new ResponseDiskCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10*1024*1024);
     }
@@ -69,15 +68,6 @@ public class WeCampusApi {
         queue.start();
 
         return queue;
-    }
-
-    /**
-     * Get cached image from the file
-     * @param url
-     * @return
-     */
-    public static File getCachedImage(String url) {
-        return diskBasedCache.getFileForKey(url);
     }
 
     /**
@@ -100,23 +90,35 @@ public class WeCampusApi {
     }
 
     /**
-     * Common network request api
-     * @param request
+     * Get school list
      * @param tag
+     * @param page
+     * @param listener
+     * @param errorListener
      */
-    public static void executeRequest(Request request, Object tag) {
+    public static void getSchoolList(Object tag, final int page, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<School>(Request.Method.GET, HttpUtil.getSchoolList(), School.class, listener, errorListener);
+
         if(tag != null) {
             request.setTag(tag);
         }
-
         requestQueue.add(request);
     }
 
-    public static void login(Object tag, String email, String pwd, Response.Listener listener,
+    /**
+     * Login
+     * @param tag
+     * @param account
+     * @param pwd
+     * @param schoolID
+     * @param listener
+     * @param errorListener
+     */
+    public static void login(Object tag, String account, String pwd, int schoolID, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Bundle bundle = getBundle();
-
-        Request request = new GsonRequest<User>(Request.Method.GET, null, User.class, listener, errorListener);
+        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd, schoolID,
+                User.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

@@ -81,6 +81,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@id/rege_step_two_tv_academy"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@string/rege_step_two_academy"

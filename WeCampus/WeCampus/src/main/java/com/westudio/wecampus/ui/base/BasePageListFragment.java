@@ -77,18 +77,6 @@ public abstract class BasePageListFragment<T> extends BaseFragment {
     }
 
     protected void loadData(final int page) {
-        WeCampusApi.executeRequest(new GsonRequest<T>(Request.Method.GET, getRequestUrl(), getResponseDataClass(),
-                new Response.Listener<T>() {
-                    @Override
-                    public void onResponse(final T response) {
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-
-                    }
-                }), this);
     }
 
     /**
