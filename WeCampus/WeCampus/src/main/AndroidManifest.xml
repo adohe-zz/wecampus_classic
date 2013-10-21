@@ -89,6 +89,12 @@
             android:label="@string/choose_school">
         </activity>
 
+        <!-- SearchActivity -->
+        <activity
+            android:name=".ui.square.SearchActivity"
+            android:label="@string/search">
+        </activity>
+
         <!-- Add Account Service-->
         <service
             android:name=".service.AuthenticationService"

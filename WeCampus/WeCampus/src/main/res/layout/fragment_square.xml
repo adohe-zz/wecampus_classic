@@ -4,16 +4,18 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_color">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:focusable="true"
-            android:focusableInTouchMode="true" >
+            android:focusableInTouchMode="true">
 
             <!-- Search bar -->
             <EditText
@@ -25,6 +27,7 @@
                 android:hint="@string/search_hint"
                 android:singleLine="true"
                 android:textSize="16sp"
+                android:focusable="false"
                 android:paddingLeft="14dp"
                 android:paddingRight="10dp"
                 android:layout_marginTop="14dp"
@@ -32,214 +35,222 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
 
-            <!-- Banner -->
             <LinearLayout
+                android:id="@+id/banner_and_catgories"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/banner1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:layout_weight="1"/>
-
+                <!-- Banner -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1" >
+                    android:layout_height="180dp"
+                    android:orientation="vertical">
 
                     <com.android.volley.toolbox.NetworkImageView
-                        android:id="@+id/banner2"
+                        android:id="@+id/banner1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:layout_weight="1"/>
 
-                    <com.android.volley.toolbox.NetworkImageView
-                        android:id="@+id/banner3"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:layout_weight="1"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+                        <com.android.volley.toolbox.NetworkImageView
+                            android:id="@+id/banner2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:layout_weight="1"/>
+
+                        <com.android.volley.toolbox.NetworkImageView
+                            android:id="@+id/banner3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <!-- All kinds of activities -->
+                <TextView
+                    android:text="@string/all_kinds_of_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"/>
+                <!-- entertainment -->
+                <RelativeLayout
+                    android:id="@+id/section_entertainment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/square_section_height"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:background="@drawable/square_section_background">
+
+                    <View
+                        android:layout_width="@dimen/square_color_mark_width"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="#ea4140"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/section_entertainment"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:layout_alignParentRight="true"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/menu_list_divider"/>
+
+                </RelativeLayout>
+                <!-- lecture -->
+                <RelativeLayout
+                    android:id="@+id/section_lecture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/square_section_height"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:background="@drawable/square_section_background">
+
+                    <View
+                        android:layout_width="@dimen/square_color_mark_width"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="#29a18a"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/section_lecture"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:layout_alignParentRight="true"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/menu_list_divider"/>
+
+                </RelativeLayout>
+                <!-- contest -->
+                <RelativeLayout
+                    android:id="@+id/section_contest"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/square_section_height"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:background="@drawable/square_section_background">
+
+                    <View
+                        android:layout_width="@dimen/square_color_mark_width"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="#e77e23"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/section_contest"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:layout_alignParentRight="true"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/menu_list_divider"/>
+
+                </RelativeLayout>
+                <!-- recruiting -->
+                <RelativeLayout
+                    android:id="@+id/section_recruiting"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/square_section_height"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:background="@drawable/square_section_background">
+
+                    <View
+                        android:layout_width="@dimen/square_color_mark_width"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="#157efb"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/section_recruiting"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:layout_alignParentRight="true"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="2dp"
+                        android:background="@color/menu_list_divider"/>
+
+                </RelativeLayout>
+
             </LinearLayout>
-
-            <!-- All kinds of activities -->
-            <TextView
-                android:text="@string/all_kinds_of_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="8dp"/>
-            <!-- entertainment -->
-            <RelativeLayout
-                android:id="@+id/section_entertainment"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_section_height"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:clickable="true"
-                android:background="@drawable/square_section_background">
-
-                <View
-                    android:layout_width="@dimen/square_color_mark_width"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:background="#ea4140"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/section_entertainment"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_right_arrow"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="2dp"
-                    android:background="@color/menu_list_divider"/>
-
-            </RelativeLayout>
-            <!-- lecture -->
-            <RelativeLayout
-                android:id="@+id/section_lecture"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_section_height"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:clickable="true"
-                android:background="@drawable/square_section_background">
-
-                <View
-                    android:layout_width="@dimen/square_color_mark_width"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:background="#29a18a"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/section_lecture"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_right_arrow"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="2dp"
-                    android:background="@color/menu_list_divider"/>
-
-            </RelativeLayout>
-            <!-- contest -->
-            <RelativeLayout
-                android:id="@+id/section_contest"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_section_height"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:clickable="true"
-                android:background="@drawable/square_section_background">
-
-                <View
-                    android:layout_width="@dimen/square_color_mark_width"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:background="#e77e23"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/section_contest"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_right_arrow"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="2dp"
-                    android:background="@color/menu_list_divider"/>
-
-            </RelativeLayout>
-            <!-- recruiting -->
-            <RelativeLayout
-                android:id="@+id/section_recruiting"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_section_height"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:clickable="true"
-                android:background="@drawable/square_section_background">
-
-                <View
-                    android:layout_width="@dimen/square_color_mark_width"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:background="#157efb"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/section_recruiting"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_right_arrow"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="2dp"
-                    android:background="@color/menu_list_divider"/>
-
-            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

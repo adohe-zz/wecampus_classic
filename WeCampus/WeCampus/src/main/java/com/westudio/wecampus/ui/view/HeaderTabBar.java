@@ -109,4 +109,13 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
                 break;
         }
     }
+
+    /**
+     * Set the texts on the three tabs
+     */
+    public void setTexts(int res1, int res2, int res3) {
+        mTab1.setText(res1);
+        mTab2.setText(res2);
+        mTab3.setText(res3);
+    }
 }
