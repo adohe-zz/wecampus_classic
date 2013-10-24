@@ -14,6 +14,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
+import com.westudio.wecampus.ui.user.UserHomepageFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -29,7 +30,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 
     public enum ContentType {
-        ACTIVITY, USERS, SQUARE, SETTINGS;
+        ACTIVITY, USERS, SQUARE, SETTINGS, HOMEPAGE;
     }
 
     @Override
@@ -105,6 +106,8 @@ public class MainActivity extends SherlockFragmentActivity {
                 clazz = UsersListFragment.class;
             } else if (type == ContentType.SQUARE) {
                 clazz = SquareFragment.class;
+            } else if (type == ContentType.HOMEPAGE) {
+                clazz = UserHomepageFragment.class;
             }
             Fragment f = Fragment.instantiate(this, clazz.getName());
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
