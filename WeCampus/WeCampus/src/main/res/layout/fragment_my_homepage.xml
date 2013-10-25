@@ -125,8 +125,73 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:background="@color/bg_color">
 
-                <!-- include
-                    layout="@layout/row_activity_list"/ -->
+                <RelativeLayout
+                    android:id="@id/activity_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:background="@drawable/listitem_activity_selector">
+
+                    <ImageView
+                        android:id="@id/activity_list_item_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_alignParentTop="true"
+                        android:scaleType="centerCrop"
+                        android:background="#c9c9c9" />
+
+                    <TextView
+                        android:id="@id/activity_list_item_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:paddingRight="15dp"
+                        android:background="@drawable/tag_background"
+                        android:textIsSelectable="false"
+                        style="@style/ActivityTagStyle" />
+
+                    <TextView
+                        android:id="@id/activity_list_item_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@id/activity_list_item_image"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@id/activity_list_item_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_below="@id/activity_list_item_title"
+                        android:layout_alignLeft="@id/activity_list_item_title" />
+
+                    <TextView
+                        android:id="@id/activity_list_item_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_below="@id/activity_list_item_time"
+                        android:layout_alignLeft="@id/activity_list_item_title" />
+
+                    <TextView
+                        android:id="@id/activity_list_item_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_below="@id/activity_list_item_time"
+                        android:layout_alignBottom="@id/activity_list_item_location"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_height="40dp"
@@ -142,7 +207,7 @@
                     android:layout_height="93.3dp"
                     android:layout_width="match_parent"
                     android:background="@android:color/white"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginBottom="2dp">
 
                     <TextView
                         android:id="@+id/num_like_org"
