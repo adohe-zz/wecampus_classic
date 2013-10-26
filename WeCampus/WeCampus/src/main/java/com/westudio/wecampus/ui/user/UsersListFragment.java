@@ -3,7 +3,6 @@ package com.westudio.wecampus.ui.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,7 @@ public class UsersListFragment extends BaseFragment {
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(activity, UserProfileActivity.class));
+                startActivity(new Intent(activity, UserHomepageActivity.class));
             }
         });
 

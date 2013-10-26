@@ -71,6 +71,27 @@
     <string name="org_like">喜欢的公共组织</string>
     <string name="search_hint">搜索活动、用户、公共组织</string>
 
+    <!-- My Profile -->
+    <string name="nickname">昵称</string>
+    <string name="gender">性别</string>
+    <string name="school">学校</string>
+    <string name="words">个性签名</string>
+    <string name="real_name">真实姓名</string>
+    <string name="telephone">联系电话</string>
+    <string name="email">常用邮箱</string>
+    <string name="relationship">恋爱状态</string>
+    <string name="college">学院</string>
+    <string name="role">角色</string>
+    <string name="my_profile_tip">以上信息会对所有人开放</string>
+    <string name="nickname_hint">昵称最多8个字哟</string>
+    <string name="gender_hint">点击选择</string>
+    <string name="words_hint">简单描述下自己</string>
+    <string name="real_name_hint">请输入您的真实姓名</string>
+    <string name="telephone_hint">请输入您的联系方式</string>
+    <string name="email_hint">请输入您的常用邮箱</string>
+    <string name="click_hint">点击选择</string>
+    <string name="user_profile">个人资料</string>
+
     <string-array name="intro_words">
         <item>校园活动，一网打尽</item>
         <item>爱你所爱</item>
@@ -79,4 +100,14 @@
 
     <!-- Pick School Part -->
     <string name="choose_school">选择学校</string>
+    <string name="search">搜索</string>
+    <string name="no_search_result">还没有这样的内容吧</string>
+    <string name="view_more_activities">点击查看更多活动 ></string>
+    <string name="horizontal_dot">•</string>
+    <string name="follow">关注</string>
+    <string name="follower">粉丝</string>
+    <string name="homepage_like_org">喜欢的公共组织(%d)</string>
+    <string name="num_people_like">%d人喜欢过</string>
+    <string name="followed">已关注</string>
+    <string name="follow_earch_other">相互关注</string>
 </resources>

@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.user.MyHomepageActivity;
 import com.westudio.wecampus.ui.user.MyProfileActivity;
 import com.westudio.wecampus.util.ImageUtil;
 
@@ -22,6 +24,7 @@ import com.westudio.wecampus.util.ImageUtil;
 public class LeftMenuFragment extends Fragment implements View.OnClickListener{
 
     private RelativeLayout mActivitySection, mUserSection, mSquareSection, mSettingsSection;
+    private ImageButton mBtnEdit;
 
     public static LeftMenuFragment newInstance() {
         LeftMenuFragment f = new LeftMenuFragment();
@@ -38,6 +41,8 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
         bm = ImageUtil.getRoundedCornerBitmap(bm);
         avatar.setImageBitmap(bm);
         avatar.setOnClickListener(this);
+        mBtnEdit = (ImageButton) view.findViewById(R.id.edit_button);
+        mBtnEdit.setOnClickListener(this);
 
         //list
         mActivitySection = (RelativeLayout) view.findViewById(R.id.activity_section);
@@ -78,6 +83,10 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             }
             case R.id.img_avatar: {
+                mainActivity.changeContent(MainActivity.ContentType.HOMEPAGE);
+                break;
+            }
+            case R.id.edit_button: {
                 startActivity(new Intent(getActivity(), MyProfileActivity.class));
                 break;
             }
