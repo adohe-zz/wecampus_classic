@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Main Content -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/detail_bg">
+
+            <com.westudio.wecampus.ui.view.ScrollViewWithVP
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ViewStub
+                        android:id="@id/view_stub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- This Blank Layout Resolve the Conflict with the bottom action bar-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:visibility="gone"
+                        tools:ignore="UselessLeaf,Orientation" >
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.westudio.wecampus.ui.view.ScrollViewWithVP>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <!-- Bottom Action Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@id/bottom_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            tools:ignore="DisableBaselineAlignment"
+            android:orientation="horizontal"
+            android:background="@color/bottom_bar_bg">
+
+            <TextView
+                android:id="@id/bottom_bar_attend"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="nihao"
+                style="@style/DetailBottomText"
+                android:gravity="center">
+            </TextView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:background="#dddddd"/>
+
+            <TextView
+                android:id="@id/bottom_bar_like"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="hello"
+                style="@style/DetailBottomText"
+                android:gravity="center">
+            </TextView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

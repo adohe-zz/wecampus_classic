@@ -14,11 +14,13 @@ import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.Utility;
 
+import java.util.List;
+
 /**
  * Created by nankonami on 13-10-19.
  */
 public class PickSchoolActivity extends SherlockFragmentActivity
-        implements Response.ErrorListener, Response.Listener<School.SchoolRequestData>{
+        implements Response.ErrorListener, Response.Listener<List<School>>{
 
     private TableLayout tableLayout;
 
@@ -41,6 +43,7 @@ public class PickSchoolActivity extends SherlockFragmentActivity
      * Set the action bar style
      */
     private void setupActionBar() {
+        Utility.log("test", "test");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
@@ -62,16 +65,6 @@ public class PickSchoolActivity extends SherlockFragmentActivity
     }
 
     @Override
-    public void onErrorResponse(VolleyError volleyError) {
-
-    }
-
-    @Override
-    public void onResponse(School.SchoolRequestData schoolRequestData) {
-        Utility.log("response", "response get");
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
             Intent intent = new Intent();
@@ -80,5 +73,15 @@ public class PickSchoolActivity extends SherlockFragmentActivity
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        Utility.log("error", "error");
+    }
+
+    @Override
+    public void onResponse(List<School> schools) {
+        Utility.log("schools size: ", schools.size());
     }
 }

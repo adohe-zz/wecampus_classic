@@ -67,7 +67,8 @@
     </style>
 
     <style name="DetailTextOrg" parent="DetailTextView">
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/login_textview_bg</item>
     </style>
 
     <style name="DetailTextTitle">
@@ -86,6 +87,18 @@
         <item name="android:textColor">@color/detail_content</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="DetailTextPartTitle">
+        <item name="android:textColor">@color/rege_title_color</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DetailBottomText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

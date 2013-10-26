@@ -25,6 +25,8 @@ import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
 
+import java.util.List;
+
 /**
  * Created by nankonami on 13-9-9.
  */
@@ -98,7 +100,7 @@ public class WeCampusApi {
      */
     public static void getSchoolList(Object tag, final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<School>(Request.Method.GET, HttpUtil.getSchoolList(), School.class, listener, errorListener);
+        Request request = new GsonRequest<List<School>>(Request.Method.GET, HttpUtil.getSchoolList(), listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

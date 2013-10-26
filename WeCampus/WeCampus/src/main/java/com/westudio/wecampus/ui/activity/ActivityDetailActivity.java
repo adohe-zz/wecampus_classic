@@ -35,9 +35,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTitle;
     private TextView tvTime;
     private TextView tvLocation;
-    private TextView tvLike;
-    private TextView tvRead;
-    private Button btnAttend;
+    private TextView tvTag;
+    private ImageView ivPoster;
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
@@ -45,28 +44,10 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail);
 
-        updateActionBar();
-        initViewPager();
+        //updateActionBar();
         initWidget();
-    }
-
-    private void initViewPager() {
-        List<View> viewList = new ArrayList<View>();
-        for(int i = 0; i < IMG_IDS.length; i++) {
-            LinearLayout linearLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.page_activity_detail, null);
-            ImageView imageView = (ImageView)linearLayout.findViewById(R.id.detail_viewpager_pic);
-            imageView.setImageResource(IMG_IDS[i]);
-            viewList.add(linearLayout);
-        }
-
-        viewPager = (ViewPager)findViewById(R.id.detail_viewpager);
-        pageIndicator = (UnderlinePageIndicator)findViewById(R.id.detail_viewpager_indicator);
-        IntroImageAdapter adapter = new IntroImageAdapter(viewList);
-        viewPager.setAdapter(adapter);
-        pageIndicator.setViewPager(viewPager, 0);
-        pageIndicator.setFades(false);
     }
 
     private void initWidget() {
@@ -74,19 +55,22 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTitle = (TextView)findViewById(R.id.detail_tv_title);
         tvTime = (TextView)findViewById(R.id.detail_tv_time);
         tvLocation = (TextView)findViewById(R.id.detail_tv_location);
-        tvLike = (TextView)findViewById(R.id.detail_tv_like);
-        tvRead = (TextView)findViewById(R.id.detail_tv_read);
-        btnAttend = (Button)findViewById(R.id.detail_btn_attent);
+        tvTag = (TextView)findViewById(R.id.detail_tv_tag);
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
+        tvContent.setText("You see, most well written code will instantly tell you what it does. With some experience " +
+                "in functional JavaScript, and having read both Functional JavaScript and JavaScript Allongé " +
+                "(both amazing books), I had no problem reading it. But explain it (and why one would even care about doing it) " +
+                "to someone with no experience in functional programming?");
+        ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
     }
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.detail_menu, menu);
@@ -104,7 +88,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /**
      * Display the share dialog

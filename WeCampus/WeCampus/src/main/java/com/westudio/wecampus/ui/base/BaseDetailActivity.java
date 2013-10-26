@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewStub;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.westudio.wecampus.R;
 import com.westudio.wecampus.util.SwipeToCloseListener;
 
 /**
@@ -14,12 +16,21 @@ import com.westudio.wecampus.util.SwipeToCloseListener;
 public class BaseDetailActivity extends SherlockFragmentActivity {
 
     protected GestureDetector gestureDector;
+    private ViewStub vsContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         gestureDector = new GestureDetector(this, new SwipeToCloseListener(this));
+    }
+
+    @Override
+    public void setContentView(int layoutResId) {
+        super.setContentView(R.layout.base_detail_frame);
+        vsContent = (ViewStub)findViewById(R.id.view_stub);
+        vsContent.setLayoutResource(layoutResId);
+        vsContent.inflate();
     }
 
     /** register a listener on the top view of activity to enable swipe to close */

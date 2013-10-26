@@ -47,6 +47,7 @@ public class School {
     }
 
     public static class SchoolRequestData {
+
         private ArrayList<School> schools;
 
 

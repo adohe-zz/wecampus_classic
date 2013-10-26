@@ -60,27 +60,41 @@
     <item type="id" name="rege_step_two_skip">false</item>
 
     <!-- Activity Detail Part -->
+    <item type="id" name="view_stub">false</item>
     <item type="id" name="detail_viewpager_container">false</item>
     <item type="id" name="detail_viewpager">false</item>
     <item type="id" name="detail_viewpager_indicator">false</item>
     <item type="id" name="detail_viewpager_pic">false</item>
+    <item type="id" name="detail_brief_part">false</item>
+    <item type="id" name="detail_part_two">false</item>
+    <item type="id" name="detail_part_three">false</item>
+    <item type="id" name="detail_part_four">false</item>
+    <item type="id" name="detail_part_five">false</item>
     <item type="id" name="detail_tv_title">false</item>
     <item type="id" name="detail_tv_time">false</item>
     <item type="id" name="detail_tv_location">false</item>
     <item type="id" name="detail_tv_like">false</item>
     <item type="id" name="detail_tv_read">false</item>
     <item type="id" name="detail_tv_content">false</item>
+    <item type="id" name="detail_tv_content_tips">false</item>
     <item type="id" name="detail_tv_organization">false</item>
     <item type="id" name="detail_tv_ticket">false</item>
     <item type="id" name="detail_tv_company">false</item>
+    <item type="id" name="detail_tv_tag">false</item>
+    <item type="id" name="detail_tv_attend_num">false</item>
     <item type="id" name="detail_img_pointer">false</item>
+    <item type="id" name="detail_img_poster">false</item>
     <item type="id" name="detail_btn_attent">false</item>
     <item type="id" name="detail_divider_one">false</item>
     <item type="id" name="detail_rl_org">false</item>
     <item type="id" name="detail_divider_two">false</item>
     <item type="id" name="detail_divider_three">false</item>
     <item type="id" name="detail_menu_share">false</item>
+    <item type="id" name="detail_org_tips">false</item>
     <item type="id" name="detail_menu_like">false</item>
+    <item type="id" name="bottom_action_bar">false</item>
+    <item type="id" name="bottom_bar_attend">false</item>
+    <item type="id" name="bottom_bar_like">false</item>
 
     <!-- User Profile Part -->
     <item type="id" name="user_profile_like">false</item>

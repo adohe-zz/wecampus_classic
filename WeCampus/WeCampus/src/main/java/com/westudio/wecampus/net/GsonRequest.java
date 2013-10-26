@@ -7,12 +7,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Created by nankonami on 13-9-10.
@@ -44,10 +46,32 @@ public class GsonRequest<T> extends Request<T> {
         this.errorListener = errorListener;
     }
 
+    /**
+     * @param method
+     * @param url
+     * @param successListener
+     * @param errorListener
+     */
+    public GsonRequest(int method, String url, Response.Listener successListener, Response.ErrorListener errorListener) {
+        super(method, url, errorListener);
+
+        this.mGson = new Gson();
+        this.listener = successListener;
+        this.errorListener = errorListener;
+    }
+
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
-        Utility.log("hrere", "here");
+        Utility.log("statuscode", response.statusCode);
         try {
+            /*if(response.statusCode != 200) {
+                return Response.error(new VolleyError("Network Error"));
+            } else {
+                String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                Utility.log("data", data);
+                return Response.success((T)mGson.fromJson(data, new TypeToken<T>(){}.getType()), HttpHeaderParser.parseCacheHeaders(response));
+            }*/
+
             String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             JSONObject jsonObject = new JSONObject(data);
             if(Integer.valueOf(jsonObject.getJSONObject("Status").getString("Id")) != 0) {
@@ -58,10 +82,8 @@ public class GsonRequest<T> extends Request<T> {
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JSONException e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     @Override
