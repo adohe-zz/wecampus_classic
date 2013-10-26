@@ -56,6 +56,12 @@
                         style="@style/HomePageTextSecondary"
                         android:text="热爱移动互联网啊啊啊？？？"/>
 
+                    <!-- Follow button (hide in my home page)-->
+                    <com.westudio.wecampus.ui.view.FollowButton
+                        android:id="@+id/btn_follow"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+
                      <LinearLayout
                          android:layout_height="wrap_content"
                          android:layout_width="match_parent"
