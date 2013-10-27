@@ -2,8 +2,7 @@ package com.westudio.wecampus.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TableLayout;
+import android.widget.GridView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -22,7 +21,8 @@ import java.util.List;
 public class PickSchoolActivity extends SherlockFragmentActivity
         implements Response.ErrorListener, Response.Listener<List<School>>{
 
-    private TableLayout tableLayout;
+    private GridView gridView;
+    private PickSchoolAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,6 @@ public class PickSchoolActivity extends SherlockFragmentActivity
      * Set the action bar style
      */
     private void setupActionBar() {
-        Utility.log("test", "test");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
@@ -59,16 +58,15 @@ public class PickSchoolActivity extends SherlockFragmentActivity
      * Init the view
      */
     private void initWidget() {
-        tableLayout = (TableLayout)findViewById(R.id.school_table);
-        View tableRow = this.getLayoutInflater().inflate(R.layout.row_pick_school, null);
-        tableLayout.addView(tableRow);
+        gridView = (GridView)findViewById(R.id.school_table);
+        adapter = new PickSchoolAdapter(this);
+        gridView.setAdapter(adapter);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
             Intent intent = new Intent();
-            intent.putExtra("Test", "test");
             this.setResult(1, intent);
             finish();
         }
@@ -83,5 +81,7 @@ public class PickSchoolActivity extends SherlockFragmentActivity
     @Override
     public void onResponse(List<School> schools) {
         Utility.log("schools size: ", schools.size());
+        Utility.log("schools name", schools.get(0).getName());
+        //adapter.setSchoolList(schools);
     }
 }

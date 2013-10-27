@@ -64,26 +64,27 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         Utility.log("statuscode", response.statusCode);
         try {
-            /*if(response.statusCode != 200) {
+            if(response.statusCode != 200) {
                 return Response.error(new VolleyError("Network Error"));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                 Utility.log("data", data);
-                return Response.success((T)mGson.fromJson(data, new TypeToken<T>(){}.getType()), HttpHeaderParser.parseCacheHeaders(response));
-            }*/
+                T list = mGson.fromJson(data, new TypeToken<T>(){}.getType());
+                return Response.success(list, HttpHeaderParser.parseCacheHeaders(response));
+            }
 
-            String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            /*String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             JSONObject jsonObject = new JSONObject(data);
             if(Integer.valueOf(jsonObject.getJSONObject("Status").getString("Id")) != 0) {
                 return Response.error(new VolleyError(jsonObject.getJSONObject("Status").getString("Memo")));
             } else {
                 return Response.success(mGson.fromJson(jsonObject.getJSONObject("Data").toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
-            }
+            }*/
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
-        } catch (JSONException e) {
+        } /*catch (JSONException e) {
             return null;
-        }
+        }*/
     }
 
     @Override

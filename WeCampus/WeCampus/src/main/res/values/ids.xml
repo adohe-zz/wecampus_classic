@@ -106,8 +106,7 @@
 
     <!-- Pick School Part -->
     <item type="id" name="school_table">false</item>
-    <item type="id" name="school_image_one">false</item>
-    <item type="id" name="school_image_two">false</item>
-    <item type="id" name="school_image_three">false</item>
+    <item type="id" name="school_icon">false</item>
+    <item type="id" name="school_name">false</item>
 
 </resources>
