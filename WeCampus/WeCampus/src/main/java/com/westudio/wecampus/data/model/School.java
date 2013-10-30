@@ -48,15 +48,15 @@ public class School {
 
     public static class SchoolRequestData {
 
-        private ArrayList<School> schools;
+        private ArrayList<School> objects;
 
 
-        public ArrayList<School> getSchools() {
-            return schools;
+        public ArrayList<School> getObjects() {
+            return objects;
         }
 
-        public void setSchools(ArrayList<School> schools) {
-            this.schools = schools;
+        public void setObjects(ArrayList<School> objects) {
+            this.objects = objects;
         }
     }
 }

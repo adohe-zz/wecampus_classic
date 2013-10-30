@@ -100,7 +100,7 @@ public class WeCampusApi {
      */
     public static void getSchoolList(Object tag, final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<List<School>>(Request.Method.GET, HttpUtil.getSchoolList(), listener, errorListener);
+        Request request = new GsonRequest<School.SchoolRequestData>(Request.Method.GET, HttpUtil.getSchoolList(), School.SchoolRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

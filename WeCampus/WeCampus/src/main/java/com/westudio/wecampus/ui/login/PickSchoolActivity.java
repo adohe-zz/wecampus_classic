@@ -19,7 +19,7 @@ import java.util.List;
  * Created by nankonami on 13-10-19.
  */
 public class PickSchoolActivity extends SherlockFragmentActivity
-        implements Response.ErrorListener, Response.Listener<List<School>>{
+        implements Response.ErrorListener, Response.Listener<School.SchoolRequestData>{
 
     private GridView gridView;
     private PickSchoolAdapter adapter;
@@ -75,13 +75,12 @@ public class PickSchoolActivity extends SherlockFragmentActivity
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        Utility.log("error", "error");
+
     }
 
     @Override
-    public void onResponse(List<School> schools) {
-        Utility.log("schools size: ", schools.size());
-        Utility.log("schools name", schools.get(0).getName());
-        //adapter.setSchoolList(schools);
+    public void onResponse(School.SchoolRequestData schoolRequestData) {
+        Utility.log("test", schoolRequestData.getObjects().size());
+        Utility.log("test", schoolRequestData.getObjects().get(0).getName());
     }
 }

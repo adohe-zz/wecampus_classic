@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.westudio.wecampus.util.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,9 +69,10 @@ public class GsonRequest<T> extends Request<T> {
                 return Response.error(new VolleyError("Network Error"));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                Utility.log("data", data);
-                T list = mGson.fromJson(data, new TypeToken<T>(){}.getType());
-                return Response.success(list, HttpHeaderParser.parseCacheHeaders(response));
+                JSONObject json = new JSONObject();
+                JSONArray array = new JSONArray(data);
+                json.put("objects", array);
+                return Response.success(mGson.fromJson(json.toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
 
             /*String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
@@ -82,9 +84,9 @@ public class GsonRequest<T> extends Request<T> {
             }*/
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
-        } /*catch (JSONException e) {
+        } catch (JSONException e) {
             return null;
-        }*/
+        }
     }
 
     @Override
