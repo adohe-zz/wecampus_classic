@@ -15,25 +15,22 @@ public class Activity {
 
     private static final HashMap<Integer, Activity> CACHE = new HashMap<Integer, Activity>();
 
-    public int Id;
+    public int id;
 
-    public String Begin;
-    public String End;
-    public String Title;
-    public String Location;
-    public int Channel_Id;
-    public String Organizer;
-    public String OrganizerAvatar;
-    public String Status;
-    public String Image;
-    public String CreatedAt;
-    public String Description;
-    public int Like;
-    public boolean CanLike;
-    public int Schedule;
-    public boolean CanSchedule;
-    public int FriendsCount;
-    public int AccountId;
+    public String title;
+    public String image;
+    public String description;
+    public String category;
+    public String location;
+    public String begin;
+    public String end;
+    public boolean provide_ticket;
+    public String ticket_service;
+    public String sponsor_name;
+    public String sponsor_url;
+    public int organization_id;
+    public boolean have_sponsor;
+    public int count_of_fans;
 
     public static Activity fromJson(String json) {
         return new Gson().fromJson(json, Activity.class);
@@ -54,119 +51,155 @@ public class Activity {
             return activity;
         }
         Activity ac = new Activity();
-        ac.Id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ID));
-        ac.Begin = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.BEGIN));
-        ac.End = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.END));
-        ac.Title = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.TITLE));
-        ac.Location = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.LOCATION));
-        ac.Channel_Id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CHANNEL_ID));
-        ac.Organizer = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ORGANIZER));
-        ac.OrganizerAvatar = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ORGANIZER_AVATAR));
-        ac.Status = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.STATUS));
-        ac.Image = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.IMAGE));
-        ac.CreatedAt = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CRTEATE_AT));
-        ac.Description = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.DESCRIPTION));
-        ac.Like = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.LIKE));
-        ac.CanLike = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_LIKE)) > 0;
-        ac.Schedule = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.SCHEDULE));
-        ac.CanSchedule = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_SCHEDULE)) > 0;
-        ac.FriendsCount = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.FRIEND_COUNT));
-        ac.AccountId = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ACCOUNT_ID));
+        ac.id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ID));
+        ac.begin = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.BEGIN));
+        ac.end = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.END));
+        ac.title = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.TITLE));
+        ac.location = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.LOCATION));
+        ac.organization_id = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.ORGANIZATION_ID));
+        ac.description = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.DESCRIPTION));
+        ac.category = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CATEGORY));
+        ac.sponsor_name = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.SPONSOR_NAME));
+        ac.image = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.IMAGE));
+        ac.sponsor_url = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.SPONSOR_URL));
+        ac.ticket_service = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.TICKET_SERVICE));
+        ac.count_of_fans = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.COUNT_OF_FANS));
+        ac.provide_ticket = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.PROVIDE_TICKET)) > 0;
+        ac.have_sponsor = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.HAVE_SPONSOR)) > 0;
         addToCache(ac);
         return ac;
     }
 
     public int getId() {
-        return Id;
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
-    public String getLocation() {
-        return Location;
-    }
-
-    public int getChannel_Id() {
-        return Channel_Id;
-    }
-
-    public String getOrganizer() {
-        return Organizer;
-    }
-
-    public String getOrganizerAvatar() {
-        return OrganizerAvatar;
-    }
-
-    public String getStatus() {
-        return Status;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getImage() {
-        return Image;
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public int getLike() {
-        return Like;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public boolean isCanLike() {
-        return CanLike;
+    public String getCategory() {
+        return category;
     }
 
-    public int getSchedule() {
-        return Schedule;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public boolean isCanSchedule() {
-        return CanSchedule;
+    public String getLocation() {
+        return location;
     }
 
-    public int getFriendsCount() {
-        return FriendsCount;
-    }
-
-    public int getAccountId() {
-        return AccountId;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getBegin() {
-        return Begin;
+        return begin;
+    }
+
+    public void setBegin(String begin) {
+        this.begin = begin;
     }
 
     public String getEnd() {
-        return End;
+        return end;
     }
 
-    public String getCreatedAt() {
-        return CreatedAt;
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    public boolean isProvide_ticket() {
+        return provide_ticket;
+    }
+
+    public void setProvide_ticket(boolean provide_ticket) {
+        this.provide_ticket = provide_ticket;
+    }
+
+    public String getTicket_service() {
+        return ticket_service;
+    }
+
+    public void setTicket_service(String ticket_service) {
+        this.ticket_service = ticket_service;
+    }
+
+    public String getSponsor_name() {
+        return sponsor_name;
+    }
+
+    public void setSponsor_name(String sponsor_name) {
+        this.sponsor_name = sponsor_name;
+    }
+
+    public String getSponsor_url() {
+        return sponsor_url;
+    }
+
+    public void setSponsor_url(String sponsor_url) {
+        this.sponsor_url = sponsor_url;
+    }
+
+    public int getOrganization_id() {
+        return organization_id;
+    }
+
+    public void setOrganization_id(int organization_id) {
+        this.organization_id = organization_id;
+    }
+
+    public boolean isHave_sponsor() {
+        return have_sponsor;
+    }
+
+    public void setHave_sponsor(boolean have_sponsor) {
+        this.have_sponsor = have_sponsor;
+    }
+
+    public int getCount_of_fans() {
+        return count_of_fans;
+    }
+
+    public void setCount_of_fans(int count_of_fans) {
+        this.count_of_fans = count_of_fans;
     }
 
     public static class ActivityRequestData {
-        private int NextPager;
-        private ArrayList<Activity> Activities;
 
+        private ArrayList<Activity> objects;
 
-        public int getNextPager() {
-            return NextPager;
+        public ArrayList<Activity> getObjects() {
+            return objects;
         }
 
-        public void setNextPager(int nextPager) {
-            NextPager = nextPager;
-        }
-
-        public ArrayList<Activity> getActivities() {
-            return Activities;
-        }
-
-        public void setActivities(ArrayList<Activity> activities) {
-            Activities = activities;
+        public void setObjects(ArrayList<Activity> objects) {
+            this.objects = objects;
         }
     }
 }

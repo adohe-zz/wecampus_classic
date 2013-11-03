@@ -72,6 +72,7 @@ public class GsonRequest<T> extends Request<T> {
                 JSONObject json = new JSONObject();
                 JSONArray array = new JSONArray(data);
                 json.put("objects", array);
+                Utility.log("response string", data);
                 return Response.success(mGson.fromJson(json.toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
 

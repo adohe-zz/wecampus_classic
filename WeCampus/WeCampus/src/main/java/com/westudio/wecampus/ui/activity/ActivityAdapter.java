@@ -65,8 +65,8 @@ public class ActivityAdapter extends CursorAdapter {
         holder.text_title.setText(activity.getTitle());
         holder.text_time.setText(activity.getBegin());
         holder.text_location.setText(activity.getLocation());
-        holder.text_tag.setText(Utility.getCatByChannelId(activity.getChannel_Id()));
-        holder.text_like.setText(String.valueOf(activity.getLike()));
+        holder.text_tag.setText(activity.getCategory());
+        holder.text_like.setText(String.valueOf(activity.getCount_of_fans()));
 
     }
 

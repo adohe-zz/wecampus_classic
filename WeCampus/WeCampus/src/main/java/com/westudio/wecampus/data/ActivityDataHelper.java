@@ -38,19 +38,16 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.END, activity.getEnd());
         values.put(ActivityDBInfo.TITLE, activity.getTitle());
         values.put(ActivityDBInfo.LOCATION, activity.getLocation());
-        values.put(ActivityDBInfo.CHANNEL_ID, activity.getChannel_Id());
-        values.put(ActivityDBInfo.ORGANIZER, activity.getOrganizer());
-        values.put(ActivityDBInfo.ORGANIZER_AVATAR, activity.getOrganizerAvatar());
-        values.put(ActivityDBInfo.STATUS, activity.getStatus());
+        values.put(ActivityDBInfo.ORGANIZATION_ID, activity.getOrganization_id());
+        values.put(ActivityDBInfo.CATEGORY, activity.getCategory());
+        values.put(ActivityDBInfo.SPONSOR_NAME, activity.getSponsor_name());
+        values.put(ActivityDBInfo.SPONSOR_URL, activity.getSponsor_url());
         values.put(ActivityDBInfo.IMAGE, activity.getImage());
-        values.put(ActivityDBInfo.CRTEATE_AT, activity.getCreatedAt());
+        values.put(ActivityDBInfo.TICKET_SERVICE, activity.getTicket_service());
         values.put(ActivityDBInfo.DESCRIPTION, activity.getDescription());
-        values.put(ActivityDBInfo.LIKE, activity.getLike());
-        values.put(ActivityDBInfo.CAN_LIKE, activity.isCanLike());
-        values.put(ActivityDBInfo.SCHEDULE, activity.getSchedule());
-        values.put(ActivityDBInfo.CAN_SCHEDULE, activity.isCanSchedule());
-        values.put(ActivityDBInfo.FRIEND_COUNT, activity.getFriendsCount());
-        values.put(ActivityDBInfo.ACCOUNT_ID, activity.getAccountId());
+        values.put(ActivityDBInfo.COUNT_OF_FANS, activity.getCount_of_fans());
+        values.put(ActivityDBInfo.PROVIDE_TICKET, activity.isProvide_ticket());
+        values.put(ActivityDBInfo.HAVE_SPONSOR, activity.isHave_sponsor());
 
         return values;
     }
@@ -103,20 +100,16 @@ public class ActivityDataHelper extends BaseDataHelper{
         public static final String END = "end";
         public static final String TITLE = "title";
         public static final String LOCATION = "location";
-        public static final String CHANNEL_ID = "channel_id";
-        public static final String ORGANIZER = "organizer";
-        public static final String ORGANIZER_AVATAR = "organizer_avatar";
-        public static final String STATUS = "status";
+        public static final String ORGANIZATION_ID = "organization_id";
+        public static final String CATEGORY = "category";
+        public static final String SPONSOR_NAME = "sponsor_name";
+        public static final String SPONSOR_URL = "sponsor_url";
         public static final String IMAGE = "image";
-        public static final String CRTEATE_AT = "create_at";
+        public static final String TICKET_SERVICE = "ticket_service";
         public static final String DESCRIPTION = "description";
-        public static final String LIKE = "like";
-        public static final String CAN_LIKE = "canlike";
-        public static final String SCHEDULE = "schedule";
-        public static final String CAN_SCHEDULE = "canschedule";
-        public static final String FRIEND_COUNT = "firend_count";
-        public static final String ACCOUNT_ID = "account_id";
-        public static final String ACCOUNT_DETAIL = "account_detail";
+        public static final String COUNT_OF_FANS = "count_of_fans";
+        public static final String PROVIDE_TICKET = "provide_ticket";
+        public static final String HAVE_SPONSOR = "have_sponsor";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.DataType.INTEGER)
@@ -124,18 +117,15 @@ public class ActivityDataHelper extends BaseDataHelper{
                 .addColumn(END, Column.DataType.TIMESTAMP)
                 .addColumn(TITLE, Column.DataType.TEXT)
                 .addColumn(LOCATION, Column.DataType.TEXT)
-                .addColumn(CHANNEL_ID, Column.DataType.INTEGER)
-                .addColumn(ORGANIZER, Column.DataType.TEXT)
-                .addColumn(ORGANIZER_AVATAR, Column.DataType.TEXT)
-                .addColumn(STATUS, Column.DataType.TEXT)
+                .addColumn(ORGANIZATION_ID, Column.DataType.INTEGER)
+                .addColumn(CATEGORY, Column.DataType.TEXT)
+                .addColumn(SPONSOR_NAME, Column.DataType.TEXT)
+                .addColumn(SPONSOR_URL, Column.DataType.TEXT)
                 .addColumn(IMAGE, Column.DataType.TEXT)
-                .addColumn(CRTEATE_AT, Column.DataType.TIMESTAMP)
+                .addColumn(TICKET_SERVICE, Column.DataType.TEXT)
                 .addColumn(DESCRIPTION, Column.DataType.TEXT)
-                .addColumn(LIKE, Column.DataType.INTEGER)
-                .addColumn(CAN_LIKE, Column.DataType.BOOLEAN)
-                .addColumn(SCHEDULE, Column.DataType.INTEGER)
-                .addColumn(CAN_SCHEDULE, Column.DataType.BOOLEAN)
-                .addColumn(FRIEND_COUNT, Column.DataType.INTEGER)
-                .addColumn(ACCOUNT_ID, Column.DataType.INTEGER);
+                .addColumn(COUNT_OF_FANS, Column.DataType.INTEGER)
+                .addColumn(PROVIDE_TICKET, Column.DataType.BOOLEAN)
+                .addColumn(HAVE_SPONSOR, Column.DataType.BOOLEAN);
     }
 }

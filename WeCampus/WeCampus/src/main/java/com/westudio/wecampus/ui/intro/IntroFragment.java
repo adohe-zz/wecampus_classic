@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.viewpagerindicator.UnderlinePageIndicator;
+import com.viewpagerindicator.CirclePageIndicator;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.login.AuthActivity;
@@ -27,14 +27,14 @@ import java.util.List;
 public class IntroFragment extends BaseFragment implements View.OnClickListener{
 
     private static final int[] BG_IMAGE_IDS = {
-            R.drawable.welcome1, R.drawable.welcome2, R.drawable.welcome3
+            R.drawable.photo1, R.drawable.photo2, R.drawable.photo3, R.drawable.photo4
     };
-
+    private static final int[] WORD_IMAGE_IDS = {
+            R.drawable.text1, R.drawable.text2, R.drawable.text3, R.drawable.text4
+    };
     private View view;
     private ViewPager viewPager;
-    private UnderlinePageIndicator pageIndicator;
-    private Button btnNotNow;
-    private Button btLogin;
+    private CirclePageIndicator pageIndicator;
 
     private Activity activity;
 
@@ -69,26 +69,31 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
         List<View> viewList = new ArrayList<View>();
         String[] words = getResources().getStringArray(R.array.intro_words);
 
+        //Add the first four pages
         for(int i = 0; i < BG_IMAGE_IDS.length; i++) {
             LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.page_intro, null);
             ImageView imageView = (ImageView) linearLayout.findViewById(R.id.picture);
             imageView.setImageResource(BG_IMAGE_IDS[i]);
-            TextView tvIntro = (TextView) linearLayout.findViewById(R.id.words);
-            tvIntro.setText(words[i]);
+            ImageView ivWord = (ImageView) linearLayout.findViewById(R.id.words);
+            ivWord.setImageResource(WORD_IMAGE_IDS[i]);
             viewList.add(linearLayout);
         }
+
+        //Add the last page
+        LinearLayout lastPage = (LinearLayout)inflater.inflate(R.layout.page_last_intro, null);
+        ImageView iv = (ImageView)lastPage.findViewById(R.id.imageView);
+        iv.setImageResource(R.drawable.photo5);
+        Button notLogin = (Button)lastPage.findViewById(R.id.intro_no_login);
+        notLogin.setOnClickListener(this);
+        Button login = (Button)lastPage.findViewById(R.id.intro_login_sign);
+        login.setOnClickListener(this);
+        viewList.add(lastPage);
 
         viewPager = (ViewPager)view.findViewById(R.id.intro_viewpager);
         IntroImageAdapter adapter = new IntroImageAdapter(viewList);
         viewPager.setAdapter(adapter);
-        pageIndicator = (UnderlinePageIndicator)view.findViewById(R.id.intro_viewpager_indicator);
+        pageIndicator = (CirclePageIndicator)view.findViewById(R.id.intro_viewpager_indicator);
         pageIndicator.setViewPager(viewPager, 0);
-        pageIndicator.setFades(false);
-
-        btnNotNow = (Button) view.findViewById(R.id.intro_no_login);
-        btnNotNow.setOnClickListener(this);
-        btLogin = (Button) view.findViewById(R.id.intro_login_sign);
-        btLogin.setOnClickListener(this);
 
         return view;
     }
@@ -96,16 +101,13 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.intro_no_login: {
+            case R.id.intro_no_login:
                 startActivity(new Intent(activity, MainActivity.class));
                 activity.finish();
                 break;
-            }
-            case R.id.intro_login_sign : {
+            case R.id.intro_login_sign:
                 startActivity(new Intent(activity, AuthActivity.class));
-                //activity.finish();
                 break;
-            }
         }
     }
 }

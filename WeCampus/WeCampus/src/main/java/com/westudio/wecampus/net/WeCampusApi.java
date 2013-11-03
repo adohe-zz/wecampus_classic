@@ -23,6 +23,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
 
 import java.util.List;
@@ -175,7 +176,7 @@ public class WeCampusApi {
                         imageView.setImageDrawable(transitionDrawable);
                         transitionDrawable.startTransition(100);
                     } else {
-                        imageView.setImageBitmap(response.getBitmap());
+                        imageView.setImageBitmap(ImageUtil.getRoundedCornerBitmap(response.getBitmap()));
                     }
                 } else if(defaultImageDrawable != null) {
                     imageView.setImageDrawable(defaultImageDrawable);

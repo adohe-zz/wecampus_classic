@@ -193,7 +193,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
-                mDataHelper.bulkInsert(activityRequestData.getActivities());
+                mDataHelper.bulkInsert(activityRequestData.getObjects());
                 return null;
             }
 

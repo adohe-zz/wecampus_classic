@@ -21,7 +21,8 @@
     <color name="pressed_we">#CC13C7AF</color>
     <color name="bg_color">#DEDEDE</color>
     <color name="menu_list_divider">#b1b1b1</color>
-    <color name="intro_activity_bg">#ececec</color>
+    <color name="intro_activity_bg">#2eddae</color>
+    <color name="intro_page_color">#0a654c</color>
     <color name="auth_activity_bg">#dedede</color>
     <color name="login_btn_bg">#eb6f65</color>
     <color name="intro_right_btn_bg">#13C7AF</color>

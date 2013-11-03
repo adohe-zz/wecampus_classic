@@ -115,7 +115,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Utility.log("get", "result");
+        if(resultCode == AuthActivity.PICK_SCHOOL_RESULT) {
+            edtSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
+        }
     }
 
     /**

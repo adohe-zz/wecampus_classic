@@ -2,6 +2,8 @@ package com.westudio.wecampus.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -61,6 +63,16 @@ public class PickSchoolActivity extends SherlockFragmentActivity
         gridView = (GridView)findViewById(R.id.school_table);
         adapter = new PickSchoolAdapter(this);
         gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                School school = (School)adapter.getItem(position);
+                Intent intent = new Intent();
+                intent.putExtra(AuthActivity.PICK_SCHOOL_NAME, school.getName());
+                setResult(AuthActivity.PICK_SCHOOL_RESULT, intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -80,7 +92,6 @@ public class PickSchoolActivity extends SherlockFragmentActivity
 
     @Override
     public void onResponse(School.SchoolRequestData schoolRequestData) {
-        Utility.log("test", schoolRequestData.getObjects().size());
-        Utility.log("test", schoolRequestData.getObjects().get(0).getName());
+        adapter.setSchoolList(schoolRequestData.getObjects());
     }
 }

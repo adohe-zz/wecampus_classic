@@ -19,6 +19,9 @@ public class AuthActivity extends SherlockFragmentActivity {
 
     public static final int PICK_SCHOOL_REQUEST = 1;
     public static final int PICK_ACADEMY_REQUEST = 2;
+    public static final int PICK_SCHOOL_RESULT = 3;
+    public static final int PICK_ACADEMY_RESULT = 4;
+    public static final String PICK_SCHOOL_NAME = "school_name";
 
     private String mEmail;
     private String mPwd;
