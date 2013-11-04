@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -50,28 +51,35 @@ public class FollowButton extends Button {
     }
 
     public void setFollowState(FollowState state) {
+        Drawable drawable = null;
         switch (state) {
             case FOLLOWING: {
                 setBackgroundResource(R.drawable.selector_followed);
                 setText(R.string.followed);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
                 break;
             }
             case FOLLOW_EACH_OTHER: {
                 setBackgroundResource(R.drawable.selector_followed);
                 setText(R.string.follow_earch_other);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
                 break;
             }
             case UNFOLLOWED: {
                 setBackgroundResource(R.drawable.selector_unfollowed);
                 setText(R.string.follow);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
                 break;
             }
             case BE_FOLLOWED: {
                 setBackgroundResource(R.drawable.selector_unfollowed);
                 setText(R.string.follow);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
                 break;
             }
         }
+        setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+        setCompoundDrawablePadding(10);
         mFollowState = state;
     }
 
