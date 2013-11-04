@@ -32,16 +32,38 @@
         <com.westudio.wecampus.ui.view.HeaderTabBar
             android:id="@+id/search_result_tabbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
         <ListView
             android:id="@+id/search_result_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <include
-            layout="@layout/empty_search_result"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/empty_view"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_no_result"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_search_result"/>
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
