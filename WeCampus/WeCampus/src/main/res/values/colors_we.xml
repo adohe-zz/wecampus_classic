@@ -24,7 +24,7 @@
     <color name="intro_activity_bg">#2eddae</color>
     <color name="intro_page_color">#0a654c</color>
     <color name="auth_activity_bg">#dedede</color>
-    <color name="login_btn_bg">#eb6f65</color>
+    <color name="login_btn_bg">#f66e67</color>
     <color name="intro_right_btn_bg">#13C7AF</color>
     <color name="divider_bg">#bdbdbd</color>
     <color name="login_textview_bg">#3e454d</color>
@@ -36,6 +36,7 @@
     <color name="detail_content">#6a6a6a</color>
     <color name="detail_bg">#e5e1e1</color>
     <color name="bottom_bar_bg">#3e3e3e</color>
+    <color name="list_item_select_bg">#0a000000</color>
 
     <!-- Main color for text -->
     <color name="text_color_primary">#3e454d</color>
