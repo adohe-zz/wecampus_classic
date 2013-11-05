@@ -24,7 +24,7 @@
             android:orientation="vertical">
             
             <FrameLayout
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent">
 
                 <View
@@ -33,9 +33,10 @@
 
                 <!-- User information -->
                 <LinearLayout
-                    android:layout_height="170dp"
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:background="@android:color/white"
+                    android:layout_marginTop="130dp"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
                     android:gravity="center">
@@ -59,13 +60,16 @@
                     <!-- Follow button (hide in my home page)-->
                     <com.westudio.wecampus.ui.view.FollowButton
                         android:id="@+id/btn_follow"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
+                        android:layout_height="36dp"
+                        android:layout_width="150dp"
+                        android:textColor="@android:color/white"
+                        android:layout_margin="15dp"/>
 
                      <LinearLayout
                          android:layout_height="wrap_content"
                          android:layout_width="match_parent"
-                         android:gravity="center_horizontal">
+                         android:gravity="center_horizontal"
+                         android:layout_marginBottom="30dp">
 
                          <TextView
                              android:text="30"
