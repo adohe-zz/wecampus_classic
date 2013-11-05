@@ -13,6 +13,11 @@ import java.util.Set;
  * A common http util to generate the request url and so on.
  */
 public class HttpUtil {
+    // constants of request URLs
+    public static final String URL_GET_ACTIVITY_LIST = "http://api.wecampus.net/v1/activities";
+
+    public static final String URL_POST_REGISTER = "http://api.wecampus.net/v1/users";
+
 
     /**
      * Build the url query string according to the param bundle

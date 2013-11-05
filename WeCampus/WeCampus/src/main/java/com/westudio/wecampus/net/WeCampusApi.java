@@ -26,8 +26,6 @@ import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
 
-import java.util.List;
-
 /**
  * Created by nankonami on 13-9-9.
  */
@@ -129,8 +127,27 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void postRegister(Object tag, String email, String nickname, String password,
+                                    String gender, String schoolId, Response.Listener listener,
+                                    Response.ErrorListener errorListener) {
+        RegisterRequest.RegisterData data = new RegisterRequest.RegisterData();
+        data.email = email;
+        data.nickname = nickname;
+        data.password = password;
+        data.gender = gender;
+        data.schoolId = schoolId;
+
+        Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER,
+                User.class, data, listener, errorListener);
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     /**
-     * Request Image from net
+     * Request Image from network
      * @param imageUrl
      * @param listener
      * @return

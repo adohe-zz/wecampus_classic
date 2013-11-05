@@ -22,10 +22,8 @@ public class SearchActivity extends BaseDetailActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLvResult = (ListView) findViewById(R.id.search_result_list);
-        View emptyView = getLayoutInflater().inflate(R.layout.empty_search_result, null);
 
-        //mLvResult.setEmptyView(emptyView);
-        mLvResult.setEmptyView(findViewById(R.id.empty_view));
+        findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
     }
 
     @Override

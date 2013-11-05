@@ -13,42 +13,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by nankonami on 13-10-19.
- * Create Session Request
+ * Created by martian on 13-11-4.
  */
-public class CreateSessionRequest<T> extends GsonRequest<T> {
+public class RegisterRequest<T> extends GsonRequest<T> {
+    private RegisterData mRegisterData;
 
-    private String account;
-    private String pwd;
-    private int schoolID;
-
-    /**
-     * Constructor used for GET/DELETE/PATCH
-     *
-     * @param method
-     * @param url
-     * @param account
-     * @param pwd
-     * @param schoolID
-     * @param clazz
-     * @param successListener
-     * @param errorListener
-     */
-    public CreateSessionRequest(int method, String url, String account, String pwd, int schoolID, Class<T> clazz,
-                                Response.Listener successListener, Response.ErrorListener errorListener) {
+    public RegisterRequest(int method, String url, Class<T> clazz, RegisterData registerData, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(method, url, clazz, successListener, errorListener);
+        mRegisterData = registerData;
+    }
 
-        this.account = account;
-        this.pwd = pwd;
-        this.schoolID = schoolID;
+    public static class RegisterData {
+        public String email;
+        public String nickname;
+        public String password;
+        public String gender;
+        public String schoolId;
     }
 
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("account", account);
-        params.put("password", HttpUtil.encryPwd(pwd));
-        params.put("schoolId", String.valueOf(schoolID));
+        params.put("email", mRegisterData.email);
+        params.put("password", mRegisterData.password);
+        params.put("schoolId", mRegisterData.schoolId);
+        params.put("nickname", mRegisterData.nickname);
+        params.put("gender", mRegisterData.gender);
         return params;
     }
 
