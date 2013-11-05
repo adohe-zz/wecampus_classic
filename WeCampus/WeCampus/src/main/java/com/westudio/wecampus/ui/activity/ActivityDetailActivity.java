@@ -64,6 +64,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                 "(both amazing books), I had no problem reading it. But explain it (and why one would even care about doing it) " +
                 "to someone with no experience in functional programming?");
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
+        showBottomActionBar();
     }
 
     private void updateActionBar() {

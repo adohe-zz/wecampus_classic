@@ -20,6 +20,7 @@ import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-9-20.
@@ -116,13 +117,13 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if(v.getId() == R.id.rege_btn_register && checkValidation()) {
             WeCampusApi.postRegister(this, edtEmail.getText().toString(),
                     edtNickName.getText().toString(), edtPwd.getText().toString(),
-                    gender.genderMark, String.valueOf(schoolId), this, this);
+                    "male", String.valueOf(schoolId), this, this);
         } else if(v.getId() == R.id.rege_tips_two) {
             startActivity(new Intent(activity, TermsOfUseActivity.class));
         } else if(v.getId() == R.id.rege_edt_school) {
             startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
         } else if(v.getId() == R.id.rege_edt_sex) {
-            startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_GENDER_REQUEST);
+            //startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_GENDER_REQUEST);
         }
     }
 
@@ -132,6 +133,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if(resultCode == AuthActivity.PICK_SCHOOL_RESULT) {
             edtSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
             schoolId = data.getIntExtra(AuthActivity.PICK_SCHOOL_ID, -1);
+            Utility.log("school_id", schoolId);
         } else if (resultCode == AuthActivity.PICK_GENDER_RESULT) {
             int type = data.getIntExtra(AuthActivity.PICK_GENDER, 2);
             gender = (type == 0 ? Gender.MALE : (type == 1 ? Gender.FEMALE : Gender.SECRET));
@@ -158,7 +160,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             Toast.makeText(getActivity(), R.string.msg_please_input_nickname, Toast.LENGTH_SHORT).show();
             return result;
         } else if (gender == null) {
-            Toast.makeText(getActivity(), R.string.msg_please_input_gender, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), R.string.msg_please_input_gender, Toast.LENGTH_SHORT).show();
+            result = true;
             return result;
         }
 

@@ -3,6 +3,7 @@ package com.westudio.wecampus.net;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ public class RegisterRequest<T> extends GsonRequest<T> {
         Map<String, String> params = new HashMap<String, String>();
         params.put("email", mRegisterData.email);
         params.put("password", mRegisterData.password);
-        params.put("schoolId", mRegisterData.schoolId);
+        params.put("school_id", mRegisterData.schoolId);
         params.put("nickname", mRegisterData.nickname);
         params.put("gender", mRegisterData.gender);
         return params;
@@ -54,7 +55,9 @@ public class RegisterRequest<T> extends GsonRequest<T> {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
                 jsonObject.put(entry.getKey(), URLEncoder.encode(entry.getValue(), getParamsEncoding()));
             }
-            return jsonObject.toString().getBytes(getParamsEncoding());
+            JSONObject json = new JSONObject();
+            json.put("data", jsonObject.toString());
+            return json.toString().getBytes(getParamsEncoding());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {
