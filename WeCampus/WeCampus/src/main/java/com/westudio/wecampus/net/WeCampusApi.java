@@ -118,7 +118,7 @@ public class WeCampusApi {
      */
     public static void login(Object tag, String account, String pwd, int schoolID, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd, schoolID,
+        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd,
                 User.class, listener, errorListener);
 
         if(tag != null) {

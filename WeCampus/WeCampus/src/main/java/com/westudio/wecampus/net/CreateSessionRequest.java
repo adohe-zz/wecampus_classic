@@ -29,18 +29,16 @@ public class CreateSessionRequest<T> extends GsonRequest<T> {
      * @param url
      * @param account
      * @param pwd
-     * @param schoolID
      * @param clazz
      * @param successListener
      * @param errorListener
      */
-    public CreateSessionRequest(int method, String url, String account, String pwd, int schoolID, Class<T> clazz,
+    public CreateSessionRequest(int method, String url, String account, String pwd, Class<T> clazz,
                                 Response.Listener successListener, Response.ErrorListener errorListener) {
         super(method, url, clazz, successListener, errorListener);
 
         this.account = account;
         this.pwd = pwd;
-        this.schoolID = schoolID;
     }
 
     @Override
@@ -48,7 +46,6 @@ public class CreateSessionRequest<T> extends GsonRequest<T> {
         Map<String, String> params = new HashMap<String, String>();
         params.put("account", account);
         params.put("password", HttpUtil.encryPwd(pwd));
-        params.put("schoolId", String.valueOf(schoolID));
         return params;
     }
 
@@ -64,6 +61,8 @@ public class CreateSessionRequest<T> extends GsonRequest<T> {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
                 jsonObject.put(entry.getKey(), URLEncoder.encode(entry.getValue(), getParamsEncoding()));
             }
+            JSONObject json = new JSONObject();
+            json.put("data", jsonObject.toString());
             return jsonObject.toString().getBytes(getParamsEncoding());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

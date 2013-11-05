@@ -47,8 +47,10 @@
 
     <!-- Bottom Action Bar -->
     <RelativeLayout
+        android:id="@id/detail_bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@id/bottom_action_bar"
@@ -56,21 +58,19 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             tools:ignore="DisableBaselineAlignment"
-            android:orientation="horizontal"
             android:background="@color/bottom_bar_bg">
 
             <LinearLayout
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical">
 
                 <ImageView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:src="@drawable/ic_activity_participate"
-                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="35dp"
                     android:contentDescription="@string/imageDescription"/>
 
                 <TextView
@@ -78,6 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
                     android:text="@string/want_to_attend"
                     style="@style/DetailBottomText">
                 </TextView>
@@ -92,15 +93,16 @@
                 android:background="#dddddd"/>
 
             <LinearLayout
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="35dp"
                     android:src="@drawable/ic_activity_like_un"
                     android:contentDescription="@string/imageDescription" />
 
@@ -108,6 +110,7 @@
                     android:id="@id/bottom_bar_like"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:text="@string/detail_like"
                     style="@style/DetailBottomText">
                 </TextView>

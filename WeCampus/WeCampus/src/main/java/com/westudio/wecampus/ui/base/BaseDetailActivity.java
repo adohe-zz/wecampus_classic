@@ -5,6 +5,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.RelativeLayout;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.westudio.wecampus.R;
@@ -41,5 +42,10 @@ public class BaseDetailActivity extends SherlockFragmentActivity {
                 return gestureDector.onTouchEvent(motionEvent);
             }
         });
+    }
+
+    public void showBottomActionBar() {
+        RelativeLayout bottomActionBar = (RelativeLayout)this.findViewById(R.id.detail_bottom_bar);
+        bottomActionBar.setVisibility(View.VISIBLE);
     }
 }
