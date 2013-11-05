@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -69,6 +70,7 @@ public class PickSchoolActivity extends SherlockFragmentActivity
                 School school = (School)adapter.getItem(position);
                 Intent intent = new Intent();
                 intent.putExtra(AuthActivity.PICK_SCHOOL_NAME, school.getName());
+                intent.putExtra(AuthActivity.PICK_SCHOOL_ID, school.getId());
                 setResult(AuthActivity.PICK_SCHOOL_RESULT, intent);
                 finish();
             }
@@ -87,7 +89,7 @@ public class PickSchoolActivity extends SherlockFragmentActivity
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        Toast.makeText(this, R.string.net_work_err, Toast.LENGTH_SHORT).show();
     }
 
     @Override

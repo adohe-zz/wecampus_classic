@@ -110,4 +110,13 @@
     <string name="num_people_like">%d人喜欢过</string>
     <string name="followed">已关注</string>
     <string name="follow_earch_other">相互关注</string>
+    <string name="net_work_err">网络貌似有问题</string>
+    <string name="msg_school_not_selected">学校未选择</string>
+    <string name="msg_error_email_format">邮箱格式错误</string>
+    <string name="msg_please_input_nickname">请输入昵称</string>
+    <string name="msg_please_input_gender">请输入性别</string><string name="gender_male">男</string>
+    <string name="msg_please_input_pwd">请输入密码</string>
+    <string name="choose_gender">选择性别</string>
+    <string name="gender_female">女</string>
+    <string name="gender_secret">保密</string>
 </resources>

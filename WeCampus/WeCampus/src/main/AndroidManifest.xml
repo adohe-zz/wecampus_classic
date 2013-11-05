@@ -50,7 +50,8 @@
         <!-- Auth Activity -->
         <activity
             android:name=".ui.login.AuthActivity"
-            android:label="@string/btn_login">
+            android:label="@string/btn_login"
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!-- Terms of Use Activity -->
@@ -87,6 +88,12 @@
         <activity
             android:name=".ui.login.PickSchoolActivity"
             android:label="@string/choose_school">
+        </activity>
+
+        <!-- Choose Gender Activity -->
+        <activity
+            android:name=".ui.login.PickGenderActivity"
+            android:label="@string/choose_gender">
         </activity>
 
         <!-- SearchActivity -->
