@@ -123,7 +123,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         } else if(v.getId() == R.id.rege_edt_school) {
             startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
         } else if(v.getId() == R.id.rege_edt_sex) {
-            //startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_GENDER_REQUEST);
+            startActivityForResult(new Intent(activity, PickGenderActivity.class), AuthActivity.PICK_GENDER_REQUEST);
         }
     }
 
@@ -137,7 +137,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         } else if (resultCode == AuthActivity.PICK_GENDER_RESULT) {
             int type = data.getIntExtra(AuthActivity.PICK_GENDER, 2);
             gender = (type == 0 ? Gender.MALE : (type == 1 ? Gender.FEMALE : Gender.SECRET));
-            edtSex.setText(gender.genderMark);
+            String strGender = (type == 0 ? getString(R.string.gender_male) :
+                    (type == 1 ? getString(R.string.gender_female) : getString(R.string.gender_secret)));
+            edtSex.setText(strGender);
         }
     }
 

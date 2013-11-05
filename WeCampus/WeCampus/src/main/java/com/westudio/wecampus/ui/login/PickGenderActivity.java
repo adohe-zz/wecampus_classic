@@ -23,9 +23,9 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
         View male = findViewById(R.id.item_male);
         male.setOnClickListener(this);
         View female = findViewById(R.id.item_female);
-        male.setOnClickListener(this);
+        female.setOnClickListener(this);
         View secret = findViewById(R.id.item_secret);
-        male.setOnClickListener(this);
+        secret.setOnClickListener(this);
 
     }
 
