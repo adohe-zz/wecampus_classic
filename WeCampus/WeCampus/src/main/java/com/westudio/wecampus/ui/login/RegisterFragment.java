@@ -133,7 +133,9 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             edtSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
             schoolId = data.getIntExtra(AuthActivity.PICK_SCHOOL_ID, -1);
         } else if (resultCode == AuthActivity.PICK_GENDER_RESULT) {
-            //TODO
+            int type = data.getIntExtra(AuthActivity.PICK_GENDER, 2);
+            gender = (type == 0 ? Gender.MALE : (type == 1 ? Gender.FEMALE : Gender.SECRET));
+            edtSex.setText(gender.genderMark);
         }
     }
 
