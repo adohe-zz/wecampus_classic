@@ -46,7 +46,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //updateActionBar();
+        updateActionBar();
         initWidget();
     }
 
@@ -68,6 +68,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     /*@Override

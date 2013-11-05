@@ -59,15 +59,31 @@
             android:orientation="horizontal"
             android:background="@color/bottom_bar_bg">
 
-            <TextView
-                android:id="@id/bottom_bar_attend"
-                android:layout_width="0dp"
+            <LinearLayout
                 android:layout_height="match_parent"
+                android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="nihao"
-                style="@style/DetailBottomText"
-                android:gravity="center">
-            </TextView>
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_activity_participate"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/imageDescription"/>
+
+                <TextView
+                    android:id="@id/bottom_bar_attend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/want_to_attend"
+                    style="@style/DetailBottomText">
+                </TextView>
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="1dp"
@@ -75,15 +91,28 @@
                 android:layout_gravity="center_vertical"
                 android:background="#dddddd"/>
 
-            <TextView
-                android:id="@id/bottom_bar_like"
-                android:layout_width="0dp"
+            <LinearLayout
                 android:layout_height="match_parent"
+                android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="hello"
-                style="@style/DetailBottomText"
-                android:gravity="center">
-            </TextView>
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_activity_like_un"
+                    android:contentDescription="@string/imageDescription" />
+
+                <TextView
+                    android:id="@id/bottom_bar_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/detail_like"
+                    style="@style/DetailBottomText">
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
 

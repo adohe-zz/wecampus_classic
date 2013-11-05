@@ -6,9 +6,12 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
+        android:scaleType="centerInside"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="70dp"
         android:layout_gravity="center_horizontal" />
 
     <Button
@@ -17,14 +20,27 @@
         android:layout_height="wrap_content"
         android:text="@string/access_without_login"
         android:textSize="18sp"
-        android:textColor="@color/text_color_white"
-        android:layout_gravity="center_horizontal" />
+        android:textColor="@android:color/black"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_no_login"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"/>
 
     <Button
         android:id="@id/intro_login_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_sign"
-        android:layout_gravity="center_horizontal" />
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_login_sign"
+        android:layout_marginTop="15dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"/>
 
 </LinearLayout>

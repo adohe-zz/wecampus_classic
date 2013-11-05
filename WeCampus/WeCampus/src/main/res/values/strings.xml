@@ -62,6 +62,8 @@
     <string name="detail_org">发布方</string>
     <string name="detail_attend">参加的人</string>
     <string name="detail_content_tips">活动简介</string>
+    <string name="want_to_attend">想参加</string>
+    <string name="detail_like">喜欢</string>
 
     <string name="imageDescription">ImageView</string>
     <string name="terms_of_use">用户协议</string>
