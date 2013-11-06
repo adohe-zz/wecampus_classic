@@ -18,7 +18,7 @@
 -->
 
 <resources>
-    <color name="pressed_we">#CC13C7AF</color>
+    <color name="pressed_we">#30000000</color>
     <color name="bg_color">#DEDEDE</color>
     <color name="menu_list_divider">#b1b1b1</color>
     <color name="intro_activity_bg">#2eddae</color>

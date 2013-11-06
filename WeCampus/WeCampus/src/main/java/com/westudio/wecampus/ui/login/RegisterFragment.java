@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -43,6 +44,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private TextView tvSex;
     private Button btnSubmit;
     private TextView tvTipsTwo;
+    private ProgressDialog progressDialog;
 
     private int schoolId = -1;
     private Gender gender;
@@ -115,9 +117,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.rege_btn_register && checkValidation()) {
-            WeCampusApi.postRegister(this, edtEmail.getText().toString(),
-                    edtNickName.getText().toString(), edtPwd.getText().toString(),
-                    "male", String.valueOf(schoolId), this, this);
+            startRegister();
         } else if(v.getId() == R.id.rege_tips_two) {
             startActivity(new Intent(activity, TermsOfUseActivity.class));
         } else if(v.getId() == R.id.rege_edt_school) {
@@ -182,12 +182,20 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         Toast.makeText(getActivity(), "Register error", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onResponse(User user) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         Toast.makeText(getActivity(), "Regitster success", Toast.LENGTH_SHORT).show();
+
+
         FragmentTransaction fragmentTransaction =
                 ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
@@ -195,5 +203,15 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 AuthActivity.UPDATE_PROFILE_TAG);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private void startRegister() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+
+        WeCampusApi.postRegister(this, edtEmail.getText().toString(),
+                edtNickName.getText().toString(), edtPwd.getText().toString(),
+                gender.genderMark, String.valueOf(schoolId), this, this);
     }
 }
