@@ -38,7 +38,6 @@ public class ActivityAdapter extends CursorAdapter {
 
     @Override
     public Object getItem(int position) {
-        mCursor.moveToPosition(position);
         return Activity.fromCursor(mCursor);
     }
 

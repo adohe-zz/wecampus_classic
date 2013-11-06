@@ -1,6 +1,10 @@
 package com.westudio.wecampus.ui.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -14,6 +18,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.UnderlinePageIndicator;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.ActivityDataHelper;
+import com.westudio.wecampus.data.DataProvider;
+import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.intro.IntroImageAdapter;
 
@@ -41,13 +49,28 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvCompany;
     private TextView tvContent;
 
+    ActivityDataHelper dataHelper;
+
+    private int activityId = -1;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
+
+        dataHelper = new ActivityDataHelper(this);
+        refreshActivityFromDb();
 
         updateActionBar();
         initWidget();
+    }
+
+    private void refreshActivityFromDb() {
+        if (activityId != -1) {
+            activity = dataHelper.query(activityId);
+        }
     }
 
     private void initWidget() {
@@ -59,11 +82,21 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
-        tvContent.setText("You see, most well written code will instantly tell you what it does. With some experience " +
-                "in functional JavaScript, and having read both Functional JavaScript and JavaScript Allongé " +
-                "(both amazing books), I had no problem reading it. But explain it (and why one would even care about doing it) " +
-                "to someone with no experience in functional programming?");
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
+
+//        tvOrg.setText();
+        tvTitle.setText(activity.getTitle());
+//        tvTime.setText();
+        tvLocation.setText(activity.getLocation());
+        tvTag.setText(activity.getCategory());
+        tvTicket.setText(activity.getLocation());
+        tvCompany.setText(activity.getSponsor_name());
+        tvContent.setText(activity.getDescription());
+
+        Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+        WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(ivPoster,
+                defaultDrawable, defaultDrawable));
+
         showBottomActionBar();
     }
 
@@ -77,7 +110,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.detail_menu, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -87,10 +120,13 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                 return true;
             case R.id.detail_menu_like:
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 
     /**
      * Display the share dialog

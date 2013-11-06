@@ -36,6 +36,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
         LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityRequestData> {
+    public static final String ACTIVITY_ID = "activity_id";
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private ActivityAdapter mAdapter;
@@ -110,6 +111,8 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, ActivityDetailActivity.class);
+                Activity ac = (Activity) mAdapter.getItem(position);
+                intent.putExtra(ACTIVITY_ID, ac.getId());
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
             }
