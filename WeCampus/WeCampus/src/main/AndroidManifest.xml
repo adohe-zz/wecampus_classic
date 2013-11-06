@@ -24,7 +24,7 @@
         android:theme="@style/Theme.We" >
 
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.login.SplashActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
