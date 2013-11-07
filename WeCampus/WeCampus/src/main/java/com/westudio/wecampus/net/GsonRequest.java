@@ -24,10 +24,10 @@ public class GsonRequest<T> extends Request<T> {
 
     private static final String TAG = "GSONREQUEST";
 
-    private Class<T> clazz;
-    private Gson mGson;
-    private Response.Listener listener;
-    private Response.ErrorListener errorListener;
+    protected Class<T> clazz;
+    protected Gson mGson;
+    protected Response.Listener listener;
+    protected Response.ErrorListener errorListener;
 
     /**
      * Constructor used for GET/DELETE/PATCH

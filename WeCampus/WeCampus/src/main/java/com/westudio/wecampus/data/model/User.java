@@ -5,5 +5,6 @@ package com.westudio.wecampus.data.model;
  */
 public class User {
     public String Name;
-    public String Avatar;
+    public String email;
+    public String token;
 }

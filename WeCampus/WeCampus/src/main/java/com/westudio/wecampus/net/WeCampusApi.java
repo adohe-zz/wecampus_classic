@@ -138,7 +138,7 @@ public class WeCampusApi {
         data.schoolId = schoolId;
 
         Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER,
-                User.class, data, listener, errorListener);
+                data, listener, errorListener);
 
         if (tag != null) {
             request.setTag(tag);
