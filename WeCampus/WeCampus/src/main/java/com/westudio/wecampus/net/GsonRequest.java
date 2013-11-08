@@ -24,10 +24,10 @@ public class GsonRequest<T> extends Request<T> {
 
     private static final String TAG = "GSONREQUEST";
 
-    private Class<T> clazz;
-    private Gson mGson;
-    private Response.Listener listener;
-    private Response.ErrorListener errorListener;
+    protected Class<T> clazz;
+    protected Gson mGson;
+    protected Response.Listener listener;
+    protected Response.ErrorListener errorListener;
 
     /**
      * Constructor used for GET/DELETE/PATCH
@@ -75,14 +75,6 @@ public class GsonRequest<T> extends Request<T> {
                 Utility.log("response string", data);
                 return Response.success(mGson.fromJson(json.toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
-
-            /*String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            JSONObject jsonObject = new JSONObject(data);
-            if(Integer.valueOf(jsonObject.getJSONObject("Status").getString("Id")) != 0) {
-                return Response.error(new VolleyError(jsonObject.getJSONObject("Status").getString("Memo")));
-            } else {
-                return Response.success(mGson.fromJson(jsonObject.getJSONObject("Data").toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
-            }*/
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JSONException e) {

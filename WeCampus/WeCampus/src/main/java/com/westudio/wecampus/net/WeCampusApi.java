@@ -23,7 +23,6 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
-import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.database.ResponseDiskCache;
 
 /**
@@ -137,8 +136,7 @@ public class WeCampusApi {
         data.gender = gender;
         data.schoolId = schoolId;
 
-        Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER,
-                User.class, data, listener, errorListener);
+        Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER, data, listener, errorListener);
 
         if (tag != null) {
             request.setTag(tag);
@@ -193,7 +191,7 @@ public class WeCampusApi {
                         imageView.setImageDrawable(transitionDrawable);
                         transitionDrawable.startTransition(100);
                     } else {
-                        imageView.setImageBitmap(ImageUtil.getRoundedCornerBitmap(response.getBitmap()));
+                        imageView.setImageBitmap(response.getBitmap());
                     }
                 } else if(defaultImageDrawable != null) {
                     imageView.setImageDrawable(defaultImageDrawable);

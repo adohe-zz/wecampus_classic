@@ -1,4 +1,4 @@
-package com.westudio.wecampus.ui.splash;
+package com.westudio.wecampus.ui.login;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -62,7 +62,7 @@ public class SplashActivity extends Activity {
                     Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
                     startActivity(intent);
                 }
-            }, 1000);
+            }, 300);
         }
     }
 }

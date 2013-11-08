@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -47,6 +48,9 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
 
     @Override
     public void onClick(View view) {
+        //show the selected icon
+        view.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+
         int type = 0;
         switch (view.getId()) {
             case R.id.item_male: {
@@ -62,9 +66,20 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
                 break;
             }
         }
-        Intent intent = new Intent();
-        intent.putExtra(AuthActivity.PICK_GENDER, type);
-        setResult(AuthActivity.PICK_GENDER_RESULT, intent);
-        finish();
+
+        Handler handler = new Handler();
+        final int finalType = type;
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.putExtra(AuthActivity.PICK_GENDER, finalType);
+                setResult(AuthActivity.PICK_GENDER_RESULT, intent);
+                finish();
+            }
+        };
+
+        handler.postDelayed(runnable, 400);
+
     }
 }

@@ -4,8 +4,7 @@
     android:id="@id/activity_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="8dp"
-    android:background="@drawable/listitem_activity_selector">
+    android:paddingBottom="8dp">
 
     <ImageView
         android:id="@id/activity_list_item_image"

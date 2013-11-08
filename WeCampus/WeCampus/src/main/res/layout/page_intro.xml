@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingRight="70dp"
         android:paddingLeft="70dp"
+        android:layout_marginLeft="30dp"
         android:scaleType="centerInside">
     </ImageView>
 

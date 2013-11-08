@@ -88,7 +88,8 @@
                         android:background="#00000000"
                         android:hint="@string/input_tips"
                         android:inputType="textEmailAddress"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:singleLine="true"/>
 
                 </LinearLayout>
 
@@ -121,7 +122,8 @@
                         android:background="#00000000"
                         android:hint="@string/input_tips"
                         android:inputType="textPassword"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:singleLine="true"/>
 
                 </LinearLayout>
 
@@ -154,7 +156,8 @@
                         android:background="#00000000"
                         android:hint="@string/rege_nickname_tips"
                         android:maxLength="8"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:singleLine="true"/>
 
                 </LinearLayout>
 
