@@ -133,7 +133,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if(resultCode == AuthActivity.PICK_SCHOOL_RESULT) {
             edtSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
             schoolId = data.getIntExtra(AuthActivity.PICK_SCHOOL_ID, -1);
-            Utility.log("school_id", schoolId);
         } else if (resultCode == AuthActivity.PICK_GENDER_RESULT) {
             int type = data.getIntExtra(AuthActivity.PICK_GENDER, 2);
             gender = (type == 0 ? Gender.MALE : (type == 1 ? Gender.FEMALE : Gender.SECRET));
@@ -162,7 +161,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             Toast.makeText(getActivity(), R.string.msg_please_input_nickname, Toast.LENGTH_SHORT).show();
             return result;
         } else if (gender == null) {
-            //Toast.makeText(getActivity(), R.string.msg_please_input_gender, Toast.LENGTH_SHORT).show();
             result = true;
             return result;
         }
@@ -193,8 +191,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        Toast.makeText(getActivity(), "Regitster success", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
 
         FragmentTransaction fragmentTransaction =
                 ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
