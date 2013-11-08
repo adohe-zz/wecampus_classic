@@ -186,10 +186,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     }
 
     @Override
-    public void onResponse(User data) {
-        if (data == null) {
-            return;
-        }
+    public void onResponse(User user) {
+        Toast.makeText(getActivity(), "Regitster success", Toast.LENGTH_SHORT).show();
         FragmentTransaction fragmentTransaction =
                 ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
