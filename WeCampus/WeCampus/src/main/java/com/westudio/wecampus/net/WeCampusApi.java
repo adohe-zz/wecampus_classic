@@ -111,14 +111,13 @@ public class WeCampusApi {
      * @param tag
      * @param account
      * @param pwd
-     * @param schoolID
      * @param listener
      * @param errorListener
      */
-    public static void login(Object tag, String account, String pwd, int schoolID, Response.Listener listener,
-                Response.ErrorListener errorListener) {
-        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd,
-                User.class, listener, errorListener);
+    public static void postLogin(Object tag, String account, String pwd, Response.Listener listener,
+                                 Response.ErrorListener errorListener) {
+        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.URL_POST_SESSION,
+                account, pwd, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

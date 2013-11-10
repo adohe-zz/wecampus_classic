@@ -13,6 +13,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.westudio.wecampus.data.DBHelper;
+import com.westudio.wecampus.util.AccountManager;
 
 /**
  * Created by nankonami on 13-9-7.
@@ -30,6 +31,8 @@ public class BaseApplication extends Application {
 
     public DisplayMetrics displayMetrics;
 
+    private AccountManager accountMgr;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,6 +40,8 @@ public class BaseApplication extends Application {
         RequestQueue queue = Volley.newRequestQueue(this);
         hasAccount = false;
         mContext = getApplicationContext();
+
+        accountMgr = new AccountManager(mContext);
     }
 
     @Override
@@ -69,5 +74,9 @@ public class BaseApplication extends Application {
             this.displayMetrics = dm;
             return displayMetrics;
         }
+    }
+
+    public AccountManager getAccountMgr() {
+        return accountMgr;
     }
 }

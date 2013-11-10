@@ -18,6 +18,8 @@ public class HttpUtil {
 
     public static final String URL_POST_REGISTER = "http://api.wecampus.net/v1/users";
 
+    public static final String URL_POST_SESSION = "http://api.wecampus.net/v1/sessions";
+
 
     /**
      * Build the url query string according to the param bundle
@@ -62,14 +64,6 @@ public class HttpUtil {
      */
     public static final String getActivityList(Bundle bundle) {
         return "http://api.wecampus.net/v1/activities";
-    }
-
-    /**
-     * Get the url for login
-     * @return
-     */
-    public static final String getLoginUrl() {
-        return "http://api.wecampus.net/v1/sessions/new";
     }
 
     /**

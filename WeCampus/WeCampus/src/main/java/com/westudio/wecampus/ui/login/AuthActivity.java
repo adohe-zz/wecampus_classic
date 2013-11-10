@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.net.WeCampusApi;
 
 /**
  * Created by nankonami on 13-9-18.
@@ -25,9 +27,6 @@ public class AuthActivity extends SherlockFragmentActivity {
     public static final String PICK_SCHOOL_NAME = "school_name";
     public static final String PICK_SCHOOL_ID = "school_id";
     public static final String PICK_GENDER = "gender";
-
-    private String mEmail;
-    private String mPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +54,6 @@ public class AuthActivity extends SherlockFragmentActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-    }
-
-    public void handleLogin(final String email, final String pwd) {
-        mEmail = email;
-        mPwd = pwd;
-
-
     }
 
     @Override

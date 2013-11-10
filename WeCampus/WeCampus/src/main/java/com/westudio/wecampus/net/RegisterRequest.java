@@ -64,15 +64,14 @@ public class RegisterRequest extends GsonRequest<User> {
         JSONObject jsonObject = new JSONObject();
         try {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
-                jsonObject.put(entry.getKey(), URLEncoder.encode(entry.getValue(), getParamsEncoding()));
+                jsonObject.put(entry.getKey(), entry.getValue());
             }
         } catch (AuthFailureError authFailureError) {
             authFailureError.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
+
         try {
             mEntity.addPart("data", new StringBody(jsonObject.toString()));
         } catch (UnsupportedEncodingException e) {
@@ -82,16 +81,6 @@ public class RegisterRequest extends GsonRequest<User> {
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-        buildConentEntity();
-        try {
-            mEntity.writeTo(bos);
-        } catch (IOException e) {
-            VolleyLog.e("IOException writing to ByteArrayOutputStream");
-        }
-        //return bos.toByteArray();
-
         JSONObject jsonObject = new JSONObject();
         try {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
