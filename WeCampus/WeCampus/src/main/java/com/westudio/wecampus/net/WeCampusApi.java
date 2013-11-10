@@ -17,6 +17,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -137,6 +138,16 @@ public class WeCampusApi {
 
         Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER, data, listener, errorListener);
 
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void getAdvertisement(Object tag, Response.Listener listener,
+                                        Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Advertisement.AdResultData>(Request.Method.GET,
+                HttpUtil.URL_GET_ADVERTISEMENTS, Advertisement.AdResultData.class, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }

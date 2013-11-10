@@ -20,6 +20,8 @@ public class HttpUtil {
 
     public static final String URL_POST_SESSION = "http://api.wecampus.net/v1/sessions";
 
+    public static final String URL_GET_ADVERTISEMENTS = "http://api.wecampus.net/v1/advertisements";
+
 
     /**
      * Build the url query string according to the param bundle
