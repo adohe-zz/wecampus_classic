@@ -22,6 +22,13 @@ public class HttpUtil {
 
     public static final String URL_GET_ADVERTISEMENTS = "http://api.wecampus.net/v1/advertisements";
 
+    public static final String URL_GET_ACTIVITIES = "http://api.wecampus.net/v1/activities";
+
+    public static final String URL_GET_SCHOOLS = "http://api.wecampus.net/v1/schools";
+
+    public static enum ActivityOp {
+        DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
+    }
 
     /**
      * Build the url query string according to the param bundle
@@ -60,20 +67,26 @@ public class HttpUtil {
     }
 
     /**
-     * Get the url for request activity
-     * @param bundle
+     * GET REQUEST URL OF ACTIVITY ID AND OPERATION
+     * @param id
+     * @param activityOp
      * @return
      */
-    public static final String getActivityList(Bundle bundle) {
-        return "http://api.wecampus.net/v1/activities";
-    }
+    public static String getActivityByIdWithOp(final int id, ActivityOp activityOp) {
+        StringBuilder sb = new StringBuilder("http://api.wecampus.net/v1/activities/");
+        switch (activityOp) {
+            case DETAIL:
+                sb.append(id);
+                break;
+            case LIKE:
+                sb.append(id).append("/like");
+                break;
+            case DISLIKE:
+                sb.append(id).append("/dislike");
+                break;
+        }
 
-    /**
-     * Get the url for request school
-     * @return
-     */
-    public static final String getSchoolList() {
-        return "http://api.wecampus.net/v1/schools";
+        return sb.toString();
     }
 
     /**

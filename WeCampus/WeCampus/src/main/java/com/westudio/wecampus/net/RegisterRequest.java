@@ -108,7 +108,7 @@ public class RegisterRequest extends GsonRequest<User> {
                 return Response.error(new VolleyError("Network Error"));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-
+                Utility.log("response string", data);
                 return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
 

@@ -1,32 +1,21 @@
 package com.westudio.wecampus.ui.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.viewpagerindicator.UnderlinePageIndicator;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
-import com.westudio.wecampus.data.DataProvider;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
-import com.westudio.wecampus.ui.intro.IntroImageAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by nankonami on 13-10-4.
@@ -37,8 +26,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private static final int[] IMG_IDS = {R.drawable.detail_pager_img, R.drawable.detail_pager_img_two};
 
     //Widgets
-    private ViewPager viewPager;
-    private UnderlinePageIndicator pageIndicator;
     private TextView tvOrg;
     private TextView tvTitle;
     private TextView tvTime;
@@ -48,6 +35,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+    private LinearLayout barAttend;
+    private LinearLayout barLike;
 
     ActivityDataHelper dataHelper;
 
@@ -84,9 +73,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
-//        tvOrg.setText();
         tvTitle.setText(activity.getTitle());
-//        tvTime.setText();
         tvLocation.setText(activity.getLocation());
         tvTag.setText(activity.getCategory());
         tvTicket.setText(activity.getLocation());
@@ -98,6 +85,11 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                 defaultDrawable, defaultDrawable));
 
         showBottomActionBar();
+
+        barAttend = (LinearLayout)findViewById(R.id.bottom_bar_attend);
+        barAttend.setOnClickListener(new ClickListener());
+        barLike = (LinearLayout)findViewById(R.id.bottom_bar_like);
+        barLike.setOnClickListener(new ClickListener());
     }
 
     private void updateActionBar() {
@@ -142,5 +134,17 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         intent.putExtra(Intent.EXTRA_TEXT, content);
         intent.putExtra(Intent.EXTRA_TITLE, title);
         startActivity(Intent.createChooser(intent, content));
+    }
+
+    private class ClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == R.id.bottom_bar_attend) {
+
+            } else if(v.getId() == R.id.bottom_bar_like) {
+
+            }
+        }
     }
 }

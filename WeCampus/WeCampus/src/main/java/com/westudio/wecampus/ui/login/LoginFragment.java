@@ -22,6 +22,7 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-9-18.
@@ -77,9 +78,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         tvForgetPwd = (TextView)view.findViewById(R.id.login_forget_pwd);
         tvForgetPwd.setOnClickListener(this);
         tvPwd = (TextView)view.findViewById(R.id.login_tv_pwd);
-        //tvPwd.setText(R.string.rege_pwd);
         tvEmail = (TextView)view.findViewById(R.id.login_tv_email);
-        //tvEmail.setText(R.string.rege_email);
 
         return view;
     }
@@ -151,7 +150,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         // Save account info to XML
         BaseApplication app = (BaseApplication)getActivity().getApplication();
+        Utility.log("token", user.token);
         app.getAccountMgr().saveAccountInfo(user.id, user.token);
+        app.hasAccount = true;
 
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
