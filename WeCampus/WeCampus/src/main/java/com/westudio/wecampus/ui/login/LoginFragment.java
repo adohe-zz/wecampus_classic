@@ -22,7 +22,6 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
-import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-9-18.
@@ -150,7 +149,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         // Save account info to XML
         BaseApplication app = (BaseApplication)getActivity().getApplication();
-        Utility.log("token", user.token);
         app.getAccountMgr().saveAccountInfo(user.id, user.token);
         app.hasAccount = true;
 

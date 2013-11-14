@@ -26,6 +26,8 @@ public class HttpUtil {
 
     public static final String URL_GET_SCHOOLS = "http://api.wecampus.net/v1/schools";
 
+    public static final String URL_POST_PROFILE_AVATAR = "http://api.wecampus.net/v1/profile/avatar";
+
     public static enum ActivityOp {
         DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
     }

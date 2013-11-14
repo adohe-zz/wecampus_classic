@@ -38,8 +38,6 @@ public class WeCampusApi {
     private static RequestQueue requestQueue = newRequestQueue();
     private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
 
-    private static String mAuthToken;
-
     private WeCampusApi() {
     }
 
@@ -119,7 +117,7 @@ public class WeCampusApi {
      */
     public static void likeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
+        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
                 listener, errorListener);
 
         if(tag != null) {
@@ -137,7 +135,7 @@ public class WeCampusApi {
      */
     public static void disLikeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
+        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
                 listener, errorListener);
 
         if(tag != null) {
@@ -204,6 +202,14 @@ public class WeCampusApi {
                                         Response.ErrorListener errorListener) {
         Request request = new GsonRequest<Advertisement.AdResultData>(Request.Method.GET,
                 HttpUtil.URL_GET_ADVERTISEMENTS, Advertisement.AdResultData.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void postUpdateAvatar(Object tag, String path, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new UploadAvatarRequest(path, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }

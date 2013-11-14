@@ -67,21 +67,6 @@ public class GsonRequest<T> extends Request<T> {
     }
 
     @Override
-    public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> headers = super.getHeaders();
-        if(headers == null || headers.equals(Collections.emptyMap())) {
-            headers = new HashMap<String, String>();
-        }
-
-        if(BaseApplication.getInstance().hasAccount) {
-            Utility.log("has ", "account");
-            headers.put("Auth-Token", BaseApplication.getInstance().getAccountMgr().getToken());
-        }
-
-        return headers;
-    }
-
-    @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         Utility.log("statuscode", response.statusCode);
         try {

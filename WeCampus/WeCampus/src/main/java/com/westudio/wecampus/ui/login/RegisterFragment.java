@@ -184,7 +184,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        Toast.makeText(getActivity(), "Register error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.register_fail, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -197,6 +197,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         // Save account info to XML
         BaseApplication app = (BaseApplication)getActivity().getApplication();
         app.getAccountMgr().saveAccountInfo(user.id, user.token);
+        app.hasAccount = true;
 
         FragmentTransaction fragmentTransaction =
                 ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();

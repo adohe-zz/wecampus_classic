@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,9 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.util.ImageUtil;
@@ -19,14 +24,14 @@ import com.westudio.wecampus.util.ImageUtil;
 /**
  * Created by nankonami on 13-9-20.
  */
-public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener {
+public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener, Response.Listener<Void>, Response.ErrorListener {
 
     private Activity activity;
 
     private TextView tvSkip;
     private TextView tvAcademy;
     private ImageView ivAvatar;
-
+    private ProgressDialog progressDialog;
     private String mStrImgLocalPath;
 
     public static UpdateProfileFragment newInstance(Bundle bundle) {
@@ -98,7 +103,23 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         Bitmap bmAvatar = bundle.getParcelable("cropedImage");
         mStrImgLocalPath = bundle.getString("imagePath");
         ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(bmAvatar));
-        //TODO fire an upload image request
 
+        // fire an upload image request
+        WeCampusApi.postUpdateAvatar(getActivity(), mStrImgLocalPath, this, this);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        progressDialog.dismiss();
+        Toast.makeText(getActivity(), R.string.upload_fail, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResponse(Void aVoid) {
+        progressDialog.dismiss();
+        Toast.makeText(getActivity(), R.string.upload_success, Toast.LENGTH_SHORT).show();
     }
 }

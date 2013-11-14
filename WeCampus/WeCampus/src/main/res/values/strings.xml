@@ -131,4 +131,7 @@
     <string name="text_no_sdcard">未发现SD卡</string>
     <string name="text_cancel">取消</string>
     <string name="text_no_camera">未发现相机应用</string>
+    <string name="upload_success">头像上传成功</string>
+    <string name="upload_fail">上传失败</string>
+    <string name="register_fail">注册失败</string>
 </resources>

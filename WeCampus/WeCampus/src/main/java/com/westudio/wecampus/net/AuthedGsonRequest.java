@@ -2,6 +2,7 @@ package com.westudio.wecampus.net;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
+import com.westudio.wecampus.ui.base.BaseApplication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,22 +13,23 @@ import java.util.Map;
  */
 public class AuthedGsonRequest<T> extends GsonRequest<T> {
     public static final String AUTH_TOKEN_KEY = "Auth-Token";
-    private String mToken;
 
-    public AuthedGsonRequest(String token, int method, String url, Class<T> clazz, Response.Listener successListener, Response.ErrorListener errorListener) {
+    public AuthedGsonRequest(int method, String url, Class<T> clazz, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(method, url, clazz, successListener, errorListener);
-        this.mToken = token;
     }
 
-    public AuthedGsonRequest(String token, int method, String url, Response.Listener successListener, Response.ErrorListener errorListener) {
+    public AuthedGsonRequest(int method, String url, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(method, url, successListener, errorListener);
-        this.mToken = token;
     }
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> mapHeaders = new HashMap<String, String>();
-        mapHeaders.put(AUTH_TOKEN_KEY, mToken);
-        return mapHeaders;
+        Map<String, String> headers = new HashMap<String, String>();
+
+        if(BaseApplication.getInstance().hasAccount) {
+            headers.put(AUTH_TOKEN_KEY, BaseApplication.getInstance().getAccountMgr().getToken());
+        }
+
+        return headers;
     }
 }

@@ -5,7 +5,6 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.westudio.wecampus.data.model.User;
 
@@ -14,10 +13,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,7 +101,6 @@ public class RegisterRequest extends GsonRequest<User> {
                 return Response.error(new VolleyError("Network Error"));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                Utility.log("response string", data);
                 return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
 

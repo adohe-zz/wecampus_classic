@@ -5,6 +5,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.westudio.wecampus.util.HttpUtil;
 
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
@@ -20,10 +21,9 @@ public class UploadAvatarRequest extends AuthedGsonRequest<Void>{
     private String mImagePath;
     private MultipartEntity mEntity = new MultipartEntity();
 
-    public UploadAvatarRequest(String token, int method, String url, String imagePath, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(token, method, url, successListener, errorListener);
+    public UploadAvatarRequest(String imagePath, Response.Listener successListener, Response.ErrorListener errorListener) {
+        super(Method.POST, HttpUtil.URL_POST_PROFILE_AVATAR, successListener, errorListener);
         mImagePath = imagePath;
-
     }
 
     @Override
