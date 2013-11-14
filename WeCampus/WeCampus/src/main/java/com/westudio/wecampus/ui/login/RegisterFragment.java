@@ -20,6 +20,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.util.Utility;
 
@@ -193,6 +194,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         }
         Toast.makeText(getActivity(), R.string.register_success, Toast.LENGTH_SHORT).show();
 
+        // Save account info to XML
+        BaseApplication app = (BaseApplication)getActivity().getApplication();
+        app.getAccountMgr().saveAccountInfo(user.id, user.token);
+
         FragmentTransaction fragmentTransaction =
                 ((AuthActivity)activity).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
@@ -211,4 +216,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                 edtNickName.getText().toString(), edtPwd.getText().toString(),
                 gender.genderMark, String.valueOf(schoolId), this, this);
     }
+
+
 }

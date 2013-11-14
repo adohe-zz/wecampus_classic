@@ -123,6 +123,7 @@
     <string name="gender_secret">保密</string>
     <string name="please_wait">请稍候</string>
     <string name="register_success">恭喜你，注册成功了。</string>
+    <string name="login_error">登录失败</string>
 
     <string name="text_take_photo">相机</string>
     <string name="text_pick_photo">相册</string>

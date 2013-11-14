@@ -29,9 +29,6 @@ public class AuthActivity extends PickPhotoActivity {
     public static final String PICK_SCHOOL_ID = "school_id";
     public static final String PICK_GENDER = "gender";
 
-    private String mEmail;
-    private String mPwd;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,13 +88,6 @@ public class AuthActivity extends PickPhotoActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-    }
-
-    public void handleLogin(final String email, final String pwd) {
-        mEmail = email;
-        mPwd = pwd;
-
-
     }
 
     @Override

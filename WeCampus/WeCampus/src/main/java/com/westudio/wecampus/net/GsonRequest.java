@@ -1,5 +1,6 @@
 package com.westudio.wecampus.net;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -8,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONArray;
@@ -15,7 +17,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nankonami on 13-9-10.
@@ -59,6 +64,21 @@ public class GsonRequest<T> extends Request<T> {
         this.mGson = new Gson();
         this.listener = successListener;
         this.errorListener = errorListener;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = super.getHeaders();
+        if(headers == null || headers.equals(Collections.emptyMap())) {
+            headers = new HashMap<String, String>();
+        }
+
+        if(BaseApplication.getInstance().hasAccount) {
+            Utility.log("has ", "account");
+            headers.put("Auth-Token", BaseApplication.getInstance().getAccountMgr().getToken());
+        }
+
+        return headers;
     }
 
     @Override

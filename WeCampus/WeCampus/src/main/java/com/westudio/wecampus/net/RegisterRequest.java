@@ -61,15 +61,14 @@ public class RegisterRequest extends GsonRequest<User> {
         JSONObject jsonObject = new JSONObject();
         try {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
-                jsonObject.put(entry.getKey(), URLEncoder.encode(entry.getValue(), getParamsEncoding()));
+                jsonObject.put(entry.getKey(), entry.getValue());
             }
         } catch (AuthFailureError authFailureError) {
             authFailureError.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
+
         try {
             mEntity.addPart("data", new StringBody(jsonObject.toString()));
         } catch (UnsupportedEncodingException e) {
@@ -79,16 +78,6 @@ public class RegisterRequest extends GsonRequest<User> {
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-        buildConentEntity();
-        try {
-            mEntity.writeTo(bos);
-        } catch (IOException e) {
-            VolleyLog.e("IOException writing to ByteArrayOutputStream");
-        }
-        //return bos.toByteArray();
-
         JSONObject jsonObject = new JSONObject();
         try {
             for(Map.Entry<String, String> entry : getParams().entrySet()) {
@@ -116,7 +105,7 @@ public class RegisterRequest extends GsonRequest<User> {
                 return Response.error(new VolleyError("Network Error"));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-
+                Utility.log("response string", data);
                 return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
             }
 

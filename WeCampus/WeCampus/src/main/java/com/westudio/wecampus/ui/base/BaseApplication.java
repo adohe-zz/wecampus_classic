@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.westudio.wecampus.data.DBHelper;
+import com.westudio.wecampus.util.AccountManager;
 
 /**
  * Created by nankonami on 13-9-7.
@@ -30,13 +26,24 @@ public class BaseApplication extends Application {
 
     public DisplayMetrics displayMetrics;
 
+    private AccountManager accountMgr;
+
+    //The singleton application instance
+    private static BaseApplication application = null;
+
+    public static BaseApplication getInstance() {
+        return application;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        application = this;
         hasAccount = false;
         mContext = getApplicationContext();
+
+        accountMgr = new AccountManager(mContext);
     }
 
     @Override
@@ -69,5 +76,9 @@ public class BaseApplication extends Application {
             this.displayMetrics = dm;
             return displayMetrics;
         }
+    }
+
+    public AccountManager getAccountMgr() {
+        return accountMgr;
     }
 }

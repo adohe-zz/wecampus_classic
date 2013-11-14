@@ -17,6 +17,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -40,11 +41,6 @@ public class WeCampusApi {
     private static String mAuthToken;
 
     private WeCampusApi() {
-    }
-
-    public static void setHeader(Context context) {
-        SharedPreferences sp = context.getSharedPreferences()
-        mAuthToken
     }
 
     /**
@@ -87,7 +83,61 @@ public class WeCampusApi {
                 Response.ErrorListener errorListener) {
         Bundle bundle = getBundle();
 
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityList(bundle), Activity.ActivityRequestData.class,
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.URL_GET_ACTIVITIES, Activity.ActivityRequestData.class,
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * GET ACTIVITY DETAIL BY ID
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityById(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL),
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * LIKE ACTIVITY
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void likeActivityWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * DISLIKE ACTIVITY
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void disLikeActivityWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
                 listener, errorListener);
 
         if(tag != null) {
@@ -105,7 +155,7 @@ public class WeCampusApi {
      */
     public static void getSchoolList(Object tag, final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<School.SchoolRequestData>(Request.Method.GET, HttpUtil.getSchoolList(), School.SchoolRequestData.class, listener, errorListener);
+        Request request = new GsonRequest<School.SchoolRequestData>(Request.Method.GET, HttpUtil.URL_GET_SCHOOLS, School.SchoolRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -118,14 +168,13 @@ public class WeCampusApi {
      * @param tag
      * @param account
      * @param pwd
-     * @param schoolID
      * @param listener
      * @param errorListener
      */
-    public static void login(Object tag, String account, String pwd, int schoolID, Response.Listener listener,
-                Response.ErrorListener errorListener) {
-        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.getLoginUrl(), account, pwd,
-                User.class, listener, errorListener);
+    public static void postLogin(Object tag, String account, String pwd, Response.Listener listener,
+                                 Response.ErrorListener errorListener) {
+        Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.URL_POST_SESSION,
+                account, pwd, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -151,9 +200,14 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
-    public static void postUpdateAvatar(Object tag, String path, Response.Listener listener,
+    public static void getAdvertisement(Object tag, Response.Listener listener,
                                         Response.ErrorListener errorListener) {
-        Request request = new UploadAvatarRequest()
+        Request request = new GsonRequest<Advertisement.AdResultData>(Request.Method.GET,
+                HttpUtil.URL_GET_ADVERTISEMENTS, Advertisement.AdResultData.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
     }
 
     /**

@@ -67,4 +67,8 @@ public class Advertisement {
             this.advertisements = advertisements;
         }
     }
+
+    public class AdResultData {
+        public ArrayList<Advertisement> objects;
+    }
 }
