@@ -1,18 +1,21 @@
 package com.westudio.wecampus.ui.login;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.base.PickPhotoActivity;
 
 /**
  * Created by nankonami on 13-9-18.
  * The login/register activity
  */
-public class AuthActivity extends SherlockFragmentActivity {
+public class AuthActivity extends PickPhotoActivity {
 
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
     public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
@@ -30,7 +33,7 @@ public class AuthActivity extends SherlockFragmentActivity {
     private String mPwd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
@@ -39,6 +42,16 @@ public class AuthActivity extends SherlockFragmentActivity {
                 .commit();
 
         setUpActionBar();
+
+        /**************************************************************************************/
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
+        fragmentTransaction.replace(R.id.auth_container, UpdateProfileFragment.newInstance(null),
+                AuthActivity.UPDATE_PROFILE_TAG);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        /**************************************************************************************/
+
     }
 
     @Override
@@ -49,6 +62,29 @@ public class AuthActivity extends SherlockFragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case PHOTO_PICKED_WITH_DATA: {
+                Uri selectedImage = data.getData();
+                doCropPhoto(selectedImage, mUriTemp);
+                break;
+            }
+            case CAMERA_WITH_DATA: {
+                doCropPhoto(mUriTemp, mUriTemp);
+                break;
+            }
+            case PHOTO_CROPED_WITH_DATA: {
+                UpdateProfileFragment fragment = (UpdateProfileFragment) getSupportFragmentManager().findFragmentByTag(UPDATE_PROFILE_TAG);
+                Bundle bundle = new Bundle();
+                Bitmap bm = decodeUriAsBitmap(mUriTemp);
+                bundle.putParcelable("cropedImage", bm);
+                bundle.putString("imagePath", mUriTemp.getPath());
+                fragment.setCropedAvatarImage(bundle);
+                break;
+            }
+        }
     }
 
     private void setUpActionBar() {

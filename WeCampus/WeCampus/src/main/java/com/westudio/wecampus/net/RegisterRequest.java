@@ -8,12 +8,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.westudio.wecampus.data.model.User;
-import com.westudio.wecampus.util.HttpUtil;
-import com.westudio.wecampus.util.Utility;
 
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

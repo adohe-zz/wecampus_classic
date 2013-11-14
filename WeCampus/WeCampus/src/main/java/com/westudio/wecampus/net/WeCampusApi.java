@@ -37,7 +37,14 @@ public class WeCampusApi {
     private static RequestQueue requestQueue = newRequestQueue();
     private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
 
+    private static String mAuthToken;
+
     private WeCampusApi() {
+    }
+
+    public static void setHeader(Context context) {
+        SharedPreferences sp = context.getSharedPreferences()
+        mAuthToken
     }
 
     /**
@@ -142,6 +149,11 @@ public class WeCampusApi {
             request.setTag(tag);
         }
         requestQueue.add(request);
+    }
+
+    public static void postUpdateAvatar(Object tag, String path, Response.Listener listener,
+                                        Response.ErrorListener errorListener) {
+        Request request = new UploadAvatarRequest()
     }
 
     /**

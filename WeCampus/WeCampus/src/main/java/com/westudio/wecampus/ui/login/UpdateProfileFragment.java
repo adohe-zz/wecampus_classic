@@ -2,16 +2,19 @@ package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by nankonami on 13-9-20.
@@ -22,6 +25,9 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
     private TextView tvSkip;
     private TextView tvAcademy;
+    private ImageView ivAvatar;
+
+    private String mStrImgLocalPath;
 
     public static UpdateProfileFragment newInstance(Bundle bundle) {
         UpdateProfileFragment fragment = new UpdateProfileFragment();
@@ -59,6 +65,8 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         tvAcademy.setText("学        院");
         tvSkip = (TextView)view.findViewById(R.id.rege_step_two_skip);
         tvSkip.setOnClickListener(this);
+        ivAvatar = (ImageView) view.findViewById(R.id.rege_step_two_avatar);
+        ivAvatar.setOnClickListener(this);
 
         return view;
     }
@@ -79,6 +87,18 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 activity.finish();
                 break;
             }
+            case R.id.rege_step_two_avatar: {
+                ((AuthActivity)getActivity()).doPickPhotoAction();
+                break;
+            }
         }
+    }
+
+    public void setCropedAvatarImage(Bundle bundle) {
+        Bitmap bmAvatar = bundle.getParcelable("cropedImage");
+        mStrImgLocalPath = bundle.getString("imagePath");
+        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(bmAvatar));
+        //TODO fire an upload image request
+
     }
 }
