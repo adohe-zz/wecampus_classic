@@ -50,7 +50,7 @@ public class UsersListFragment extends BaseFragment {
         ArrayList<User> users = new ArrayList<User>();
         for (int i = 0; i < 36; i++) {
             User u = new User();
-            u.Name = name.charAt(i >= name.length() ? name.length() - 1 : i) + "aldjfaldkj";
+            u.name = name.charAt(i >= name.length() ? name.length() - 1 : i) + "aldjfaldkj";
             users.add(u);
         }
 
@@ -59,7 +59,7 @@ public class UsersListFragment extends BaseFragment {
 
             @Override
             public int compare(User user, User user2) {
-                return PinYin.getPinYin(user.Name).compareTo(PinYin.getPinYin(user2.Name));
+                return PinYin.getPinYin(user.name).compareTo(PinYin.getPinYin(user2.name));
             }
         });
 

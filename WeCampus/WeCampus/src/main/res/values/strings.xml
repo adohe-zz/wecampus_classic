@@ -51,7 +51,7 @@
     <string name="rege_step_two_title">注册成功! 你可以先完善一些个人资料</string>
     <string name="rege_step_two_title_two">这些信息会对你的好友开放</string>
     <string name="rege_step_two_true_name">真实姓名</string>
-    <string name="rege_step_two_academy">学    院</string>
+    <string name="rege_step_two_birthday">生   日</string>
     <string name="rege_step_two_description">个性签名</string>
 
     <!-- Activity Detail Part -->
