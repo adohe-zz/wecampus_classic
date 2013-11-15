@@ -145,6 +145,42 @@ public class WeCampusApi {
     }
 
     /**
+     * JOIN ACTIVITY
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void joinActivityWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * QUIT ACTIVITY
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void quitActivityWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
      * Get school list
      * @param tag
      * @param page

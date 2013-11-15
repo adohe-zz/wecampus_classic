@@ -18,6 +18,7 @@ import java.io.IOException;
  * Created by jam on 13-11-14.
  */
 public class UploadAvatarRequest extends AuthedGsonRequest<Void>{
+
     private String mImagePath;
     private MultipartEntity mEntity = new MultipartEntity();
 
