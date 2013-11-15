@@ -216,6 +216,14 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void postUpdateProfile(Object tag, User user, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new UpdateProfileRequest(user, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     /**
      * Request Image from network
      * @param imageUrl

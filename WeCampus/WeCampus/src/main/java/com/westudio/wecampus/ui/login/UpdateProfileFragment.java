@@ -29,7 +29,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     private Activity activity;
 
     private TextView tvSkip;
-    private TextView tvAcademy;
     private ImageView ivAvatar;
     private ProgressDialog progressDialog;
     private String mStrImgLocalPath;
@@ -66,8 +65,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register_two, container, false);
 
-        tvAcademy = (TextView)view.findViewById(R.id.rege_step_two_tv_academy);
-        tvAcademy.setText("学        院");
         tvSkip = (TextView)view.findViewById(R.id.rege_step_two_skip);
         tvSkip.setOnClickListener(this);
         ivAvatar = (ImageView) view.findViewById(R.id.rege_step_two_avatar);

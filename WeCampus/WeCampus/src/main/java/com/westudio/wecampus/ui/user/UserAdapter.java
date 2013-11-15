@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.util.PinYin;
-import com.woozzu.android.util.StringMatcher;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(getItem(position).Name);
+        holder.name.setText(getItem(position).name);
 
         return convertView;
     }
@@ -65,13 +64,13 @@ public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
             for (int j = 0; j < getCount(); j++) {
                 if (i == 0) {
                     // not English nor Chinese
-                    char c = getItem(j).Name.charAt(0);
+                    char c = getItem(j).name.charAt(0);
                     if ((c < 19968 && c > 171941) && (c < 'a' && c > 'z')
                             && (c < 'A' && c > 'Z')) {
                         return j;
                     }
                 } else {
-                    if (PinYin.match(String.valueOf(getItem(j).Name.charAt(0)),
+                    if (PinYin.match(String.valueOf(getItem(j).name.charAt(0)),
                             mSections.charAt(i))) {
                         return j;
                     }
