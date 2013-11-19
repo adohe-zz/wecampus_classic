@@ -36,6 +36,7 @@ dependencies {
     compile project(':extras:IndexableListView')
     compile project(':extras:ViewPagerIndicator')
     compile project(':extras:ParallaxScrollView')
+    compile project(':extras:PhotoView')
 }
 
 tasks.withType(Compile) {
