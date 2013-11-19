@@ -260,6 +260,27 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void postJoinActivity(Object tag, int id, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.POST,
+                HttpUtil.URL_GET_ACTIVITY_LIST + "/" + id,
+                Activity.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void postLikeActivity(Object tag, int id, boolean like, Response.Listener listener, Response.ErrorListener errorListener) {
+        StringBuilder sb = new StringBuilder(HttpUtil.URL_GET_ACTIVITIES);
+        sb.append('/').append("id").append('/').append(like ? "like" : "dislike");
+        Request request = new AuthedGsonRequest(Request.Method.POST, sb.toString(),
+                Activity.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     /**
      * Request Image from network
      * @param imageUrl

@@ -19,25 +19,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
                     <ViewStub
                         android:id="@id/view_stub"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"/>
 
                     <!-- This Blank Layout Resolve the Conflict with the bottom action bar-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:visibility="gone"
-                        tools:ignore="UselessLeaf,Orientation" >
-                    </LinearLayout>
+                        android:layout_below="@id/view_stub"/>
 
-                </LinearLayout>
+                </RelativeLayout>
 
             </com.westudio.wecampus.ui.view.ScrollViewWithVP>
 
@@ -62,21 +60,29 @@
 
             <LinearLayout
                 android:id="@id/bottom_bar_attend"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical">
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/selectable_background_we">
 
                 <ImageView
+                    android:id="@+id/ic_activity_join"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:src="@drawable/ic_activity_participate"
-                    android:layout_marginLeft="35dp"
                     android:contentDescription="@string/imageDescription"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_join"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:text="@string/want_to_attend"
@@ -94,22 +100,30 @@
 
             <LinearLayout
                 android:id="@id/bottom_bar_like"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:background="@drawable/selectable_background_we">
 
                 <ImageView
+                    android:id="@+id/ic_activity_like"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="35dp"
                     android:src="@drawable/ic_activity_like_un"
                     android:contentDescription="@string/imageDescription" />
 
+                <ProgressBar
+                    android:id="@+id/progress_like"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="@string/detail_like"
                     style="@style/DetailBottomText">

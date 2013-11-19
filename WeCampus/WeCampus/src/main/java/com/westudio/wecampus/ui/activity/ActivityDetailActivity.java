@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
@@ -21,8 +24,7 @@ import com.westudio.wecampus.ui.base.BaseDetailActivity;
  * Created by nankonami on 13-10-4.
  * Activity that display the detail of activity
  */
-public class ActivityDetailActivity extends BaseDetailActivity {
-
+public class ActivityDetailActivity extends BaseDetailActivity{
     private static final int[] IMG_IDS = {R.drawable.detail_pager_img, R.drawable.detail_pager_img_two};
 
     //Widgets
@@ -35,13 +37,13 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
-    private LinearLayout barAttend;
-    private LinearLayout barLike;
 
     ActivityDataHelper dataHelper;
 
     private int activityId = -1;
     private Activity activity;
+    private JoinHandler joinHandler;
+    private LikeHandler likeHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +88,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
         showBottomActionBar();
 
-        barAttend = (LinearLayout)findViewById(R.id.bottom_bar_attend);
-        barAttend.setOnClickListener(new ClickListener());
-        barLike = (LinearLayout)findViewById(R.id.bottom_bar_like);
-        barLike.setOnClickListener(new ClickListener());
+        joinHandler = new JoinHandler(this);
+        likeHandler = new LikeHandler(this);
     }
 
     private void updateActionBar() {
@@ -140,11 +140,83 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.bottom_bar_attend) {
 
-            } else if(v.getId() == R.id.bottom_bar_like) {
+        }
+    }
 
-            }
+    private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener{
+        private  android.app.Activity ac;
+        ProgressBar progressBar;
+        ImageView icon;
+        LinearLayout container;
+
+        public JoinHandler(android.app.Activity activity) {
+            this.ac = activity;
+            progressBar = (ProgressBar) ac.findViewById(R.id.progress_join);
+            icon = (ImageView) ac.findViewById(R.id.ic_activity_join);
+            container = (LinearLayout) ac.findViewById(R.id.bottom_bar_attend);
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    join();
+                }
+            });
+        }
+
+        public void join() {
+            progressBar.setVisibility(View.VISIBLE);
+            icon.setVisibility(View.GONE);
+            WeCampusApi.postJoinActivity(ActivityDetailActivity.this, activity.getId(), this, this);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            progressBar.setVisibility(View.GONE);
+            icon.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onResponse(Activity activity) {
+            container.setVisibility(View.GONE);
+        }
+    }
+
+    private class LikeHandler implements Response.Listener<Activity>, Response.ErrorListener{
+        private  android.app.Activity ac;
+        boolean like;
+        ProgressBar progressBar;
+        ImageView icon;
+        LinearLayout container;
+
+        public LikeHandler(android.app.Activity activity) {
+            this.ac = activity;
+            progressBar = (ProgressBar) ac.findViewById(R.id.progress_like);
+            icon = (ImageView) ac.findViewById(R.id.ic_activity_like);
+            container = (LinearLayout) ac.findViewById(R.id.bottom_bar_like);
+
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changeLikeState();
+                }
+            });
+        }
+
+        public void changeLikeState() {
+            progressBar.setVisibility(View.VISIBLE);
+            icon.setVisibility(View.GONE);
+            WeCampusApi.postLikeActivity(ActivityDetailActivity.this, activity.getId(), like, this, this);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            progressBar.setVisibility(View.GONE);
+            icon.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onResponse(Activity activity) {
+
         }
     }
 }
