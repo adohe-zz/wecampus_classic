@@ -103,6 +103,10 @@
             android:label="@string/search">
         </activity>
 
+        <!-- ImageDetailActivity -->
+        <activity
+            android:name=".ui.base.ImageDetailActivity" />
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

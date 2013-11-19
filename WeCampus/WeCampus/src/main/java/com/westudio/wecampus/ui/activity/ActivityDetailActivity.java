@@ -19,6 +19,7 @@ import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
+import com.westudio.wecampus.ui.base.ImageDetailActivity;
 
 /**
  * Created by nankonami on 13-10-4.
@@ -82,9 +83,10 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         tvCompany.setText(activity.getSponsor_name());
         tvContent.setText(activity.getDescription());
 
-        Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+        Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
         WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
+        ivPoster.setOnClickListener(clickListener);
 
         showBottomActionBar();
 
@@ -136,13 +138,22 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         startActivity(Intent.createChooser(intent, content));
     }
 
-    private class ClickListener implements View.OnClickListener {
+    private View.OnClickListener clickListener =  new View.OnClickListener() {
 
         @Override
-        public void onClick(View v) {
-
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.detail_img_poster: {
+                    Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
+                    intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.getImage());
+                    startActivity(intent);
+                    break;
+                }
+            }
         }
-    }
+    };
+
+
 
     private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener{
         private  android.app.Activity ac;
