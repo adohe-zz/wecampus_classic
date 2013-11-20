@@ -35,7 +35,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  * Fragment that display the activity list
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
-        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityRequestData> {
+        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityListRequestData> {
     public static final String ACTIVITY_ID = "activity_id";
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
@@ -112,7 +112,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, ActivityDetailActivity.class);
                 Activity ac = (Activity) mAdapter.getItem(position);
-                intent.putExtra(ACTIVITY_ID, ac.getId());
+                intent.putExtra(ACTIVITY_ID, ac.id);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
             }
@@ -192,11 +192,11 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     }
 
     @Override
-    public void onResponse(final Activity.ActivityRequestData activityRequestData) {
+    public void onResponse(final Activity.ActivityListRequestData activityListRequestData) {
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
-                mDataHelper.bulkInsert(activityRequestData.getObjects());
+                mDataHelper.bulkInsert(activityListRequestData.getObjects());
                 return null;
             }
 

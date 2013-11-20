@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-10-4.
@@ -30,6 +32,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
 
     //Widgets
     private TextView tvOrg;
+    private ImageView ivOrgAvatar;
     private TextView tvTitle;
     private TextView tvTime;
     private TextView tvLocation;
@@ -45,6 +48,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
     private Activity activity;
     private JoinHandler joinHandler;
     private LikeHandler likeHandler;
+    private ActivityDetailUpdater updater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
 
     private void initWidget() {
         tvOrg = (TextView)findViewById(R.id.detail_tv_organization);
+        ivOrgAvatar = (ImageView) findViewById(R.id.detail_org_avatar);
         tvTitle = (TextView)findViewById(R.id.detail_tv_title);
         tvTime = (TextView)findViewById(R.id.detail_tv_time);
         tvLocation = (TextView)findViewById(R.id.detail_tv_location);
@@ -76,20 +81,24 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
-        tvTitle.setText(activity.getTitle());
-        tvLocation.setText(activity.getLocation());
-        tvTag.setText(activity.getCategory());
-        tvTicket.setText(activity.getLocation());
-        tvCompany.setText(activity.getSponsor_name());
-        tvContent.setText(activity.getDescription());
+        tvTitle.setText(activity.title);
+        tvLocation.setText(activity.location);
+        tvTag.setText(activity.category);
+        tvTicket.setText(activity.location);
+        tvCompany.setText(activity.sponsor_name);
+        tvContent.setText(activity.description);
 
         Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-        WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(ivPoster,
+        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
 
         showBottomActionBar();
 
+        updateExtraUi();
+
+        updater = new ActivityDetailUpdater();
+        updater.fetchActivityDetail();
         joinHandler = new JoinHandler(this);
         likeHandler = new LikeHandler(this);
     }
@@ -105,6 +114,29 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         inflater.inflate(R.menu.detail_menu, menu);
         return true;
     }*/
+
+    private void updateExtraUi() {
+        if (activity.organization != null) {
+            tvOrg.setText(activity.organization.getName());
+            Drawable defaultOrgAvatar = getResources().getDrawable(R.drawable.detail_organization);
+            WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivOrgAvatar,
+                    defaultOrgAvatar, defaultOrgAvatar));
+        }
+
+        if (activity.have_ticket) {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.detail_tv_ticket)).setText(activity.ticket_service);
+        } else {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.GONE);
+        }
+
+        if (activity.have_sponsor) {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.detail_rl_sponsor)).setText(activity.sponsor_name);
+        } else {
+            findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -145,7 +177,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
             switch (view.getId()) {
                 case R.id.detail_img_poster: {
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
-                    intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.getImage());
+                    intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
                     startActivity(intent);
                     break;
                 }
@@ -177,7 +209,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         public void join() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postJoinActivity(ActivityDetailActivity.this, activity.getId(), this, this);
+            WeCampusApi.postJoinActivity(ActivityDetailActivity.this, activity.id, this, this);
         }
 
         @Override
@@ -216,7 +248,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         public void changeLikeState() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postLikeActivity(ActivityDetailActivity.this, activity.getId(), like, this, this);
+            WeCampusApi.postLikeActivity(ActivityDetailActivity.this, activity.id, like, this, this);
         }
 
         @Override
@@ -228,6 +260,32 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         @Override
         public void onResponse(Activity activity) {
 
+        }
+    }
+
+    private class ActivityDetailUpdater implements Response.Listener<Activity.ActivityRequestData>, Response.ErrorListener{
+
+        public void fetchActivityDetail() {
+            WeCampusApi.getActivityDetail(ActivityDetailActivity.this, activity.id, this, this);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            //TODO fetch activity failed
+        }
+
+        @Override
+        public void onResponse(final Activity.ActivityRequestData data) {
+            Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                @Override
+                protected Object doInBackground(Object... objects) {
+                    dataHelper.update(data.objects);
+                    return null;
+                }
+            });
+
+            activity = data.objects;
+            updateExtraUi();
         }
     }
 }

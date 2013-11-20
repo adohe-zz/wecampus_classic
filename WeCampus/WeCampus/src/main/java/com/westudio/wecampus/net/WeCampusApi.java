@@ -81,7 +81,19 @@ public class WeCampusApi {
                 Response.ErrorListener errorListener) {
         Bundle bundle = getBundle();
 
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.URL_GET_ACTIVITIES, Activity.ActivityRequestData.class,
+        Request request = new GsonRequest<Activity.ActivityListRequestData>(Request.Method.GET, HttpUtil.URL_GET_ACTIVITIES, Activity.ActivityListRequestData.class,
+                listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void getActivityDetail(Object tag, int id, Response.Listener listener,
+                                         Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
+                HttpUtil.URL_GET_ACTIVITIES + "/" + id, Activity.ActivityRequestData.class,
                 listener, errorListener);
 
         if(tag != null) {
@@ -99,7 +111,7 @@ public class WeCampusApi {
      */
     public static void getActivityById(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL),
+        Request request = new GsonRequest<Activity.ActivityListRequestData>(Request.Method.GET, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL),
                 listener, errorListener);
 
         if(tag != null) {
@@ -117,7 +129,7 @@ public class WeCampusApi {
      */
     public static void likeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
+        Request request = new AuthedGsonRequest<Activity.ActivityListRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
                 listener, errorListener);
 
         if(tag != null) {
@@ -135,7 +147,7 @@ public class WeCampusApi {
      */
     public static void disLikeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
+        Request request = new AuthedGsonRequest<Activity.ActivityListRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
                 listener, errorListener);
 
         if(tag != null) {
@@ -153,7 +165,7 @@ public class WeCampusApi {
      */
     public static void joinActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
+        Request request = new AuthedGsonRequest<Activity.ActivityListRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
                 listener, errorListener);
 
         if(tag != null) {
@@ -171,7 +183,7 @@ public class WeCampusApi {
      */
     public static void quitActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
+        Request request = new AuthedGsonRequest<Activity.ActivityListRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
                 listener, errorListener);
 
         if(tag != null) {

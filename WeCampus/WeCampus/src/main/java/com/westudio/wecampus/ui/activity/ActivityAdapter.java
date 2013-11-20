@@ -59,13 +59,13 @@ public class ActivityAdapter extends CursorAdapter {
                 + mListView.getHeaderViewsCount()));
 
         Activity activity = Activity.fromCursor(cursor);
-        holder.imageRequest = WeCampusApi.requestImage(activity.getImage(), WeCampusApi.getImageListener(holder.imageView,
+        holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
-        holder.text_title.setText(activity.getTitle());
-        holder.text_time.setText(activity.getBegin());
-        holder.text_location.setText(activity.getLocation());
-        holder.text_tag.setText(activity.getCategory());
-        holder.text_like.setText(String.valueOf(activity.getCount_of_fans()));
+        holder.text_title.setText(activity.title);
+        holder.text_time.setText(activity.begin);
+        holder.text_location.setText(activity.location);
+        holder.text_tag.setText(activity.category);
+        holder.text_like.setText(String.valueOf(activity.count_of_fans));
 
     }
 

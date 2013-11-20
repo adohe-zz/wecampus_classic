@@ -16,7 +16,6 @@
             android:id="@id/detail_tv_title"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="20dp"
-            android:text="普华永道中天会计事务所(特殊普通入伙)招聘宣讲会"
             style="@style/DetailTextTitle" />
 
         <ImageView
@@ -37,7 +36,6 @@
             android:id="@id/detail_tv_time"
             android:layout_below="@id/detail_tv_title"
             android:layout_toRightOf="@id/detail_img_poster"
-            android:text="9:00-11:00 9/21"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:drawableLeft="@drawable/detail_time"
@@ -51,9 +49,10 @@
             android:layout_below="@id/detail_tv_time"
             android:layout_alignLeft="@id/detail_tv_time"
             android:layout_marginTop="10dp"
-            android:text="同济大学四平路校区"
             android:drawableLeft="@drawable/detail_location"
             android:drawablePadding="5dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             style="@style/DetailTextView" />
 
         <TextView
@@ -63,16 +62,15 @@
             android:layout_below="@id/detail_tv_location"
             android:layout_alignLeft="@id/detail_tv_time"
             android:layout_marginTop="10dp"
-            android:text="企业招聘"
             android:drawableLeft="@drawable/detail_tag"
             android:drawablePadding="5dp"
             style="@style/DetailTextView" />
 
     </RelativeLayout>
 
-    <!-- The Second Part -->
+    <!-- The Ticket Part -->
     <RelativeLayout
-        android:id="@id/detail_part_two"
+        android:id="@+id/detail_part_ticket"
         android:layout_below="@id/detail_brief_part"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +85,6 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="可以在xxx领票"
             android:drawableLeft="@drawable/detail_ticket"
             android:drawablePadding="5dp"
             style="@style/DetailTextTicket"/>
@@ -100,7 +97,7 @@
             android:background="@color/divider_bg" />
 
         <RelativeLayout
-            android:id="@id/detail_rl_org"
+            android:id="@+id/detail_rl_sponsor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -112,7 +109,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="可口可乐公司"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/detail_company"
@@ -154,16 +150,23 @@
             style="@style/DetailTextPartTitle">
         </TextView>
 
+        <ImageView
+            android:id="@+id/detail_org_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/detail_org_tips"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/detail_organization"/>
+
         <TextView
             android:id="@id/detail_tv_organization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/detail_org_tips"
+            android:layout_toRightOf="@id/detail_org_avatar"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:text="WeCampus团队"
-            android:drawableLeft="@drawable/detail_organization"
-            android:drawablePadding="7dp"
+            android:layout_marginLeft="7dp"
             style="@style/DetailTextOrg" />
 
         <ImageView
