@@ -11,6 +11,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
  */
 public class TermsOfUseActivity extends SherlockFragmentActivity {
 
+    private static final String URL = "http://wecampus.net/terms.html";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,7 @@ public class TermsOfUseActivity extends SherlockFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WebView webView = new WebView(this);
-        webView.loadUrl("file:///android_asset/terms_of_use.html");
+        webView.loadUrl(URL);
         setContentView(webView);
     }
 }
