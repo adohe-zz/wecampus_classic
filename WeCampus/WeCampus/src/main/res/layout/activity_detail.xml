@@ -74,20 +74,22 @@
         android:id="@+id/detail_part_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/white">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@id/detail_tv_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="1.3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:drawableLeft="@drawable/detail_ticket"
             android:drawablePadding="5dp"
             android:background="@android:color/white"
+            android:gravity="center_vertical"
             style="@style/DetailTextTicket"
             />
 
@@ -97,7 +99,9 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:layout_below="@id/detail_divider_one">
+            android:clickable="true"
+            android:background="@drawable/selector_activity_detail_section"
+            android:layout_below="@id/detail_tv_ticket">
 
             <TextView
                 android:id="@id/detail_tv_company"
@@ -106,6 +110,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
                 android:drawableLeft="@drawable/detail_company"
                 android:drawablePadding="5dp"
                 style="@style/DetailTextTicket" />
@@ -124,7 +129,7 @@
 
     </RelativeLayout>
 
-    <!-- The Third Part -->
+    <!-- The Organization Part -->
     <RelativeLayout
         android:id="@id/detail_part_three"
         android:layout_width="match_parent"
@@ -132,7 +137,8 @@
         android:layout_marginTop="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@android:color/white">
+        android:clickable="true"
+        android:background="@drawable/selector_activity_detail_section">
 
         <TextView
             android:id="@id/detail_org_tips"
@@ -159,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/detail_org_tips"
             android:layout_toRightOf="@id/detail_org_avatar"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="7dp"
             style="@style/DetailTextOrg" />
 
@@ -175,7 +181,7 @@
 
     </RelativeLayout>
 
-    <!-- The Fourth Part -->
+    <!-- The Participants Part -->
     <RelativeLayout
         android:id="@id/detail_part_four"
         android:layout_width="match_parent"
@@ -183,7 +189,8 @@
         android:layout_marginTop="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@android:color/white">
+        android:clickable="true"
+        android:background="@drawable/selector_activity_detail_section">
 
         <TextView
             android:id="@id/detail_tv_attend_num"
