@@ -151,6 +151,7 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         }
 
         if (activity.have_sponsor) {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.detail_tv_company)).setText(activity.sponsor_name);
         } else {
