@@ -15,6 +15,7 @@ import com.westudio.wecampus.util.Utility;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
@@ -75,10 +76,15 @@ public class GsonRequest<T> extends Request<T> {
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                 JSONObject json = new JSONObject();
-                JSONArray array = new JSONArray(data);
-                json.put("objects", array);
-                Utility.log("response string", data);
-                return Response.success(mGson.fromJson(json.toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
+                Object object = new JSONTokener(data).nextValue();
+                if (object instanceof JSONObject) {
+                    return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
+                } else {
+                    JSONArray array = new JSONArray(data);
+                    json.put("objects", array);
+                    return Response.success(mGson.fromJson(json.toString(), clazz), HttpHeaderParser.parseCacheHeaders(response));
+                }
+
             }
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));

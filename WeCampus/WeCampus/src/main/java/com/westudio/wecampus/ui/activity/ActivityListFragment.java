@@ -35,7 +35,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  * Fragment that display the activity list
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
-        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityListRequestData> {
+        LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityRequestData> {
     public static final String ACTIVITY_ID = "activity_id";
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
@@ -192,7 +192,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     }
 
     @Override
-    public void onResponse(final Activity.ActivityListRequestData activityListRequestData) {
+    public void onResponse(final Activity.ActivityRequestData activityListRequestData) {
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {

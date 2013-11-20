@@ -81,7 +81,7 @@ public class Activity {
         return ac;
     }
 
-    public static class ActivityListRequestData {
+    public static class ActivityRequestData {
 
         private ArrayList<Activity> objects;
 
@@ -94,7 +94,4 @@ public class Activity {
         }
     }
 
-    public static class ActivityRequestData {
-        public Activity objects;
-    }
 }

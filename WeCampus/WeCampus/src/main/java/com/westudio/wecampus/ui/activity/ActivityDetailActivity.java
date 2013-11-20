@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
@@ -137,6 +138,8 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         } else {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
         }
+
+        tvLocation.setText(activity.location);
     }
 
     @Override
@@ -264,28 +267,30 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         }
     }
 
-    private class ActivityDetailUpdater implements Response.Listener<Activity.ActivityRequestData>, Response.ErrorListener{
+    private class ActivityDetailUpdater implements Response.Listener<Activity>, Response.ErrorListener{
 
         public void fetchActivityDetail() {
-            WeCampusApi.getActivityDetail(ActivityDetailActivity.this, activity.id, this, this);
+            WeCampusApi.getActivityById(ActivityDetailActivity.this, activity.id, this, this);
         }
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             //TODO fetch activity failed
+            Toast.makeText(ActivityDetailActivity.this, volleyError.getMessage(), 1).show();
         }
 
         @Override
-        public void onResponse(final Activity.ActivityRequestData data) {
+        public void onResponse(final Activity data) {
             Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
                 @Override
                 protected Object doInBackground(Object... objects) {
-                    dataHelper.update(data.objects);
+                    if (data != null) {
+                        dataHelper.update(data);
+                    }
                     return null;
                 }
             });
-
-            activity = data.objects;
+            activity = data;
             updateExtraUi();
         }
     }
