@@ -19,23 +19,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <ViewStub
                         android:id="@id/view_stub"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_height="wrap_content"/>
 
                     <!-- This Blank Layout Resolve the Conflict with the bottom action bar-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_below="@id/view_stub"/>
+                        android:visibility="gone"
+                        tools:ignore="UselessLeaf,Orientation"/>
 
-                </RelativeLayout>
+                </LinearLayout>
 
             </com.westudio.wecampus.ui.view.ScrollViewWithVP>
 

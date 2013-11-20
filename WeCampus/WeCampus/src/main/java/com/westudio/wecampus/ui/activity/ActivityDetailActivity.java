@@ -28,6 +28,7 @@ import com.westudio.wecampus.util.Utility;
  * Activity that display the detail of activity
  */
 public class ActivityDetailActivity extends BaseDetailActivity{
+
     private static final int[] IMG_IDS = {R.drawable.detail_pager_img, R.drawable.detail_pager_img_two};
 
     //Widgets
