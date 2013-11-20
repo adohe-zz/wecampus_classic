@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -294,8 +293,11 @@ public class ActivityDetailActivity extends BaseDetailActivity{
         }
 
         @Override
-        public void onResponse(Activity activity) {
-
+        public void onResponse(Activity data) {
+            activity = data;
+            icon.setImageDrawable(getResources().getDrawable(activity.can_like ?
+                    R.drawable.ic_activity_like_un : R.drawable.ic_activity_like_sl));
+            updateActivityToDb();
         }
     }
 
@@ -316,11 +318,11 @@ public class ActivityDetailActivity extends BaseDetailActivity{
             activity = data;
             updateExtraUi();
 
-            refreshActivityInDb();
+            updateActivityToDb();
         }
     }
 
-    private void refreshActivityInDb() {
+    private void updateActivityToDb() {
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... objects) {
