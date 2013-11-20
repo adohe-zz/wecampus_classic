@@ -1,6 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <!-- The Brief Part -->
     <RelativeLayout
@@ -71,7 +72,6 @@
     <!-- The Ticket Part -->
     <RelativeLayout
         android:id="@+id/detail_part_ticket"
-        android:layout_below="@id/detail_brief_part"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -82,19 +82,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="1.3dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:drawableLeft="@drawable/detail_ticket"
             android:drawablePadding="5dp"
-            style="@style/DetailTextTicket"/>
-
-        <View
-            android:id="@id/detail_divider_one"
-            android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_below="@id/detail_tv_ticket"
-            android:background="@color/divider_bg" />
+            android:background="@android:color/white"
+            style="@style/DetailTextTicket"
+            />
 
         <RelativeLayout
             android:id="@+id/detail_rl_sponsor"
@@ -134,7 +129,6 @@
         android:id="@id/detail_part_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/detail_part_two"
         android:layout_marginTop="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -186,7 +180,6 @@
         android:id="@id/detail_part_four"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/detail_part_three"
         android:layout_marginTop="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -228,7 +221,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@id/detail_part_five"
-        android:layout_below="@id/detail_part_four"
         android:layout_marginTop="15dp"
         android:background="@android:color/white">
 
@@ -256,4 +248,4 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
