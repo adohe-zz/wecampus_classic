@@ -28,6 +28,7 @@ dependencies {
     compile 'com.github.chrisbanes.actionbarpulltorefresh:extra-abs:0.7.+'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.apache.httpcomponents:httpmime:4.3.1'
     compile files('libs/volley.jar')
     compile project(':extras:ListViewAnimationLib')
     compile project(':extras:IndexableListView')
