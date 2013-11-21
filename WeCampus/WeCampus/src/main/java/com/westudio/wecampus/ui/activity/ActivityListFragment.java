@@ -188,7 +188,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        Utility.log("test", volleyError.getMessage());
+        Utility.log("error", volleyError.getMessage());
     }
 
     @Override

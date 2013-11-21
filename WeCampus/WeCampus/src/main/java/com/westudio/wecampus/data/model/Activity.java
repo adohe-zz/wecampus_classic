@@ -38,10 +38,6 @@ public class Activity {
     public String url;
     public Organization organization;
 
-    public static Activity fromJson(String json) {
-        return new Gson().fromJson(json, Activity.class);
-    }
-
     private static void addToCache(Activity activity) {
         CACHE.put(activity.id, activity);
     }

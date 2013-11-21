@@ -38,9 +38,9 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.END, activity.end);
         values.put(ActivityDBInfo.TITLE, activity.title);
         if (activity.organization != null) {
-            values.put(ActivityDBInfo.LOCATION, activity.organization.getId());
+            values.put(ActivityDBInfo.ORGANIZATION_ID, activity.organization.getId());
         }
-        values.put(ActivityDBInfo.ORGANIZATION_ID, activity.organization_id);
+        values.put(ActivityDBInfo.LOCATION, activity.location);
         values.put(ActivityDBInfo.CATEGORY, activity.category);
         values.put(ActivityDBInfo.SPONSOR_NAME, activity.sponsor_name);
         values.put(ActivityDBInfo.SPONSOR_URL, activity.sponsor_url);

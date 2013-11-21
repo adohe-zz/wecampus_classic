@@ -21,12 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:paddingLeft="15dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:paddingRight="15dp"
-        android:background="@drawable/tag_background"
         android:textIsSelectable="false"
         style="@style/ActivityTagStyle" />
 
@@ -39,7 +38,8 @@
         android:layout_marginTop="6dp"
         android:layout_below="@id/activity_list_item_image"
         android:singleLine="true"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        style="@style/ActivityListTitle"/>
 
     <TextView
         android:id="@id/activity_list_item_time"
@@ -47,15 +47,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_below="@id/activity_list_item_title"
-        android:layout_alignLeft="@id/activity_list_item_title" />
+        android:drawableLeft="@drawable/ic_list_activity_time"
+        android:drawablePadding="5dp"
+        android:layout_alignLeft="@id/activity_list_item_title"
+        style="@style/ActivityListTextView"/>
 
     <TextView
         android:id="@id/activity_list_item_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:layout_marginRight="35dp"
         android:layout_below="@id/activity_list_item_time"
-        android:layout_alignLeft="@id/activity_list_item_title" />
+        android:drawableLeft="@drawable/ic_list_activity_location"
+        android:drawablePadding="5dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_alignLeft="@id/activity_list_item_title"
+        style="@style/ActivityListTextView"/>
 
     <TextView
         android:id="@id/activity_list_item_like"
@@ -64,6 +73,9 @@
         android:layout_marginRight="16dp"
         android:layout_below="@id/activity_list_item_time"
         android:layout_alignBottom="@id/activity_list_item_location"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/ic_list_activity_like_sl"
+        android:drawablePadding="5dp"
+        style="@style/ActivityListTextView"/>
 
 </RelativeLayout>
