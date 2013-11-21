@@ -29,9 +29,6 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/volley.jar')
-    compile files('libs/ormlite-android-4.45.jar')
-    compile files('libs/ormlite-core-4.45.jar')
-    compile files('libs/FlurryAgent.jar')
     compile project(':extras:ListViewAnimationLib')
     compile project(':extras:IndexableListView')
     compile project(':extras:ViewPagerIndicator')
