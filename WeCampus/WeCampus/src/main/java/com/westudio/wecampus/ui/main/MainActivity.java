@@ -2,8 +2,6 @@ package com.westudio.wecampus.ui.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -27,7 +25,6 @@ public class MainActivity extends SherlockFragmentActivity {
     private ActionBarDrawerToggleCompat mDrawerToggle;
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private ContentType mCurrentContent = ContentType.ACTIVITY;
-
 
     public enum ContentType {
         ACTIVITY, USERS, SQUARE, SETTINGS, HOMEPAGE;

@@ -111,4 +111,16 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="ActivityListTitle">
+        <item name="android:textColor">@color/login_textview_bg</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15.5sp</item>
+    </style>
+
+    <style name="ActivityListTextView">
+        <item name="android:textColor">@color/rege_title_color</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

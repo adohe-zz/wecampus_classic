@@ -42,4 +42,10 @@
     <color name="text_color_primary">#3e454d</color>
     <color name="text_color_secondary">#6a6a6a</color>
     <color name="text_color_white">#ffffff</color>
+    
+    <!-- Tag Background Color -->
+    <color name="entertainment_bg_color">#ee6766</color>
+    <color name="lecture_bg_color">#29a089</color>
+    <color name="school_bg_color">#ec984f</color>
+    <color name="company_bg_color">#4498fc</color>
 </resources>

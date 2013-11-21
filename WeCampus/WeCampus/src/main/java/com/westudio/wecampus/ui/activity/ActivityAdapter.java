@@ -17,12 +17,14 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
-import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by martian on 13-9-11.
  */
 public class ActivityAdapter extends CursorAdapter {
+
+    private static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
+
     private LayoutInflater mLayoutInflater;
 
     private ListView mListView;
@@ -59,10 +61,14 @@ public class ActivityAdapter extends CursorAdapter {
                 + mListView.getHeaderViewsCount()));
 
         Activity activity = Activity.fromCursor(cursor);
-        holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
+        if(activity.image.equals(IMAGE_NOT_FOUND)) {
+            holder.imageView.setVisibility(View.GONE);
+        } else {
+            holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
+        }
         holder.text_title.setText(activity.title);
-        holder.text_time.setText(activity.begin);
+        holder.text_time.setText("9:00-11:00 9/21(周三)");
         holder.text_location.setText(activity.location);
         holder.text_tag.setText(activity.category);
         holder.text_like.setText(String.valueOf(activity.count_of_fans));
