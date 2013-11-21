@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@id/login_tv_email"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@string/input_email"
                 android:layout_weight="1"
@@ -31,7 +31,7 @@
                 style="@style/LoginTextView"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:id="@id/login_edt_email"
@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@id/login_tv_pwd"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@string/input_pwd"
                 android:layout_weight="1"
@@ -64,7 +64,7 @@
                 style="@style/LoginTextView" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:id="@id/login_edt_pwd"

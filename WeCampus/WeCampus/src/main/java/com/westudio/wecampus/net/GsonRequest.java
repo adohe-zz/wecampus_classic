@@ -53,26 +53,12 @@ public class GsonRequest<T> extends Request<T> {
         this.errorListener = errorListener;
     }
 
-    /**
-     * @param method
-     * @param url
-     * @param successListener
-     * @param errorListener
-     */
-    public GsonRequest(int method, String url, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(method, url, errorListener);
-
-        this.mGson = new Gson();
-        this.listener = successListener;
-        this.errorListener = errorListener;
-    }
-
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         Utility.log("statuscode", response.statusCode);
         try {
             if(response.statusCode != 200) {
-                return Response.error(new VolleyError("Network Error"));
+                return Response.error(new VolleyError(response));
             } else {
                 String data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                 JSONObject json = new JSONObject();

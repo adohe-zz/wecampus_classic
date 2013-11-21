@@ -7,8 +7,6 @@ import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.AccountManager;
 
 /**
@@ -50,7 +48,6 @@ public class BaseApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        OpenHelperManager.releaseHelper();
     }
 
     @Override

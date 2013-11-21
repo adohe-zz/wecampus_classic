@@ -5,6 +5,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.util.HttpUtil;
 
 import org.apache.http.entity.mime.MultipartEntity;
@@ -13,17 +14,18 @@ import org.apache.http.entity.mime.content.FileBody;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by jam on 13-11-14.
  */
-public class UploadAvatarRequest extends AuthedGsonRequest<Void>{
+public class UploadAvatarRequest extends AuthedGsonRequest<User>{
 
     private String mImagePath;
     private MultipartEntity mEntity = new MultipartEntity();
 
     public UploadAvatarRequest(String imagePath, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(Method.POST, HttpUtil.URL_POST_PROFILE_AVATAR, successListener, errorListener);
+        super(Method.POST, HttpUtil.URL_POST_PROFILE_AVATAR, User.class, successListener, errorListener);
         mImagePath = imagePath;
     }
 
@@ -34,7 +36,7 @@ public class UploadAvatarRequest extends AuthedGsonRequest<Void>{
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        mEntity.addPart("image", new FileBody(new File(mImagePath), "image/*"));
+        mEntity.addPart("image", new FileBody(new File(mImagePath)));
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {
@@ -46,10 +48,17 @@ public class UploadAvatarRequest extends AuthedGsonRequest<Void>{
     }
 
     @Override
-    protected Response<Void> parseNetworkResponse(NetworkResponse response) {
+    protected Response<User> parseNetworkResponse(NetworkResponse response) {
         if(response.statusCode != 200) {
             return Response.error(new VolleyError("Network Error"));
         }
-        return Response.success(null, HttpHeaderParser.parseCacheHeaders(response));
+        String data = null;
+        try {
+            data = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return Response.success(mGson.fromJson(data, clazz), HttpHeaderParser.parseCacheHeaders(response));
     }
 }

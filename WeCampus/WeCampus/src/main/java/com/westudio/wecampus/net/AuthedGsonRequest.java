@@ -18,17 +18,13 @@ public class AuthedGsonRequest<T> extends GsonRequest<T> {
         super(method, url, clazz, successListener, errorListener);
     }
 
-    public AuthedGsonRequest(int method, String url, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(method, url, successListener, errorListener);
-    }
-
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
 
-        if(BaseApplication.getInstance().hasAccount) {
+//        if(BaseApplication.getInstance().hasAccount) {
             headers.put(AUTH_TOKEN_KEY, BaseApplication.getInstance().getAccountMgr().getToken());
-        }
+//        }
 
         return headers;
     }

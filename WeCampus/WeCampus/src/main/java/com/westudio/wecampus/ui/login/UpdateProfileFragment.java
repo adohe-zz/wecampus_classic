@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +18,9 @@ import com.actionbarsherlock.app.ActionBar;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.util.ImageUtil;
@@ -24,7 +28,7 @@ import com.westudio.wecampus.util.ImageUtil;
 /**
  * Created by nankonami on 13-9-20.
  */
-public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener, Response.Listener<Void>, Response.ErrorListener {
+public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener{
 
     private Activity activity;
 
@@ -32,6 +36,10 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     private ImageView ivAvatar;
     private ProgressDialog progressDialog;
     private String mStrImgLocalPath;
+    private Button btnSubmit;
+
+    private AvatarUpdateHandler avatarHandler = new AvatarUpdateHandler();
+    private ProfileUpdateHandler profileUpdateHandler;
 
     public static UpdateProfileFragment newInstance(Bundle bundle) {
         UpdateProfileFragment fragment = new UpdateProfileFragment();
@@ -69,7 +77,10 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         tvSkip.setOnClickListener(this);
         ivAvatar = (ImageView) view.findViewById(R.id.rege_step_two_avatar);
         ivAvatar.setOnClickListener(this);
+        btnSubmit = (Button) view.findViewById(R.id.rege_step_two_submit);
+        btnSubmit.setOnClickListener(this);
 
+        profileUpdateHandler = new ProfileUpdateHandler(getActivity(), view);
         return view;
     }
 
@@ -93,6 +104,9 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 ((AuthActivity)getActivity()).doPickPhotoAction();
                 break;
             }
+            case R.id.rege_step_two_submit: {
+                profileUpdateHandler.uploadProfile();
+            }
         }
     }
 
@@ -102,21 +116,65 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(bmAvatar));
 
         // fire an upload image request
-        WeCampusApi.postUpdateAvatar(getActivity(), mStrImgLocalPath, this, this);
+        WeCampusApi.postUpdateAvatar(getActivity(), mStrImgLocalPath, avatarHandler, avatarHandler);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getString(R.string.please_wait));
         progressDialog.show();
     }
 
-    @Override
-    public void onErrorResponse(VolleyError volleyError) {
-        progressDialog.dismiss();
-        Toast.makeText(getActivity(), R.string.upload_fail, Toast.LENGTH_SHORT).show();
+    private class AvatarUpdateHandler implements Response.Listener<Void>, Response.ErrorListener {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            progressDialog.dismiss();
+            Toast.makeText(getActivity(), R.string.upload_fail, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(Void aVoid) {
+            progressDialog.dismiss();
+            Toast.makeText(getActivity(), R.string.upload_success, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    @Override
-    public void onResponse(Void aVoid) {
-        progressDialog.dismiss();
-        Toast.makeText(getActivity(), R.string.upload_success, Toast.LENGTH_SHORT).show();
+    private class ProfileUpdateHandler implements Response.Listener<Void>, Response.ErrorListener {
+        private EditText etRealName;
+        private EditText etWords;
+        private Activity _activity;
+
+        public ProfileUpdateHandler(Activity activity, View v) {
+            etRealName = (EditText) v.findViewById(R.id.rege_step_two_true_name);
+            etWords = (EditText) v.findViewById(R.id.rege_step_two_description);
+            this._activity = activity;
+        }
+
+        public void uploadProfile() {
+            String realName = etRealName.getText().toString();
+            String words = etWords.getText().toString();
+            if (realName.length() != 0 || words.length() != 0) {
+                User user = new User();
+                user.id = ((BaseApplication) _activity.getApplication()).getAccountMgr().getUserId();
+                user.name = realName;
+                user.words = words;
+                progressDialog = new ProgressDialog(_activity);
+                progressDialog.show();
+                WeCampusApi.postUpdateProfile(_activity, user, this, this);
+            } else {
+                // 什么都没输入的情况
+            }
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            progressDialog.dismiss();
+            Toast.makeText(getActivity(), R.string.upload_fail, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(Void aVoid) {
+            progressDialog.dismiss();
+            startActivity(new Intent(activity, MainActivity.class));
+            activity.finish();
+        }
     }
+
 }

@@ -118,8 +118,9 @@ public class WeCampusApi {
      */
     public static void likeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
-                listener, errorListener);
+        Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
+                Activity.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -136,8 +137,9 @@ public class WeCampusApi {
      */
     public static void disLikeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
-                listener, errorListener);
+        Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
+                Activity.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -154,8 +156,9 @@ public class WeCampusApi {
      */
     public static void joinActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
-                listener, errorListener);
+        Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
+                Activity.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -172,8 +175,9 @@ public class WeCampusApi {
      */
     public static void quitActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.POST, HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
-                listener, errorListener);
+        Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
+                Activity.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

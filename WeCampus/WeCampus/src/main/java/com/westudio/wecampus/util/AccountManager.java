@@ -40,4 +40,9 @@ public class AccountManager {
             return mToken;
         }
     }
+
+    public String getUserId() {
+        SharedPreferences sp = mContext.getSharedPreferences(ACCOUNT_PREFERENCE, Context.MODE_PRIVATE);
+        return sp.getString(PREF_ID, "");
+    }
 }
