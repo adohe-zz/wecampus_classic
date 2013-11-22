@@ -9,6 +9,7 @@
     <item type="id" name="activity_list_item_location">false</item>
     <item type="id" name="activity_list_item_like">false</item>
     <item type="id" name="activity_list_item_image">false</item>
+    <item type="id" name="activity_list_item_summary">false</item>
 
     <!-- Intro Activity -->
     <item type="id" name="intro_image">false</item>
