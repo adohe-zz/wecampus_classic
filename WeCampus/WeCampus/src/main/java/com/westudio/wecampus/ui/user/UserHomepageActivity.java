@@ -25,6 +25,8 @@ public class UserHomepageActivity extends BaseDetailActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homepage);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         listView = (ListView)findViewById(R.id.user_profile_listview);
         View header = new View(this);
         loadingFooter = new LoadingFooter(this);
@@ -36,10 +38,7 @@ public class UserHomepageActivity extends BaseDetailActivity {
         listView.addFooterView(loadingFooter.getView());
         listView.setAdapter(animationAdapter);
 
-        updateActionBar();
     }
 
-    private void updateActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+
 }

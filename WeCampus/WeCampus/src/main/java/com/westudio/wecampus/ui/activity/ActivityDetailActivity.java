@@ -25,6 +25,7 @@ import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
+import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -100,6 +101,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
+
+        findViewById(R.id.detail_part_three).setOnClickListener(clickListener);
 
         showBottomActionBar();
 
@@ -214,6 +217,11 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                 case R.id.detail_img_poster: {
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.detail_part_three: {
+                    Intent intent = new Intent(ActivityDetailActivity.this, OrganizationHomepageActivity.class);
                     startActivity(intent);
                     break;
                 }

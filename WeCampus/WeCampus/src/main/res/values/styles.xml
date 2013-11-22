@@ -125,7 +125,7 @@
 
     <style name="OrgSectionTitle">
         <item name="android:textColor">#3e454d</item>
-        <item name="android:textSize">27sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="OrgSectionText" parent="@style/OrgSectionTitle">

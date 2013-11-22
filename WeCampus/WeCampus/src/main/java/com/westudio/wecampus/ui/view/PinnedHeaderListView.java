@@ -19,6 +19,7 @@ import com.westudio.wecampus.R;
 public class PinnedHeaderListView extends ListView {
 
     private OnHeaderOffScreenListener mHeaderOffScreenListener;
+    private OnTabSelectedListener mTabSelectedListener;
 
     private boolean isHeaderOffScreen;
 
@@ -35,6 +36,12 @@ public class PinnedHeaderListView extends ListView {
 
         /** Callback when the list header is move in screen */
         public void onHeaderInScreen();
+    }
+
+    public interface OnTabSelectedListener {
+        public void onTabOneSelected();
+        public void onTabTwoSelected();
+        public void onTabThreeSelecd();
     }
 
     public PinnedHeaderListView(Context context) {
@@ -58,6 +65,11 @@ public class PinnedHeaderListView extends ListView {
         this.mHeaderOffScreenListener = headerOffScreenListener;
     }
 
+
+    public void setmTabSelectedListener(OnTabSelectedListener mTabSelectedListener) {
+        this.mTabSelectedListener = mTabSelectedListener;
+    }
+
     // Add the
     private void addHeaderView() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -77,16 +89,19 @@ public class PinnedHeaderListView extends ListView {
             @Override
             public void onFirstTabSelected() {
                 mPinnedHeader.setSelected(0, true);
+                mTabSelectedListener.onTabOneSelected();
             }
 
             @Override
             public void onSecondTabSelected() {
                 mPinnedHeader.setSelected(1, true);
+                mTabSelectedListener.onTabTwoSelected();
             }
 
             @Override
             public void onThirdTabSelected() {
                 mPinnedHeader.setSelected(2, true);
+                mTabSelectedListener.onTabThreeSelecd();
             }
         });
 
@@ -98,16 +113,19 @@ public class PinnedHeaderListView extends ListView {
             @Override
             public void onFirstTabSelected() {
                 mHeader.setSelected(0, true);
+                mTabSelectedListener.onTabOneSelected();
             }
 
             @Override
             public void onSecondTabSelected() {
                 mHeader.setSelected(1, true);
+                mTabSelectedListener.onTabTwoSelected();
             }
 
             @Override
             public void onThirdTabSelected() {
                 mHeader.setSelected(2, true);
+                mTabSelectedListener.onTabThreeSelecd();
             }
         });
     }
@@ -137,4 +155,11 @@ public class PinnedHeaderListView extends ListView {
             }
         }
     };
+
+    public void setTabTexts(int res1, int res2, int res3) {
+        if (mPinnedHeader != null) {
+            mPinnedHeader.setTexts(res1, res2, res3);
+        }
+        mHeader.setTexts(res1, res2, res3);
+    }
 }
