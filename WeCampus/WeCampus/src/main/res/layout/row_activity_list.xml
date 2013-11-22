@@ -78,4 +78,14 @@
         android:drawablePadding="5dp"
         style="@style/ActivityListTextView"/>
 
+    <TextView
+        android:id="@id/activity_list_item_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/activity_list_item_location"
+        android:layout_alignLeft="@id/activity_list_item_title"
+        android:ellipsize="true"
+        android:visibility="GONE"
+        style="@style/ActivityListTextView"/>
 </RelativeLayout>
