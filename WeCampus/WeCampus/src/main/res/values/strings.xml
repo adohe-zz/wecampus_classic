@@ -134,4 +134,7 @@
     <string name="upload_success">头像上传成功</string>
     <string name="upload_fail">上传失败</string>
     <string name="register_fail">注册失败</string>
+    <string name="admin">管理员</string>
+    <string name="org_intro">组织介绍</string>
+    <string name="contact_with_mail">邮件联系</string>
 </resources>

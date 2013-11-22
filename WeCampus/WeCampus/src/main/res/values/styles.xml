@@ -123,4 +123,13 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="OrgSectionTitle">
+        <item name="android:textColor">#3e454d</item>
+        <item name="android:textSize">27sp</item>
+    </style>
+
+    <style name="OrgSectionText" parent="@style/OrgSectionTitle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>
