@@ -137,4 +137,6 @@
     <string name="admin">管理员</string>
     <string name="org_intro">组织介绍</string>
     <string name="contact_with_mail">邮件联系</string>
+    <string name="posted_activities">发布的活动</string>
+    <string name="brief_introduction">简单介绍</string>
 </resources>

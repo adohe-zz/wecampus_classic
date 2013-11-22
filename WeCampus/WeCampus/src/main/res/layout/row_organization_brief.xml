@@ -10,6 +10,7 @@
         android:layout_marginTop="9dp"
         android:layout_marginLeft="3.3dp"
         android:layout_marginRight="3.3dp"
+        android:orientation="vertical"
         android:background="@android:color/white">
 
         <TextView
@@ -36,6 +37,7 @@
         android:layout_marginLeft="3.3dp"
         android:layout_marginRight="3.3dp"
         android:layout_marginTop="9dp"
+        android:orientation="vertical"
         android:background="@android:color/white">
 
         <TextView

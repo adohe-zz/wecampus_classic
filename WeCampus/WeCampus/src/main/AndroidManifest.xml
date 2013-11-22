@@ -107,6 +107,9 @@
         <activity
             android:name=".ui.base.ImageDetailActivity" />
 
+        <activity
+            android:name=".ui.organiztion.OrganizationHomepageActivity" />
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

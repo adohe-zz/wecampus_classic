@@ -18,13 +18,15 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="关注他" />
+            android:text="关注他"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="参加的活动"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal" />
 
         <ListView
