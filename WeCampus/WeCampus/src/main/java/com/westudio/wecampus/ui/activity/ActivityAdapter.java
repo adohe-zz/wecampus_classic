@@ -63,6 +63,8 @@ public class ActivityAdapter extends CursorAdapter {
         Activity activity = Activity.fromCursor(cursor);
         if(activity.image.equals(IMAGE_NOT_FOUND)) {
             holder.imageView.setVisibility(View.GONE);
+            holder.text_summary.setVisibility(View.VISIBLE);
+            holder.text_summary.setText(activity.summary);
         } else {
             holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
@@ -94,6 +96,7 @@ public class ActivityAdapter extends CursorAdapter {
         TextView text_time;
         TextView text_location;
         TextView text_like;
+        TextView text_summary;
         ImageLoader.ImageContainer imageRequest;
 
         public ViewHolder(View view) {
@@ -103,6 +106,7 @@ public class ActivityAdapter extends CursorAdapter {
             text_time = (TextView)view.findViewById(R.id.activity_list_item_time);
             text_location = (TextView)view.findViewById(R.id.activity_list_item_location);
             text_like = (TextView)view.findViewById(R.id.activity_list_item_like);
+            text_summary = (TextView)view.findViewById(R.id.activity_list_item_summary);
         }
     }
 }
