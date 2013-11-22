@@ -47,6 +47,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+    private TextView tvNoParticipants;
 
     ActivityDataHelper dataHelper;
 
@@ -85,6 +86,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
+        tvNoParticipants = (TextView)findViewById(R.id.detail_tv_no_people_attend);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
         tvTitle.setText(activity.title);
@@ -102,6 +104,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         showBottomActionBar();
 
         updateExtraUi();
+        setParticipantsPart();
 
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
@@ -123,6 +126,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     }*/
 
     private void updateExtraUi() {
+
+        //If the organization is not null
         if (activity.organization != null) {
             tvOrg.setText(activity.organization.getName());
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
@@ -159,6 +164,14 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
 
         tvLocation.setText(activity.location);
+    }
+
+    private void setParticipantsPart() {
+        if(activity.count_of_participants == 0) {
+            tvNoParticipants.setVisibility(View.VISIBLE);
+        } else {
+
+        }
     }
 
     @Override

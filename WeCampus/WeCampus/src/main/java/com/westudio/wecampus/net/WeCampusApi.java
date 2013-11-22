@@ -18,6 +18,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.Advertisement;
+import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -81,8 +82,9 @@ public class WeCampusApi {
                 Response.ErrorListener errorListener) {
         Bundle bundle = getBundle();
 
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.URL_GET_ACTIVITIES, Activity.ActivityRequestData.class,
-                listener, errorListener);
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
+                HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST),
+                Activity.ActivityRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -182,6 +184,26 @@ public class WeCampusApi {
         if(tag != null) {
             request.setTag(tag);
         }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get Activity Participants with id
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityParticipantsWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<Participants>(Request.Method.GET,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE),
+                Participants.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+
         requestQueue.add(request);
     }
 

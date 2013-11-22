@@ -55,6 +55,7 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.CAN_LIKE, activity.can_like);
         values.put(ActivityDBInfo.HAVE_TICKETS, activity.have_ticket);
         values.put(ActivityDBInfo.URL, activity.url);
+        values.put(ActivityDBInfo.SUMMARY, activity.summary);
         return values;
     }
 
@@ -132,6 +133,7 @@ public class ActivityDataHelper extends BaseDataHelper{
         public static final String CAN_JOIN = "can_join";
         public static final String CAN_LIKE = "can_like";
         public static final String URL = "url";
+        public static final String SUMMARY = "summary";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.DataType.INTEGER)
@@ -153,6 +155,7 @@ public class ActivityDataHelper extends BaseDataHelper{
                 .addColumn(HAVE_TICKETS, Column.DataType.BOOLEAN)
                 .addColumn(CAN_JOIN, Column.DataType.BOOLEAN)
                 .addColumn(CAN_LIKE, Column.DataType.BOOLEAN)
-                .addColumn(URL, Column.DataType.TEXT);
+                .addColumn(URL, Column.DataType.TEXT)
+                .addColumn(SUMMARY, Column.DataType.TEXT);
     }
 }

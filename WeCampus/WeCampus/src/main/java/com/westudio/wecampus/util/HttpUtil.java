@@ -30,8 +30,20 @@ public class HttpUtil {
 
     public static final String URL_PROFILE = "http://api.wecampus.net/v1/profile";
 
+    public static final String HTTP_PROTOCOL = "http://";
+
+    public static final String HOST_NAME = "api.wecampus.net";
+
+    public static final String API_VERSION = "v1";
+
+    public static final String SLASH = "/";
+
+    public static final String BASE_ACTIVITY_PATH = "activities";
+    public static final String BASE_USER_PATH = "";
+    public static final String BASE_ORGANIZATION_PATH = "organizations";
+
     public static enum ActivityOp {
-        DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
+        LIST, DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
     }
 
     /**
@@ -77,8 +89,12 @@ public class HttpUtil {
      * @return
      */
     public static String getActivityByIdWithOp(final int id, ActivityOp activityOp) {
-        StringBuilder sb = new StringBuilder("http://api.wecampus.net/v1/activities/");
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_ACTIVITY_PATH).append(SLASH);
         switch (activityOp) {
+            case LIST:
+                break;
             case DETAIL:
                 sb.append(id);
                 break;
@@ -87,6 +103,18 @@ public class HttpUtil {
                 break;
             case DISLIKE:
                 sb.append(id).append("/dislike");
+                break;
+            case JOIN:
+                sb.append(id).append("/join");
+                break;
+            case QUIT:
+                sb.append(id).append("/quit");
+                break;
+            case FANS:
+                sb.append(id).append("/fans");
+                break;
+            case PARTICIPATE:
+                sb.append(id).append("/participants");
                 break;
         }
 
