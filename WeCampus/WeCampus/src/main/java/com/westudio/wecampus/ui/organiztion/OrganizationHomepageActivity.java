@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.organiztion;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +10,32 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.OrgDataHelper;
+import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.ui.activity.ActivityAdapter;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.ui.view.PinnedHeaderListView;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by martian on 13-11-22.
  */
 public class OrganizationHomepageActivity extends BaseGestureActivity {
+    public static final String ORG_ID = "organization_id";
 
     private PinnedHeaderListView mListView;
     private ActivityAdapter activityAdapter;
     private LoadingFooter loadingFooter;
     private HeaderTabBar mPinnedHeader;
     private IntroAdapter mIntroAdapter;
+    private TestAdapter testAdapter;
+
+    private int mId;
+    private Organization mOrganization;
+    private OrgDataHelper mOrgDataHelper;
+    private OrgQueryTask mOrgQueryTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +43,18 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
         setContentView(R.layout.activity_org_homepage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mId = getIntent().getIntExtra(ORG_ID, -1);
+        mOrgDataHelper = new OrgDataHelper(this);
+
         mPinnedHeader = (HeaderTabBar) findViewById(R.id.pinned_header);
         mListView = (PinnedHeaderListView) findViewById(R.id.listview);
+        registerSwipeToCloseListener(mListView);
         mIntroAdapter = new IntroAdapter(this);
 
         mListView.setmPinnedHeader(mPinnedHeader);
-        mListView.setAdapter(new TestAdapter(this));
+        testAdapter = new TestAdapter(this);
+        mListView.setAdapter(testAdapter);
+
         mListView.setTabTexts(R.string.posted_activities, R.string.brief_introduction, 0);
 
         mListView.setHeaderOffScreenListener(new PinnedHeaderListView.OnHeaderOffScreenListener() {
@@ -55,7 +72,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
         mListView.setmTabSelectedListener(new PinnedHeaderListView.OnTabSelectedListener() {
             @Override
             public void onTabOneSelected() {
-
+                mListView.setAdapter(testAdapter);
             }
 
             @Override
@@ -68,6 +85,23 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
             }
         });
 
+        mOrgQueryTask = new OrgQueryTask();
+        Utility.executeAsyncTask(mOrgQueryTask);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mOrgQueryTask != null) {
+            mOrgQueryTask.cancel(true);
+        }
+    }
+
+    private void updateUI() {
+        mListView.setName(mOrganization.name);
+        mListView.setAvatar(mOrganization.avatar);
+        mIntroAdapter.setData(mOrganization.admin_name, mOrganization.description,
+                mOrganization.admin_url);
     }
 
     public class TestAdapter extends BaseAdapter {
@@ -102,6 +136,20 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
             TextView tv = (TextView) view.findViewById(R.id.user_name);
             tv.setText("NameHahahahhahaah");
             return view;
+        }
+    }
+
+    private class OrgQueryTask extends AsyncTask<Object, Object, Object> {
+
+        @Override
+        protected Object doInBackground(Object... objects) {
+            mOrganization = mOrgDataHelper.query(mId);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            updateUI();
         }
     }
 }

@@ -67,9 +67,9 @@ public class OrgDataHelper extends BaseDataHelper {
         bulkInsert(contentValues.toArray(valueArray));
     }
 
-    public void update(Organization org) {
+    public int update(Organization org) {
         ContentValues values = getContentValues(org);
-        update(values, OrganiztionDBInfo.ID + "= ?", new String[] {
+        return update(values, OrganiztionDBInfo.ID + "= ?", new String[] {
                 String.valueOf(org.id)
         });
     }

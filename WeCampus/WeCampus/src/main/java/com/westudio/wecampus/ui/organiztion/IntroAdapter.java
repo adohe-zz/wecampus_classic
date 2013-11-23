@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.westudio.wecampus.R;
 
@@ -14,9 +15,19 @@ import com.westudio.wecampus.R;
 public class IntroAdapter extends BaseAdapter{
 
     private Context mContext;
+    private String mName;
+    private String mIntroduction;
+    private String mAdminUrl;
 
     public IntroAdapter(Context context) {
         mContext = context;
+    }
+
+    public void setData(String adminName, String intro, String adminUrl) {
+        this.mName = adminName;
+        this.mIntroduction = intro;
+        this.mAdminUrl = adminUrl;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -39,6 +50,8 @@ public class IntroAdapter extends BaseAdapter{
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.row_organization_brief, viewGroup, false);
+        ((TextView)view.findViewById(R.id.org_name)).setText(mName);
+        ((TextView)view.findViewById(R.id.org_intro)).setText(mIntroduction);
         return view;
     }
 }
