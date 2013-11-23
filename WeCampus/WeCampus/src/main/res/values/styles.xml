@@ -123,6 +123,12 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="ActivityListSummary">
+        <item name="android:textColor">@color/login_textview_bg</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12.5sp</item>
+    </style>
+
     <style name="OrgSectionTitle">
         <item name="android:textColor">#3e454d</item>
         <item name="android:textSize">18sp</item>

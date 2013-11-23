@@ -255,7 +255,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         public void join() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postJoinActivity(ActivityDetailActivity.this, activity.id, this, this);
+            WeCampusApi.joinActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
         }
 
         @Override
@@ -305,7 +305,11 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         public void changeLikeState() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postLikeActivity(ActivityDetailActivity.this, activity.id, like, this, this);
+            if(like) {
+                WeCampusApi.likeActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
+            } else {
+                WeCampusApi.disLikeActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
+            }
         }
 
         @Override

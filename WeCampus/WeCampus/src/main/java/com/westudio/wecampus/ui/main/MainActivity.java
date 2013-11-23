@@ -9,8 +9,13 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.model.ActivityCategory;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.square.SquareFragment;
 import com.westudio.wecampus.ui.user.UserHomepageFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
@@ -61,11 +66,13 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
-        Fragment activityFragment = ActivityListFragment.newInstance(null);
+        CategoryHandler handler = new CategoryHandler();
+        requestActivityCategory(handler);
+        /*Fragment activityFragment = ActivityListFragment.newInstance(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
 
         Fragment menuFragment = LeftMenuFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();*/
 
     }
 
@@ -112,5 +119,31 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mDrawerLayout.closeDrawers();
 
+    }
+
+    private void requestActivityCategory(CategoryHandler handler) {
+        WeCampusApi.getActivityCategory(MainActivity.class, handler, handler);
+    }
+
+    private class CategoryHandler implements Response.Listener<ActivityCategory.CategoryRequestData>,
+            Response.ErrorListener {
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+
+        }
+
+        @Override
+        public void onResponse(ActivityCategory.CategoryRequestData categoryRequestData) {
+            for(ActivityCategory category : categoryRequestData.getObjects()) {
+                BaseApplication.categoryMapping.put(category.name, category.color);
+            }
+
+            Fragment activityFragment = ActivityListFragment.newInstance(null);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
+
+            Fragment menuFragment = LeftMenuFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
+        }
     }
 }

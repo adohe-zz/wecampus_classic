@@ -9,6 +9,8 @@ import android.view.Display;
 
 import com.westudio.wecampus.util.AccountManager;
 
+import java.util.HashMap;
+
 /**
  * Created by nankonami on 13-9-7.
  * The singleton application
@@ -26,6 +28,8 @@ public class BaseApplication extends Application {
     public DisplayMetrics displayMetrics;
 
     private AccountManager accountMgr;
+
+    public static final HashMap<String, String> categoryMapping = new HashMap<String, String>();
 
     //The singleton application instance
     private static BaseApplication application = null;

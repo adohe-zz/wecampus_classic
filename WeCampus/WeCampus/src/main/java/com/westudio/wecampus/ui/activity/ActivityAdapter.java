@@ -17,6 +17,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseApplication;
 
 /**
  * Created by martian on 13-9-11.
@@ -73,8 +74,10 @@ public class ActivityAdapter extends CursorAdapter {
         holder.text_time.setText("9:00-11:00 9/21(周三)");
         holder.text_location.setText(activity.location);
         holder.text_tag.setText(activity.category);
+        String color = BaseApplication.categoryMapping.get(activity.category);
+        Drawable drawable = new ColorDrawable(Color.parseColor(color));
+        holder.text_tag.setBackgroundDrawable(drawable);
         holder.text_like.setText(String.valueOf(activity.count_of_fans));
-
     }
 
     private ViewHolder getHolder(final View view) {

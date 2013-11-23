@@ -41,6 +41,7 @@ public class HttpUtil {
     public static final String BASE_ACTIVITY_PATH = "activities";
     public static final String BASE_USER_PATH = "";
     public static final String BASE_ORGANIZATION_PATH = "organizations";
+    public static final String BASE_ACTIVITY_CATEGORY_PATH = "activity_categories";
 
     public static enum ActivityOp {
         LIST, DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
@@ -118,6 +119,17 @@ public class HttpUtil {
                 break;
         }
 
+        return sb.toString();
+    }
+
+    /**
+     * GET REQUEST ACTIVITY CATEGORY URL
+     * @return
+     */
+    public static String getActivityCategory() {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_ACTIVITY_CATEGORY_PATH);
         return sb.toString();
     }
 
