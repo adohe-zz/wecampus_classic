@@ -86,6 +86,6 @@
         android:layout_below="@id/activity_list_item_location"
         android:layout_alignLeft="@id/activity_list_item_title"
         android:ellipsize="end"
-        android:visibility="gone"
         style="@style/ActivityListTextView"/>
+
 </RelativeLayout>
