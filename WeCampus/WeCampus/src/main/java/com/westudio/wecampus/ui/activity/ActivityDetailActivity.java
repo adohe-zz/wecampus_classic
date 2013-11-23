@@ -167,6 +167,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
 
         tvLocation.setText(activity.location);
+        tvContent.setText(activity.description);
     }
 
     private void setParticipantsPart() {
