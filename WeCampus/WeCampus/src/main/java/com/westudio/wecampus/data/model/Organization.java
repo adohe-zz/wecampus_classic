@@ -1,24 +1,28 @@
 package com.westudio.wecampus.data.model;
 
+import android.database.Cursor;
+
+import com.westudio.wecampus.data.OrgDataHelper;
+
 /**
  * Created by nankonami on 13-11-15.
  */
 public class Organization {
 
     //Organization id
-    private int id;
+    public int id;
     //Organization admin email
-    private String admin_url;
+    public String admin_url;
     //Organization admin name
-    private String admin_name;
+    public String admin_name;
     //Organization avatar
-    private String avatar;
+    public String avatar;
     //Count of fans
-    private int count_of_fans;
+    public int count_of_fans;
     //Organization description
-    private String description;
+    public String description;
     //Organization name
-    private String name;
+    public String name;
 
     public Organization(int id, String admin_url, String admin_name, String avatar, String description, int count_of_fans, String name) {
         this.id = id;
@@ -28,6 +32,18 @@ public class Organization {
         this.description = description;
         this.count_of_fans = count_of_fans;
         this.name = name;
+    }
+
+    public static Organization fromCursor(Cursor cursor) {
+        Organization org = new Organization();
+        org.id = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ID));
+        org.admin_name = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ADMIN_NAME));
+        org.admin_url = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ADMIN_URL));
+        org.avatar = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.AVATAR));
+        org.count_of_fans = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.COUNT_OF_FANS));
+        org.description = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.DESCRIPTION));
+        org.name = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.NAME));
+        return org;
     }
 
     public Organization() {

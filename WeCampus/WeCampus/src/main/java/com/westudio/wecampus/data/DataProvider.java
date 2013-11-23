@@ -32,21 +32,25 @@ public class DataProvider extends ContentProvider {
 
     // messages
     public static final String PATH_ACTIVITIES = "activities";
+    public static final String PATH_ORGANIZATIONS = "organizations";
 
     public static final Uri ACTIVITIES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ACTIVITIES);
+    public static final Uri ORGANIZATIONS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ORGANIZATIONS);
 
     private static final int ACTIVITES = 0;
+    private static final int ORGANIZATIONS = 1;
 
     /*
      * MIME type definitions
      */
     public static final String ACTIVITY_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.westudio.shot";
-
+    public static final String ORGANIZATIONS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.westudio.organization";
     private static final UriMatcher sUriMatcher;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(AUTHORITY, PATH_ACTIVITIES, ACTIVITES);
+        sUriMatcher.addURI(AUTHORITY, PATH_ORGANIZATIONS, ORGANIZATIONS);
     }
 
     private static DBHelper mDBHelper;
@@ -63,6 +67,8 @@ public class DataProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case ACTIVITES:
                 return ACTIVITY_CONTENT_TYPE;
+            case ORGANIZATIONS:
+                return ORGANIZATIONS_CONTENT_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -73,6 +79,9 @@ public class DataProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case ACTIVITES:
                 table = ActivityDataHelper.ActivityDBInfo.TABLE_NAME;
+                break;
+            case ORGANIZATIONS:
+                table = OrgDataHelper.OrganiztionDBInfo.TABLE_NAME;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -209,10 +218,13 @@ public class DataProvider extends ContentProvider {
         public void onCreate(SQLiteDatabase db) {
             //TODO create tables here
             ActivityDataHelper.ActivityDBInfo.TABLE.create(db);
+            OrgDataHelper.OrganiztionDBInfo.TABLE.create(db);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         }
+
+
     }
 }
