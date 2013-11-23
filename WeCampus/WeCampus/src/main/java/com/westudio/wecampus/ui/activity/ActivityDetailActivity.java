@@ -51,6 +51,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+    private TextView tvNoParticipants;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -103,6 +104,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
+        tvNoParticipants = (TextView)findViewById(R.id.detail_tv_no_people_attend);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
         showBottomActionBar();
@@ -124,6 +126,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         ivPoster.setOnClickListener(clickListener);
 
         updateExtraUi();
+        setParticipantsPart();
 
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
@@ -145,6 +148,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     }*/
 
     private void updateExtraUi() {
+
+        //If the organization is not null
         if (activity.organization != null) {
             tvOrg.setText(activity.organization.getName());
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
@@ -181,6 +186,15 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
 
         tvLocation.setText(activity.location);
+        tvContent.setText(activity.description);
+    }
+
+    private void setParticipantsPart() {
+        if(activity.count_of_participants == 0) {
+            tvNoParticipants.setVisibility(View.VISIBLE);
+        } else {
+
+        }
     }
 
     @Override
@@ -262,7 +276,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         public void join() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postJoinActivity(ActivityDetailActivity.this, activity.id, this, this);
+            WeCampusApi.joinActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
         }
 
         @Override
@@ -312,7 +326,11 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         public void changeLikeState() {
             progressBar.setVisibility(View.VISIBLE);
             icon.setVisibility(View.GONE);
-            WeCampusApi.postLikeActivity(ActivityDetailActivity.this, activity.id, like, this, this);
+            if(like) {
+                WeCampusApi.likeActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
+            } else {
+                WeCampusApi.disLikeActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
+            }
         }
 
         @Override

@@ -201,14 +201,26 @@
             style="@style/DetailTextPartTitle">
         </TextView>
 
-        <ImageView
+        <TextView
+            android:id="@id/detail_tv_no_people_attend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_tv_attend_num"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/detail_no_participants"
+            android:visibility="gone"
+            style="@style/DetailTextPartTitle">
+        </TextView>
+
+        <!--ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/detail_tv_attend_num"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/detail_part_avatar"
-            android:contentDescription="@string/imageDescription"/>
+            android:contentDescription="@string/imageDescription"/-->
 
         <ImageView
             android:id="@id/detail_img_pointer"

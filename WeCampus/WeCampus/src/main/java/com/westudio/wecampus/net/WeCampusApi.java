@@ -17,7 +17,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
+import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -81,8 +83,9 @@ public class WeCampusApi {
                 Response.ErrorListener errorListener) {
         Bundle bundle = getBundle();
 
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET, HttpUtil.URL_GET_ACTIVITIES, Activity.ActivityRequestData.class,
-                listener, errorListener);
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
+                HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST),
+                Activity.ActivityRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -186,6 +189,43 @@ public class WeCampusApi {
     }
 
     /**
+     * Get Activity Participants with id
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityParticipantsWithId(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<Participants>(Request.Method.GET,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE),
+                Participants.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get Activity Category
+     * @param tag
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityCategory(Object tag, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<ActivityCategory.CategoryRequestData>(Request.Method.GET, HttpUtil.getActivityCategory(),
+                ActivityCategory.CategoryRequestData.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
      * Get school list
      * @param tag
      * @param page
@@ -221,6 +261,17 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    /**
+     * Register
+     * @param tag
+     * @param email
+     * @param nickname
+     * @param password
+     * @param gender
+     * @param schoolId
+     * @param listener
+     * @param errorListener
+     */
     public static void postRegister(Object tag, String email, String nickname, String password,
                                     String gender, String schoolId, Response.Listener listener,
                                     Response.ErrorListener errorListener) {
@@ -259,27 +310,6 @@ public class WeCampusApi {
 
     public static void postUpdateProfile(Object tag, User user, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new UpdateProfileRequest(user, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
-    }
-
-    public static void postJoinActivity(Object tag, int id, Response.Listener listener, Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.POST,
-                HttpUtil.URL_GET_ACTIVITY_LIST + "/" + id,
-                Activity.class, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
-    }
-
-    public static void postLikeActivity(Object tag, int id, boolean like, Response.Listener listener, Response.ErrorListener errorListener) {
-        StringBuilder sb = new StringBuilder(HttpUtil.URL_GET_ACTIVITIES);
-        sb.append('/').append("id").append('/').append(like ? "like" : "dislike");
-        Request request = new AuthedGsonRequest(Request.Method.POST, sb.toString(),
-                Activity.class, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }

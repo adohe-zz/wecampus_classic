@@ -82,6 +82,7 @@
     <item type="id" name="detail_tv_company">false</item>
     <item type="id" name="detail_tv_tag">false</item>
     <item type="id" name="detail_tv_attend_num">false</item>
+    <item type="id" name="detail_tv_no_people_attend">false</item>
     <item type="id" name="detail_img_pointer">false</item>
     <item type="id" name="detail_img_poster">false</item>
     <item type="id" name="detail_btn_attent">false</item>

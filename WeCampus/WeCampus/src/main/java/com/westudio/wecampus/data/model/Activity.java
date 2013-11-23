@@ -36,6 +36,8 @@ public class Activity {
     public boolean can_join;
     public boolean can_like;
     public String url;
+    public String summary;
+    public int uid;
     public Organization organization;
 
     private static void addToCache(Activity activity) {
@@ -73,6 +75,8 @@ public class Activity {
         ac.can_join = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_JOIN)) > 0;
         ac.can_like = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.CAN_LIKE)) > 0;
         ac.url = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.URL));
+        ac.summary = cursor.getString(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.SUMMARY));
+        ac.uid = cursor.getInt(cursor.getColumnIndex(ActivityDataHelper.ActivityDBInfo.UID));
         addToCache(ac);
         return ac;
     }
