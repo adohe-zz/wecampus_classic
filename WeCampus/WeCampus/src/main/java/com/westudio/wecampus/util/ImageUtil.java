@@ -33,7 +33,7 @@ public class ImageUtil {
         paint.setColor(color);
         // draw a circle
         canvas.drawCircle(x/2, x/2, x/2, paint);
-        canvas.translate(-25, -6);
+        //canvas.translate(-25, -6);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);

@@ -28,6 +28,7 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.ui.view.RoundedImageView;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 

@@ -186,9 +186,9 @@ public class PinnedHeaderListView extends ListView {
     }
 
     public void setAvatar(String url) {
-        final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
         WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
-
+            Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.detail_organization);
             @Override
             public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                 Bitmap data = imageContainer.getBitmap();
@@ -199,7 +199,7 @@ public class PinnedHeaderListView extends ListView {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                mAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(defaultBitmap));
+                mAvatar.setImageBitmap(defaultBitmap);
             }
         });
     }
