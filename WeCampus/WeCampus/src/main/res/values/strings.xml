@@ -140,4 +140,5 @@
     <string name="contact_with_mail">邮件联系</string>
     <string name="posted_activities">发布的活动</string>
     <string name="brief_introduction">简单介绍</string>
+    <string name="msg_please_input_info">请输入信息</string>
 </resources>
