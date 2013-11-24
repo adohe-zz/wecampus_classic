@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Organization;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityAdapter;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
@@ -19,10 +22,14 @@ import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.ui.view.PinnedHeaderListView;
 import com.westudio.wecampus.util.Utility;
 
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
+
 /**
  * Created by martian on 13-11-22.
  */
-public class OrganizationHomepageActivity extends BaseGestureActivity {
+public class OrganizationHomepageActivity extends BaseGestureActivity implements OnRefreshListener {
     public static final String ORG_ID = "organization_id";
 
     private PinnedHeaderListView mListView;
@@ -36,6 +43,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
     private Organization mOrganization;
     private OrgDataHelper mOrgDataHelper;
     private OrgQueryTask mOrgQueryTask;
+    private RequestOrgHandler mRequestOrgHandler;
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,11 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
 
         mId = getIntent().getIntExtra(ORG_ID, -1);
         mOrgDataHelper = new OrgDataHelper(this);
+        mRequestOrgHandler = new RequestOrgHandler();
+
+        mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
+        PullToRefreshLayout ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
+        ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
         mPinnedHeader = (HeaderTabBar) findViewById(R.id.pinned_header);
         mListView = (PinnedHeaderListView) findViewById(R.id.listview);
@@ -104,6 +118,11 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
                 mOrganization.admin_url);
     }
 
+    @Override
+    public void onRefreshStarted(View view) {
+        WeCampusApi.getOrganization(this, mId, mRequestOrgHandler, mRequestOrgHandler);
+    }
+
     public class TestAdapter extends BaseAdapter {
 
         private Context mContext;
@@ -150,6 +169,34 @@ public class OrganizationHomepageActivity extends BaseGestureActivity {
         @Override
         protected void onPostExecute(Object o) {
             updateUI();
+        }
+    }
+
+    private class RequestOrgHandler implements Response.Listener<Organization>, Response.ErrorListener{
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            mPullToRefreshAttacher.setRefreshComplete();
+        }
+
+        @Override
+        public void onResponse(final Organization organization) {
+            mPullToRefreshAttacher.setRefreshComplete();
+            if (organization != null) {
+                Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                    @Override
+                    protected Object doInBackground(Object... objects) {
+                        mOrgDataHelper.update(organization);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        mOrgQueryTask = new OrgQueryTask();
+                        Utility.executeAsyncTask(mOrgQueryTask);
+                    }
+                });
+            }
         }
     }
 }

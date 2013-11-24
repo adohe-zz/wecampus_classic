@@ -30,6 +30,8 @@ public class HttpUtil {
 
     public static final String URL_PROFILE = "http://api.wecampus.net/v1/profile";
 
+    public static final String URL_ORGANIZATIONS = "http://api.wecampus.net/v1/organizations";
+
     public static final String HTTP_PROTOCOL = "http://";
 
     public static final String HOST_NAME = "api.wecampus.net";

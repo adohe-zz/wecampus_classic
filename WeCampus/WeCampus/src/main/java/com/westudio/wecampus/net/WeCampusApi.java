@@ -19,6 +19,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
+import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
@@ -310,6 +311,16 @@ public class WeCampusApi {
 
     public static void postUpdateProfile(Object tag, User user, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new UpdateProfileRequest(user, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void getOrganization(Object tag, int id, Response.Listener listener,
+                                       Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(Request.Method.GET, HttpUtil.URL_ORGANIZATIONS + "/" + id,
+                Organization.class, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }
