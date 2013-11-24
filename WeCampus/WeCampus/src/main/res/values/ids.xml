@@ -97,6 +97,7 @@
     <item type="id" name="bottom_bar_attend">false</item>
     <item type="id" name="bottom_bar_like">false</item>
     <item name="detail_bottom_bar" type="id">false</item>
+    <item name="detail_participants_container" type="id">false</item>
 
     <!-- User Profile Part -->
     <item type="id" name="user_profile_like">false</item>

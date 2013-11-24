@@ -134,6 +134,17 @@ public class HttpUtil {
     }
 
     /**
+     * Get the abs path of the image
+     * @param url
+     * @return
+     */
+    public static String getImageUrl(String url) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append("wecampus.net").append(SLASH).append(url);
+        return sb.toString();
+    }
+
+    /**
      * Encrypt the password with Hash Algorithm
      * @param password
      * @return

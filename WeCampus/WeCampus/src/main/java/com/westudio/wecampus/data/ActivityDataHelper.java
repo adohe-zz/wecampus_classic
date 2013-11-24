@@ -159,6 +159,6 @@ public class ActivityDataHelper extends BaseDataHelper{
                 .addColumn(CAN_LIKE, Column.DataType.BOOLEAN)
                 .addColumn(URL, Column.DataType.TEXT)
                 .addColumn(SUMMARY, Column.DataType.TEXT)
-                .addColumn(UID, Column.DataType.INTEGER);
+                .addColumn(UID, Column.DataType.TEXT);
     }
 }

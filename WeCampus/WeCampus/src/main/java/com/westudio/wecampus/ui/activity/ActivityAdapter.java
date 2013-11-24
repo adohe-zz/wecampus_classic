@@ -18,6 +18,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.HttpUtil;
 
 /**
  * Created by martian on 13-9-11.
@@ -64,11 +65,11 @@ public class ActivityAdapter extends CursorAdapter {
         Activity activity = Activity.fromCursor(cursor);
         if(activity.image.equals(IMAGE_NOT_FOUND)) {
             holder.imageView.setVisibility(View.GONE);
-            holder.text_summary.setVisibility(View.VISIBLE);
             holder.text_summary.setText(activity.summary);
         } else {
-            holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
+            holder.imageRequest = WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
+            holder.text_summary.setVisibility(View.GONE);
         }
         holder.text_title.setText(activity.title);
         holder.text_time.setText("9:00-11:00 9/21(周三)");

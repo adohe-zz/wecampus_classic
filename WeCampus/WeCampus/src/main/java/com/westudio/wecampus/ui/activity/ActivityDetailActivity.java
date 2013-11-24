@@ -22,10 +22,12 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -48,7 +50,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
-    private TextView tvNoParticipants;
 
     ActivityDataHelper dataHelper;
 
@@ -56,6 +57,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private Activity activity;
     private JoinHandler joinHandler;
     private LikeHandler likeHandler;
+    private ParticipateHandler participateHandler;
     private ActivityDetailUpdater updater;
 
     @Override
@@ -87,7 +89,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
-        tvNoParticipants = (TextView)findViewById(R.id.detail_tv_no_people_attend);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
         tvTitle.setText(activity.title);
@@ -98,7 +99,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvContent.setText(activity.description);
 
         Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
+        WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
 
@@ -111,6 +112,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
+        participateHandler = new ParticipateHandler(this);
+        participateHandler.refreshUI();
         joinHandler = new JoinHandler(this);
         joinHandler.refreshUi(activity.can_join);
         likeHandler = new LikeHandler(this);
@@ -134,7 +137,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         if (activity.organization != null) {
             tvOrg.setText(activity.organization.getName());
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
-            WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+            WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), new ImageLoader.ImageListener() {
 
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
@@ -171,11 +174,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     }
 
     private void setParticipantsPart() {
-        if(activity.count_of_participants == 0) {
-            tvNoParticipants.setVisibility(View.VISIBLE);
-        } else {
 
-        }
     }
 
     @Override
@@ -232,7 +231,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
 
 
-    private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener{
+    private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener {
         private  android.app.Activity ac;
         ProgressBar progressBar;
         ImageView icon;
@@ -282,7 +281,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
     }
 
-    private class LikeHandler implements Response.Listener<Activity>, Response.ErrorListener{
+    private class LikeHandler implements Response.Listener<Activity>, Response.ErrorListener {
         private  android.app.Activity ac;
         boolean like;
         ProgressBar progressBar;
@@ -328,7 +327,56 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
     }
 
-    private class ActivityDetailUpdater implements Response.Listener<Activity>, Response.ErrorListener{
+    private class ParticipateHandler implements Response.Listener<Participants.ParticipantsRequestData>, Response.ErrorListener {
+
+        private android.app.Activity ac;
+        TextView tvNoAttend;
+        LinearLayout container;
+
+        public ParticipateHandler(android.app.Activity activity) {
+            this.ac = activity;
+            tvNoAttend = (TextView) activity.findViewById(R.id.detail_tv_no_people_attend);
+            container = (LinearLayout)activity.findViewById(R.id.detail_participants_container);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+
+        }
+
+        @Override
+        public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
+            Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
+            for(Participants participants : participantsRequestData.getObjects()) {
+                final ImageView imageView = new ImageView(ac);
+                WeCampusApi.requestImage(HttpUtil.getImageUrl(participants.avatar), new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                        Bitmap data = imageContainer.getBitmap();
+                        if(data != null) {
+                            imageView.setImageBitmap(data);
+                            container.addView(imageView);
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                });
+            }
+        }
+
+        public void refreshUI() {
+            if(activity.count_of_participants == 0) {
+                tvNoAttend.setVisibility(View.VISIBLE);
+            } else {
+                WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, this, this);
+            }
+        }
+    }
+
+    private class ActivityDetailUpdater implements Response.Listener<Activity>, Response.ErrorListener {
 
         public void fetchActivityDetail() {
             WeCampusApi.getActivityById(ActivityDetailActivity.this, activity.id, this, this);

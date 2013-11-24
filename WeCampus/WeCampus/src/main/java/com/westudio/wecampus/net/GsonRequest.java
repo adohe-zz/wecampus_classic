@@ -1,6 +1,5 @@
 package com.westudio.wecampus.net;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -8,9 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.westudio.wecampus.ui.base.BaseApplication;
-import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,10 +14,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by nankonami on 13-9-10.
@@ -55,7 +47,6 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
-        Utility.log("statuscode", response.statusCode);
         try {
             if(response.statusCode != 200) {
                 return Response.error(new VolleyError(response));

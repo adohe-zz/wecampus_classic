@@ -197,9 +197,9 @@ public class WeCampusApi {
      */
     public static void getActivityParticipantsWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Participants>(Request.Method.GET,
+        Request request = new AuthedGsonRequest<Participants.ParticipantsRequestData>(Request.Method.GET,
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE),
-                Participants.class, listener, errorListener);
+                Participants.ParticipantsRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
