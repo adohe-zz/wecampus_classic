@@ -1,6 +1,8 @@
 package com.westudio.wecampus.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -8,10 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by jam on 13-9-23.
@@ -28,6 +36,9 @@ public class PinnedHeaderListView extends ListView {
 
     private HeaderTabBar mPinnedHeader;
     private HeaderTabBar mHeader;
+
+    private ImageView mAvatar;
+    private TextView mName;
 
     public interface OnHeaderOffScreenListener {
 
@@ -77,6 +88,13 @@ public class PinnedHeaderListView extends ListView {
         this.addHeaderView(header, null , false);
         final LinearLayout headerFrame = (LinearLayout) header.findViewById(R.id.profile_header);
         mHeader = (HeaderTabBar) header.findViewById(R.id.header_tab_bar);
+
+        //隐藏一些不需要的widget
+        header.findViewById(R.id.edit_button).setVisibility(GONE);
+        header.findViewById(R.id.text_user_words).setVisibility(GONE);
+
+        mAvatar = (ImageView) header.findViewById(R.id.img_avatar);
+        mName = (TextView) header.findViewById(R.id.text_user_name);
 
         headerFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -161,5 +179,28 @@ public class PinnedHeaderListView extends ListView {
             mPinnedHeader.setTexts(res1, res2, res3);
         }
         mHeader.setTexts(res1, res2, res3);
+    }
+
+    public void setName(String name) {
+        mName.setText(name);
+    }
+
+    public void setAvatar(String url) {
+        WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
+            Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.detail_organization);
+            @Override
+            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                Bitmap data = imageContainer.getBitmap();
+                if (data != null) {
+                    mAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                mAvatar.setImageBitmap(defaultBitmap);
+            }
+        });
     }
 }

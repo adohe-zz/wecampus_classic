@@ -17,14 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
             android:text="@string/admin"
             style="@style/OrgSectionTitle"/>
 
         <TextView
             android:id="@+id/org_name"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/OrgSectionText"/>
@@ -44,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="18dp"
             android:text="@string/org_intro"
             style="@style/OrgSectionTitle"/>
 
@@ -52,8 +54,7 @@
             android:id="@+id/org_intro"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/OrgSectionText"/>

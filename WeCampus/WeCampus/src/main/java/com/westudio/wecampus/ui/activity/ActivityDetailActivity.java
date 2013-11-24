@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
+import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -51,7 +53,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvCompany;
     private TextView tvContent;
 
-    ActivityDataHelper dataHelper;
+    ActivityDataHelper acDataHelper;
+    private OrgDataHelper orgDataHelper;
 
     private int activityId = -1;
     private Activity activity;
@@ -66,16 +69,29 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
 
-        dataHelper = new ActivityDataHelper(this);
+        acDataHelper = new ActivityDataHelper(this);
+        orgDataHelper = new OrgDataHelper(this);
         refreshActivityFromDb();
 
         updateActionBar();
-        initWidget();
+
     }
 
     private void refreshActivityFromDb() {
         if (activityId != -1) {
-            activity = dataHelper.query(activityId);
+            Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                @Override
+                protected Object doInBackground(Object... objects) {
+                    activity = acDataHelper.query(activityId);
+                    activity.organization = orgDataHelper.query(activity.organization_id);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    initWidget();
+                }
+            });
         }
     }
 
@@ -91,6 +107,12 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
+        showBottomActionBar();
+
+        if (activity == null) {
+            return;
+        }
+
         tvTitle.setText(activity.title);
         tvLocation.setText(activity.location);
         tvTag.setText(activity.category);
@@ -102,10 +124,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
-
-        findViewById(R.id.detail_part_three).setOnClickListener(clickListener);
-
-        showBottomActionBar();
 
         updateExtraUi();
         setParticipantsPart();
@@ -137,7 +155,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         if (activity.organization != null) {
             tvOrg.setText(activity.organization.getName());
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
-            WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), new ImageLoader.ImageListener() {
+            WeCampusApi.requestImage(activity.organization.avatar, new ImageLoader.ImageListener() {
 
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
@@ -222,6 +240,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                 }
                 case R.id.detail_part_three: {
                     Intent intent = new Intent(ActivityDetailActivity.this, OrganizationHomepageActivity.class);
+                    intent.putExtra(OrganizationHomepageActivity.ORG_ID, activity.organization_id);
                     startActivity(intent);
                     break;
                 }
@@ -392,7 +411,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         public void onResponse(final Activity data) {
             activity = data;
             updateExtraUi();
-
             updateActivityToDb();
         }
     }
@@ -402,9 +420,30 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             @Override
             protected Object doInBackground(Object... objects) {
                 if (activity != null) {
-                    dataHelper.update(activity);
+                    acDataHelper.update(activity);
                 }
                 return null;
+            }
+        });
+        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                if (activity != null) {
+                    int updatedRows = orgDataHelper.update(activity.organization);
+                    if (updatedRows == 0) {
+                        orgDataHelper.insert(activity.organization);
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                View v = findViewById(R.id.detail_part_three);
+                if (v != null) {
+                    v.setOnClickListener(clickListener);
+                }
             }
         });
     }
