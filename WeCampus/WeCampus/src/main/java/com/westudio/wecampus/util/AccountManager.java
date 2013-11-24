@@ -22,10 +22,10 @@ public class AccountManager {
         mToken = sp.getString(PREF_TOKEN, "");
     }
 
-    public void saveAccountInfo(String id, String token) {
+    public void saveAccountInfo(int id, String token) {
         SharedPreferences.Editor editor =
                 mContext.getSharedPreferences(ACCOUNT_PREFERENCE, Context.MODE_PRIVATE).edit();
-        editor.putString(PREF_ID, id);
+        editor.putInt(PREF_ID, id);
         editor.putString(PREF_TOKEN, token);
         editor.apply();
 
