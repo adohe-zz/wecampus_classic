@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -38,8 +38,6 @@ import com.westudio.wecampus.util.Utility;
  * Activity that display the detail of activity
  */
 public class ActivityDetailActivity extends BaseDetailActivity {
-
-    private static final int[] IMG_IDS = {R.drawable.detail_pager_img, R.drawable.detail_pager_img_two};
 
     //Widgets
     private TextView tvOrg;
@@ -116,22 +114,15 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvTitle.setText(activity.title);
         tvLocation.setText(activity.location);
         tvTag.setText(activity.category);
-        tvTicket.setText(activity.location);
-        tvCompany.setText(activity.sponsor_name);
-        tvContent.setText(activity.description);
 
         Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
         WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
 
-        updateExtraUi();
-        setParticipantsPart();
-
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
         participateHandler = new ParticipateHandler(this);
-        participateHandler.refreshUI();
         joinHandler = new JoinHandler(this);
         joinHandler.refreshUi(activity.can_join);
         likeHandler = new LikeHandler(this);
@@ -187,12 +178,9 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
         }
 
-        tvLocation.setText(activity.location);
+
         tvContent.setText(activity.description);
-    }
-
-    private void setParticipantsPart() {
-
+        participateHandler.refreshUI();
     }
 
     @Override
@@ -247,8 +235,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             }
         }
     };
-
-
 
     private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener {
         private  android.app.Activity ac;
@@ -368,6 +354,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
             for(Participants participants : participantsRequestData.getObjects()) {
                 final ImageView imageView = new ImageView(ac);
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43)));
                 WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
                     @Override
                     public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {

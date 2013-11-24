@@ -32,7 +32,7 @@
                     <!-- This Blank Layout Resolve the Conflict with the bottom action bar-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="52dp"
                         android:visibility="gone"
                         tools:ignore="UselessLeaf,Orientation"/>
 
