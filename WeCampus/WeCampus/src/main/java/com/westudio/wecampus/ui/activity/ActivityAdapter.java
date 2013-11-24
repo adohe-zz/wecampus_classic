@@ -67,7 +67,7 @@ public class ActivityAdapter extends CursorAdapter {
             holder.imageView.setVisibility(View.GONE);
             holder.text_summary.setText(activity.summary);
         } else {
-            holder.imageRequest = WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), WeCampusApi.getImageListener(holder.imageView,
+            holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
             holder.text_summary.setVisibility(View.GONE);
         }

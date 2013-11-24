@@ -121,7 +121,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvContent.setText(activity.description);
 
         Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-        WeCampusApi.requestImage(HttpUtil.getImageUrl(activity.image), WeCampusApi.getImageListener(ivPoster,
+        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
                 defaultDrawable, defaultDrawable));
         ivPoster.setOnClickListener(clickListener);
 
@@ -368,7 +368,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
             for(Participants participants : participantsRequestData.getObjects()) {
                 final ImageView imageView = new ImageView(ac);
-                WeCampusApi.requestImage(HttpUtil.getImageUrl(participants.avatar), new ImageLoader.ImageListener() {
+                WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
                     @Override
                     public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                         Bitmap data = imageContainer.getBitmap();
