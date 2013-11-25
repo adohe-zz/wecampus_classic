@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/ptr_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <!-- No Content Container -->
+        <LinearLayout
+            android:id="@id/detail_no_content"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/detail_no_content"
+                android:contentDescription="@string/imageDescription"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@id/detail_content_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <ScrollView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- The Brief Part -->
+                    <RelativeLayout
+                        android:id="@id/detail_brief_part"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@id/detail_tv_title"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginLeft="20dp"
+                            style="@style/DetailTextTitle" />
+
+                        <ImageView
+                            android:id="@id/detail_img_poster"
+                            android:layout_width="90dp"
+                            android:layout_height="110dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_below="@id/detail_tv_title"
+                            android:src="@drawable/detail_img_poster"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="@string/imageDescription" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@id/detail_tv_time"
+                            android:layout_below="@id/detail_tv_title"
+                            android:layout_toRightOf="@id/detail_img_poster"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:drawableLeft="@drawable/detail_time"
+                            android:drawablePadding="5dp"
+                            style="@style/DetailTextView" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@id/detail_tv_location"
+                            android:layout_below="@id/detail_tv_time"
+                            android:layout_alignLeft="@id/detail_tv_time"
+                            android:layout_marginTop="10dp"
+                            android:drawableLeft="@drawable/detail_location"
+                            android:drawablePadding="5dp"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            style="@style/DetailTextView" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@id/detail_tv_tag"
+                            android:layout_below="@id/detail_tv_location"
+                            android:layout_alignLeft="@id/detail_tv_time"
+                            android:layout_marginTop="10dp"
+                            android:drawableLeft="@drawable/detail_tag"
+                            android:drawablePadding="5dp"
+                            style="@style/DetailTextView" />
+
+                    </RelativeLayout>
+
+                    <!-- The Ticket Part -->
+                    <RelativeLayout
+                        android:id="@+id/detail_part_ticket"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:id="@id/detail_tv_ticket"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="1.3dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:drawableLeft="@drawable/detail_ticket"
+                            android:drawablePadding="5dp"
+                            android:background="@android:color/white"
+                            android:gravity="center_vertical"
+                            style="@style/DetailTextTicket"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/detail_rl_sponsor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:clickable="true"
+                            android:background="@drawable/selector_activity_detail_section"
+                            android:layout_below="@id/detail_tv_ticket">
+
+                            <TextView
+                                android:id="@id/detail_tv_company"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_centerVertical="true"
+                                android:drawableLeft="@drawable/detail_company"
+                                android:drawablePadding="5dp"
+                                style="@style/DetailTextTicket" />
+
+                            <ImageView
+                                android:id="@id/detail_img_pointer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="20dp"
+                                android:src="@drawable/detail_pointer"
+                                android:layout_centerVertical="true"
+                                android:contentDescription="@string/imageDescription" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <!-- The Organization Part -->
+                    <RelativeLayout
+                        android:id="@id/detail_part_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:clickable="true"
+                        android:background="@drawable/selector_activity_detail_section">
+
+                        <TextView
+                            android:id="@id/detail_org_tips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/detail_org"
+                            style="@style/DetailTextPartTitle">
+                        </TextView>
+
+                        <ImageView
+                            android:id="@+id/detail_org_avatar"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/detail_org_tips"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/detail_organization"/>
+
+                        <TextView
+                            android:id="@id/detail_tv_organization"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/detail_org_tips"
+                            android:layout_toRightOf="@id/detail_org_avatar"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="7dp"
+                            style="@style/DetailTextOrg" />
+
+                        <ImageView
+                            android:id="@id/detail_img_pointer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/detail_pointer"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/imageDescription" />
+
+                    </RelativeLayout>
+
+                    <!-- The Participants Part -->
+                    <RelativeLayout
+                        android:id="@id/detail_part_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:clickable="true"
+                        android:background="@drawable/selector_activity_detail_section">
+
+                        <TextView
+                            android:id="@id/detail_tv_attend_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/detail_attend"
+                            style="@style/DetailTextPartTitle">
+                        </TextView>
+
+                        <TextView
+                            android:id="@id/detail_tv_no_people_attend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/detail_tv_attend_num"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/detail_no_participants"
+                            android:visibility="gone"
+                            style="@style/DetailTextPartTitle">
+                        </TextView>
+
+                        <LinearLayout
+                            android:id="@id/detail_participants_container"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_below="@id/detail_tv_attend_num"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@id/detail_img_pointer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/detail_pointer"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/imageDescription" />
+
+                    </RelativeLayout>
+
+                    <!-- The Fifth Part -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@id/detail_part_five"
+                        android:layout_marginTop="15dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@id/detail_tv_content_tips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/detail_content_tips"
+                            style="@style/DetailTextPartTitle">
+                        </TextView>
+
+                        <TextView
+                            android:id="@id/detail_tv_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hello_world"
+                            android:layout_below="@id/detail_tv_content_tips"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            style="@style/DetailTextContent" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <!-- Bottom Action Bar -->
+            <RelativeLayout
+                android:id="@id/detail_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@id/bottom_action_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    tools:ignore="DisableBaselineAlignment"
+                    android:background="@color/bottom_bar_bg">
+
+                    <LinearLayout
+                        android:id="@id/bottom_bar_attend"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/selectable_background_we">
+
+                        <ImageView
+                            android:id="@+id/ic_activity_join"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_activity_participate"
+                            android:contentDescription="@string/imageDescription"/>
+
+                        <ProgressBar
+                            android:id="@+id/progress_join"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/want_to_attend"
+                            style="@style/DetailBottomText">
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="1dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#dddddd"/>
+
+                    <LinearLayout
+                        android:id="@id/bottom_bar_like"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        android:background="@drawable/selectable_background_we">
+
+                        <ImageView
+                            android:id="@+id/ic_activity_like"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_activity_like_un"
+                            android:contentDescription="@string/imageDescription" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_like"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/detail_like"
+                            style="@style/DetailBottomText">
+                        </TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>

@@ -61,10 +61,6 @@
 
     <!-- Activity Detail Part -->
     <item type="id" name="view_stub">false</item>
-    <item type="id" name="detail_viewpager_container">false</item>
-    <item type="id" name="detail_viewpager">false</item>
-    <item type="id" name="detail_viewpager_indicator">false</item>
-    <item type="id" name="detail_viewpager_pic">false</item>
     <item type="id" name="detail_brief_part">false</item>
     <item type="id" name="detail_part_two">false</item>
     <item type="id" name="detail_part_three">false</item>
@@ -98,6 +94,9 @@
     <item type="id" name="bottom_bar_like">false</item>
     <item name="detail_bottom_bar" type="id">false</item>
     <item name="detail_participants_container" type="id">false</item>
+    <item name="ptr_detail_layout" type="id">false</item>
+    <item name="detail_no_content" type="id">false</item>
+    <item name="detail_content_container" type="id">false</item>
 
     <!-- User Profile Part -->
     <item type="id" name="user_profile_like">false</item>

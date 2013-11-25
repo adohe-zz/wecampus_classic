@@ -110,6 +110,8 @@
         <activity
             android:name=".ui.organiztion.OrganizationHomepageActivity" />
 
+        <activity android:name=".ui.activity.Test" />
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"
