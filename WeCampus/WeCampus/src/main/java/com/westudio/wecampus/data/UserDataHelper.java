@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.support.v4.content.CursorLoader;
 
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.util.database.Column;
@@ -93,6 +94,11 @@ public class UserDataHelper extends BaseDataHelper {
         }
     }
 
+    public CursorLoader getCursorLoader() {
+        return new CursorLoader(getContext(), getContentUri(), null, null, new String[]{},
+                UserDBInfo.ID + " DESC");
+    }
+
     public static class UserDBInfo implements BaseColumns {
         private UserDBInfo() {
         }
@@ -118,7 +124,7 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String WORDS = "words";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
-                .addColumn(ID, Column.DataType.INTEGER)
+                .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
                 .addColumn(NAME, Column.DataType.TEXT)
                 .addColumn(BIRTHDAY, Column.DataType.TEXT)
                 .addColumn(AVATAR, Column.DataType.TEXT)

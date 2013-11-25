@@ -47,6 +47,7 @@ public class BaseApplication extends Application {
         mContext = getApplicationContext();
 
         accountMgr = new AccountManager(mContext);
+        hasAccount = accountMgr.getUserId() != 0;
     }
 
     @Override

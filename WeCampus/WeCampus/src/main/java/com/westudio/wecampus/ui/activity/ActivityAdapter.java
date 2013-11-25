@@ -18,13 +18,12 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by martian on 13-9-11.
  */
 public class ActivityAdapter extends CursorAdapter {
-
-    private static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
 
     private LayoutInflater mLayoutInflater;
 
@@ -62,7 +61,7 @@ public class ActivityAdapter extends CursorAdapter {
                 + mListView.getHeaderViewsCount()));
 
         Activity activity = Activity.fromCursor(cursor);
-        if(activity.image.equals(IMAGE_NOT_FOUND)) {
+        if(activity.image.equals(ImageUtil.IMAGE_NOT_FOUND)) {
             holder.imageView.setVisibility(View.GONE);
             holder.text_summary.setVisibility(View.VISIBLE);
             holder.text_summary.setText(activity.summary);

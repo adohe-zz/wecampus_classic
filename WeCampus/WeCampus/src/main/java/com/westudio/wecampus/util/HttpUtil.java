@@ -16,7 +16,7 @@ public class HttpUtil {
     // constants of request URLs
     public static final String URL_GET_ACTIVITY_LIST = "http://api.wecampus.net/v1/activities";
 
-    public static final String URL_POST_REGISTER = "http://api.wecampus.net/v1/users";
+    public static final String URL_POST_USERS = "http://api.wecampus.net/v1/users";
 
     public static final String URL_POST_SESSION = "http://api.wecampus.net/v1/sessions";
 

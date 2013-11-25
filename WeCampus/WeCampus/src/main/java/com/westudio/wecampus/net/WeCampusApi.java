@@ -283,7 +283,7 @@ public class WeCampusApi {
         data.gender = gender;
         data.schoolId = schoolId;
 
-        Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_REGISTER, data, listener, errorListener);
+        Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_USERS, data, listener, errorListener);
 
         if (tag != null) {
             request.setTag(tag);
@@ -321,6 +321,18 @@ public class WeCampusApi {
                                        Response.ErrorListener errorListener) {
         Request request = new GsonRequest(Request.Method.GET, HttpUtil.URL_ORGANIZATIONS + "/" + id,
                 Organization.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    public static void getFriends(Object tag, int id, Response.Listener listener,
+                                  Response.ErrorListener errorListener) {
+        StringBuilder path = new StringBuilder(HttpUtil.URL_POST_USERS)
+                .append('/').append(id).append('/').append("friends");
+        Request request = new AuthedGsonRequest(Request.Method.GET, path.toString(),
+                User.UserListData.class, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }

@@ -14,6 +14,8 @@ import android.os.Build;
  */
 public class ImageUtil {
 
+    public static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
+
     /**
      * Get Circle Bitmap
      * @param bitmap
