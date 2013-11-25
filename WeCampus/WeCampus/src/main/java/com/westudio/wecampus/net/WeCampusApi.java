@@ -84,7 +84,7 @@ public class WeCampusApi {
         Bundle bundle = getBundle();
 
         Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
-                HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST),
+                HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST, page),
                 Activity.ActivityRequestData.class, listener, errorListener);
 
         if(tag != null) {
@@ -103,7 +103,7 @@ public class WeCampusApi {
     public static void getActivityById(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.GET,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL, 0),
                 Activity.class, listener, errorListener);
 
         if(tag != null) {
@@ -122,7 +122,7 @@ public class WeCampusApi {
     public static void likeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE, 0),
                 Activity.class, listener, errorListener);
 
         if(tag != null) {
@@ -141,7 +141,7 @@ public class WeCampusApi {
     public static void disLikeActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE, 0),
                 Activity.class, listener, errorListener);
 
         if(tag != null) {
@@ -160,7 +160,7 @@ public class WeCampusApi {
     public static void joinActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN, 0),
                 Activity.class, listener, errorListener);
 
         if(tag != null) {
@@ -179,7 +179,7 @@ public class WeCampusApi {
     public static void quitActivityWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.POST,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT, 0),
                 Activity.class, listener, errorListener);
 
         if(tag != null) {
@@ -198,7 +198,7 @@ public class WeCampusApi {
     public static void getActivityParticipantsWithId(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest<Participants.ParticipantsRequestData>(Request.Method.GET,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE),
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE, 0),
                 Participants.ParticipantsRequestData.class, listener, errorListener);
 
         if(tag != null) {

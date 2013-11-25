@@ -141,11 +141,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
             @Override
             protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                requestActivity(1);
                 return null;
             }
 
@@ -183,6 +179,11 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
      * @param page
      */
     private void requestActivity(final int page) {
+        final boolean isRefreshFromTop = page == 1;
+        if(!mPullToRefreshAttacher.isRefreshing() && isRefreshFromTop) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
+
         WeCampusApi.getActivityList(this, page, this, this);
     }
 

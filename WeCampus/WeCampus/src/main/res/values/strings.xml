@@ -60,7 +60,7 @@
     <string name="detail_menu_share">分享</string>
     <string name="detail_menu_like">点赞</string>
     <string name="detail_org">发布方</string>
-    <string name="detail_attend">参加的人</string>
+    <string name="detail_attend">参加的人(%d)</string>
     <string name="detail_content_tips">活动简介</string>
     <string name="want_to_attend">想参加</string>
     <string name="detail_like">喜欢</string>

@@ -112,4 +112,7 @@
     <item type="id" name="school_icon">false</item>
     <item type="id" name="school_name">false</item>
 
+    <!-- Base Detail Part -->
+    <item type="id" name="base_detail_frame">false</item>
+
 </resources>
