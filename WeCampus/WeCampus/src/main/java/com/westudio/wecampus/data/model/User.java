@@ -4,6 +4,8 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.UserDataHelper;
 
+import java.util.List;
+
 /**
  * Created by jam on 13-9-19.
  */
@@ -51,5 +53,9 @@ public class User {
         user.phone = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.PHONE));
         user.stage = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.STAGE));
         return user;
+    }
+
+    public class UserListData {
+        public List<User> objects;
     }
 }

@@ -43,7 +43,7 @@ public class AuthActivity extends PickPhotoActivity {
         //TODO delete
         /**只是为了测试上传资料*/
         /**************************************************************************************/
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        /*FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
         fragmentTransaction.replace(R.id.auth_container, UpdateProfileFragment.newInstance(null),
                 AuthActivity.UPDATE_PROFILE_TAG);

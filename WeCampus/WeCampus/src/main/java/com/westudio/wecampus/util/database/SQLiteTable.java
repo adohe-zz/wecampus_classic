@@ -28,6 +28,12 @@ public class SQLiteTable {
                 Column.DataType.INTEGER));
     }
 
+    public SQLiteTable(String tableName, String primaryKey) {
+        mTableName = tableName;
+        mColumnsDefinitions.add(new Column(primaryKey, Column.Constraint.PRIMARY_KEY,
+                Column.DataType.INTEGER));
+    }
+
     public SQLiteTable addColumn(Column columnsDefinition) {
         mColumnsDefinitions.add(columnsDefinition);
         return this;

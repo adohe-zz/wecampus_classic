@@ -1,52 +1,64 @@
 package com.westudio.wecampus.ui.user;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.PinYin;
-
-import java.util.List;
 
 /**
  * Created by martian on 13-9-19.
  */
-public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
+public class UserAdapter extends CursorAdapter implements SectionIndexer {
 
     private String mSections = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public static class ViewHolder {
-        public TextView name;
+    private LayoutInflater mLayoutInflater;
+    private ListView mListView;
+
+    private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+
+    public UserAdapter(Context context, ListView listView) {
+        super(context, null , false);
+        mLayoutInflater = LayoutInflater.from(context);
+        mListView = listView;
     }
 
-    public UserAdapter(Context context, List<User> objects) {
-        super(context, R.layout.row_user_list, R.id.user_name, objects);
+
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        return mLayoutInflater.inflate(R.layout.row_user_list, null);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            LayoutInflater inflater = (LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.row_user_list, parent, false);
-            holder.name = (TextView) convertView.findViewById(R.id.user_name);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+    public void bindView(View view, Context context, Cursor cursor) {
+        ViewHolder holder = getHolder(view);
+        if(holder.imageRequest != null) {
+            holder.imageRequest.cancelRequest();
         }
 
-        holder.name.setText(getItem(position).name);
+        view.setEnabled(!mListView.isItemChecked(cursor.getPosition()
+                + mListView.getHeaderViewsCount()));
 
-        return convertView;
+        User user = User.fromCursor(cursor);
+        holder.nickname.setText(user.nickname);
+        holder.imageRequest = WeCampusApi.requestImage(user.avatar,
+                WeCampusApi.getImageListener(holder.avatar, defaultDrawable, defaultDrawable));
     }
 
     @Override
@@ -64,13 +76,13 @@ public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
             for (int j = 0; j < getCount(); j++) {
                 if (i == 0) {
                     // not English nor Chinese
-                    char c = getItem(j).name.charAt(0);
+                    char c = getItem(j).nickname.charAt(0);
                     if ((c < 19968 && c > 171941) && (c < 'a' && c > 'z')
                             && (c < 'A' && c > 'Z')) {
                         return j;
                     }
                 } else {
-                    if (PinYin.match(String.valueOf(getItem(j).name.charAt(0)),
+                    if (PinYin.match(String.valueOf(getItem(j).nickname.charAt(0)),
                             mSections.charAt(i))) {
                         return j;
                     }
@@ -83,5 +95,32 @@ public class UserAdapter extends ArrayAdapter<User> implements SectionIndexer {
     @Override
     public int getSectionForPosition(int i) {
         return 0;
+    }
+
+    @Override
+    public User getItem(int position) {
+        return User.fromCursor(mCursor);
+    }
+
+    private ViewHolder getHolder(final View view) {
+        ViewHolder viewHolder = (ViewHolder)view.getTag();
+
+        if(viewHolder == null) {
+            viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder);
+        }
+
+        return viewHolder;
+    }
+
+    private static class ViewHolder {
+        ImageView avatar;
+        TextView nickname;
+        ImageLoader.ImageContainer imageRequest;
+
+        public ViewHolder(View view) {
+            avatar = (ImageView) view.findViewById(R.id.user_avatar);
+            nickname = (TextView) view.findViewById(R.id.user_name);
+        }
     }
 }

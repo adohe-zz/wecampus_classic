@@ -1,21 +1,13 @@
 package com.westudio.wecampus.ui.login;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.intro.IntroActivity;
-
-import java.io.IOException;
+import com.westudio.wecampus.ui.main.MainActivity;
 
 /**
  * Created by nankonami on 13-9-11.
@@ -27,42 +19,17 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
 
-        jumpToMainActivity();
+        completeSplash();
     }
 
-    private void jumpToMainActivity() {
-        final AccountManager accountManager = AccountManager.get(this);
-        final Account[] accounts = accountManager.getAccountsByType(BaseApplication.ACCOUNT_TYPE);
-
-        if(accounts.length > 0) {
-            accountManager.getAuthToken(accounts[0], BaseApplication.AUTHTOKEN_TYPE, null, null,
-                    new AccountManagerCallback<Bundle>() {
-                        @Override
-                        public void run(AccountManagerFuture<Bundle> result) {
-                            try {
-                                Bundle bundle = result.getResult();
-                                BaseApplication application = (BaseApplication) getApplication();
-                                application.hasAccount = true;
-
-                                finish();
-                            } catch (OperationCanceledException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (AuthenticatorException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, null);
+    private void completeSplash() {
+        SplashActivity.this.finish();
+        Intent intent = null;
+        if (BaseApplication.getInstance().hasAccount) {
+            intent = new Intent(SplashActivity.this, MainActivity.class);
         } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    SplashActivity.this.finish();
-                    Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
-                    startActivity(intent);
-                }
-            }, 300);
+            intent = new Intent(SplashActivity.this, IntroActivity.class);
         }
+        startActivity(intent);
     }
 }
