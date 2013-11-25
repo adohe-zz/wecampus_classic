@@ -1,4 +1,4 @@
-package com.westudio.wecampus.util.database;
+package com.westudio.wecampus.util;
 
 import com.android.volley.Cache;
 import com.android.volley.toolbox.DiskBasedCache;

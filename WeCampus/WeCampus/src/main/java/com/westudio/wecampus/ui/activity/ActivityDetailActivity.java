@@ -10,12 +10,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,7 +39,7 @@ import com.westudio.wecampus.util.Utility;
  * Created by nankonami on 13-10-4.
  * Activity that display the detail of activity
  */
-public class ActivityDetailActivity extends BaseDetailActivity {
+public class ActivityDetailActivity extends SherlockFragmentActivity {
 
     //Widgets
     private TextView tvOrg;
@@ -49,6 +52,9 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+
+    private LinearLayout noContentContainer;
+    private FrameLayout contentContainer;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -63,14 +69,17 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail_two);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
 
-        acDataHelper = new ActivityDataHelper(this);
+       /* acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
-        refreshActivityFromDb();
-
+        refreshActivityFromDb();*/
+        initWidget();
         updateActionBar();
+
+        updater = new ActivityDetailUpdater();
+        updater.fetchActivityDetail();
     }
 
     private void refreshActivityFromDb() {
@@ -102,10 +111,11 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
-
+        noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
+        contentContainer = (FrameLayout)findViewById(R.id.detail_content_container);
         //showBottomActionBar();
 
-        if (activity == null) {
+        /*if (activity == null) {
             return;
         }
 
@@ -121,10 +131,13 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         updater = new ActivityDetailUpdater();
         //TODO:IF NO NETWORK CONNECTED
         updater.fetchActivityDetail();
-        participateHandler = new ParticipateHandler(this);
+        participateHandler = new ParticipateHandler(this);*/
         /*joinHandler = new JoinHandler(this);
         joinHandler.refreshUi(activity.can_join);
         likeHandler = new LikeHandler(this);*/
+        participateHandler = new ParticipateHandler(this);
+        joinHandler = new JoinHandler(this);
+        likeHandler = new LikeHandler(this);
     }
 
     private void updateActionBar() {
@@ -138,6 +151,58 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         inflater.inflate(R.menu.detail_menu, menu);
         return true;
     }*/
+
+    private void updateUI() {
+
+        tvTitle.setText(activity.title);
+        tvLocation.setText(activity.location);
+        tvTag.setText(activity.category);
+
+        Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
+        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
+                defaultDrawable, defaultDrawable));
+        ivPoster.setOnClickListener(clickListener);
+
+        //If the organization is not null
+        if (activity.organization != null) {
+            tvOrg.setText(activity.organization.getName());
+            final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
+            WeCampusApi.requestImage(activity.organization.avatar, new ImageLoader.ImageListener() {
+
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    Bitmap data = imageContainer.getBitmap();
+                    if (data != null) {
+                        ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(defaultBitmap));
+                }
+            });
+        }
+
+        if (activity.have_ticket) {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.detail_tv_ticket)).setText(activity.ticket_service);
+        } else {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.GONE);
+        }
+
+        if (activity.have_sponsor) {
+            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
+            findViewById(R.id.detail_rl_sponsor).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.detail_tv_company)).setText(activity.sponsor_name);
+        } else {
+            findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
+        }
+
+
+        tvContent.setText(activity.description);
+        participateHandler.refreshUI();
+    }
 
     private void updateExtraUi() {
 
@@ -384,11 +449,12 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
 
         public void refreshUI() {
+            String attend = getResources().getString(R.string.detail_attend);
+            tvAttend.setText(String.format(attend, activity.count_of_participants));
+
             if(activity.count_of_participants == 0) {
                 tvNoAttend.setVisibility(View.VISIBLE);
             } else {
-                String attend = getResources().getString(R.string.detail_attend);
-                tvAttend.setText(String.format(attend, activity.count_of_participants));
                 WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, this, this);
             }
         }
@@ -397,20 +463,24 @@ public class ActivityDetailActivity extends BaseDetailActivity {
     private class ActivityDetailUpdater implements Response.Listener<Activity>, Response.ErrorListener {
 
         public void fetchActivityDetail() {
-            WeCampusApi.getActivityById(ActivityDetailActivity.this, activity.id, this, this);
+            WeCampusApi.getActivityById(ActivityDetailActivity.this, activityId, this, this);
         }
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             //TODO fetch activity failed
-            Toast.makeText(ActivityDetailActivity.this, volleyError.getMessage(), 1).show();
+            noContentContainer.setVisibility(View.VISIBLE);
+            contentContainer.setVisibility(View.GONE);
+            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
+                    Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onResponse(final Activity data) {
             activity = data;
-            updateExtraUi();
-            updateActivityToDb();
+            //updateExtraUi();
+            //updateActivityToDb();
+            updateUI();
         }
     }
 

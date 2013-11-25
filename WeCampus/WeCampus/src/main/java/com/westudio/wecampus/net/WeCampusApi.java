@@ -27,7 +27,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.BitmapLruCache;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.HttpUtil;
-import com.westudio.wecampus.util.database.ResponseDiskCache;
+import com.westudio.wecampus.util.ResponseDiskCache;
 
 /**
  * Created by nankonami on 13-9-9.

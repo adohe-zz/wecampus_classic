@@ -213,7 +213,8 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        Utility.log("error", volleyError.getMessage());
+        Toast.makeText(activity, getResources().getString(R.string.network_problem),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
