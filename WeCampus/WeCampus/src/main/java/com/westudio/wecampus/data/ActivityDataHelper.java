@@ -138,7 +138,7 @@ public class ActivityDataHelper extends BaseDataHelper{
         public static final String UID = "uid";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
-                .addColumn(ID, Column.DataType.INTEGER)
+                .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
                 .addColumn(BEGIN, Column.DataType.TIMESTAMP)
                 .addColumn(END, Column.DataType.TIMESTAMP)
                 .addColumn(TITLE, Column.DataType.TEXT)
