@@ -91,12 +91,13 @@ public class HttpUtil {
      * @param activityOp
      * @return
      */
-    public static String getActivityByIdWithOp(final int id, ActivityOp activityOp) {
+    public static String getActivityByIdWithOp(final int id, ActivityOp activityOp, final int page) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
                 .append(SLASH).append(BASE_ACTIVITY_PATH).append(SLASH);
         switch (activityOp) {
             case LIST:
+                sb.append("?").append("page=").append(page);
                 break;
             case DETAIL:
                 sb.append(id);
@@ -132,17 +133,6 @@ public class HttpUtil {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
                 .append(SLASH).append(BASE_ACTIVITY_CATEGORY_PATH);
-        return sb.toString();
-    }
-
-    /**
-     * Get the abs path of the image
-     * @param url
-     * @return
-     */
-    public static String getImageUrl(String url) {
-        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
-        sb.append("wecampus.net").append(SLASH).append(url);
         return sb.toString();
     }
 

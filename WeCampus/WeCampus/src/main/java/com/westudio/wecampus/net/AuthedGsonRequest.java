@@ -3,6 +3,7 @@ package com.westudio.wecampus.net;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.Utility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +23,7 @@ public class AuthedGsonRequest<T> extends GsonRequest<T> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
 
-//        if(BaseApplication.getInstance().hasAccount) {
-            headers.put(AUTH_TOKEN_KEY, BaseApplication.getInstance().getAccountMgr().getToken());
-//        }
-
+        headers.put(AUTH_TOKEN_KEY, BaseApplication.getInstance().getAccountMgr().getToken());
         return headers;
     }
 }

@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
@@ -24,6 +28,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import com.westudio.wecampus.util.ListViewUtils;
 import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -36,6 +41,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  */
 public class ActivityListFragment extends BaseFragment implements OnRefreshListener,
         LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener, Response.Listener<Activity.ActivityRequestData> {
+
     public static final String ACTIVITY_ID = "activity_id";
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
@@ -46,6 +52,9 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     private ListView listView;
 
     private LoadingFooter loadingFooter;
+
+    private boolean isRefreshFromTop = true;
+    private int mPage = 1;
 
     public static ActivityListFragment newInstance(Bundle args) {
         ActivityListFragment f = new ActivityListFragment();
@@ -61,9 +70,27 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                requestFirstPageAndScrollToTop();
+                return true;
+            default:
+               return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-        //TODO:which context this should use?
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -102,7 +129,12 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
                     return;
                 }
 
-
+                if(firstVisibleItem + visibleItemCount >= totalItemCount
+                        && totalItemCount != 0
+                        && totalItemCount != listView.getFooterViewsCount() +
+                        listView.getFooterViewsCount() && mAdapter.getCount() > 0) {
+                    requestActivity(mPage);
+                }
             }
         });
 
@@ -136,27 +168,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onRefreshStarted(View view) {
-        //TODO
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                super.onPostExecute(result);
-
-                // Notify PullToRefreshAttacher that the refresh has finished
-                mPullToRefreshAttacher.setRefreshComplete();
-            }
-        }.execute();
+        requestActivity(1);
     }
 
     @Override
@@ -168,7 +180,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
         if(cursor != null && cursor.getCount() == 0) {
-            requestActivity(1);
+            requestActivity(mPage);
         }
     }
 
@@ -183,7 +195,20 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
      * @param page
      */
     private void requestActivity(final int page) {
+        isRefreshFromTop = page == 1;
+        if(!mPullToRefreshAttacher.isRefreshing() && isRefreshFromTop) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
+
         WeCampusApi.getActivityList(this, page, this, this);
+    }
+
+    /**
+     * Request the first page activity and listview scroll to top
+     */
+    private void requestFirstPageAndScrollToTop() {
+        ListViewUtils.smoothScrollListViewToTop(listView);
+        requestActivity(1);
     }
 
     @Override
@@ -193,18 +218,27 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onResponse(final Activity.ActivityRequestData activityListRequestData) {
-        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object... params) {
-                mDataHelper.bulkInsert(activityListRequestData.getObjects());
-                return null;
-            }
+        if(activityListRequestData.getObjects().size() == 0) {
+            loadingFooter.setState(LoadingFooter.State.TheEnd);
+        } else {
+            Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                @Override
+                protected Object doInBackground(Object... params) {
+                    if(isRefreshFromTop) {
+                        mDataHelper.deleteAll();
+                    }
 
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                mPullToRefreshAttacher.setRefreshComplete();
-            }
-        });
+                    mPage ++;
+                    mDataHelper.bulkInsert(activityListRequestData.getObjects());
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    super.onPostExecute(o);
+                    mPullToRefreshAttacher.setRefreshComplete();
+                }
+            });
+        }
     }
 }

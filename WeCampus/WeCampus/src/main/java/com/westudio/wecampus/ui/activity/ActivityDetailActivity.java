@@ -29,7 +29,6 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
-import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -72,7 +71,6 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         refreshActivityFromDb();
 
         updateActionBar();
-
     }
 
     private void refreshActivityFromDb() {
@@ -105,7 +103,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
 
-        showBottomActionBar();
+        //showBottomActionBar();
 
         if (activity == null) {
             return;
@@ -121,11 +119,12 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         ivPoster.setOnClickListener(clickListener);
 
         updater = new ActivityDetailUpdater();
+        //TODO:IF NO NETWORK CONNECTED
         updater.fetchActivityDetail();
         participateHandler = new ParticipateHandler(this);
-        joinHandler = new JoinHandler(this);
+        /*joinHandler = new JoinHandler(this);
         joinHandler.refreshUi(activity.can_join);
-        likeHandler = new LikeHandler(this);
+        likeHandler = new LikeHandler(this);*/
     }
 
     private void updateActionBar() {
@@ -181,6 +180,7 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
         tvContent.setText(activity.description);
         participateHandler.refreshUI();
+        //joinHandler.refreshUi(activity.can_join);
     }
 
     @Override
@@ -276,12 +276,12 @@ public class ActivityDetailActivity extends BaseDetailActivity {
         }
 
         public void refreshUi(boolean canJoin) {
-            if (!canJoin) {
-                container.setVisibility(View.GONE);
-                divider.setVisibility(View.GONE);
-            } else {
+            if (canJoin) {
                 container.setVisibility(View.VISIBLE);
                 divider.setVisibility(View.VISIBLE);
+            } else {
+                container.setVisibility(View.GONE);
+                divider.setVisibility(View.GONE);
             }
         }
     }
@@ -330,16 +330,26 @@ public class ActivityDetailActivity extends BaseDetailActivity {
                     R.drawable.ic_activity_like_un : R.drawable.ic_activity_like_sl));
             updateActivityToDb();
         }
+
+        public void refreshUi(boolean canLike) {
+            if(canLike) {
+
+            } else {
+                icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_activity_like_sl));
+            }
+        }
     }
 
     private class ParticipateHandler implements Response.Listener<Participants.ParticipantsRequestData>, Response.ErrorListener {
 
         private android.app.Activity ac;
         TextView tvNoAttend;
+        TextView tvAttend;
         LinearLayout container;
 
         public ParticipateHandler(android.app.Activity activity) {
             this.ac = activity;
+            tvAttend = (TextView)activity.findViewById(R.id.detail_tv_attend_num);
             tvNoAttend = (TextView) activity.findViewById(R.id.detail_tv_no_people_attend);
             container = (LinearLayout)activity.findViewById(R.id.detail_participants_container);
         }
@@ -351,8 +361,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
 
         @Override
         public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
-            Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-            for(Participants participants : participantsRequestData.getObjects()) {
+            for(int i = 0; i < (activity.count_of_participants > 5 ? 5 : activity.count_of_participants); i++) {
+                Participants participants = participantsRequestData.getObjects().get(i);
                 final ImageView imageView = new ImageView(ac);
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43)));
                 WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
@@ -377,6 +387,8 @@ public class ActivityDetailActivity extends BaseDetailActivity {
             if(activity.count_of_participants == 0) {
                 tvNoAttend.setVisibility(View.VISIBLE);
             } else {
+                String attend = getResources().getString(R.string.detail_attend);
+                tvAttend.setText(String.format(attend, activity.count_of_participants));
                 WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, this, this);
             }
         }
