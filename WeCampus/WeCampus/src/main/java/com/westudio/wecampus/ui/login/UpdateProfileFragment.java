@@ -122,7 +122,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         progressDialog.show();
     }
 
-    private class AvatarUpdateHandler implements Response.Listener<Void>, Response.ErrorListener {
+    private class AvatarUpdateHandler implements Response.Listener<User>, Response.ErrorListener {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             progressDialog.dismiss();
@@ -130,13 +130,13 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         }
 
         @Override
-        public void onResponse(Void aVoid) {
+        public void onResponse(User user) {
             progressDialog.dismiss();
             Toast.makeText(getActivity(), R.string.upload_success, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class ProfileUpdateHandler implements Response.Listener<Void>, Response.ErrorListener {
+    private class ProfileUpdateHandler implements Response.Listener<User>, Response.ErrorListener {
         private EditText etRealName;
         private EditText etWords;
         private Activity _activity;
@@ -159,7 +159,8 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 progressDialog.show();
                 WeCampusApi.postUpdateProfile(_activity, user, this, this);
             } else {
-                // 什么都没输入的情况
+                Toast.makeText(getActivity(), R.string.msg_please_input_info,
+                        Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -170,7 +171,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         }
 
         @Override
-        public void onResponse(Void aVoid) {
+        public void onResponse(User user) {
             progressDialog.dismiss();
             startActivity(new Intent(activity, MainActivity.class));
             activity.finish();

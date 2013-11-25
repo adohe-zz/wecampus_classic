@@ -33,24 +33,29 @@ public class DataProvider extends ContentProvider {
     // messages
     public static final String PATH_ACTIVITIES = "activities";
     public static final String PATH_ORGANIZATIONS = "organizations";
+    public static final String PATH_USERS = "users";
 
     public static final Uri ACTIVITIES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ACTIVITIES);
     public static final Uri ORGANIZATIONS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ORGANIZATIONS);
+    public static final Uri USERS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_USERS);
 
     private static final int ACTIVITES = 0;
     private static final int ORGANIZATIONS = 1;
+    private static final int USERS = 2;
 
     /*
      * MIME type definitions
      */
     public static final String ACTIVITY_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.westudio.shot";
     public static final String ORGANIZATIONS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.westudio.organization";
+    public static final String USERS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.westudio.user";
     private static final UriMatcher sUriMatcher;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(AUTHORITY, PATH_ACTIVITIES, ACTIVITES);
         sUriMatcher.addURI(AUTHORITY, PATH_ORGANIZATIONS, ORGANIZATIONS);
+        sUriMatcher.addURI(AUTHORITY, PATH_USERS, USERS);
     }
 
     private static DBHelper mDBHelper;
@@ -69,6 +74,8 @@ public class DataProvider extends ContentProvider {
                 return ACTIVITY_CONTENT_TYPE;
             case ORGANIZATIONS:
                 return ORGANIZATIONS_CONTENT_TYPE;
+            case USERS:
+                return USERS_CONTENT_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -82,6 +89,9 @@ public class DataProvider extends ContentProvider {
                 break;
             case ORGANIZATIONS:
                 table = OrgDataHelper.OrganiztionDBInfo.TABLE_NAME;
+                break;
+            case USERS:
+                table = UserDataHelper.UserDBInfo.TABLE_NAME;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -219,6 +229,7 @@ public class DataProvider extends ContentProvider {
             //TODO create tables here
             ActivityDataHelper.ActivityDBInfo.TABLE.create(db);
             OrgDataHelper.OrganiztionDBInfo.TABLE.create(db);
+            UserDataHelper.UserDBInfo.TABLE.create(db);
         }
 
         @Override
