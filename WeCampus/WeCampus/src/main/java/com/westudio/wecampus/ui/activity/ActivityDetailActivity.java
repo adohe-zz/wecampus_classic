@@ -29,17 +29,20 @@ import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.net.WeCampusApi;
-import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
+
 /**
  * Created by nankonami on 13-10-4.
  * Activity that display the detail of activity
  */
-public class ActivityDetailActivity extends SherlockFragmentActivity {
+public class ActivityDetailActivity extends SherlockFragmentActivity implements OnRefreshListener {
 
     //Widgets
     private TextView tvOrg;
@@ -52,6 +55,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+    private ImageView ivCat;
 
     private LinearLayout noContentContainer;
     private FrameLayout contentContainer;
@@ -65,6 +69,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
     private LikeHandler likeHandler;
     private ParticipateHandler participateHandler;
     private ActivityDetailUpdater updater;
+
+    //Pull to refresh widget
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +108,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
     }
 
     private void initWidget() {
+
         tvOrg = (TextView)findViewById(R.id.detail_tv_organization);
         ivOrgAvatar = (ImageView) findViewById(R.id.detail_org_avatar);
         tvTitle = (TextView)findViewById(R.id.detail_tv_title);
@@ -111,6 +119,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
+        ivPoster.setOnClickListener(clickListener);
+        ivCat = (ImageView)findViewById(R.id.detail_no_content_img);
+        ivCat.setOnClickListener(clickListener);
         noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
         contentContainer = (FrameLayout)findViewById(R.id.detail_content_container);
         //showBottomActionBar();
@@ -138,6 +149,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
         participateHandler = new ParticipateHandler(this);
         joinHandler = new JoinHandler(this);
         likeHandler = new LikeHandler(this);
+
+        mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
+        PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)findViewById(R.id.ptr_detail_layout);
+        pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
     }
 
     private void updateActionBar() {
@@ -299,9 +314,28 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
                     startActivity(intent);
                     break;
                 }
+                case R.id.detail_no_content_img: {
+                    if(Utility.isConnect(ActivityDetailActivity.this)) {
+                        updater.fetchActivityDetail();
+                        mPullToRefreshAttacher.setRefreshing(true);
+                    } else {
+                        Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         }
     };
+
+    @Override
+    public void onRefreshStarted(View view) {
+        if(Utility.isConnect(this)) {
+            updater.fetchActivityDetail();
+        } else {
+            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private class JoinHandler implements Response.Listener<Activity>, Response.ErrorListener {
         private  android.app.Activity ac;
@@ -393,9 +427,11 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
         @Override
         public void onResponse(Activity data) {
             activity = data;
+            progressBar.setVisibility(View.GONE);
+            icon.setVisibility(View.VISIBLE);
             icon.setImageDrawable(getResources().getDrawable(activity.can_like ?
                     R.drawable.ic_activity_like_un : R.drawable.ic_activity_like_sl));
-            updateActivityToDb();
+            //updateActivityToDb();
         }
 
         public void refreshUi(boolean canLike) {
@@ -428,6 +464,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
 
         @Override
         public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
+            container.removeAllViews();
             for(int i = 0; i < (activity.count_of_participants > 5 ? 5 : activity.count_of_participants); i++) {
                 Participants participants = participantsRequestData.getObjects().get(i);
                 final ImageView imageView = new ImageView(ac);
@@ -471,6 +508,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             //TODO fetch activity failed
+            if(mPullToRefreshAttacher.isRefreshing()) {
+                mPullToRefreshAttacher.setRefreshComplete();
+            }
+
             noContentContainer.setVisibility(View.VISIBLE);
             contentContainer.setVisibility(View.GONE);
             Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
@@ -479,7 +520,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
 
         @Override
         public void onResponse(final Activity data) {
+            if(mPullToRefreshAttacher.isRefreshing()) {
+                mPullToRefreshAttacher.setRefreshComplete();
+            }
             activity = data;
+            noContentContainer.setVisibility(View.GONE);
+            contentContainer.setVisibility(View.VISIBLE);
             //updateExtraUi();
             //updateActivityToDb();
             updateUI();
