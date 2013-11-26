@@ -202,6 +202,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity {
 
         tvContent.setText(activity.description);
         participateHandler.refreshUI();
+        joinHandler.refreshUi(activity.can_join);
+        likeHandler.refreshUi(activity.can_like);
     }
 
     private void updateExtraUi() {
