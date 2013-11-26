@@ -74,6 +74,10 @@ public class WeCampusApi {
         return queue;
     }
 
+    public static void cancelRequest(Object tag) {
+        requestQueue.cancelAll(tag);
+    }
+
     /**
      * GET ACTIVITY LIST
      * @param page

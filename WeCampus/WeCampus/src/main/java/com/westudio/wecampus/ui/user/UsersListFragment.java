@@ -63,8 +63,10 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         loadingFooter = new LoadingFooter(getActivity());
 
         //TODO
-        View header = new View(getActivity());
-        mUserList.addHeaderView(header);
+        View introHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_intro_header, null);
+        mUserList.addHeaderView(introHeader);
+        View searchHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_search_header, null);
+        mUserList.addHeaderView(searchHeader);
 
         mAdapter = new UserAdapter(getActivity(), mUserList);
         mUserList.addFooterView(loadingFooter.getView());

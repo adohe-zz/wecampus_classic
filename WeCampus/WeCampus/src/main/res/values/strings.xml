@@ -145,5 +145,7 @@
 
     <!-- Network Part -->
     <string name="network_problem">网络不给力</string>
+    <string name="invite_wx_friends">邀请微信好友</string>
+    <string name="serach_friends">搜索好友</string>
 
 </resources>

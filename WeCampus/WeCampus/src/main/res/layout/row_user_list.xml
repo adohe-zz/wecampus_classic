@@ -4,8 +4,8 @@
               android:orientation="horizontal"
               android:gravity="center_vertical"
               android:layout_width="match_parent"
-              android:background="@android:color/white"
               android:layout_height="67dp"
+              android:background="@android:color/white"
               android:minHeight="67dp" >
 
     <ImageView

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_friends"
+    android:layout_width="match_parent"
+    android:layout_height="66.7dp"
+    android:minHeight="66.7dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:src="@drawable/ic_user_search"
+        android:layout_width="41.6dp"
+        android:layout_height="41.6dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="17.3sp"
+        android:text="@string/serach_friends"/>
+
+</LinearLayout>
