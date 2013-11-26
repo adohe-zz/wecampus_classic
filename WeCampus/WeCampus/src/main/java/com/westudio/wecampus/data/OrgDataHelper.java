@@ -99,7 +99,7 @@ public class OrgDataHelper extends BaseDataHelper {
         public static final String NAME = "name";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
-                .addColumn(ID, Column.DataType.INTEGER)
+                .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
                 .addColumn(ADMIN_URL, Column.DataType.TEXT)
                 .addColumn(ADMIN_NAME, Column.DataType.TEXT)
                 .addColumn(AVATAR, Column.DataType.TEXT)

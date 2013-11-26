@@ -18,7 +18,6 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
-import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
@@ -64,14 +63,14 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         loadingFooter = new LoadingFooter(getActivity());
 
         //TODO
-        View header = new View(getActivity());
-        mUserList.addHeaderView(header);
+        View introHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_intro_header, null);
+        mUserList.addHeaderView(introHeader);
+        View searchHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_search_header, null);
+        mUserList.addHeaderView(searchHeader);
 
         mAdapter = new UserAdapter(getActivity(), mUserList);
-        CardsAnimationAdapter animationAdapter = new CardsAnimationAdapter(getActivity(), mAdapter);
-        animationAdapter.setListView(mUserList);
         mUserList.addFooterView(loadingFooter.getView());
-        mUserList.setAdapter(animationAdapter);
+        mUserList.setAdapter(mAdapter);
 
         mPullToRefreshAttacher = ((MainActivity)getActivity()).getPullToRefreshAttacher();
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
@@ -98,8 +97,8 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         });
 
         mAdapter = new UserAdapter(getActivity(), mUserList);
-        mUserList.setAdapter(mAdapter);
         mUserList.setFastScrollEnabled(true);
+        mUserList.setAdapter(mAdapter);
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

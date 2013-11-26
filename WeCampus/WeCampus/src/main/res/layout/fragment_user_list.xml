@@ -15,6 +15,8 @@
             android:id="@+id/user_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:drawSelectorOnTop="true"
             android:listSelector="@drawable/selectable_background_we"/>
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
