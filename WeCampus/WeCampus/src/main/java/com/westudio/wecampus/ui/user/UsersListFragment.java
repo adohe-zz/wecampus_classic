@@ -42,7 +42,6 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
     private IndexableListView mUserList;
     private UserAdapter mAdapter;
     private UserDataHelper mDataHelper;
-    private LoadingFooter loadingFooter;
 
     public static UsersListFragment newInstance() {
         UsersListFragment f = new UsersListFragment();
@@ -60,8 +59,6 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
 
         mUserList = (IndexableListView) view.findViewById(R.id.user_list);
-        loadingFooter = new LoadingFooter(getActivity());
-        loadingFooter.setState(LoadingFooter.State.TheEnd);
 
         //TODO
         View introHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_intro_header, null);
@@ -70,7 +67,6 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         mUserList.addHeaderView(searchHeader);
 
         mAdapter = new UserAdapter(getActivity(), mUserList);
-        mUserList.addFooterView(loadingFooter.getView());
         mUserList.setAdapter(mAdapter);
 
         mPullToRefreshAttacher = ((MainActivity)getActivity()).getPullToRefreshAttacher();
@@ -79,23 +75,6 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
         mDataHelper = new UserDataHelper(getActivity());
         getLoaderManager().initLoader(1, null, this);
-
-        mUserList.setOnScrollListener( new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if(loadingFooter.getState() == LoadingFooter.State.Loading ||
-                        loadingFooter.getState() == LoadingFooter.State.TheEnd ) {
-                    return;
-                }
-
-
-            }
-        });
 
         mAdapter = new UserAdapter(getActivity(), mUserList);
         mUserList.setFastScrollEnabled(true);
@@ -111,9 +90,9 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
     }
 
     private void requestUsers() {
-        loadingFooter.setState(LoadingFooter.State.Loading);
         int id = BaseApplication.getInstance().getAccountMgr().getUserId();
         WeCampusApi.getFriends(this, id, this, this);
+        mPullToRefreshAttacher.setRefreshing(true);
     }
 
     @Override
@@ -130,7 +109,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
         if(cursor != null && cursor.getCount() == 0) {
-            requestUsers();
+            //requestUsers();
         }
     }
 
@@ -141,12 +120,10 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        loadingFooter.setState(LoadingFooter.State.TheEnd);
     }
 
     @Override
     public void onResponse(final User.UserListData userListData) {
-        loadingFooter.setState(LoadingFooter.State.TheEnd);
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
