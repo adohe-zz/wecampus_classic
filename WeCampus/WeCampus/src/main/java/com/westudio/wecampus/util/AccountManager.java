@@ -32,6 +32,14 @@ public class AccountManager {
         mToken = token;
     }
 
+    public void clearAccountInfo() {
+        SharedPreferences.Editor editor =
+                mContext.getSharedPreferences(ACCOUNT_PREFERENCE, Context.MODE_PRIVATE).edit();
+        editor.putInt(PREF_ID, 0);
+        editor.putString(PREF_TOKEN, "");
+        editor.apply();
+    }
+
     public String getToken() {
         if (TextUtils.isEmpty(mToken)) {
             SharedPreferences sp = mContext.getSharedPreferences(ACCOUNT_PREFERENCE, Context.MODE_PRIVATE);

@@ -266,6 +266,17 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void logout(Object tag, int id, Response.Listener listener,
+                              Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.DELETE,
+                HttpUtil.URL_POST_SESSION + "/" + id, Object.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     /**
      * Register
      * @param tag
