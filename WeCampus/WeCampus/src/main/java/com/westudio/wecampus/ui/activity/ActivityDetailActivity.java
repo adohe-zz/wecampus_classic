@@ -29,6 +29,7 @@ import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.ImageUtil;
@@ -57,8 +58,13 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private TextView tvContent;
     private ImageView ivCat;
 
+    private ProgressBar progressBar;
+    private ProgressBar pbContent;
+    private LinearLayout lyContent;
     private LinearLayout noContentContainer;
     private FrameLayout contentContainer;
+    private RelativeLayout rlOrganization;
+    private RelativeLayout rlParticipants;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -76,12 +82,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_two);
+        setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
 
-       /* acDataHelper = new ActivityDataHelper(this);
+        acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
-        refreshActivityFromDb();*/
+        //refreshActivityFromDb();
         initWidget();
         updateActionBar();
 
@@ -123,7 +129,14 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         ivCat = (ImageView)findViewById(R.id.detail_no_content_img);
         ivCat.setOnClickListener(clickListener);
         noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
+        progressBar = (ProgressBar)findViewById(R.id.detail_no_content_pb);
+        //pbContent = (ProgressBar)findViewById(R.id.detail_content_pb);
+        lyContent = (LinearLayout)findViewById(R.id.detail_content);
         contentContainer = (FrameLayout)findViewById(R.id.detail_content_container);
+        rlOrganization = (RelativeLayout)findViewById(R.id.detail_part_three);
+        rlOrganization.setOnClickListener(clickListener);
+        rlParticipants = (RelativeLayout)findViewById(R.id.detail_part_four);
+        rlParticipants.setOnClickListener(clickListener);
         //showBottomActionBar();
 
         /*if (activity == null) {
@@ -217,8 +230,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         tvContent.setText(activity.description);
         participateHandler.refreshUI();
-        joinHandler.refreshUi(activity.can_join);
-        likeHandler.refreshUi(activity.can_like);
+        if(BaseApplication.getInstance().hasAccount) {
+            joinHandler.refreshUi(activity.can_join);
+            likeHandler.refreshUi(activity.can_like);
+        }
     }
 
     private void updateExtraUi() {
@@ -275,6 +290,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 return true;
             case android.R.id.home:
                 finish();
+                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -316,8 +332,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 }
                 case R.id.detail_no_content_img: {
                     if(Utility.isConnect(ActivityDetailActivity.this)) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        ivCat.setVisibility(View.GONE);
                         updater.fetchActivityDetail();
-                        mPullToRefreshAttacher.setRefreshing(true);
                     } else {
                         Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
                                 Toast.LENGTH_SHORT).show();
@@ -332,6 +349,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         if(Utility.isConnect(this)) {
             updater.fetchActivityDetail();
         } else {
+            if(mPullToRefreshAttacher.isRefreshing()) {
+                mPullToRefreshAttacher.setRefreshComplete();
+            }
             Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
                     Toast.LENGTH_SHORT).show();
         }
@@ -352,7 +372,18 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    join();
+                    //Check the session
+                    if(BaseApplication.getInstance().hasAccount) {
+                        if(Utility.isConnect(ActivityDetailActivity.this)) {
+                            join();
+                        } else {
+                            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.please_login),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             divider = ac.findViewById(R.id.divider);
@@ -374,6 +405,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         public void onResponse(Activity data) {
             activity = data;
             refreshUi(activity.can_join);
+            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.attend_success),
+                    Toast.LENGTH_SHORT).show();
         }
 
         public void refreshUi(boolean canJoin) {
@@ -403,7 +436,17 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    changeLikeState();
+                    if(BaseApplication.getInstance().hasAccount) {
+                        if(Utility.isConnect(ActivityDetailActivity.this)) {
+                            changeLikeState();
+                        } else {
+                            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.please_login),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -431,10 +474,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             icon.setVisibility(View.VISIBLE);
             icon.setImageDrawable(getResources().getDrawable(activity.can_like ?
                     R.drawable.ic_activity_like_un : R.drawable.ic_activity_like_sl));
-            //updateActivityToDb();
+            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.like_success),
+                    Toast.LENGTH_SHORT).show();
         }
 
         public void refreshUi(boolean canLike) {
+            like = canLike;
             if(canLike) {
 
             } else {
@@ -502,6 +547,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private class ActivityDetailUpdater implements Response.Listener<Activity>, Response.ErrorListener {
 
         public void fetchActivityDetail() {
+            mPullToRefreshAttacher.setRefreshing(true);
             WeCampusApi.getActivityById(ActivityDetailActivity.this, activityId, this, this);
         }
 
@@ -523,12 +569,15 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             if(mPullToRefreshAttacher.isRefreshing()) {
                 mPullToRefreshAttacher.setRefreshComplete();
             }
+            //pbContent.setVisibility(View.GONE);
+            lyContent.setVisibility(View.VISIBLE);
             activity = data;
             noContentContainer.setVisibility(View.GONE);
             contentContainer.setVisibility(View.VISIBLE);
             //updateExtraUi();
             //updateActivityToDb();
             updateUI();
+            updateActivityToDb();
         }
     }
 

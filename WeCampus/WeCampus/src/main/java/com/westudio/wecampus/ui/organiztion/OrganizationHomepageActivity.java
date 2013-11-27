@@ -30,6 +30,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  * Created by martian on 13-11-22.
  */
 public class OrganizationHomepageActivity extends BaseGestureActivity implements OnRefreshListener {
+
     public static final String ORG_ID = "organization_id";
 
     private PinnedHeaderListView mListView;

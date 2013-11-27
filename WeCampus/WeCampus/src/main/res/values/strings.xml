@@ -66,6 +66,9 @@
     <string name="want_to_attend">想参加</string>
     <string name="detail_like">喜欢</string>
     <string name="detail_no_participants">暂时还没有参加的人哦~</string>
+    <string name="like_success">喜欢成功</string>
+    <string name="attend_success">已参加</string>
+    <string name="please_login">请先登录</string>
 
     <string name="imageDescription">ImageView</string>
     <string name="terms_of_use">用户协议</string>
