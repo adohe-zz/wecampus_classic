@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,8 +59,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private ImageView ivCat;
 
     private ProgressBar progressBar;
+    private ProgressBar pbContent;
+    private LinearLayout lyContent;
     private LinearLayout noContentContainer;
     private FrameLayout contentContainer;
+    private RelativeLayout rlOrganization;
+    private RelativeLayout rlParticipants;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -80,9 +85,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
 
-       /* acDataHelper = new ActivityDataHelper(this);
+        acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
-        refreshActivityFromDb();*/
+        //refreshActivityFromDb();
         initWidget();
         updateActionBar();
 
@@ -125,7 +130,13 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         ivCat.setOnClickListener(clickListener);
         noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
         progressBar = (ProgressBar)findViewById(R.id.detail_no_content_pb);
+        //pbContent = (ProgressBar)findViewById(R.id.detail_content_pb);
+        lyContent = (LinearLayout)findViewById(R.id.detail_content);
         contentContainer = (FrameLayout)findViewById(R.id.detail_content_container);
+        rlOrganization = (RelativeLayout)findViewById(R.id.detail_part_three);
+        rlOrganization.setOnClickListener(clickListener);
+        rlParticipants = (RelativeLayout)findViewById(R.id.detail_part_four);
+        rlParticipants.setOnClickListener(clickListener);
         //showBottomActionBar();
 
         /*if (activity == null) {
@@ -279,6 +290,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 return true;
             case android.R.id.home:
                 finish();
+                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -557,12 +569,15 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             if(mPullToRefreshAttacher.isRefreshing()) {
                 mPullToRefreshAttacher.setRefreshComplete();
             }
+            //pbContent.setVisibility(View.GONE);
+            lyContent.setVisibility(View.VISIBLE);
             activity = data;
             noContentContainer.setVisibility(View.GONE);
             contentContainer.setVisibility(View.VISIBLE);
             //updateExtraUi();
             //updateActivityToDb();
             updateUI();
+            updateActivityToDb();
         }
     }
 
