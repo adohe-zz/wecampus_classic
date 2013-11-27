@@ -1,13 +1,16 @@
 package com.westudio.wecampus.ui.square;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -49,7 +52,7 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
 
         imageLoader = WeCampusApi.getImageLoader();
         // set banners
-        setBanners();
+        WeCampusApi.getAdvertisement(this, this, this);
 
         mSerachBar = (EditText) view.findViewById(R.id.search_bar);
         mSerachBar.setOnClickListener(this);
@@ -90,12 +93,37 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
         NetworkImageView banner1 = (NetworkImageView) view.findViewById(R.id.banner1);
         NetworkImageView banner2 = (NetworkImageView) view.findViewById(R.id.banner2);
         NetworkImageView banner3 = (NetworkImageView) view.findViewById(R.id.banner3);
+        banner1.setOnClickListener(adClickListenner);
+        banner2.setOnClickListener(adClickListenner);
+        banner3.setOnClickListener(adClickListenner);
+
         if (advertisementList != null && advertisementList.size() >= 3) {
             banner1.setImageUrl(advertisementList.get(0).getImage(), imageLoader);
             banner2.setImageUrl(advertisementList.get(1).getImage(), imageLoader);
             banner3.setImageUrl(advertisementList.get(2).getImage(), imageLoader);
         }
     }
+
+    private View.OnClickListener adClickListenner = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            String url = "";
+            if (view.getId() == R.id.banner1 && advertisementList.size() > 0) {
+                url = advertisementList.get(0).getUrl();
+            } else if (view.getId() == R.id.banner2 && advertisementList.size() > 1) {
+                url = advertisementList.get(1).getUrl();
+            } else if (view.getId() == R.id.banner3 && advertisementList.size() > 2) {
+                url = advertisementList.get(2).getUrl();
+            }
+            Intent intent = new Intent();
+            intent.setData(Uri.parse(url));
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+            }
+        }
+    };
 
     private class CategoryHandler implements Response.Listener<ActivityCategory.CategoryRequestData>,
             Response.ErrorListener {
