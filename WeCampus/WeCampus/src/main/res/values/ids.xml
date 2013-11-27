@@ -98,6 +98,7 @@
     <item name="detail_no_content" type="id">false</item>
     <item name="detail_content_container" type="id">false</item>
     <item name="detail_no_content_img" type="id">false</item>
+    <item name="detail_no_content_pb" type="id">false</item>
 
     <!-- User Profile Part -->
     <item type="id" name="user_profile_like">false</item>
