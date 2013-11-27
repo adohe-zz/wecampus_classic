@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
             android:drawSelectorOnTop="true"
+            android:footerDividersEnabled="false"
             android:listSelector="@drawable/selectable_background_we"/>
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/section"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/square_section_height"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:clickable="true"
+    android:background="@drawable/square_section_background">
+
+    <View
+        android:id="@+id/color_mark"
+        android:layout_width="@dimen/square_color_mark_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:background="#ea4140" />
+
+    <TextView
+        android:id="@+id/section_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="18dp"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_right_arrow"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="18dp"
+        android:layout_alignParentRight="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="2dp"
+        android:background="@color/menu_list_divider" />
+
+</RelativeLayout>

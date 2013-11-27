@@ -51,7 +51,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private Gender gender;
 
     public enum Gender {
-        MALE("male"), FEMALE("female"), SECRET("secret");
+        MALE("男"), FEMALE("女"), SECRET("保密");
 
         public String genderMark;
         private Gender(String gender) {

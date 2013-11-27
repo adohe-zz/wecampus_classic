@@ -1,17 +1,20 @@
 package com.westudio.wecampus.ui.square;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
@@ -27,6 +30,7 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
     private List<Advertisement> advertisementList;
     private ImageLoader imageLoader;
     private View view;
+    private CategoryHandler categoryHandler;
 
     public static SquareFragment newInstance() {
         SquareFragment f = new SquareFragment();
@@ -49,7 +53,16 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
 
         mSerachBar = (EditText) view.findViewById(R.id.search_bar);
         mSerachBar.setOnClickListener(this);
+
+        categoryHandler = new CategoryHandler(view, getActivity());
+        categoryHandler.fetchCategory();
         return view;
+    }
+
+    @Override
+    public void onDetach() {
+        WeCampusApi.cancelRequest(this);
+        super.onDetach();
     }
 
     @Override
@@ -81,6 +94,36 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
             banner1.setImageUrl(advertisementList.get(0).getImage(), imageLoader);
             banner2.setImageUrl(advertisementList.get(1).getImage(), imageLoader);
             banner3.setImageUrl(advertisementList.get(2).getImage(), imageLoader);
+        }
+    }
+
+    private class CategoryHandler implements Response.Listener<ActivityCategory.CategoryRequestData>,
+            Response.ErrorListener {
+        private LinearLayout container;
+        private Context context;
+
+        public CategoryHandler(View rootView, Context context) {
+            this.context = context;
+            container = (LinearLayout) rootView.findViewById(R.id.banner_and_catgories);
+        }
+
+        public void fetchCategory() {
+            WeCampusApi.getActivityCategory(SquareFragment.this, this, this);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+        }
+
+        @Override
+        public void onResponse(ActivityCategory.CategoryRequestData data) {
+            ActivityCategoryView categoryView;
+            for (ActivityCategory category : data.getObjects()) {
+                categoryView = new ActivityCategoryView(context);
+                categoryView.setCategory(category);
+                container.addView(categoryView);
+            }
+
         }
     }
 }

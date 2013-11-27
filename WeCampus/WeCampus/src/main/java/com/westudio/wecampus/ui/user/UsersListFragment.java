@@ -61,6 +61,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
         mUserList = (IndexableListView) view.findViewById(R.id.user_list);
         loadingFooter = new LoadingFooter(getActivity());
+        loadingFooter.setState(LoadingFooter.State.TheEnd);
 
         //TODO
         View introHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_intro_header, null);
@@ -110,6 +111,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
     }
 
     private void requestUsers() {
+        loadingFooter.setState(LoadingFooter.State.Loading);
         int id = BaseApplication.getInstance().getAccountMgr().getUserId();
         WeCampusApi.getFriends(this, id, this, this);
     }
@@ -139,11 +141,12 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        loadingFooter.setState(LoadingFooter.State.TheEnd);
     }
 
     @Override
     public void onResponse(final User.UserListData userListData) {
+        loadingFooter.setState(LoadingFooter.State.TheEnd);
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
