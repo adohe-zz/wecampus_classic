@@ -18,6 +18,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 
 /**
@@ -32,8 +33,11 @@ public class ActivityAdapter extends CursorAdapter {
     //The default image
     private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
 
+    private Context mContext;
+
     public ActivityAdapter(Context context, ListView listView) {
         super(context, null, false);
+        mContext = context;
         mLayoutInflater = ((android.app.Activity)context).getLayoutInflater();
         mListView = listView;
     }
@@ -72,7 +76,7 @@ public class ActivityAdapter extends CursorAdapter {
             holder.text_summary.setVisibility(View.GONE);
         }
         holder.text_title.setText(activity.title);
-        holder.text_time.setText("9:00-11:00 9/21(周三)");
+        holder.text_time.setText(DateUtil.getActivityTime(mContext, activity.begin, activity.end));
         holder.text_location.setText(activity.location);
         holder.text_tag.setText(activity.category);
         String color = BaseApplication.categoryMapping.get(activity.category);

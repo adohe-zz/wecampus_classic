@@ -1,5 +1,7 @@
 package com.westudio.wecampus.data.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by nankonami on 13-11-15.
  * This class is the model of list activity
@@ -26,84 +28,36 @@ public class ActivityList {
     public String description;
     //Activity image
     public String image;
+    //Activity summary
+    public String summary;
 
-    public String getTitle() {
-        return title;
+    public ActivityList() {
     }
 
-    public void setTitle(String title) {
+    public ActivityList(String title, int id, String begin, String end,
+                        String location, String category, int count_of_fans, int count_of_views,
+                        String description, String image) {
         this.title = title;
-    }
-
-    public String getBegin() {
-        return begin;
-    }
-
-    public void setBegin(String begin) {
-        this.begin = begin;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getCount_of_fans() {
-        return count_of_fans;
-    }
-
-    public void setCount_of_fans(int count_of_fans) {
-        this.count_of_fans = count_of_fans;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCount_of_views() {
-        return count_of_views;
-    }
-
-    public void setCount_of_views(int count_of_views) {
+        this.begin = begin;
+        this.end = end;
+        this.location = location;
+        this.category = category;
+        this.count_of_fans = count_of_fans;
         this.count_of_views = count_of_views;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
+        this.description = description;
         this.image = image;
+    }
+
+    public static class RequestData {
+        ArrayList<ActivityList> objects;
+
+        public ArrayList<ActivityList> getObjects() {
+            return objects;
+        }
+
+        public void setObjects(ArrayList<ActivityList> objects) {
+            this.objects = objects;
+        }
     }
 }

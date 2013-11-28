@@ -14,7 +14,16 @@
         <com.westudio.wecampus.ui.view.PinnedHeaderListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:choiceMode="singleChoice"
+            android:scrollingCache="true"
+            android:smoothScrollbar="true"
+            android:dividerHeight="13dp"
+            android:drawSelectorOnTop="true"
+            android:divider="@android:color/transparent"/>
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
 

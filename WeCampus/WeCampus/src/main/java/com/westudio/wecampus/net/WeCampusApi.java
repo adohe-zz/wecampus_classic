@@ -18,6 +18,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.ActivityCategory;
+import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.Participants;
@@ -332,10 +333,37 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
-    public static void getOrganization(Object tag, int id, Response.Listener listener,
+    /**
+     * Get the organization detail
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getOrganization(Object tag, final int id, Response.Listener listener,
                                        Response.ErrorListener errorListener) {
-        Request request = new GsonRequest(Request.Method.GET, HttpUtil.URL_ORGANIZATIONS + "/" + id,
+        Request request = new GsonRequest<Organization>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
+                HttpUtil.OrganizationOp.DETAIL, 0, null),
                 Organization.class, listener, errorListener);
+        if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the organization's activities
+     * @param tag
+     * @param id
+     * @param page
+     * @param listener
+     * @param errorListener
+     */
+    public static void getOrganizationActivity(Object tag, final int id, final int page, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<ActivityList.RequestData>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
+                HttpUtil.OrganizationOp.ACTIVITY, page, null),
+                ActivityList.RequestData.class, listener, errorListener);
         if (tag != null) {
             request.setTag(tag);
         }

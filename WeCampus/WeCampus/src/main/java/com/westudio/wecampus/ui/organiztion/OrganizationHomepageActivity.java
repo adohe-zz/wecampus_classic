@@ -7,15 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.OrgDataHelper;
+import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityAdapter;
+import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
@@ -34,17 +37,17 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     public static final String ORG_ID = "organization_id";
 
     private PinnedHeaderListView mListView;
-    private ActivityAdapter activityAdapter;
     private LoadingFooter loadingFooter;
     private HeaderTabBar mPinnedHeader;
     private IntroAdapter mIntroAdapter;
-    private TestAdapter testAdapter;
+    private OrganizationActivityAdapter activityAdapter;
 
     private int mId;
     private Organization mOrganization;
     private OrgDataHelper mOrgDataHelper;
     private OrgQueryTask mOrgQueryTask;
     private RequestOrgHandler mRequestOrgHandler;
+    private RequestOrgActivityHandler mRequestOrgAcHandler;
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override
@@ -56,6 +59,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mId = getIntent().getIntExtra(ORG_ID, -1);
         mOrgDataHelper = new OrgDataHelper(this);
         mRequestOrgHandler = new RequestOrgHandler();
+        mRequestOrgAcHandler = new RequestOrgActivityHandler();
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
@@ -67,8 +71,10 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mIntroAdapter = new IntroAdapter(this);
 
         mListView.setmPinnedHeader(mPinnedHeader);
-        testAdapter = new TestAdapter(this);
-        mListView.setAdapter(testAdapter);
+        activityAdapter = new OrganizationActivityAdapter(this);
+        CardsAnimationAdapter animationAdapter = new CardsAnimationAdapter(this, activityAdapter);
+        animationAdapter.setListView(mListView);
+        mListView.setAdapter(animationAdapter);
 
         mListView.setTabTexts(R.string.posted_activities, R.string.brief_introduction, 0);
 
@@ -87,7 +93,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mListView.setmTabSelectedListener(new PinnedHeaderListView.OnTabSelectedListener() {
             @Override
             public void onTabOneSelected() {
-                mListView.setAdapter(testAdapter);
+                mListView.setAdapter(activityAdapter);
             }
 
             @Override
@@ -102,6 +108,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         mOrgQueryTask = new OrgQueryTask();
         Utility.executeAsyncTask(mOrgQueryTask);
+        getOrgActivity(1);
     }
 
     @Override
@@ -110,6 +117,10 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         if (mOrgQueryTask != null) {
             mOrgQueryTask.cancel(true);
         }
+    }
+
+    private void getOrgActivity(final int page) {
+        WeCampusApi.getOrganizationActivity(this, mId, page, mRequestOrgAcHandler, mRequestOrgAcHandler);
     }
 
     private void updateUI() {
@@ -122,41 +133,6 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     @Override
     public void onRefreshStarted(View view) {
         WeCampusApi.getOrganization(this, mId, mRequestOrgHandler, mRequestOrgHandler);
-    }
-
-    public class TestAdapter extends BaseAdapter {
-
-        private Context mContext;
-
-        public TestAdapter(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public int getCount() {
-            return 15;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.row_user_list, viewGroup, false);
-            TextView tv = (TextView) view.findViewById(R.id.user_name);
-            tv.setText("NameHahahahhahaah");
-            return view;
-        }
     }
 
     private class OrgQueryTask extends AsyncTask<Object, Object, Object> {
@@ -198,6 +174,26 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
                     }
                 });
             }
+        }
+    }
+
+    //Request Organization Activity Handler
+    private class RequestOrgActivityHandler implements Response.Listener<ActivityList.RequestData>, Response.ErrorListener {
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            if(mPullToRefreshAttacher.isRefreshing()) {
+                mPullToRefreshAttacher.setRefreshComplete();
+            }
+        }
+
+        @Override
+        public void onResponse(ActivityList.RequestData requestData) {
+            if(mPullToRefreshAttacher.isRefreshing()) {
+                mPullToRefreshAttacher.setRefreshComplete();
+            }
+
+            activityAdapter.addAll(requestData.getObjects());
         }
     }
 }

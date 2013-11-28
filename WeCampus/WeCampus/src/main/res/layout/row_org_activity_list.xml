@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@id/activity_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="3.3dp"
+        android:layout_marginLeft="3.3dp"
+        android:background="@android:color/white"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@id/activity_list_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:background="#c9c9c9" />
+
+        <TextView
+            android:id="@id/activity_list_item_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="15dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="15dp"
+            android:textIsSelectable="false"
+            style="@style/ActivityTagStyle" />
+
+        <TextView
+            android:id="@id/activity_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/activity_list_item_image"
+            android:ellipsize="end"
+            style="@style/ActivityListTitle"/>
+
+        <TextView
+            android:id="@id/activity_list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/activity_list_item_title"
+            android:drawableLeft="@drawable/ic_list_activity_time"
+            android:drawablePadding="5dp"
+            android:layout_alignLeft="@id/activity_list_item_title"
+            style="@style/ActivityListTextView"/>
+
+        <TextView
+            android:id="@id/activity_list_item_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="35dp"
+            android:layout_below="@id/activity_list_item_time"
+            android:drawableLeft="@drawable/ic_list_activity_location"
+            android:drawablePadding="5dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_alignLeft="@id/activity_list_item_title"
+            style="@style/ActivityListTextView"/>
+
+        <TextView
+            android:id="@id/activity_list_item_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/activity_list_item_time"
+            android:layout_alignBottom="@id/activity_list_item_location"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/ic_list_activity_like_sl"
+            android:drawablePadding="5dp"
+            style="@style/ActivityListTextView"/>
+
+        <TextView
+            android:id="@id/activity_list_item_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/activity_list_item_location"
+            android:layout_alignLeft="@id/activity_list_item_title"
+            android:ellipsize="end"
+            style="@style/ActivityListSummary"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
