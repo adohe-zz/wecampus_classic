@@ -35,6 +35,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -186,6 +187,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private void updateUI() {
 
         tvTitle.setText(activity.title);
+        tvTime.setText(DateUtil.getActivityTime(this, activity.begin, activity.end));
         tvLocation.setText(activity.location);
         tvTag.setText(activity.category);
 

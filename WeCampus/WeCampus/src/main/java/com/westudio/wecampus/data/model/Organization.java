@@ -4,6 +4,8 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.OrgDataHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by nankonami on 13-11-15.
  */
@@ -47,6 +49,18 @@ public class Organization {
     }
 
     public Organization() {
+    }
+
+    public static class OrganizationRequestData {
+        private ArrayList<Organization> objects;
+
+        public ArrayList<Organization> getObjects() {
+            return objects;
+        }
+
+        public void setObjects(ArrayList<Organization> objects) {
+            this.objects = objects;
+        }
     }
 
     public int getId() {
