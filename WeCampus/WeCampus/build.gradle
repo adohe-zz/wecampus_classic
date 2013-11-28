@@ -31,6 +31,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpmime:4.1.2'
     compile 'com.makeramen:roundedimageview:1.1.0@aar'
     compile files('libs/volley.jar')
+    compile files('libs/libammsdk.jar')
     compile project(':extras:ListViewAnimationLib')
     compile project(':extras:IndexableListView')
     compile project(':extras:ViewPagerIndicator')
