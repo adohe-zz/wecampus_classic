@@ -3,6 +3,9 @@ package com.westudio.wecampus.ui.square;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
+import com.makeramen.RoundedImageView;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
@@ -90,17 +92,21 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void setBanners() {
-        NetworkImageView banner1 = (NetworkImageView) view.findViewById(R.id.banner1);
-        NetworkImageView banner2 = (NetworkImageView) view.findViewById(R.id.banner2);
-        NetworkImageView banner3 = (NetworkImageView) view.findViewById(R.id.banner3);
+        RoundedImageView banner1 = (RoundedImageView) view.findViewById(R.id.banner1);
+        RoundedImageView banner2 = (RoundedImageView) view.findViewById(R.id.banner2);
+        RoundedImageView banner3 = (RoundedImageView) view.findViewById(R.id.banner3);
         banner1.setOnClickListener(adClickListenner);
         banner2.setOnClickListener(adClickListenner);
         banner3.setOnClickListener(adClickListenner);
 
+        Drawable blankDrawable = new ColorDrawable(Color.rgb(255, 255, 255));
         if (advertisementList != null && advertisementList.size() >= 3) {
-            banner1.setImageUrl(advertisementList.get(0).getImage(), imageLoader);
-            banner2.setImageUrl(advertisementList.get(1).getImage(), imageLoader);
-            banner3.setImageUrl(advertisementList.get(2).getImage(), imageLoader);
+            WeCampusApi.requestImage(advertisementList.get(0).getImage(),
+                    WeCampusApi.getImageListener(banner1, null, blankDrawable));
+            WeCampusApi.requestImage(advertisementList.get(1).getImage(),
+                    WeCampusApi.getImageListener(banner2, null, blankDrawable));
+            WeCampusApi.requestImage(advertisementList.get(2).getImage(),
+                    WeCampusApi.getImageListener(banner3, null, blankDrawable));
         }
     }
 

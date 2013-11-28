@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -46,12 +47,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="vertical">
 
-                    <com.android.volley.toolbox.NetworkImageView
+                    <com.makeramen.RoundedImageView
                         android:id="@+id/banner1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:corner_radius="8dip"
+                        app:border_width="0dip"
+                        app:border_color="@android:color/transparent"
                         android:scaleType="centerCrop"
                         android:layout_weight="1"/>
 
@@ -61,19 +68,26 @@
                         android:orientation="horizontal"
                         android:layout_weight="1">
 
-                        <com.android.volley.toolbox.NetworkImageView
+                        <com.makeramen.RoundedImageView
                             android:id="@+id/banner2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            app:corner_radius="8dip"
+                            app:border_width="0dip"
+                            app:border_color="@android:color/transparent"/>
 
-                        <com.android.volley.toolbox.NetworkImageView
+                        <com.makeramen.RoundedImageView
                             android:id="@+id/banner3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            app:corner_radius="8dip"
+                            app:border_width="0dip"
+                            app:border_color="@android:color/transparent"/>
 
                     </LinearLayout>
 
