@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,6 +33,7 @@ import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
+import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
@@ -173,12 +176,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.detail_menu, menu);
         return true;
-    }*/
+    }
 
     private void updateUI() {
 
@@ -284,9 +287,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.detail_menu_share:
-                showShareDialog();
-                return true;
-            case R.id.detail_menu_like:
+                //showShareDialog();
+                startActivity(new Intent(this, ShareMenuActivity.class));
                 return true;
             case android.R.id.home:
                 finish();

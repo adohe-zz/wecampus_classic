@@ -158,5 +158,11 @@
     <string name="friday">周五</string>
     <string name="saturday">周六</string>
     <string name="sunday">周日</string>
-    
+    <string name="share_to">分享到</string>
+    <string name="quit">不参加了</string>
+    <string name="share_sms">短信</string>
+    <string name="share_mail">邮件</string>
+    <string name="share_wx_moment">朋友圈</string>
+    <string name="share_wx">微信好友</string>
+
 </resources>
