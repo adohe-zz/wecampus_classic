@@ -86,7 +86,8 @@
     <style name="DetailTextContent">
         <item name="android:textColor">@color/detail_content</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">5dp</item>
     </style>
 
     <style name="DetailTextPartTitle">
