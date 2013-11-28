@@ -48,6 +48,10 @@ public class HttpUtil {
     public static enum ActivityOp {
         LIST, DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
     }
+    
+    public static enum OrganizationOp {
+        SEARCH, DETAIL, FOLLOW, UNFOLLOW, FANS, ACTIVITY
+    }
 
     /**
      * Build the url query string according to the param bundle
@@ -97,7 +101,7 @@ public class HttpUtil {
                 .append(SLASH).append(BASE_ACTIVITY_PATH).append(SLASH);
         switch (activityOp) {
             case LIST:
-                sb.append("?").append("page=").append(page);
+                sb.append("?page=").append(page);
                 break;
             case DETAIL:
                 sb.append(id);
@@ -136,6 +140,33 @@ public class HttpUtil {
         return sb.toString();
     }
 
+    public static String getOrganizationByIdWithOp(final int id, OrganizationOp op, final int page, final String keyword) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_ORGANIZATION_PATH).append(SLASH);
+        switch(op) {
+            case SEARCH:
+                sb.append("?keywords=").append(keyword);
+                break;
+            case DETAIL:
+                sb.append(id);
+                break;
+            case FOLLOW:
+                sb.append(id).append(SLASH).append("follow");
+                break;
+            case UNFOLLOW:
+                sb.append(id).append(SLASH).append("unfollow");
+                break;
+            case FANS:
+                sb.append(id).append(SLASH).append("fans");
+                break;
+            case ACTIVITY:
+                sb.append(id).append(SLASH).append("activities");
+        }
+        
+        return sb.toString();
+    }
+    
     /**
      * Encrypt the password with Hash Algorithm
      * @param password
