@@ -113,6 +113,10 @@
         <activity android:name=".ui.base.ShareMenuActivity"
             android:theme="@style/ShareDialogStyle"/>
 
+        <!-- ActivityListActivity -->
+        <activity
+            android:name=".ui.activity.ActivityListActivity"/>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

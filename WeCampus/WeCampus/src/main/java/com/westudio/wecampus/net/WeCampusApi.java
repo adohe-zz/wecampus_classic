@@ -87,8 +87,6 @@ public class WeCampusApi {
      */
     public static void getActivityList(Object tag, final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Bundle bundle = getBundle();
-
         Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
                 HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST, page),
                 Activity.ActivityRequestData.class, listener, errorListener);
@@ -111,6 +109,26 @@ public class WeCampusApi {
         Request request = new AuthedGsonRequest<Activity>(Request.Method.GET,
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL, 0),
                 Activity.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the activity of one category
+     * @param tag
+     * @param page
+     * @param category
+     * @param listener
+     * @param errorListener
+     */
+    public static void getActivityOfCategory(Object tag, final int page, final String category, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
+                HttpUtil.getActivityOfCategory(category, page),
+                Activity.ActivityRequestData.class, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);
@@ -260,6 +278,23 @@ public class WeCampusApi {
                                  Response.ErrorListener errorListener) {
         Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.URL_POST_SESSION,
                 account, pwd, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Request data page by page
+     * @param tag
+     * @param clazz
+     * @param listener
+     * @param errorListener
+     */
+    public static void requestPageData(Object tag, final String url, Class clazz, Response.Listener listener,
+                                       Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(Request.Method.GET, url, clazz, listener, errorListener);
 
         if(tag != null) {
             request.setTag(tag);

@@ -100,7 +100,7 @@
                             android:layout_marginTop="10dp"
                             android:drawableLeft="@drawable/detail_location"
                             android:drawablePadding="5dp"
-                            android:singleLine="true"
+                            android:maxLines="2"
                             android:ellipsize="end"
                             style="@style/DetailTextView" />
 
@@ -141,7 +141,7 @@
                             />
 
                         <RelativeLayout
-                            android:id="@+id/detail_rl_sponsor"
+                            android:id="@id/detail_rl_sponsor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
@@ -306,11 +306,11 @@
                             android:id="@id/detail_tv_content"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/hello_world"
                             android:layout_below="@id/detail_tv_content_tips"
                             android:layout_marginTop="8dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:autoLink="all"
                             style="@style/DetailTextContent" />
 
                     </RelativeLayout>

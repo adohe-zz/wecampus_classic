@@ -6,10 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,6 +69,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private FrameLayout contentContainer;
     private RelativeLayout rlOrganization;
     private RelativeLayout rlParticipants;
+    private RelativeLayout rlCompany;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -141,6 +142,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         rlOrganization.setOnClickListener(clickListener);
         rlParticipants = (RelativeLayout)findViewById(R.id.detail_part_four);
         rlParticipants.setOnClickListener(clickListener);
+        rlCompany = (RelativeLayout)findViewById(R.id.detail_rl_sponsor);
+        rlCompany.setOnClickListener(clickListener);
         //showBottomActionBar();
 
         /*if (activity == null) {
@@ -331,6 +334,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                         Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.network_problem),
                                 Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                }
+                case R.id.detail_rl_sponsor: {
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.setData(Uri.parse(activity.sponsor_url));
+                    startActivity(intent);
                 }
             }
         }
@@ -505,7 +514,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             for(int i = 0; i < (activity.count_of_participants > 5 ? 5 : activity.count_of_participants); i++) {
                 Participants participants = participantsRequestData.getObjects().get(i);
                 final ImageView imageView = new ImageView(ac);
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43)));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
+                layoutParams.setMargins(0, 0, 10, 0);
+                imageView.setLayoutParams(layoutParams);
+                Utility.log("avatar", participants.avatar);
                 WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
                     @Override
                     public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {

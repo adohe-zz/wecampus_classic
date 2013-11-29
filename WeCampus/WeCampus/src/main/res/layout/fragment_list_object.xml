@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@id/base_page_ptr_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ListView
+            android:id="@id/object_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:choiceMode="singleChoice"
+            android:scrollingCache="true"
+            android:smoothScrollbar="true"
+            android:dividerHeight="13dp"
+            android:drawSelectorOnTop="true"
+            android:divider="@android:color/transparent"
+            android:listSelector="@drawable/selectable_background_we"/>
+
+    </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
+
+
+</LinearLayout>
