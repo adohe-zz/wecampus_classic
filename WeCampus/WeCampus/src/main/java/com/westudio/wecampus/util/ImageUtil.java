@@ -9,6 +9,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Build;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by martian on 13-9-15.
  */
@@ -74,5 +76,34 @@ public class ImageUtil {
         matrix.postScale(scaleWidth, scaleHeight);
 
         return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+    }
+
+    /**
+     * 截取正方形bitmap
+     * @param bitmap
+     * @return
+     */
+    public static byte[] cropBitmap(Bitmap bitmap) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        int wh = w > h ? h : w;
+
+        int retX = w > h ? (w - h) / 2 : 0;
+        int retY = w > h ? 0 : (h - w) / 2;
+
+        Bitmap bm = Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int quality = 100;
+        float factor = 0.8f;
+        int size;
+        do {
+            baos.reset();
+            quality = (int)(quality * factor);
+            bm.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+            size = baos.toByteArray().length;
+        } while (size >= 32 * 1024);
+        return baos.toByteArray();
     }
 }

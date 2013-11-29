@@ -8,6 +8,7 @@ import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.WXWebpageObject;
+import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by martian on 13-11-28.
@@ -16,16 +17,26 @@ public class WxShareTool {
 
     public static final String APP_ID = "wxf1bbe91a2e862e8d";
 
+    public static final String WEBSITE_URL = "http://www.wecampus.net";
+
     private IWXAPI mApi;
     private Context mContext;
     private WXMediaMessage mMessage;
 
     boolean result = true;
 
+    public enum ShareType {
+        FRIENDS, MOMENT;
+    }
+
     public WxShareTool(Context context) {
         mContext = context;
         mApi = WXAPIFactory.createWXAPI(context, APP_ID);
         mApi.registerApp(APP_ID);
+    }
+
+    public WxShareTool buildAppMessage() {
+        return buildMessage("精彩校园生活，从缤纷活动开始，快来一起试试吧！", null, WEBSITE_URL, null);
     }
 
     public WxShareTool buildMessage(String title, String text, String url, Bitmap thumb) {
@@ -37,30 +48,22 @@ public class WxShareTool {
         mMessage.title = title;
         mMessage.mediaObject = webpageObject;
         if (thumb != null) {
-            mMessage.setThumbImage(thumb);
+            mMessage.thumbData = ImageUtil.cropBitmap(thumb);
         }
         return this;
     }
 
     /**
-     * 发送给朋友
+     * 发送分享请求到微信
+     * @param type 要分享的地方
      */
-    public void sendToFriends() {
+    public void fireShareToWx(ShareType type) {
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.scene = SendMessageToWX.Req.WXSceneSession;
-        req.transaction = String.valueOf(System.currentTimeMillis());
-        req.message = mMessage;
-
-        result = mApi.sendReq(req);
-        result = false;
-    }
-
-    /**
-     * 发送给朋友圈
-     */
-    public void sendToMoments() {
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        if (type == ShareType.FRIENDS) {
+            req.scene = SendMessageToWX.Req.WXSceneSession;
+        } else {
+            req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        }
         req.transaction = String.valueOf(System.currentTimeMillis());
         req.message = mMessage;
 

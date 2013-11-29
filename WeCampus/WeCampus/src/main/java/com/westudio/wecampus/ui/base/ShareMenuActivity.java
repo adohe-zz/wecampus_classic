@@ -15,6 +15,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.database.WxShareTool;
 
@@ -77,30 +78,17 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
 
     @Override
     public void onClick(View view) {
-        WxShareTool wxShareTool = null;
+
         if (activity == null) {
             return;
         }
 
         switch (view.getId()) {
             case R.id.share_to_moment:
-
+                shareToWx(WxShareTool.ShareType.MOMENT);
                 break;
             case R.id.share_to_wx:
-                wxShareTool = new WxShareTool(this);
-                final WxShareTool finalWxShareTool = wxShareTool;
-                WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
-
-                    @Override
-                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                        shareToWx(finalWxShareTool, imageContainer.getBitmap());
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        shareToWx(finalWxShareTool, null);
-                    }
-                });
+                shareToWx(WxShareTool.ShareType.FRIENDS);
                 break;
             case R.id.share_to_sms:
 
@@ -111,9 +99,32 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         }
     }
 
-    private void shareToWx(WxShareTool tool, Bitmap bm) {
-        tool.buildMessage(activity.title, activity.location, activity.url, bm);
-        tool.sendToFriends();
+    private void shareToWx(final WxShareTool.ShareType type) {
+        WxShareTool wxShareTool = null;
+        wxShareTool = new WxShareTool(this);
+        final WxShareTool finalWxShareTool = wxShareTool;
+        WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+
+            @Override
+            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                initWxShareTool(finalWxShareTool, imageContainer.getBitmap()).fireShareToWx(type);
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                initWxShareTool(finalWxShareTool, null).fireShareToWx(type);
+            }
+        });
+    }
+
+    private WxShareTool initWxShareTool(WxShareTool tool, Bitmap bm) {
+        StringBuilder subTitle = new StringBuilder();
+        subTitle.append("时间：");
+        subTitle.append(DateUtil.getActivityTime(this, activity.begin, activity.end));
+        subTitle.append("\n地点：").append(activity.location);
+        tool.buildMessage(activity.title, subTitle.toString(), activity.url, bm);
+
+        return tool;
     }
 
     private void queryActivity(final int id) {
