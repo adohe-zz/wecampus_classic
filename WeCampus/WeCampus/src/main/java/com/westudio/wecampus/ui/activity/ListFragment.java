@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 
+import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
+import com.westudio.wecampus.util.HttpUtil;
 
 /**
  * Created by nankonami on 13-11-29.
@@ -53,17 +55,17 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
 
     @Override
     protected String getRequestUrl() {
-        return null;
+        return HttpUtil.getActivityOfCategory(mCategory, page);
     }
 
     @Override
     protected int getContentViewResId() {
-        return 0;
+        return R.layout.fragment_list_object;
     }
 
     @Override
     protected int getListViewId() {
-        return 0;
+        return R.id.object_list;
     }
 
     @Override
@@ -73,17 +75,17 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
 
     @Override
     protected BaseAdapter newAdapter() {
-        return null;
+        return new ActivityAdapter(mActivity, listView);
     }
 
     @Override
     protected Class getResponseDataClass() {
-        return null;
+        return Activity.ActivityRequestData.class;
     }
 
     @Override
-    protected void processResponseData() {
-
+    protected void processResponseData(Activity.ActivityRequestData data) {
+        mDataHelper.bulkInsert(data.getObjects());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.base;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
@@ -108,8 +110,24 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
 
         WeCampusApi.requestPageData(mActivity, getRequestUrl(), getResponseDataClass(), new Response.Listener<T>() {
             @Override
-            public void onResponse(T t) {
+            public void onResponse(final T t) {
+                Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                    @Override
+                    protected Object doInBackground(Object... params) {
+                        processResponseData(t);
+                        return null;
+                    }
 
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        super.onPostExecute(o);
+                        if(isRefreshFromTop) {
+                            mPullToRefreshAttacher.setRefreshComplete();
+                        } else {
+
+                        }
+                    }
+                });
             }
         }, new Response.ErrorListener() {
                     @Override
@@ -161,7 +179,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
     /**
      * Process the response data
      */
-    protected abstract void processResponseData();
+    protected abstract void processResponseData(T data);
 
     @Override
     public void onRefreshStarted(View view) {
