@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
-import android.util.Log;
 
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.database.Column;
 import com.westudio.wecampus.util.database.SQLiteTable;
 
@@ -105,6 +103,14 @@ public class ActivityDataHelper extends BaseDataHelper{
 
     public CursorLoader getCursorLoader() {
         return new CursorLoader(getContext(), getContentUri(), null, null, new String[]{},
+                ActivityDBInfo.ID + " DESC");
+    }
+
+    public CursorLoader getCursorLoader(String category) {
+        return new CursorLoader(getContext(), getContentUri(), null, ActivityDBInfo.CATEGORY + "=?",
+                new String[]{
+                        category
+                },
                 ActivityDBInfo.ID + " DESC");
     }
 

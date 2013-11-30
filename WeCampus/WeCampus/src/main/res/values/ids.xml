@@ -10,6 +10,7 @@
     <item type="id" name="activity_list_item_like">false</item>
     <item type="id" name="activity_list_item_image">false</item>
     <item type="id" name="activity_list_item_summary">false</item>
+    <item type="id" name="activity_list_frame">false</item>
 
     <!-- Intro Activity -->
     <item type="id" name="intro_image">false</item>
@@ -75,6 +76,7 @@
     <item type="id" name="detail_tv_content_tips">false</item>
     <item type="id" name="detail_tv_organization">false</item>
     <item type="id" name="detail_tv_ticket">false</item>
+    <item type="id" name="detail_rl_sponsor">false</item>
     <item type="id" name="detail_tv_company">false</item>
     <item type="id" name="detail_tv_tag">false</item>
     <item type="id" name="detail_tv_attend_num">false</item>
@@ -117,5 +119,9 @@
 
     <!-- Base Detail Part -->
     <item type="id" name="base_detail_frame">false</item>
+
+    <!-- Base Page List Fragment -->
+    <item name="base_page_ptr_layout" type="id">false</item>
+    <item name="object_list" type="id">false</item>
 
 </resources>

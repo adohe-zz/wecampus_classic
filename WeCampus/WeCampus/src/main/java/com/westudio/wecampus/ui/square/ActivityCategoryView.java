@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by martian on 13-11-27.
@@ -52,6 +53,6 @@ public class ActivityCategoryView extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-
+        Utility.log("click",tvSectionName.getText().toString());
     }
 }

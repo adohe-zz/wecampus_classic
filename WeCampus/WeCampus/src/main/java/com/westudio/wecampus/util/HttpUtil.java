@@ -140,6 +140,20 @@ public class HttpUtil {
         return sb.toString();
     }
 
+    /**
+     * Get the activity of one category
+     * @param category
+     * @param page
+     * @return
+     */
+    public static String getActivityOfCategory(final String category, final int page) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_ACTIVITY_PATH).append("?category=")
+                .append(category).append("&page=").append(page);
+        return sb.toString();
+    }
+
     public static String getOrganizationByIdWithOp(final int id, OrganizationOp op, final int page, final String keyword) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)

@@ -1,5 +1,7 @@
 package com.westudio.wecampus.ui.base;
 
+import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +14,39 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.GsonRequest;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
+import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import com.westudio.wecampus.util.Utility;
+
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 
 /**
  * Created by nankonami on 13-9-18.
  */
-public abstract class BasePageListFragment<T> extends BaseFragment {
+public abstract class BasePageListFragment<T> extends BaseFragment implements
+        PullToRefreshAttacher.OnRefreshListener {
+
     private BaseAdapter baseAdapter;
 
     protected ListView listView;
     protected int page = 1;
     protected LoadingFooter loadingFooter;
+
+    private PullToRefreshAttacher mPullToRefreshAttacher;
+
+    protected Activity mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.mActivity = activity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +62,11 @@ public abstract class BasePageListFragment<T> extends BaseFragment {
 
         listView.addHeaderView(header);
         listView.addFooterView(loadingFooter.getView());
+
+        mPullToRefreshAttacher = ((ActivityListActivity)mActivity).getmPullToRefreshAttacher();
+        PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.base_page_ptr_layout);
+        ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
+
         baseAdapter = newAdapter();
         AnimationAdapter animationAdapter = new CardsAnimationAdapter(BaseApplication.getContext(), baseAdapter);
         animationAdapter.setListView(listView);
@@ -77,6 +103,39 @@ public abstract class BasePageListFragment<T> extends BaseFragment {
     }
 
     protected void loadData(final int page) {
+        final boolean isRefreshFromTop = page == 1;
+        if(!mPullToRefreshAttacher.isRefreshing() && isRefreshFromTop) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
+
+        WeCampusApi.requestPageData(mActivity, getRequestUrl(), getResponseDataClass(), new Response.Listener<T>() {
+            @Override
+            public void onResponse(final T t) {
+                Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                    @Override
+                    protected Object doInBackground(Object... params) {
+                        processResponseData(t);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        super.onPostExecute(o);
+                        if(isRefreshFromTop) {
+                            mPullToRefreshAttacher.setRefreshComplete();
+                        } else {
+
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
     }
 
     /**
@@ -98,10 +157,18 @@ public abstract class BasePageListFragment<T> extends BaseFragment {
     protected abstract int getListViewId();
 
     /**
-     * Get the list view adapter
+     * Create the list view adapter
      * @return
      */
     protected abstract BaseAdapter newAdapter();
+
+    /**
+     * Get the list view adapter
+     * @return
+     */
+    protected BaseAdapter getAdapter() {
+        return baseAdapter;
+    }
 
     /**
      * Get the response data class
@@ -112,5 +179,10 @@ public abstract class BasePageListFragment<T> extends BaseFragment {
     /**
      * Process the response data
      */
-    protected abstract void processResponseData();
+    protected abstract void processResponseData(T data);
+
+    @Override
+    public void onRefreshStarted(View view) {
+        loadFirstPage();
+    }
 }

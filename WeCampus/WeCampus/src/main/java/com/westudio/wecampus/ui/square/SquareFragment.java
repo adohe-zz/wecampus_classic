@@ -23,6 +23,7 @@ import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.util.Utility;
 
 import java.util.List;
 
