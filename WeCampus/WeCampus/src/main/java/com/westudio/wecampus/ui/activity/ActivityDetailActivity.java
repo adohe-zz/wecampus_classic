@@ -35,6 +35,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
@@ -237,6 +238,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
 
         tvContent.setText(activity.description);
+        ContentUtil.addLinks(tvContent);
+
         participateHandler.refreshUI();
         if(BaseApplication.getInstance().hasAccount) {
             joinHandler.refreshUi(activity.can_join);
@@ -284,6 +287,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
 
         tvContent.setText(activity.description);
+        ContentUtil.addLinks(tvContent);
+
         participateHandler.refreshUI();
         //joinHandler.refreshUi(activity.can_join);
     }

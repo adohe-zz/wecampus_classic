@@ -117,6 +117,12 @@
         <activity
             android:name=".ui.activity.ActivityListActivity"/>
 
+        <!-- Browser Activity -->
+        <activity
+            android:name=".ui.base.WebBrowserActivity"
+            android:launchMode="singleTop">
+        </activity>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/back"
+        android:title="@string/back"
+        android:icon="@drawable/ic_action_browser_back"
+        android:showAsAction="always"/>
+
+    <item
+        android:id="@+id/forward"
+        android:title="@string/forward"
+        android:icon="@drawable/ic_action_browser_forward"
+        android:showAsAction="always"/>
+
+    <item
+        android:id="@+id/refresh"
+        android:title="@string/refresh_or_stop"
+        android:icon="@drawable/ic_action_browser_refresh"
+        android:showAsAction="always"/>
+
+    <item
+        android:id="@+id/more"
+        android:title="@string/more"
+        android:icon="@drawable/ic_action_browser_more"
+        android:showAsAction="always">
+
+        <menu>
+            <item android:id="@+id/copy_link"
+                android:title="@string/copy_link" />
+
+            <item android:id="@+id/open_in_browser"
+                android:title="@string/open_in_browser" />
+        </menu>
+    </item>
+</menu>
