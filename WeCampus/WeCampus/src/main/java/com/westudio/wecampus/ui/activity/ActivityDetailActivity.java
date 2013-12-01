@@ -49,6 +49,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  * Activity that display the detail of activity
  */
 public class ActivityDetailActivity extends SherlockFragmentActivity implements OnRefreshListener {
+    public static final int REQUEST_MENU = 99;
 
     //Widgets
     private TextView tvOrg;
@@ -299,7 +300,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             case R.id.detail_menu_share: {
                 Intent i = new Intent(this, ShareMenuActivity.class);
                 i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
-                startActivity(i);
+                i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
+                startActivityForResult(i, REQUEST_MENU);
                 return true;
             }
             case android.R.id.home: {
@@ -310,6 +312,13 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
              default: {
                  return super.onOptionsItemSelected(item);
              }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_MENU && resultCode == RESULT_OK) {
+            joinHandler.quit();
         }
     }
 
@@ -401,18 +410,28 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             WeCampusApi.joinActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
         }
 
+        public void quit() {
+            icon.setVisibility(View.VISIBLE);
+            WeCampusApi.quitActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
+        }
+
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            progressBar.setVisibility(View.GONE);
-            icon.setVisibility(View.VISIBLE);
+            refreshUi(activity.can_join);
         }
 
         @Override
         public void onResponse(Activity data) {
             activity = data;
             refreshUi(activity.can_join);
-            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.attend_success),
-                    Toast.LENGTH_SHORT).show();
+            if (!data.can_join) {
+                Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.attend_success),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.quit_success),
+                        Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         public void refreshUi(boolean canJoin) {
@@ -478,16 +497,13 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             activity = data;
             progressBar.setVisibility(View.GONE);
             icon.setVisibility(View.VISIBLE);
-            icon.setImageDrawable(getResources().getDrawable(activity.can_like ?
-                    R.drawable.ic_activity_like_un : R.drawable.ic_activity_like_sl));
-            Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.like_success),
-                    Toast.LENGTH_SHORT).show();
+            refreshUi(activity.can_like);
         }
 
         public void refreshUi(boolean canLike) {
             like = canLike;
             if(canLike) {
-
+                icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_activity_like_un));
             } else {
                 icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_activity_like_sl));
             }

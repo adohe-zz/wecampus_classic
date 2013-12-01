@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.base;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -34,12 +35,14 @@ import java.io.IOException;
  */
 public class ShareMenuActivity extends SherlockFragmentActivity implements View.OnClickListener {
     public static final String ACTIVITY_ID = "activity_id";
+    public static final String CAN_JOIN = "can_join";
 
     private View btnShareToWx;
     private View btnShareToMoment;
     private View btnShareToSms;
     private View btnShareToMail;
-
+    private View btnQuit;
+    private ProgressDialog progressDialog;
     private ActivityDataHelper dataHelper;
     private OrgDataHelper orgDataHelper;
 
@@ -69,6 +72,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         }
 
         initWidgets();
+
+        btnQuit.setVisibility(getIntent().getBooleanExtra(CAN_JOIN, true) ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -88,6 +93,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         btnShareToSms.setOnClickListener(this);
         btnShareToMail = findViewById(R.id.share_to_mail);
         btnShareToMail.setOnClickListener(this);
+        btnQuit = findViewById(R.id.item_quit);
+        btnQuit.setOnClickListener(this);
     }
 
     @Override
@@ -109,6 +116,10 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
                 break;
             case R.id.share_to_mail:
                 sendToEmail();
+                break;
+            case R.id.item_quit:
+                setResult(RESULT_OK, new Intent());
+                finish();
                 break;
         }
     }
