@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.data.model.Activity;
@@ -40,7 +41,9 @@ public class WeCampusApi {
             getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass() / 3;
 
     private static RequestQueue requestQueue = newRequestQueue();
-    private static ImageLoader imageLoader = new ImageLoader(requestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
+    private static RequestQueue imageRequestQueue = newRequestQueueForImage();
+
+    private static ImageLoader imageLoader = new ImageLoader(imageRequestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
 
     private WeCampusApi() {
     }
@@ -60,6 +63,14 @@ public class WeCampusApi {
      * @return
      */
     private static Cache openCache() {
+        return new DiskBasedCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10*1024*1024);
+    }
+
+    /**
+     * Open the disk cache for the image request
+     * @return
+     */
+    private static Cache openCacheForImage() {
         return new ResponseDiskCache(CacheUtil.getExternalCacheDir(BaseApplication.getContext()), 10*1024*1024);
     }
 
@@ -70,6 +81,16 @@ public class WeCampusApi {
      */
     private static RequestQueue newRequestQueue() {
         RequestQueue queue = new RequestQueue(openCache(), new BasicNetwork(new HurlStack()));
+        queue.start();
+
+        return queue;
+    }
+
+    /**
+     * Get the request queue for image
+     */
+    private static RequestQueue newRequestQueueForImage() {
+        RequestQueue queue = new RequestQueue(openCacheForImage(), new BasicNetwork(new HurlStack()));
         queue.start();
 
         return queue;
