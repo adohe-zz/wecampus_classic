@@ -22,7 +22,6 @@ public class AuthedGsonRequest<T> extends GsonRequest<T> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
-
         headers.put(AUTH_TOKEN_KEY, BaseApplication.getInstance().getAccountMgr().getToken());
         return headers;
     }

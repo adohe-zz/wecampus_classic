@@ -41,7 +41,7 @@ public class HttpUtil {
     public static final String SLASH = "/";
 
     public static final String BASE_ACTIVITY_PATH = "activities";
-    public static final String BASE_USER_PATH = "";
+    public static final String BASE_USER_PATH = "users";
     public static final String BASE_ORGANIZATION_PATH = "organizations";
     public static final String BASE_ACTIVITY_CATEGORY_PATH = "activity_categories";
     public static final String BASE_PROFILE_PATH = "profile";
@@ -56,6 +56,10 @@ public class HttpUtil {
 
     public static enum ProfileOp {
         DETAIL, AVATAR, BACKGROUND
+    }
+
+    public static enum UserOp {
+        FOLLOW, UNFOLLOW, FANS, FOLLOWERS, FRIENDS,JACTIVITY,FACTIVITY,FORGANIZATION,SEARCH
     }
 
     /**
@@ -211,6 +215,51 @@ public class HttpUtil {
                 break;
             case BACKGROUND:
                 sb.append("background");
+                break;
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * GET REQUEST URL OF USER BY ID WITH OPERATION
+     * @param id
+     * @param op
+     * @param keyword
+     * @return
+     */
+    public static String getUserByIdWithOp(final int id, UserOp op, final String keyword) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_USER_PATH).append(SLASH);
+
+        switch (op) {
+            case FOLLOW:
+                sb.append(id).append(SLASH).append("follow");
+                break;
+            case UNFOLLOW:
+                sb.append(id).append(SLASH).append("unfollow");
+                break;
+            case FANS:
+                sb.append(id).append(SLASH).append("fans");
+                break;
+            case FOLLOWERS:
+                sb.append(id).append(SLASH).append("followers");
+                break;
+            case FRIENDS:
+                sb.append(id).append(SLASH).append("friends");
+                break;
+            case JACTIVITY:
+                sb.append(id).append(SLASH).append("joined_activities");
+                break;
+            case FACTIVITY:
+                sb.append(id).append(SLASH).append("favorite_activities");
+                break;
+            case FORGANIZATION:
+                sb.append(id).append(SLASH).append("favorite_organizations");
+                break;
+            case SEARCH:
+                sb.append("?keywords=").append(keyword);
                 break;
         }
 

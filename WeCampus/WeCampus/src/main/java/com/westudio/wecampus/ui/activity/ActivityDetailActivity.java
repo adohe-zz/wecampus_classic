@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -50,6 +51,8 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  */
 public class ActivityDetailActivity extends SherlockFragmentActivity implements OnRefreshListener {
 
+    private static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
+
     //Widgets
     private TextView tvOrg;
     private ImageView ivOrgAvatar;
@@ -84,6 +87,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
     //Pull to refresh widget
     private PullToRefreshAttacher mPullToRefreshAttacher;
+
+    //Default male/female drawable
+    private Bitmap defaulMaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male);;
+    private Bitmap defaultFemaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -522,22 +529,25 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
                 layoutParams.setMargins(0, 0, 10, 0);
                 imageView.setLayoutParams(layoutParams);
-                Utility.log("avatar", participants.avatar);
-                WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
-                    @Override
-                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                        Bitmap data = imageContainer.getBitmap();
-                        if(data != null) {
-                            imageView.setImageBitmap(data);
-                            container.addView(imageView);
+                if(IMAGE_NOT_FOUND.equals(participants.avatar)) {
+                    imageView.setImageBitmap(defaulMaleDrawable);
+                } else {
+                    WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
+                        @Override
+                        public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                            Bitmap data = imageContainer.getBitmap();
+                            if(data != null) {
+                                imageView.setImageBitmap(data);
+                                container.addView(imageView);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         }
 

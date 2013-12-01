@@ -12,6 +12,7 @@
             android:src="@drawable/menu_header_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <couk.jenxsol.parallaxscrollview.views.ObservableScrollView
@@ -229,6 +230,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@id/activity_list_item_no_activity"
                     android:layout_height="40dp"
                     android:layout_width="match_parent"
                     android:text="@string/view_more_activities"

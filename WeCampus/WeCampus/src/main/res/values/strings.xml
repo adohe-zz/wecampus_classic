@@ -105,6 +105,7 @@
         <item>透过公共组织找到共同兴趣</item>
     </string-array>
     <string name="attend_activity_num">参加的活动(%d)</string>
+    <string name="no_attend_activity">还未参加活动噢~</string>
 
     <!-- Pick School Part -->
     <string name="choose_school">选择学校</string>

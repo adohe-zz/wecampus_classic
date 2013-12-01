@@ -4,11 +4,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CursorAdapter;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
@@ -46,7 +46,7 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = super.onCreateView(inflater, container, savedInstanceState);
         parseArgument();
-        mDataHelper = new ActivityDataHelper(mActivity);
+        mDataHelper = new ActivityDataHelper(getActivity());
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -70,12 +70,12 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
 
     @Override
     protected CursorAdapter getAdapter() {
-        return (CursorAdapter)super.getAdapter();
+        return (CursorAdapter) super.getAdapter();
     }
 
     @Override
     protected BaseAdapter newAdapter() {
-        return new ActivityAdapter(mActivity, listView);
+        return new ActivityAdapter(getActivity(), listView);
     }
 
     @Override

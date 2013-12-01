@@ -419,13 +419,44 @@ public class WeCampusApi {
      * @param listener
      * @param errorListener
      */
-    public static void getFriends(Object tag, int id, Response.Listener listener,
+    public static void getFriends(Object tag, final int id, Response.Listener listener,
                                   Response.ErrorListener errorListener) {
-        StringBuilder path = new StringBuilder(HttpUtil.URL_POST_USERS)
-                .append('/').append(id).append('/').append("friends");
-        Request request = new AuthedGsonRequest(Request.Method.GET, path.toString(),
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FRIENDS, null),
                 User.UserListData.class, listener, errorListener);
         if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the user joined activity list
+     * @param tag
+     * @param id
+     * @param errorListener
+     */
+    public static void getUserJActivity(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.JACTIVITY, null),
+                Activity.ActivityRequestData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the user favorite activity list
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getUserFOrganization(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null),
+                Organization.OrganizationRequestData.class, listener, errorListener);
+        if(tag != null) {
             request.setTag(tag);
         }
         requestQueue.add(request);
