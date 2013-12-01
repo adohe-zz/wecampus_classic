@@ -123,7 +123,7 @@
         android:background="@color/divider_bg"/>
 
     <TextView
-        android:id="@+id/menu_item_quit"
+        android:id="@+id/item_quit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/quit"
