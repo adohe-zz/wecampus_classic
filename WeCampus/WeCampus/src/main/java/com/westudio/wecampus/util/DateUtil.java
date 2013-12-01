@@ -60,7 +60,7 @@ public class DateUtil {
         Calendar calEnd = parseDateAndTime(end);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(calBegin.get(Calendar.MONTH)).append("-").append(calBegin.get(Calendar.DAY_OF_MONTH))
+        sb.append(calBegin.get(Calendar.MONTH) + 1).append("-").append(calBegin.get(Calendar.DAY_OF_MONTH))
                 .append(" ").append(getWeekDay(context, calBegin.get(Calendar.DAY_OF_WEEK)));
 
         if(isToday(begin)) {
@@ -98,7 +98,7 @@ public class DateUtil {
         Calendar calEnd = parseDateAndTime(endDate);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(calBegin.get(Calendar.MONTH)).append("-").append(calBegin.get(Calendar.DAY_OF_MONTH))
+        sb.append(calBegin.get(Calendar.MONTH) + 1).append("-").append(calBegin.get(Calendar.DAY_OF_MONTH))
                 .append(" ").append(getWeekDay(context, calBegin.get(Calendar.DAY_OF_WEEK)));
 
         if(isToday(beginDate)) {
