@@ -302,6 +302,13 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    /**
+     * Logout
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
     public static void logout(Object tag, int id, Response.Listener listener,
                               Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.DELETE,
@@ -405,6 +412,13 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    /**
+     * Get the friends list
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
     public static void getFriends(Object tag, int id, Response.Listener listener,
                                   Response.ErrorListener errorListener) {
         StringBuilder path = new StringBuilder(HttpUtil.URL_POST_USERS)
@@ -412,6 +426,22 @@ public class WeCampusApi {
         Request request = new AuthedGsonRequest(Request.Method.GET, path.toString(),
                 User.UserListData.class, listener, errorListener);
         if (tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the profile of current user
+     * @param tag
+     * @param listener
+     * @param errorListener
+     */
+    public static void getProfile(Object tag, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL),
+                User.class, listener, errorListener);
+        if(tag != null) {
             request.setTag(tag);
         }
         requestQueue.add(request);

@@ -104,6 +104,7 @@
         <item>爱你所爱</item>
         <item>透过公共组织找到共同兴趣</item>
     </string-array>
+    <string name="attend_activity_num">参加的活动(%d)</string>
 
     <!-- Pick School Part -->
     <string name="choose_school">选择学校</string>

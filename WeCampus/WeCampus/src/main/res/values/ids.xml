@@ -111,6 +111,9 @@
     <item type="id" name="user_profile_avatar">false</item>
     <item type="id" name="user_profile_watch">false</item>
     <item type="id" name="user_profile_listview">false</item>
+    <item type="id" name="user_profile_attend_activity">false</item>
+    <item name="user_profile_follow" type="id">false</item>
+    <item name="user_profile_fans" type="id">false</item>
 
     <!-- Pick School Part -->
     <item type="id" name="school_table">false</item>
