@@ -10,11 +10,16 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="backgroundSplit">@color/split_action_background</item>
     </style>
 
     <style name="ActivityTagStyle">
@@ -147,6 +152,12 @@
     <style name="ShareItemName">
         <item name="android:textSize">10.7sp</item>
         <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="WebProgressBarStyleHorizontal" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
     </style>
 
 </resources>

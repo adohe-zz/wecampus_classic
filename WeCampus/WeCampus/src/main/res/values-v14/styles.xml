@@ -7,6 +7,12 @@
     -->
     <style name="AppBaseTheme" parent="Theme.Sherlock.Light">
         <!-- API 14 theme customizations can go here. -->
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+    </style>
+
+
+    <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="android:backgroundSplit">@color/split_action_background</item>
     </style>
 
 </resources>

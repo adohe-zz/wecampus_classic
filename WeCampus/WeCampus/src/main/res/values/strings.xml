@@ -169,5 +169,12 @@
     <string name="share_wx_moment">朋友圈</string>
     <string name="share_wx">微信好友</string>
     <string name="send_email">发送邮件</string>
+    <string name="back">后退</string>
+    <string name="forward">前进</string>
+    <string name="refresh_or_stop">刷新/停止</string>
+    <string name="more">更多</string>
+    <string name="copy_link">复制链接</string>
+    <string name="open_in_browser">在浏览器中打开</string>
+    <string name="url_is_copied">链接已添加到剪贴板</string>
 
 </resources>

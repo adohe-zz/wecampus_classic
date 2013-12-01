@@ -44,5 +44,7 @@
     <color name="text_color_white">#ffffff</color>
 
     <color name="user_list_divider">#d0d0d0</color>
+    <color name="split_action_background">#3f3f3f</color>
+    <color name="progress_horizontal_progress">#13c7af</color>
 
 </resources>
