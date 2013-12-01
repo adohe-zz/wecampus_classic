@@ -37,7 +37,7 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.CONT_OF_FANS, user.count_of_fans);
         values.put(UserDBInfo.CONT_OF_FOLLOW_ACTIVITIES, user.count_of_follow_activities);
         values.put(UserDBInfo.CONT_OF_FOLLOW_ORGANIZATIONS, user.count_of_follow_organizations);
-        values.put(UserDBInfo.CONT_OF_FOLLOWER, user.count_of_follower);
+        values.put(UserDBInfo.CONT_OF_FOLLOWER, user.count_of_followers);
         values.put(UserDBInfo.CONTANT_EMAIL, user.contact_email);
         values.put(UserDBInfo.EMAIL, user.email);
         values.put(UserDBInfo.EMOTION, user.emotion);

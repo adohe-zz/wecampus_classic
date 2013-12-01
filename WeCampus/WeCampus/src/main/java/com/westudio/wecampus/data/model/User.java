@@ -16,7 +16,7 @@ public class User {
     public String avatar;
     public String contact_email;
     public int count_of_fans;
-    public int count_of_follower;
+    public int count_of_followers;
     public int count_of_follow_organizations;
     public int count_of_follow_activities;
     public String email;
@@ -44,7 +44,7 @@ public class User {
                 UserDataHelper.UserDBInfo.CONT_OF_FOLLOW_ACTIVITIES));
         user.count_of_follow_organizations = cursor.getInt(cursor.getColumnIndex(
                 UserDataHelper.UserDBInfo.CONT_OF_FOLLOW_ORGANIZATIONS));
-        user.count_of_follower = cursor.getInt(cursor.getColumnIndex(UserDataHelper.UserDBInfo.CONT_OF_FOLLOWER));
+        user.count_of_followers = cursor.getInt(cursor.getColumnIndex(UserDataHelper.UserDBInfo.CONT_OF_FOLLOWER));
         user.email = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.EMAIL));
         user.emotion = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.EMOTION));
         user.nickname = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.NICKNAME));

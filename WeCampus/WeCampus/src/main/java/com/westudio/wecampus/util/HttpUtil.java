@@ -44,6 +44,7 @@ public class HttpUtil {
     public static final String BASE_USER_PATH = "";
     public static final String BASE_ORGANIZATION_PATH = "organizations";
     public static final String BASE_ACTIVITY_CATEGORY_PATH = "activity_categories";
+    public static final String BASE_PROFILE_PATH = "profile";
 
     public static enum ActivityOp {
         LIST, DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
@@ -51,6 +52,10 @@ public class HttpUtil {
     
     public static enum OrganizationOp {
         SEARCH, DETAIL, FOLLOW, UNFOLLOW, FANS, ACTIVITY
+    }
+
+    public static enum ProfileOp {
+        DETAIL, AVATAR, BACKGROUND
     }
 
     /**
@@ -90,7 +95,7 @@ public class HttpUtil {
     }
 
     /**
-     * GET REQUEST URL OF ACTIVITY ID AND OPERATION
+     * GET REQUEST URL OF ACTIVITY BY ID AND OPERATION
      * @param id
      * @param activityOp
      * @return
@@ -154,6 +159,14 @@ public class HttpUtil {
         return sb.toString();
     }
 
+    /**
+     * GET REQUEST URL OF ORGANIZATION BY ID AND OPERATION
+     * @param id
+     * @param op
+     * @param page
+     * @param keyword
+     * @return
+     */
     public static String getOrganizationByIdWithOp(final int id, OrganizationOp op, final int page, final String keyword) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
@@ -180,7 +193,30 @@ public class HttpUtil {
         
         return sb.toString();
     }
-    
+
+    /**
+     * GET REQUEST URL OF PROFILE BY OPERATION
+     * @param op
+     * @return
+     */
+    public static String getProfileWithOp(ProfileOp op) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
+                .append(SLASH).append(BASE_PROFILE_PATH).append(SLASH);
+        switch (op) {
+            case DETAIL:
+                break;
+            case AVATAR:
+                sb.append("avatar");
+                break;
+            case BACKGROUND:
+                sb.append("background");
+                break;
+        }
+
+        return sb.toString();
+    }
+
     /**
      * Encrypt the password with Hash Algorithm
      * @param password

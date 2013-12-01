@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+        android:layout_height="match_parent">
         <ImageView
             android:scaleType="centerCrop"
             android:src="@drawable/menu_header_bg"
@@ -64,56 +64,55 @@
                         android:layout_height="36dp"
                         android:layout_width="150dp"
                         android:textColor="@android:color/white"
-                        android:layout_margin="15dp"
-                        android:visibility="gone"/>
+                        android:layout_margin="15dp"/>
 
-                     <LinearLayout
-                         android:layout_height="wrap_content"
-                         android:layout_width="match_parent"
-                         android:gravity="center_horizontal"
-                         android:layout_marginBottom="30dp">
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="30dp">
 
-                         <TextView
-                             android:id="@id/user_profile_follow"
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:textColor="@color/intro_right_btn_bg"
-                             android:textSize="20sp"/>
+                        <TextView
+                            android:text="30"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/intro_right_btn_bg"
+                            android:textSize="20sp"/>
 
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="3dp"
-                             android:text="@string/follow"
-                             style="@style/HomePageTextSecondary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/follow"
+                            style="@style/HomePageTextSecondary"/>
 
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:text="@string/horizontal_dot"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="6dp"
-                             android:layout_marginRight="6dp"
-                             style="@style/HomePageTextSecondary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/horizontal_dot"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            style="@style/HomePageTextSecondary"/>
 
-                         <TextView
-                             android:id="@id/user_profile_fans"
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:textColor="@color/intro_right_btn_bg"
-                             android:textSize="20sp"/>
+                        <TextView
+                            android:text="193"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/intro_right_btn_bg"
+                            android:textSize="20sp"/>
 
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="3dp"
-                             android:text="@string/follower"
-                             style="@style/HomePageTextSecondary"/>
-                     </LinearLayout>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="3dp"
+                            android:text="@string/follower"
+                            style="@style/HomePageTextSecondary"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 

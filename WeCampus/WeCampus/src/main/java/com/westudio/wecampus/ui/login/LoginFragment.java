@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.login;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
@@ -17,11 +18,13 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-9-18.
@@ -56,7 +59,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
         this.activity = activity;
     }
 
@@ -142,7 +144,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     @Override
-    public void onResponse(User user) {
+    public void onResponse(final User user) {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
