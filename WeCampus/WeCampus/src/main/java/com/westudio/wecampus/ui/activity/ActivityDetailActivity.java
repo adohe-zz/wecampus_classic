@@ -38,6 +38,7 @@ import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
+import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -51,8 +52,6 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  */
 public class ActivityDetailActivity extends SherlockFragmentActivity implements OnRefreshListener {
     public static final int REQUEST_MENU = 99;
-
-    private static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
 
     //Widgets
     private TextView tvOrg;
@@ -547,7 +546,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
                 layoutParams.setMargins(0, 0, 10, 0);
                 imageView.setLayoutParams(layoutParams);
-                if(IMAGE_NOT_FOUND.equals(participants.avatar)) {
+                if(HttpUtil.IMAGE_NOT_FOUND.equals(participants.avatar)) {
                     imageView.setImageBitmap(defaulMaleDrawable);
                     container.addView(imageView);
                 } else {

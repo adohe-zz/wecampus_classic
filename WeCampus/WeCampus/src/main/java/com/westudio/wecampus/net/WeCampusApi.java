@@ -473,6 +473,23 @@ public class WeCampusApi {
      * @param listener
      * @param errorListener
      */
+    public static void getUserFActivity(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FACTIVITY, null),
+                ActivityList.RequestData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the user favorite organization list
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
     public static void getUserFOrganization(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null),

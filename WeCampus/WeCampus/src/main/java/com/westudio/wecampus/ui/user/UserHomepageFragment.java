@@ -19,12 +19,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
+import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.util.DateUtil;
+import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -38,12 +42,16 @@ public class UserHomepageFragment extends Fragment {
 
     private ParallaxScrollView mScrollview;
     private Activity mActivity;
+    private View mView;
 
     //The id of current user
     private int uid;
 
     private UserDataHelper mDataHelper;
     private UserInfoHandler mInfoHandler;
+    private UserActivityHandler mJActivityHandler;
+    private UserFActivityHandler mFActivityHandler;
+    private UserOrganizationHandler mOrganizationHandler;
     private User mUser;
 
     //Widgets
@@ -71,17 +79,17 @@ public class UserHomepageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_homepage, container, false);
+        mView = inflater.inflate(R.layout.fragment_my_homepage, container, false);
 
-        mScrollview = (ParallaxScrollView) view.findViewById(R.id.scroll_view);
+        mScrollview = (ParallaxScrollView) mView.findViewById(R.id.scroll_view);
         mScrollview.setParallaxOffset(0.3f);
 
-        initWidget(view);
+        initWidget(mView);
 
         refreshUserFromDb();
         mInfoHandler.fetchUserInfo();
 
-        return view;
+        return mView;
     }
 
     /**
@@ -118,6 +126,8 @@ public class UserHomepageFragment extends Fragment {
         tvMoreActivity = (TextView)view.findViewById(R.id.activity_list_item_no_activity);
         tvMoreActivity.setOnClickListener(clickListener);
         tvAttendActivity = (TextView)view.findViewById(R.id.user_profile_attend_activity);
+
+        mJActivityHandler = new UserActivityHandler(mView);
     }
 
     @Override
@@ -179,20 +189,22 @@ public class UserHomepageFragment extends Fragment {
     private class UserActivityHandler implements Response.Listener<com.westudio.wecampus.data.model.Activity.ActivityRequestData>,
                 Response.ErrorListener {
 
-        private Activity activity;
-        private RelativeLayout rlActivityListItem;
-        private ImageView ivImage;
-        private TextView tvTitle;
-        private TextView tvTime;
-        private TextView tvLocation;
+        private View view;
+        RelativeLayout rlActivityListItem;
+        ImageView ivImage;
+        TextView tvTitle;
+        TextView tvTime;
+        TextView tvLocation;
+        TextView tvLike;
 
-        public UserActivityHandler(Activity activity) {
-            this.activity = activity;
-            rlActivityListItem = (RelativeLayout)activity.findViewById(R.id.activity_list_item);
-            ivImage = (ImageView)activity.findViewById(R.id.activity_list_item_image);
-            tvTitle = (TextView)activity.findViewById(R.id.activity_list_item_title);
-            tvTime = (TextView)activity.findViewById(R.id.activity_list_item_time);
-            tvLocation = (TextView)activity.findViewById(R.id.activity_list_item_location);
+        public UserActivityHandler(View view) {
+            this.view = view;
+            rlActivityListItem = (RelativeLayout)view.findViewById(R.id.activity_list_item);
+            ivImage = (ImageView)view.findViewById(R.id.activity_list_item_image);
+            tvTitle = (TextView)view.findViewById(R.id.activity_list_item_title);
+            tvTime = (TextView)view.findViewById(R.id.activity_list_item_time);
+            tvLocation = (TextView)view.findViewById(R.id.activity_list_item_location);
+            tvLike = (TextView)view.findViewById(R.id.activity_list_item_like);
         }
 
         @Override
@@ -202,7 +214,16 @@ public class UserHomepageFragment extends Fragment {
 
         @Override
         public void onResponse(com.westudio.wecampus.data.model.Activity.ActivityRequestData activityRequestData) {
+            com.westudio.wecampus.data.model.Activity ac = activityRequestData.getObjects().get(0);
+            tvTitle.setText(ac.title);
+            tvTime.setText(DateUtil.getActivityTime(mActivity, ac.begin, ac.end));
+            tvLocation.setText(ac.location);
+            tvLike.setText(String.valueOf(ac.count_of_fans));
+            if(HttpUtil.IMAGE_NOT_FOUND.equals(ac.image)) {
 
+            } else {
+
+            }
         }
 
         public void refreshUI() {
@@ -221,10 +242,20 @@ public class UserHomepageFragment extends Fragment {
 
     private class UserOrganizationHandler implements Response.Listener<Organization.OrganizationRequestData>, Response.ErrorListener {
 
-        private Activity activity;
+        private View view;
+        private RelativeLayout rlLikeOrganization;
+        private TextView tvNumOrg;
+        private TextView tvOrgName;
+        private TextView tvLikeOrg;
+        private ImageView ivIcon;
 
-        public UserOrganizationHandler(Activity activity) {
-
+        public UserOrganizationHandler(View view) {
+            this.view = view;
+            rlLikeOrganization = (RelativeLayout)view.findViewById(R.id.user_like_organization);
+            tvNumOrg = (TextView)view.findViewById(R.id.num_like_org);
+            tvOrgName = (TextView)view.findViewById(R.id.text_like_org_name);
+            tvLikeOrg = (TextView)view.findViewById(R.id.num_org_like_count);
+            ivIcon = (ImageView)view.findViewById(R.id.icon_like_org);
         }
 
         @Override
@@ -236,6 +267,51 @@ public class UserHomepageFragment extends Fragment {
         public void onResponse(Organization.OrganizationRequestData organizationRequestData) {
 
         }
+
+        public void refreshUI() {
+            String orgNum = getResources().getString(R.string.homepage_like_org);
+            if(mUser.count_of_follow_organizations == 0) {
+
+            }
+        }
+
+    }
+
+    private class UserFActivityHandler implements Response.Listener<ActivityList.RequestData>, Response.ErrorListener {
+
+        private View view;
+        private RelativeLayout rlFavoriteActivity;
+        private TextView tvNumActivity;
+        private TextView tvActivityName;
+        private TextView tvActivitySummary;
+        private ImageView ivActivityIcon;
+
+        public UserFActivityHandler(View view) {
+            this.view = view;
+            rlFavoriteActivity = (RelativeLayout)view.findViewById(R.id.user_like_activity);
+            tvNumActivity = (TextView)view.findViewById(R.id.num_like_activity);
+            tvActivityName = (TextView)view.findViewById(R.id.text_like_activity_name);
+            tvActivitySummary = (TextView)view.findViewById(R.id.text_like_activity_summary);
+            ivActivityIcon = (ImageView)view.findViewById(R.id.icon_like_activity);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+
+        }
+
+        @Override
+        public void onResponse(ActivityList.RequestData requestData) {
+
+        }
+
+        public void refreshUI() {
+            String activityNum = getResources().getString(R.string.homepage_like_activity);
+            if(mUser.count_of_follow_activities == 0) {
+
+            }
+        }
+
     }
 
     private class UserInfoHandler implements Response.Listener<User>, Response.ErrorListener {
@@ -258,6 +334,7 @@ public class UserHomepageFragment extends Fragment {
         public void onResponse(User user) {
             mUser = user;
             updateUI();
+            mJActivityHandler.refreshUI();
             updateActivityToDb();
         }
     }

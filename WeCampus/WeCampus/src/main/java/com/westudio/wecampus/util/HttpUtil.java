@@ -46,6 +46,8 @@ public class HttpUtil {
     public static final String BASE_ACTIVITY_CATEGORY_PATH = "activity_categories";
     public static final String BASE_PROFILE_PATH = "profile";
 
+    public static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
+
     public static enum ActivityOp {
         LIST, DETAIL, LIKE, DISLIKE, JOIN, FANS, QUIT, PARTICIPATE
     }

@@ -137,4 +137,7 @@
     <item name="setting_feedback" type="id">false</item>
     <item name="setting_about_us" type="id">false</item>
 
+    <item name="user_like_organization" type="id">false</item>
+    <item name="user_like_activity" type="id">false</item>
+
 </resources>

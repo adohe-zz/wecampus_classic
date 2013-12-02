@@ -242,6 +242,7 @@
 
                 <!-- Like Organizations Part -->
                 <RelativeLayout
+                    android:id="@id/user_like_organization"
                     android:layout_height="93.3dp"
                     android:layout_width="match_parent"
                     android:background="@android:color/white"
@@ -292,9 +293,12 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="18dp"
                         android:layout_alignParentRight="true"/>
+
                 </RelativeLayout>
 
+                <!-- Like Activity Part -->
                 <RelativeLayout
+                    android:id="@id/user_like_activity"
                     android:layout_height="93.3dp"
                     android:layout_width="match_parent"
                     android:background="@android:color/white"
@@ -304,7 +308,7 @@
                         android:id="@+id/num_like_activity"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="@string/homepage_like_org"
+                        android:text="@string/homepage_like_activity"
                         android:layout_marginTop="7dp"
                         android:layout_marginLeft="9dp"
                         android:layout_marginBottom="7dp"
@@ -329,7 +333,7 @@
                         style="@style/HomePageTextPrimary"/>
 
                     <TextView
-                        android:id="@+id/num_org_like_count"
+                        android:id="@+id/text_like_activity_summary"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/num_people_like"
@@ -345,6 +349,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="18dp"
                         android:layout_alignParentRight="true"/>
+
                 </RelativeLayout>
 
             </LinearLayout>
