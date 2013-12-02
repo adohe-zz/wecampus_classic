@@ -90,8 +90,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
     //Default male/female drawable
-    private Bitmap defaulMaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male);;
-    private Bitmap defaultFemaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female);;
+    private Bitmap defaulMaleDrawable;
+    private Bitmap defaultFemaleDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +105,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         initWidget();
         updateActionBar();
 
+        defaulMaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male);
+        defaultFemaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female);
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
     }
@@ -547,6 +549,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 imageView.setLayoutParams(layoutParams);
                 if(IMAGE_NOT_FOUND.equals(participants.avatar)) {
                     imageView.setImageBitmap(defaulMaleDrawable);
+                    container.addView(imageView);
                 } else {
                     WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
                         @Override
