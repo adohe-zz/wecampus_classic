@@ -20,6 +20,7 @@ import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by nankonami on 13-11-28.
@@ -31,11 +32,13 @@ public class OrganizationActivityAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
 
     private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+    private HashMap<String, String> colors;
 
     public OrganizationActivityAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(mContext);
         activityLists = new ArrayList<ActivityList>();
+        colors = BaseApplication.getInstance().getCategoryColors();
     }
 
     @Override
@@ -90,7 +93,10 @@ public class OrganizationActivityAdapter extends BaseAdapter {
         viewHolder.text_time.setText(DateUtil.getActivityTime(mContext, activityList.begin, activityList.end));
         viewHolder.text_location.setText(activityList.location);
         viewHolder.text_tag.setText(activityList.category);
-        String color = BaseApplication.categoryMapping.get(activityList.category);
+        String color = mContext.getString(R.string.default_category_color);
+        if (colors.containsKey(activityList.category)) {
+            color = colors.get(activityList.category);
+        }
         Drawable drawable = new ColorDrawable(Color.parseColor(color));
         viewHolder.text_tag.setBackgroundDrawable(drawable);
         viewHolder.text_like.setText(String.valueOf(activityList.count_of_fans));

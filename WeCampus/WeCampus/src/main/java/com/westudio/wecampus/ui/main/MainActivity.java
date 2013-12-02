@@ -20,6 +20,8 @@ import com.westudio.wecampus.ui.square.SquareFragment;
 import com.westudio.wecampus.ui.user.UserHomepageFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
 
+import java.util.HashMap;
+
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
 public class MainActivity extends SherlockFragmentActivity {
@@ -66,14 +68,10 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
-        CategoryHandler handler = new CategoryHandler();
-        requestActivityCategory(handler);
-        /*Fragment activityFragment = ActivityListFragment.newInstance(null);
+        Fragment activityFragment = ActivityListFragment.newInstance(null);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
-
         Fragment menuFragment = LeftMenuFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();*/
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
     }
 
     @Override
@@ -119,31 +117,5 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mDrawerLayout.closeDrawers();
 
-    }
-
-    private void requestActivityCategory(CategoryHandler handler) {
-        WeCampusApi.getActivityCategory(MainActivity.class, handler, handler);
-    }
-
-    private class CategoryHandler implements Response.Listener<ActivityCategory.CategoryRequestData>,
-            Response.ErrorListener {
-
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-
-        }
-
-        @Override
-        public void onResponse(ActivityCategory.CategoryRequestData categoryRequestData) {
-            for(ActivityCategory category : categoryRequestData.getObjects()) {
-                BaseApplication.categoryMapping.put(category.name, category.color);
-            }
-
-            Fragment activityFragment = ActivityListFragment.newInstance(null);
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
-
-            Fragment menuFragment = LeftMenuFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
-        }
     }
 }

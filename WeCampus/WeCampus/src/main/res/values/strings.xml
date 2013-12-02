@@ -177,5 +177,6 @@
     <string name="copy_link">复制链接</string>
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="url_is_copied">链接已添加到剪贴板</string>
+    <string name="default_category_color">#616161</string>
 
 </resources>
