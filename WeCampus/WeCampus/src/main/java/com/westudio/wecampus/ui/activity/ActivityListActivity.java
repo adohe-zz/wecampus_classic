@@ -25,6 +25,7 @@ public class ActivityListActivity extends SherlockFragmentActivity {
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
+        updateActionBar();
         Fragment f = ListFragment.newInstance(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_list_frame,
                 f).commit();
@@ -32,5 +33,10 @@ public class ActivityListActivity extends SherlockFragmentActivity {
 
     public PullToRefreshAttacher getmPullToRefreshAttacher() {
         return mPullToRefreshAttacher;
+    }
+
+    private void updateActionBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 }

@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,6 +23,7 @@ import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import com.westudio.wecampus.util.ListViewUtils;
 import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
@@ -80,7 +83,16 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+                if(loadingFooter.getState() == LoadingFooter.State.Loading
+                        || loadingFooter.getState() == LoadingFooter.State.TheEnd) {
+                    return;
+                }
+                if(firstVisibleItem + visibleItemCount >= totalItemCount
+                        && totalItemCount != 0
+                        && totalItemCount != listView.getFooterViewsCount() +
+                        listView.getFooterViewsCount() && listView.getCount() > 0) {
+                    loadNextPage();
+                }
             }
         });
 
@@ -102,6 +114,14 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
         loadData(page + 1);
     }
 
+    /**
+     * Load the first page and scroll to top position
+     */
+    protected void requestFirstPageAndScrollToTop() {
+        ListViewUtils.smoothScrollListViewToTop(listView);
+        loadFirstPage();
+    }
+
     protected void loadData(final int page) {
         final boolean isRefreshFromTop = page == 1;
         if(!mPullToRefreshAttacher.isRefreshing() && isRefreshFromTop) {
@@ -111,6 +131,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
         WeCampusApi.requestPageData(mActivity, getRequestUrl(), getResponseDataClass(), new Response.Listener<T>() {
             @Override
             public void onResponse(final T t) {
+                mPullToRefreshAttacher.setRefreshComplete();
                 Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
                     @Override
                     protected Object doInBackground(Object... params) {
@@ -124,7 +145,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
                         if(isRefreshFromTop) {
                             mPullToRefreshAttacher.setRefreshComplete();
                         } else {
-
+                            loadingFooter.setState(LoadingFooter.State.Idle, 3000);
                         }
                     }
                 });
@@ -132,7 +153,12 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        Toast.makeText(mActivity, R.string.network_problem, Toast.LENGTH_SHORT).show();
+                        if(isRefreshFromTop) {
+                            mPullToRefreshAttacher.setRefreshComplete();
+                        } else {
+                            loadingFooter.setState(LoadingFooter.State.Idle, 3000);
+                        }
                     }
                 }
         );

@@ -186,7 +186,6 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
         if(cursor != null && cursor.getCount() == 0) {
-            Utility.log("page", mPage);
             requestActivity(mPage);
         }
     }

@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -8,6 +9,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import com.westudio.wecampus.R;
@@ -15,6 +17,7 @@ import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by nankonami on 13-11-29.
@@ -49,6 +52,24 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
         mDataHelper = new ActivityDataHelper(getActivity());
 
         getLoaderManager().initLoader(0, null, this);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
+                Activity activity = (Activity)getAdapter().getItem(position);
+                intent.putExtra(ActivityListFragment.ACTIVITY_ID, activity.id);
+                startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
+            }
+        });
 
         return contentView;
     }
@@ -97,6 +118,7 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         getAdapter().changeCursor(cursor);
         if(cursor != null && cursor.getCount() == 0) {
+            Utility.log("no data", "no");
             loadFirstPage();
         }
     }
