@@ -21,6 +21,8 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 
+import java.util.HashMap;
+
 /**
  * Created by martian on 13-9-11.
  */
@@ -35,11 +37,14 @@ public class ActivityAdapter extends CursorAdapter {
 
     private Context mContext;
 
+    private HashMap<String, String> colors;
+
     public ActivityAdapter(Context context, ListView listView) {
         super(context, null, false);
         mContext = context;
         mLayoutInflater = ((android.app.Activity)context).getLayoutInflater();
         mListView = listView;
+        colors = BaseApplication.getInstance().getCategoryColors();
     }
 
     @Override
@@ -79,7 +84,10 @@ public class ActivityAdapter extends CursorAdapter {
         holder.text_time.setText(DateUtil.getActivityTime(mContext, activity.begin, activity.end));
         holder.text_location.setText(activity.location);
         holder.text_tag.setText(activity.category);
-        String color = BaseApplication.categoryMapping.get(activity.category);
+        String color = context.getString(R.string.default_category_color);
+        if (colors.containsKey(activity.category)) {
+            color = colors.get(activity.category);
+        }
         Drawable drawable = new ColorDrawable(Color.parseColor(color));
         holder.text_tag.setBackgroundDrawable(drawable);
         holder.text_like.setText(String.valueOf(activity.count_of_fans));
