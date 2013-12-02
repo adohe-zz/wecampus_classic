@@ -128,4 +128,13 @@
     <item name="base_page_ptr_layout" type="id">false</item>
     <item name="object_list" type="id">false</item>
 
+    <!-- Setting Part -->
+    <item name="ly_setting_login" type="id">false</item>
+    <item name="setting_login" type="id">false</item>
+    <item name="setting_change_pwd" type="id">false</item>
+    <item name="setting_clear_cache" type="id">false</item>
+    <item name="setting_share_wecampus" type="id">false</item>
+    <item name="setting_feedback" type="id">false</item>
+    <item name="setting_about_us" type="id">false</item>
+
 </resources>
