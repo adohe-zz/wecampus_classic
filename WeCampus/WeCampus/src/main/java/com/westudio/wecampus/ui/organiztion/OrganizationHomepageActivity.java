@@ -1,14 +1,10 @@
 package com.westudio.wecampus.ui.organiztion;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.AdapterView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,7 +13,8 @@ import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.net.WeCampusApi;
-import com.westudio.wecampus.ui.activity.ActivityAdapter;
+import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
+import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
@@ -103,6 +100,16 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
             @Override
             public void onTabThreeSelecd() {
+            }
+        });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(OrganizationHomepageActivity.this, ActivityDetailActivity.class);
+                ActivityList ac = (ActivityList)activityAdapter.getItem(position - 1);
+                intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
+                startActivity(intent);
             }
         });
 

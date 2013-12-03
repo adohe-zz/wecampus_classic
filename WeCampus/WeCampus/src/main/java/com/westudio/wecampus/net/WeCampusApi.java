@@ -434,6 +434,37 @@ public class WeCampusApi {
     }
 
     /**
+     * Follow the organization
+     * @param tag
+     * @param id
+     * @param errorListener
+     */
+    public static void followOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FOLLOW, 0, null),
+                Organization.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Unfollow the organization
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void unfollowOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.UNFOLLOW, 0, null),
+                Organization.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
      * Get the friends list
      * @param tag
      * @param id

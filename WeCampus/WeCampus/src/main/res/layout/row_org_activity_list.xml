@@ -3,15 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@id/activity_list_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="3.3dp"
         android:layout_marginLeft="3.3dp"
-        android:background="@android:color/white"
         android:paddingBottom="8dp">
 
         <ImageView

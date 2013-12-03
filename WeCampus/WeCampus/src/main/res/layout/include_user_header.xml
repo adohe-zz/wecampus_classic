@@ -23,6 +23,20 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/ic_menu_edit"/>
 
+        <TextView
+            android:id="@+id/user_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:text="1"
+            android:background="@drawable/user_like_shape"
+            android:drawableLeft="@drawable/ic_list_activity_like_sl"
+            android:drawablePadding="5dp"
+            style="@style/UserlikeTextView"
+            android:visibility="gone"/>
+
         <ImageView
             android:id="@+id/img_avatar"
             android:layout_width="70dp"
@@ -59,4 +73,5 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"/>
     </RelativeLayout>
+
 </FrameLayout>

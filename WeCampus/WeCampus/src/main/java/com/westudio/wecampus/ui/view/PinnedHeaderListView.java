@@ -20,6 +20,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.ImageUtil;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by jam on 13-9-23.
@@ -39,6 +40,9 @@ public class PinnedHeaderListView extends ListView {
 
     private ImageView mAvatar;
     private TextView mName;
+    private TextView mLike;
+
+    private Context mContext;
 
     public interface OnHeaderOffScreenListener {
 
@@ -57,17 +61,20 @@ public class PinnedHeaderListView extends ListView {
 
     public PinnedHeaderListView(Context context) {
         super(context);
+        mContext = context;
         this.setOnScrollListener(mOnScrollListener);
     }
 
     public PinnedHeaderListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         this.setOnScrollListener(mOnScrollListener);
         addHeaderView();
     }
 
     public PinnedHeaderListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
         this.setOnScrollListener(mOnScrollListener);
         addHeaderView();
     }
@@ -92,7 +99,15 @@ public class PinnedHeaderListView extends ListView {
         //隐藏一些不需要的widget
         header.findViewById(R.id.edit_button).setVisibility(GONE);
         header.findViewById(R.id.text_user_words).setVisibility(GONE);
+        mLike = (TextView)header.findViewById(R.id.user_like);
+        mLike.setVisibility(VISIBLE);
+        //TODO:把点击事件的响应封装再这里
+        mLike.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         mAvatar = (ImageView) header.findViewById(R.id.img_avatar);
         mName = (TextView) header.findViewById(R.id.text_user_name);
 

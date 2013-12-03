@@ -1,10 +1,12 @@
 package com.westudio.wecampus.ui.organiztion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.westudio.wecampus.R;
@@ -52,6 +54,19 @@ public class IntroAdapter extends BaseAdapter{
         view = inflater.inflate(R.layout.row_organization_brief, viewGroup, false);
         ((TextView)view.findViewById(R.id.org_name)).setText(mName);
         ((TextView)view.findViewById(R.id.org_intro)).setText(mIntroduction);
+        view.findViewById(R.id.btn_contact_with_mail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdminUrl != null) {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mAdminUrl});
+                    intent.setType("message/rfc822");
+                    mContext.startActivity(Intent.createChooser(intent, "please choose"));
+                } else {
+
+                }
+            }
+        });
         return view;
     }
 }
