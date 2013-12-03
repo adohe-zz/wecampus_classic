@@ -547,6 +547,22 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    //搜索API#############################################################################
+
+    public static void searchActivity(Object tag, int page, String keywords, Response.Listener listener,
+                                      Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(
+                Request.Method.GET,
+                HttpUtil.searchActivityByKeywords(keywords, page),
+                ActivityList.RequestData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    //####################################################################################
+
     /**
      * Request Image from network
      * @param imageUrl

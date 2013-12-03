@@ -152,6 +152,20 @@ public class HttpUtil {
     }
 
     /**
+     * Search activity by keywords
+     * @param keywords
+     * @param page
+     * @return
+     */
+    public static String searchActivityByKeywords(String keywords, int page) {
+        StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
+        sb.append(HOST_NAME).append(SLASH).append(API_VERSION).append(SLASH)
+                .append(BASE_ACTIVITY_PATH).append("?keywords=")
+                .append(keywords).append("&page=").append(page);
+        return sb.toString();
+    }
+
+    /**
      * Get the activity of one category
      * @param category
      * @param page
