@@ -459,7 +459,7 @@ public class WeCampusApi {
     public static void getUserJActivity(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.JACTIVITY, null),
-                Activity.ActivityRequestData.class, listener, errorListener);
+                ActivityList.RequestData.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);
         }

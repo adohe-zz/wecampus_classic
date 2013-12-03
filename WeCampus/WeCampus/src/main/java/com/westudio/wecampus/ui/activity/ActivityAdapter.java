@@ -16,10 +16,10 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.Constants;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.util.DateUtil;
-import com.westudio.wecampus.util.ImageUtil;
 
 import java.util.HashMap;
 
@@ -70,7 +70,7 @@ public class ActivityAdapter extends CursorAdapter {
                 + mListView.getHeaderViewsCount()));
 
         Activity activity = Activity.fromCursor(cursor);
-        if(activity.image.equals(ImageUtil.IMAGE_NOT_FOUND)) {
+        if(Constants.IMAGE_NOT_FOUND.equals(activity.image)) {
             holder.imageView.setVisibility(View.GONE);
             holder.text_summary.setVisibility(View.VISIBLE);
             holder.text_summary.setText(activity.summary);
