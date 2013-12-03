@@ -180,4 +180,12 @@
     <string name="url_is_copied">链接已添加到剪贴板</string>
     <string name="default_category_color">#616161</string>
 
+    <!-- Setting Part -->
+    <string name="setting_login">点击登录</string>
+    <string name="setting_change_pwd">修改密码</string>
+    <string name="setting_clear_cache">清除缓存</string>
+    <string name="setting_share_us">分享WeCampus</string>
+    <string name="setting_feed_back">意见反馈</string>
+    <string name="setting_about_us">关于我们</string>
+
 </resources>

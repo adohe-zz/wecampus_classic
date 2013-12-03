@@ -16,6 +16,7 @@ import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.ui.setting.SettingFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
 import com.westudio.wecampus.ui.user.UserHomepageFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
@@ -110,7 +111,10 @@ public class MainActivity extends SherlockFragmentActivity {
                 clazz = SquareFragment.class;
             } else if (type == ContentType.HOMEPAGE) {
                 clazz = UserHomepageFragment.class;
+            } else if(type == ContentType.SETTINGS) {
+                clazz = SettingFragment.class;
             }
+
             Fragment f = Fragment.instantiate(this, clazz.getName());
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
         }

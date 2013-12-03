@@ -101,7 +101,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             }
             case R.id.settings_section: {
-
+                mainActivity.changeContent(MainActivity.ContentType.SETTINGS);
                 break;
             }
             case R.id.img_avatar: {

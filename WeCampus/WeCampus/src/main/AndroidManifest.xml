@@ -123,6 +123,8 @@
             android:launchMode="singleTop">
         </activity>
 
+        <activity android:name=".ui.setting.AboutUsActivity"/>
+        
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"
