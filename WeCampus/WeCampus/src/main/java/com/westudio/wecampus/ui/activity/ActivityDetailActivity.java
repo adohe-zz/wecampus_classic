@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -306,11 +305,13 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.detail_menu_share: {
-                Intent i = new Intent(this, ShareMenuActivity.class);
-                i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
-                i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
-                startActivityForResult(i, REQUEST_MENU);
-                return true;
+                if (activity != null) {
+                    Intent i = new Intent(this, ShareMenuActivity.class);
+                    i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
+                    i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
+                    startActivityForResult(i, REQUEST_MENU);
+                    return true;
+                }
             }
             case android.R.id.home: {
                 finish();
