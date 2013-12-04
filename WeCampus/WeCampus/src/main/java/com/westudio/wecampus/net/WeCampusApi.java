@@ -547,6 +547,23 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    /**
+     * Update the user password
+     * @param tag
+     * @param oldPwd
+     * @param newPwd
+     * @param listener
+     * @param errorListener
+     */
+    public static void updatePwd(Object tag, String oldPwd, String newPwd, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new ModifyPwdRequest(oldPwd, newPwd, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     //搜索API#############################################################################
 
     public static void searchActivity(Object tag, int page, String keywords, Response.Listener listener,

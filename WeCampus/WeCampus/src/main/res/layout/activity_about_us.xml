@@ -4,4 +4,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@id/about_icon"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/ic_setting_logo"
+        android:contentDescription="@string/imageDescription" />
+
+    <TextView
+        android:id="@id/about_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/about_icon"
+        android:text="@string/about_name"/>
+
+    <TextView
+        android:id="@id/about_version"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/about_name"
+        android:layout_centerHorizontal="true"
+        android:text="@string/about_version"/>
+
+
+    <LinearLayout
+        android:id="@id/about_ly"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@id/about_version"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="3.3dp"
+        android:layout_marginRight="3.3dp"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="25dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:id="@id/about_rl_like"
+            android:clickable="true"
+            android:background="@drawable/setting_item_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/about_like_us"
+                style="@style/SettingTextStyle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_right_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.3dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:background="@color/divider_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="25dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:id="@id/about_rl_weibo"
+            android:clickable="true"
+            android:background="@drawable/setting_item_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/about_weibo"
+                style="@style/SettingTextStyle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_right_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.3dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:background="@color/divider_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="25dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:id="@id/about_rl_web"
+            android:clickable="true"
+            android:background="@drawable/setting_item_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/about_web"
+                style="@style/SettingTextStyle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_right_arrow" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@id/about_terms_of_use"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/about_ly"
+        android:layout_marginTop="150dp"
+        android:text="@string/rege_tips_two"/>
+
+    <TextView
+        android:id="@id/about_policy"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/about_terms_of_use"
+        android:layout_alignParentBottom="true"
+        android:text="@string/about_name"/>
+
 </RelativeLayout>

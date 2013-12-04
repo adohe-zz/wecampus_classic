@@ -188,4 +188,18 @@
     <string name="setting_feed_back">意见反馈</string>
     <string name="setting_about_us">关于我们</string>
 
+    <!-- Change Password Part -->
+    <string name="old_password">原密码</string>
+    <string name="new_password">新密码</string>
+    <string name="submit">提交</string>
+    <string name="input_old_pwd">请输入旧密码</string>
+    <string name="input_new_pwd">请输入新密码</string>
+
+    <!-- About Us Part -->
+    <string name="about_name">WeCampus</string>
+    <string name="about_version">1.0.0</string>
+    <string name="about_like_us">喜欢我们? 给个好评把!</string>
+    <string name="about_weibo">去微博看看我们在干嘛</string>
+    <string name="about_web">踩踩我们的网站</string>
+
 </resources>
