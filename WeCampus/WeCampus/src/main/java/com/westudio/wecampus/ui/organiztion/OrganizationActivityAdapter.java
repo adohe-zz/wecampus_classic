@@ -27,12 +27,12 @@ import java.util.HashMap;
  */
 public class OrganizationActivityAdapter extends BaseAdapter {
 
-    private ArrayList<ActivityList> activityLists;
-    private Context mContext;
-    private LayoutInflater mLayoutInflater;
+    protected ArrayList<ActivityList> activityLists;
+    protected Context mContext;
+    protected LayoutInflater mLayoutInflater;
 
-    private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
-    private HashMap<String, String> colors;
+    protected Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+    protected HashMap<String, String> colors;
 
     public OrganizationActivityAdapter(Context context) {
         mContext = context;
@@ -109,7 +109,7 @@ public class OrganizationActivityAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    static class ViewHolder {
+    public static class ViewHolder {
         ImageView imageView;
         TextView text_tag;
         TextView text_title;
