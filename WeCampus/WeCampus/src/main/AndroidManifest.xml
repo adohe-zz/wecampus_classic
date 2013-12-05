@@ -125,6 +125,8 @@
 
         <activity android:name=".ui.setting.AboutUsActivity"/>
 
+        <activity android:name=".ui.setting.ChangePwdActivity"/>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

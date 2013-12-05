@@ -12,23 +12,31 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by martian on 13-11-15.
+ * Created by nankonami on 13-12-4.
  */
-public class UpdateProfileRequest extends AuthedGsonRequest<User>{
+public class ModifyPwdRequest extends AuthedGsonRequest<User> {
 
-    private User mUser;
+    private String oldPwd;
+    private String newPwd;
 
-    public UpdateProfileRequest(User user, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(Method.POST, HttpUtil.URL_PROFILE, User.class, successListener, errorListener);
-        this.mUser = user;
+    public ModifyPwdRequest(String oldPwd, String newPwd, Response.Listener successListener, Response.ErrorListener errorListener) {
+        super(Method.POST, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.PASSWORD), User.class, successListener, errorListener);
+        this.oldPwd = oldPwd;
+        this.newPwd = newPwd;
+    }
+
+    @Override
+    public String getBodyContentType() {
+        return "multipart/form-data";
     }
 
     @Override
     public byte[] getBody() throws AuthFailureError {
         JSONObject json = new JSONObject();
         try {
-            json.put("name", mUser.name);
-            json.put("words", mUser.words);
+            json.put("old_password", oldPwd);
+            json.put("password", newPwd);
+            json.put("password_confirmation", newPwd);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -39,10 +47,5 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
         } catch (UnsupportedEncodingException e) {
             return null;
         }
-    }
-
-    @Override
-    public String getBodyContentType() {
-        return "multipart/form-data";
     }
 }

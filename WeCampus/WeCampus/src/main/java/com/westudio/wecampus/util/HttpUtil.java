@@ -57,7 +57,7 @@ public class HttpUtil {
     }
 
     public static enum ProfileOp {
-        DETAIL, AVATAR, BACKGROUND
+        DETAIL, AVATAR, BACKGROUND, PASSWORD
     }
 
     public static enum UserOp {
@@ -232,6 +232,9 @@ public class HttpUtil {
                 break;
             case BACKGROUND:
                 sb.append("background");
+                break;
+            case PASSWORD:
+                sb.append("modify_password");
                 break;
         }
 

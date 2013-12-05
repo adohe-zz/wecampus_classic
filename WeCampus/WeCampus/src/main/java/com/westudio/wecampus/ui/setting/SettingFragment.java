@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.setting;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,26 @@ public class SettingFragment extends SherlockFragment {
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ly_setting_change_pwd: {
+                    if(BaseApplication.getInstance().hasAccount) {
+                        Intent intent = new Intent(mActivity, ChangePwdActivity.class);
+                        startActivity(intent);
+                        mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                    } else {
 
+                    }
+                }
+                case R.id.ly_setting_about_us: {
+                    Intent intent = new Intent(mActivity, AboutUsActivity.class);
+                    startActivity(intent);
+                    mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                }
+                case R.id.ly_setting_clear_cache:
+                    break;
+                case R.id.ly_setting_feedback:
+                    break;
+            }
         }
     };
 }

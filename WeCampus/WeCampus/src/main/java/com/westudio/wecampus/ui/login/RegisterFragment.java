@@ -98,15 +98,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         edtSex = (TextView)view.findViewById(R.id.rege_edt_sex);
         edtSex.setOnClickListener(this);
         tvSchool = (TextView)view.findViewById(R.id.rege_tv_school);
-//        tvSchool.setText("学        校");
         tvEmail = (TextView)view.findViewById(R.id.rege_tv_email);
-//        tvEmail.setText("邮        箱");
         tvPwd = (TextView)view.findViewById(R.id.rege_tv_pwd);
-//        tvPwd.setText("密        码");
         tvNickName = (TextView)view.findViewById(R.id.rege_tv_nickname);
-//        tvNickName.setText("昵        称");
         tvSex = (TextView)view.findViewById(R.id.rege_tv_sex);
-//        tvSex.setText("性        别");
         btnSubmit = (Button)view.findViewById(R.id.rege_btn_register);
         btnSubmit.setOnClickListener(this);
         tvTipsTwo = (TextView)view.findViewById(R.id.rege_tips_two);

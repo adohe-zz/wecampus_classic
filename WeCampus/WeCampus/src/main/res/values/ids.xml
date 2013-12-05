@@ -139,4 +139,20 @@
     <item name="user_like_organization" type="id">false</item>
     <item name="user_like_activity" type="id">false</item>
 
+    <!-- Change Password Part -->
+    <item name="change_old_pwd" type="id">false</item>
+    <item name="change_new_pwd" type="id">false</item>
+    <item name="change_submit" type="id">false</item>
+
+    <!-- About Us Part -->
+    <item name="about_icon" type="id">false</item>
+    <item name="about_name" type="id">false</item>
+    <item name="about_version" type="id">false</item>
+    <item name="about_ly" type="id">false</item>
+    <item name="about_rl_like" type="id">false</item>
+    <item name="about_rl_weibo" type="id">false</item>
+    <item name="about_rl_web" type="id">false</item>
+    <item name="about_terms_of_use" type="id">false</item>
+    <item name="about_policy" type="id">false</item>
+
 </resources>
