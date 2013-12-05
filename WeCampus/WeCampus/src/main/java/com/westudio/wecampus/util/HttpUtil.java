@@ -193,7 +193,7 @@ public class HttpUtil {
                 .append(SLASH).append(BASE_ORGANIZATION_PATH).append(SLASH);
         switch(op) {
             case SEARCH:
-                sb.append("?keywords=").append(keyword);
+                sb.append("?keywords=").append(keyword).append("&page=").append(page);
                 break;
             case DETAIL:
                 sb.append(id);
@@ -209,6 +209,7 @@ public class HttpUtil {
                 break;
             case ACTIVITY:
                 sb.append(id).append(SLASH).append("activities");
+                break;
         }
         
         return sb.toString();

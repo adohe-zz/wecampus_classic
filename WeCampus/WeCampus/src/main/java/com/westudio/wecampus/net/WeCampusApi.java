@@ -561,6 +561,18 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void searchOrgs(Object tag, int page, String keywords, Response.Listener listener,
+                                  Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(
+                Request.Method.GET,
+                HttpUtil.getOrganizationByIdWithOp(0, HttpUtil.OrganizationOp.SEARCH, page, keywords),
+                Organization.OrganizationRequestData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     //####################################################################################
 
     /**
