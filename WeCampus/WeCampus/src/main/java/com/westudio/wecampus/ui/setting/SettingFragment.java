@@ -1,17 +1,21 @@
 package com.westudio.wecampus.ui.setting;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.main.MainActivity;
 
 /**
@@ -89,18 +93,34 @@ public class SettingFragment extends SherlockFragment {
                         startActivity(intent);
                         mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
                     } else {
-
+                        Toast.makeText(mActivity, R.string.please_login, Toast.LENGTH_SHORT).show();
                     }
+                    break;
                 }
                 case R.id.ly_setting_about_us: {
                     Intent intent = new Intent(mActivity, AboutUsActivity.class);
                     startActivity(intent);
                     mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                    break;
                 }
                 case R.id.ly_setting_clear_cache:
                     break;
-                case R.id.ly_setting_feedback:
+                case R.id.ly_setting_feedback: {
+                    Uri emailUri = Uri.parse("mailto:wetongji2012@gmail.com");
+                    Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri);
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "WeCampus Android Feedback");
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
+                }
+                case R.id.ly_setting_share_wecampus: {
+                    Intent intent = new Intent(mActivity, ShareMenuActivity.class);
+                    startActivity(intent);
+                    break;
+                }
             }
         }
     };

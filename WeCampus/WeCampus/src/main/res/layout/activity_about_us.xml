@@ -18,17 +18,21 @@
         android:id="@id/about_name"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/about_icon"
-        android:text="@string/about_name"/>
+        android:text="@string/about_name"
+        style="@style/AboutUsName"/>
 
     <TextView
         android:id="@id/about_version"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_below="@id/about_name"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/about_version"/>
+        android:text="@string/about_version"
+        style="@style/AboutUsVersion"/>
 
 
     <LinearLayout
@@ -37,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_below="@id/about_version"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="3.3dp"
         android:layout_marginRight="3.3dp"
         android:background="@android:color/white">
@@ -120,6 +124,7 @@
             android:background="@drawable/setting_item_selector">
 
             <TextView
+                android:id="@id/about_web"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -142,16 +147,17 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/about_ly"
-        android:layout_marginTop="150dp"
-        android:text="@string/rege_tips_two"/>
+        android:layout_marginTop="90dp"
+        android:text="@string/user_assignment"
+        style="@style/AboutUsUser"/>
 
     <TextView
         android:id="@id/about_policy"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/about_terms_of_use"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:text="@string/about_name"/>
 
 </RelativeLayout>

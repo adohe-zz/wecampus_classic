@@ -21,6 +21,14 @@ public class ContentUtil {
         }
     }
 
+    public static void addLinks(TextView view, String url) {
+        CharSequence content = view.getText();
+        view.setText(convertToSpannableString(url));
+        if (view.getLinksClickable()) {
+            view.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+    }
+
     private static SpannableString convertToSpannableString(String txt) {
         String hackTxt;
         if (txt.startsWith("[") && txt.endsWith("]")) {

@@ -48,4 +48,6 @@
     <color name="progress_horizontal_progress">#13c7af</color>
     <color name="user_like_color">#9b9b9b</color>
 
+    <color name="about_us_name">#666666</color>
+
 </resources>

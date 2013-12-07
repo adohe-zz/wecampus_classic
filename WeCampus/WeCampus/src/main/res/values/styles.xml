@@ -172,4 +172,28 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="AboutUsName">
+        <item name="android:textColor">@color/about_us_name</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AboutUsVersion">
+        <item name="android:textColor">@color/progress_horizontal_progress</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15.3sp</item>
+    </style>
+
+    <style name="AboutUsText">
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AboutUsUser">
+        <item name="android:textColor">@color/about_us_name</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

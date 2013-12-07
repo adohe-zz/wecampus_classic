@@ -46,6 +46,7 @@
     <string name="rege_nickname_tips">昵称最多八个字哟</string>
     <string name="rege_tips_one">点击提交，代表您已接受并同意</string>
     <string name="rege_tips_two"><u>WeCampus用户使用协议</u></string>
+    <string name="user_assignment"><u>用户使用协议</u></string>
     <string name="rege_finish">完成</string>
     <string name="rege_description">简单描述下自己</string>
     <string name="rege_skip">跳过>></string>
@@ -201,5 +202,6 @@
     <string name="about_like_us">喜欢我们? 给个好评把!</string>
     <string name="about_weibo">去微博看看我们在干嘛</string>
     <string name="about_web">踩踩我们的网站</string>
+    <string name="no_market">对不起,你的手机上暂时还没有应用商店哦!</string>
 
 </resources>
