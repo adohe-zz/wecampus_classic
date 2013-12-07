@@ -14,15 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
-import com.westudio.wecampus.util.Utility;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by nankonami on 13-9-20.
@@ -30,6 +36,9 @@ import com.westudio.wecampus.util.Utility;
  */
 public class RegisterFragment extends BaseFragment implements View.OnClickListener,
         Response.ErrorListener, Response.Listener<User>{
+
+    private static final String EAMIL_ERROR = "email";
+    private static final String NICKNAME_ERROR = "nickname";
 
     private Activity activity;
 
@@ -179,7 +188,23 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        Toast.makeText(getActivity(), R.string.register_fail, Toast.LENGTH_SHORT).show();
+        NetworkResponse response = volleyError.networkResponse;
+        try {
+            String errResponse = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            JSONArray array = new JSONArray(errResponse);
+            if(array.length() != 0) {
+                String error = array.getJSONObject(0).getString("error");
+                if(EAMIL_ERROR.equals(error)) {
+                    Toast.makeText(getActivity(), R.string.register_email_repeat, Toast.LENGTH_SHORT).show();
+                } else if(NICKNAME_ERROR.equals(error)) {
+                    Toast.makeText(getActivity(), R.string.register_nickname_repeat, Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
