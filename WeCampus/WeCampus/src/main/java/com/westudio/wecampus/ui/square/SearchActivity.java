@@ -27,6 +27,7 @@ public class SearchActivity extends BaseDetailActivity{
     // 3个不同的适配器
     private SearchActivityAdapter mActivityAdapter;
     private SearchOrgAdapter mOrgAdapter;
+    private SearchUserAdapter mSearchUserAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class SearchActivity extends BaseDetailActivity{
         findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
         mActivityAdapter = new SearchActivityAdapter(this);
         mOrgAdapter = new SearchOrgAdapter(this);
+        mSearchUserAdapter = new SearchUserAdapter(this);
     }
 
     @Override
@@ -67,7 +69,8 @@ public class SearchActivity extends BaseDetailActivity{
                         break;
                     }
                     case 1: {
-
+                        mSearchUserAdapter.requestData(textView.getText().toString(), 1);
+                        mLvResult.setAdapter(mSearchUserAdapter);
                         break;
                     }
                     case 2: {

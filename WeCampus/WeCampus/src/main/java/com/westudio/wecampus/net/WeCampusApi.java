@@ -590,6 +590,18 @@ public class WeCampusApi {
         requestQueue.add(request);
     }
 
+    public static void searchUser(Object tag, int page, String keywords, Response.Listener listener,
+                                  Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(
+                Request.Method.GET,
+                HttpUtil.getUserByIdWithOp(0, HttpUtil.UserOp.SEARCH, keywords) + "&page=" + page,
+                User.UserListData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     //####################################################################################
 
     /**

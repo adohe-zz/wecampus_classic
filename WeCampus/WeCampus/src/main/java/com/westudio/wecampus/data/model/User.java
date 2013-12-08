@@ -4,7 +4,7 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.UserDataHelper;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by jam on 13-9-19.
@@ -56,6 +56,6 @@ public class User {
     }
 
     public class UserListData {
-        public List<User> objects;
+        public ArrayList<User> objects;
     }
 }

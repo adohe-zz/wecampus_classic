@@ -1,7 +1,6 @@
 package com.westudio.wecampus.ui.square;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -48,7 +47,7 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
 
         Organization org = mList.get(i);
         if(org.avatar.equals(ImageUtil.IMAGE_NOT_FOUND)) {
-
+            viewHolder.imageView.setImageDrawable(defalutDrawable);
         } else {
             WeCampusApi.requestImage(org.getAvatar(),
                     WeCampusApi.getImageListener(viewHolder.imageView, defalutDrawable, defalutDrawable));
