@@ -1,26 +1,36 @@
 package com.westudio.wecampus.ui.organiztion;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
+import com.westudio.wecampus.data.model.OrgFans;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.ui.view.PinnedHeaderListView;
 import com.westudio.wecampus.util.Utility;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
@@ -45,18 +55,25 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     private OrgQueryTask mOrgQueryTask;
     private RequestOrgHandler mRequestOrgHandler;
     private RequestOrgActivityHandler mRequestOrgAcHandler;
+    private RequestOrgFansHandler mRequestOrgFansHandler;
+    private FollowOrganizationHandler followOrganizationHandler;
     private PullToRefreshAttacher mPullToRefreshAttacher;
+
+    private List<OrgFans> fansList = new ArrayList<OrgFans>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_homepage);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        updateActionBar();
 
         mId = getIntent().getIntExtra(ORG_ID, -1);
         mOrgDataHelper = new OrgDataHelper(this);
         mRequestOrgHandler = new RequestOrgHandler();
         mRequestOrgAcHandler = new RequestOrgActivityHandler();
+        mRequestOrgFansHandler = new RequestOrgFansHandler(this);
+        followOrganizationHandler = new FollowOrganizationHandler(this);
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
@@ -118,12 +135,40 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         getOrgActivity(1);
     }
 
+    private void updateActionBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.org_intro);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mOrgQueryTask != null) {
             mOrgQueryTask.cancel(true);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     private void getOrgActivity(final int page) {
@@ -135,6 +180,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mListView.setAvatar(mOrganization.avatar);
         mIntroAdapter.setData(mOrganization.admin_name, mOrganization.description,
                 mOrganization.admin_url);
+        mRequestOrgFansHandler.refreshUI();
     }
 
     @Override
@@ -201,6 +247,69 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
             }
 
             activityAdapter.addAll(requestData.getObjects());
+        }
+    }
+
+    //Request Organization fans handler
+    private class RequestOrgFansHandler implements Response.Listener<OrgFans.RequestData>, Response.ErrorListener {
+
+        private Activity ac;
+        private TextView tvLike;
+
+        public RequestOrgFansHandler(Activity activity) {
+            this.ac = activity;
+            tvLike = (TextView)ac.findViewById(R.id.user_like);
+            tvLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(BaseApplication.getInstance().hasAccount) {
+                        if(Utility.isConnect(OrganizationHomepageActivity.this)) {
+                            followOrganizationHandler.followOrganization();
+                        } else {
+                            Toast.makeText(OrganizationHomepageActivity.this, getResources().getString(R.string.network_problem),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(OrganizationHomepageActivity.this, getResources().getString(R.string.please_login),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            tvLike.setText("0");
+        }
+
+        @Override
+        public void onResponse(OrgFans.RequestData requestData) {
+            tvLike.setText(String.valueOf(requestData.getObjects().size()));
+            fansList.addAll(requestData.getObjects());
+        }
+
+        public void refreshUI() {
+            WeCampusApi.getOrganizationFans(OrganizationHomepageActivity.this, mId, this, this);
+        }
+    }
+
+    //Follow organization handler
+    private class FollowOrganizationHandler implements Response.Listener<Organization>, Response.ErrorListener {
+
+        public FollowOrganizationHandler(Activity activity) {
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+
+        }
+
+        @Override
+        public void onResponse(Organization organization) {
+
+        }
+
+        public void followOrganization() {
         }
     }
 }

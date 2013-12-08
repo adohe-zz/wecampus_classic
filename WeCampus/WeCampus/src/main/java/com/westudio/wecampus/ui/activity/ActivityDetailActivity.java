@@ -346,6 +346,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     Intent intent = new Intent(ActivityDetailActivity.this, OrganizationHomepageActivity.class);
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, activity.organization_id);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
                     break;
                 }
                 case R.id.detail_no_content_img: {

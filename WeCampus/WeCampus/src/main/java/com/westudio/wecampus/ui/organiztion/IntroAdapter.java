@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.util.Utility;
 
 /**
  * Created by martian on 13-11-22.
  */
-public class IntroAdapter extends BaseAdapter{
+public class IntroAdapter extends BaseAdapter {
 
     private Context mContext;
     private String mName;
@@ -51,10 +53,18 @@ public class IntroAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.row_organization_brief, viewGroup, false);
-        ((TextView)view.findViewById(R.id.org_name)).setText(mName);
-        ((TextView)view.findViewById(R.id.org_intro)).setText(mIntroduction);
-        view.findViewById(R.id.btn_contact_with_mail).setOnClickListener(new View.OnClickListener() {
+        View mView = view;
+        if(mView == null) {
+            mView = inflater.inflate(R.layout.row_organization_brief, viewGroup, false);
+        }
+
+        TextView name = (TextView)mView.findViewById(R.id.org_name);
+        TextView intro = (TextView)mView.findViewById(R.id.org_intro);
+        Button btn = (Button)mView.findViewById(R.id.btn_contact_with_mail);
+
+        name.setText(mName);
+        intro.setText(mIntroduction);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mAdminUrl != null) {
@@ -63,10 +73,11 @@ public class IntroAdapter extends BaseAdapter{
                     intent.setType("message/rfc822");
                     mContext.startActivity(Intent.createChooser(intent, "please choose"));
                 } else {
-
+                    Toast.makeText(mContext, R.string.org_no_email, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        return view;
+
+        return mView;
     }
 }

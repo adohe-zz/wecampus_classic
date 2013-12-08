@@ -21,6 +21,7 @@ import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Advertisement;
+import com.westudio.wecampus.data.model.OrgFans;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.School;
@@ -458,6 +459,22 @@ public class WeCampusApi {
     public static void unfollowOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.UNFOLLOW, 0, null),
                 Organization.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the organization fans list
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getOrganizationFans(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<OrgFans.RequestData>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FANS, 0, null),
+                OrgFans.RequestData.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);
         }

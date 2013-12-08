@@ -24,7 +24,8 @@
             android:dividerHeight="13dp"
             android:drawSelectorOnTop="true"
             android:divider="@android:color/transparent"
-            android:listSelector="@drawable/selectable_background_we"/>
+            android:listSelector="@drawable/selectable_background_we"
+            android:descendantFocusability="blocksDescendants"/>
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
 

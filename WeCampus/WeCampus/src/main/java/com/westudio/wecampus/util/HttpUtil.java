@@ -13,6 +13,7 @@ import java.util.Set;
  * A common http util to generate the request url and so on.
  */
 public class HttpUtil {
+
     // constants of request URLs
     public static final String URL_GET_ACTIVITY_LIST = "http://api.wecampus.net/v1/activities";
 
@@ -57,7 +58,7 @@ public class HttpUtil {
     }
 
     public static enum ProfileOp {
-        DETAIL, AVATAR, BACKGROUND, PASSWORD
+        DETAIL, AVATAR, BACKGROUND, PASSWORD, FPASSWORD
     }
 
     public static enum UserOp {
@@ -235,6 +236,9 @@ public class HttpUtil {
                 break;
             case PASSWORD:
                 sb.append("modify_password");
+                break;
+            case FPASSWORD:
+                sb.append("forget_password");
                 break;
         }
 

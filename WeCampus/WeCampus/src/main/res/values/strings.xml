@@ -206,4 +206,8 @@
     <string name="about_web">踩踩我们的网站</string>
     <string name="no_market">对不起,你的手机上暂时还没有应用商店哦!</string>
 
+    <string name="org_no_email">该组织暂时还没有设置邮箱</string>
+    <string name="login_email">登录邮箱</string>
+    <string name="forget_pwd_title">忘记密码</string>
+
 </resources>

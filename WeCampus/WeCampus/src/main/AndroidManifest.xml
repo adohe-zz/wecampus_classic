@@ -127,6 +127,8 @@
 
         <activity android:name=".ui.setting.ChangePwdActivity"/>
 
+        <activity android:name=".ui.login.ForgetPwdActivity"/>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

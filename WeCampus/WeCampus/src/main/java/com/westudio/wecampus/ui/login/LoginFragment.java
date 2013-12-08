@@ -104,7 +104,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 handleLogin(email, pwd);
             }
         } else if(v.getId() == R.id.login_forget_pwd) {
-
+            Intent intent = new Intent(getActivity(), ForgetPwdActivity.class);
+            startActivity(intent);
         }
     }
 

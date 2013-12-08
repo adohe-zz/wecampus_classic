@@ -10,11 +10,14 @@
         android:angle="270">
     </gradient>
     <padding
-        android:bottom="5dp"
-        android:left="15dp"
-        android:right="15dp"
-        android:top="5dp">
+        android:bottom="3dp"
+        android:left="17dp"
+        android:right="17dp"
+        android:top="3dp">
     </padding>
     <corners
         android:radius="12dp"/>
+    <stroke
+        android:color="@android:color/white"
+        android:width="0.1dp"/>
 </shape>
