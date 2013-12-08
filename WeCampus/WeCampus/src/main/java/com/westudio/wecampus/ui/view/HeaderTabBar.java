@@ -17,6 +17,7 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
     private TextView mTab2;
     private TextView mTab3;
 
+    private int mCurrentPosition = 0;
 
     // Implement a default OnTabSelectedListener
     public OnTabSelectedListener mOnTabSelectedListener = new OnTabSelectedListener() {
@@ -65,18 +66,21 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
                 mTab2.setSelected(false);
                 mTab3.setSelected(false);
                 mOnTabSelectedListener.onFirstTabSelected();
+                mCurrentPosition = 0;
                 break;
             }
             case R.id.tab2: {
                 mTab1.setSelected(false);
                 mTab3.setSelected(false);
                 mOnTabSelectedListener.onSecondTabSelected();
+                mCurrentPosition = 1;
                 break;
             }
             case R.id.tab3: {
                 mTab2.setSelected(false);
                 mTab1.setSelected(false);
                 mOnTabSelectedListener.onThirdTabSelected();
+                mCurrentPosition = 2;
                 break;
             }
             default: {
@@ -122,5 +126,9 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
         } else {
             mTab3.setVisibility(View.GONE);
         }
+    }
+
+    public int getCurrentPosition() {
+        return mCurrentPosition;
     }
 }

@@ -205,5 +205,8 @@
     <string name="about_weibo">去微博看看我们在干嘛</string>
     <string name="about_web">踩踩我们的网站</string>
     <string name="no_market">对不起,你的手机上暂时还没有应用商店哦!</string>
+    <string name="search_tab_activity">校园活动</string>
+    <string name="serach_tab_user">用户</string>
+    <string name="search_tab_org">公共组织</string>
 
 </resources>

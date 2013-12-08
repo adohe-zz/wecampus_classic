@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.square;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -16,12 +19,14 @@ import com.westudio.wecampus.util.ImageUtil;
 /**
  * Created by martian on 13-12-5.
  */
-public class SearchOrgAdapter extends BaseSearchAdapter<Organization> {
+public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
+        Response.Listener<Organization.OrganizationRequestData>, Response.ErrorListener{
     private Drawable defalutDrawable;
+    private boolean isLastPage;
 
-    public SearchOrgAdapter() {
-        super();
-        defalutDrawable = new ColorDrawable(Color.rgb(120, 120, 120));
+    public SearchOrgAdapter(Context context) {
+        super(context);
+        defalutDrawable = new ColorDrawable(context.getResources().getColor(R.color.default_org_avatar));
     }
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
@@ -52,5 +57,20 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> {
         viewHolder.textName.setText(org.getName());
 
         return convertView;
+    }
+
+    public void requestData(String keywords, int page) {
+        WeCampusApi.searchOrgs(mContext, page, keywords, this, this);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        //TODO
+    }
+
+    @Override
+    public void onResponse(Organization.OrganizationRequestData data) {
+        isLastPage = data.getObjects().isEmpty();
+        addAll(data.getObjects());
     }
 }
