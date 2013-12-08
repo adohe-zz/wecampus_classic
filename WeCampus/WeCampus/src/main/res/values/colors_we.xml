@@ -50,4 +50,7 @@
 
     <color name="about_us_name">#666666</color>
 
+    <color name="default_org_avatar">#dedede</color>
+    <color name="default_ad_color">#e5e1e1</color>
+
 </resources>

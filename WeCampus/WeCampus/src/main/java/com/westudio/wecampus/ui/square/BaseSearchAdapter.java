@@ -2,14 +2,11 @@ package com.westudio.wecampus.ui.square;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.westudio.wecampus.data.model.ActivityList;
 
 import java.util.ArrayList;
 
@@ -21,6 +18,12 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter {
     protected ArrayList<T> mList;
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
+
+    public BaseSearchAdapter(Context context) {
+        mLayoutInflater = LayoutInflater.from(context);
+        mContext = context;
+        mList = new ArrayList<T>();
+    }
 
     @Override
     public int getCount() {

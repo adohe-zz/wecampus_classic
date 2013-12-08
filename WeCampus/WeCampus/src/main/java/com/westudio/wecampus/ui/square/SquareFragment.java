@@ -3,7 +3,6 @@ package com.westudio.wecampus.ui.square;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,10 +21,12 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
-import com.westudio.wecampus.util.Utility;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Martian on 13-9-20.
@@ -100,7 +101,7 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
         banner2.setOnClickListener(adClickListenner);
         banner3.setOnClickListener(adClickListenner);
 
-        Drawable blankDrawable = new ColorDrawable(Color.rgb(255, 255, 255));
+        Drawable blankDrawable = new ColorDrawable(getResources().getColor(R.color.default_ad_color));
         if (advertisementList != null && advertisementList.size() >= 3) {
             WeCampusApi.requestImage(advertisementList.get(0).getImage(),
                     WeCampusApi.getImageListener(banner1, null, blankDrawable));
@@ -148,6 +149,17 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            // 请求失败时填充缓存的category
+            ActivityCategoryView categoryView;
+            HashMap<String, String> colors = BaseApplication.getInstance().getCategoryColors();
+            for (Map.Entry<String, String> entry : colors.entrySet()) {
+                ActivityCategory category = new ActivityCategory();
+                category.name = entry.getKey();
+                category.color = entry.getValue();
+                categoryView = new ActivityCategoryView(context);
+                categoryView.setCategory(category);
+                container.addView(categoryView);
+            }
         }
 
         @Override
