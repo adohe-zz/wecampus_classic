@@ -15,6 +15,7 @@
     <string name="menu_people">好友列表</string>
     <string name="menu_square">广场</string>
     <string name="menu_settings">设置</string>
+    <string name="menu_no_login">未登录</string>
     `
     <!-- Intro Part -->
     <string name="access_without_login">随便看看</string>
@@ -212,5 +213,8 @@
     <string name="org_no_email">该组织暂时还没有设置邮箱</string>
     <string name="login_email">登录邮箱</string>
     <string name="forget_pwd_title">忘记密码</string>
+
+    <string name="only_one_activity">你暂时只参加了一个活动哦~</string>
+    <string name="get_join_activity_error">获取活动失败</string>
 
 </resources>

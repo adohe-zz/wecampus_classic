@@ -41,7 +41,7 @@
             android:id="@+id/img_avatar"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/test_avatar"
+            android:src="@drawable/left_menu_default_avater"
             android:padding="2dp"
             android:background="@drawable/menu_avatar_bg"
             android:layout_marginTop="35dp"
@@ -56,11 +56,9 @@
             android:layout_centerHorizontal="true"
             android:textColor="#ffffff"
             android:textSize="15sp"
-            android:text="蔡思雨"
             />
 
         <TextView
-            android:text="热爱移动互联网额。"
             android:id="@+id/text_user_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
