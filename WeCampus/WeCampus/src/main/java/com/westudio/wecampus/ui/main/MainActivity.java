@@ -3,11 +3,14 @@ package com.westudio.wecampus.ui.main;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,6 +36,7 @@ public class MainActivity extends SherlockFragmentActivity {
     private ActionBarDrawerToggleCompat mDrawerToggle;
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private ContentType mCurrentContent = ContentType.ACTIVITY;
+    private MenuItem mHomeItem;
 
     public enum ContentType {
         ACTIVITY, USERS, SQUARE, SETTINGS, HOMEPAGE;
@@ -90,8 +94,28 @@ public class MainActivity extends SherlockFragmentActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        mHomeItem = menu.findItem(android.R.id.home);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
+            if (mDrawerLayout.isDrawerVisible(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {
