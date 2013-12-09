@@ -160,9 +160,15 @@ public class HttpUtil {
      */
     public static String searchActivityByKeywords(String keywords, int page) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
-        sb.append(HOST_NAME).append(SLASH).append(API_VERSION).append(SLASH)
-                .append(BASE_ACTIVITY_PATH).append("?keywords=")
-                .append(keywords).append("&page=").append(page);
+
+        try {
+            sb.append(HOST_NAME).append(SLASH).append(API_VERSION).append(SLASH)
+                    .append(BASE_ACTIVITY_PATH).append("?keywords=")
+                    .append(URLEncoder.encode(keywords, "UTF-8")).append("&page=").append(page);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         return sb.toString();
     }
 
@@ -177,6 +183,7 @@ public class HttpUtil {
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
                 .append(SLASH).append(BASE_ACTIVITY_PATH).append("?category=")
                 .append(category).append("&page=").append(page);
+
         return sb.toString();
     }
 
@@ -194,7 +201,11 @@ public class HttpUtil {
                 .append(SLASH).append(BASE_ORGANIZATION_PATH).append(SLASH);
         switch(op) {
             case SEARCH:
-                sb.append("?keywords=").append(keyword).append("&page=").append(page);
+                try {
+                    sb.append("?keywords=").append(URLEncoder.encode(keyword, "UTF-8")).append("&page=").append(page);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             case DETAIL:
                 sb.append(id);
@@ -212,7 +223,7 @@ public class HttpUtil {
                 sb.append(id).append(SLASH).append("activities");
                 break;
         }
-        
+
         return sb.toString();
     }
 
@@ -283,7 +294,11 @@ public class HttpUtil {
                 sb.append(id).append(SLASH).append("favorite_organizations");
                 break;
             case SEARCH:
-                sb.append("?keywords=").append(keyword);
+                try {
+                    sb.append("?keywords=").append(URLEncoder.encode(keyword, "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
 

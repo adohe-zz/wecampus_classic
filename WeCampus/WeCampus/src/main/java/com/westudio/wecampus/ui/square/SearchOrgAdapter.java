@@ -59,17 +59,30 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
     }
 
     public void requestData(String keywords, int page) {
+        if (page == 1) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mEmptyImage.setVisibility(View.GONE);
+        }
+
         WeCampusApi.searchOrgs(mContext, page, keywords, this, this);
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        //TODO
+        mEmptyImage.setImageResource(R.drawable.search_no_result);
+        mProgressBar.setVisibility(View.GONE);
+        mEmptyImage.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onResponse(Organization.OrganizationRequestData data) {
+        mProgressBar.setVisibility(View.GONE);
+        mEmptyImage.setVisibility(View.VISIBLE);
+        if (mList.isEmpty()) {
+            mEmptyImage.setImageResource(R.drawable.search_no_result);
+        }
         isLastPage = data.getObjects().isEmpty();
         addAll(data.getObjects());
+
     }
 }

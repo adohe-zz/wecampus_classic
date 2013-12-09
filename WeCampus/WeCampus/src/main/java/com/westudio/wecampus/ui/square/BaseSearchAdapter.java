@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -18,6 +19,8 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter {
     protected ArrayList<T> mList;
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
+    protected ImageView mEmptyImage;
+    protected ProgressBar mProgressBar;
 
     public BaseSearchAdapter(Context context) {
         mLayoutInflater = LayoutInflater.from(context);
@@ -45,11 +48,22 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void clear() {
+        mList.clear();
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder {
         ImageView imageView;
         TextView textName;
         ImageLoader.ImageContainer imageRequest;
     }
 
+    public void setmEmptyImage(ImageView image) {
+        this.mEmptyImage = image;
+    }
 
+    public void setProgressBar(ProgressBar progressBar) {
+        this.mProgressBar = progressBar;
+    }
 }
