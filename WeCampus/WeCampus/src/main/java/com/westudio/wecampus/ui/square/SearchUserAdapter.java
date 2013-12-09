@@ -49,9 +49,9 @@ public class SearchUserAdapter extends BaseSearchAdapter<User> implements
 
         User user = mList.get(i);
         if(user.avatar.equals(ImageUtil.IMAGE_NOT_FOUND)) {
-            viewHolder.imageView.setImageDrawable(user.gender.equals("女") ? defalutFemaleDrawable :
+            viewHolder.imageView.setImageDrawable("女".equals(user.gender) ? defalutFemaleDrawable :
                     defalutMaleDrawable);
-        } else if (user.gender.equals("女")) {
+        } else if ("女".equals(user.gender)) {
             WeCampusApi.requestImage(user.avatar,
                     WeCampusApi.getImageListener(viewHolder.imageView, defalutFemaleDrawable,
                             defalutFemaleDrawable));
@@ -61,23 +61,34 @@ public class SearchUserAdapter extends BaseSearchAdapter<User> implements
                             defalutMaleDrawable));
         }
 
-        viewHolder.textName.setText(user.name);
+        viewHolder.textName.setText(user.nickname);
 
         return convertView;
     }
 
     public void requestData(String keywords, int page) {
+        if (page == 1) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mEmptyImage.setVisibility(View.GONE);
+        }
         WeCampusApi.searchUser(mContext, page, keywords, this, this);
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        //TODO
+        mEmptyImage.setImageResource(R.drawable.search_no_result);
+        mProgressBar.setVisibility(View.GONE);
+        mEmptyImage.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onResponse(User.UserListData data) {
+        mProgressBar.setVisibility(View.GONE);
+        mEmptyImage.setVisibility(View.VISIBLE);
         isLastPage = data.objects.isEmpty();
         addAll(data.objects);
+        if (mList.isEmpty()) {
+            mEmptyImage.setImageResource(R.drawable.search_no_result);
+        }
     }
 }

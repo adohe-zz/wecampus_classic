@@ -40,6 +40,7 @@
             android:id="@+id/search_result_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
             android:layout_weight="1.0"/>
 
     </LinearLayout>
@@ -57,14 +58,17 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/empty_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/search_no_result"/>
+                android:src="@drawable/search_no_input"/>
 
-            <TextView
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_search_result"/>
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
     </RelativeLayout>
 
