@@ -39,6 +39,10 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
     private View view;
     private CategoryHandler categoryHandler;
 
+    RoundedImageView banner1;
+    RoundedImageView banner2;
+    RoundedImageView banner3;
+
     public static SquareFragment newInstance() {
         SquareFragment f = new SquareFragment();
         return f;
@@ -63,6 +67,11 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
 
         categoryHandler = new CategoryHandler(view, getActivity());
         categoryHandler.fetchCategory();
+
+        banner1 = (RoundedImageView) view.findViewById(R.id.banner1);
+        banner2 = (RoundedImageView) view.findViewById(R.id.banner2);
+        banner3 = (RoundedImageView) view.findViewById(R.id.banner3);
+
         return view;
     }
 
@@ -94,20 +103,18 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void setBanners() {
-        RoundedImageView banner1 = (RoundedImageView) view.findViewById(R.id.banner1);
-        RoundedImageView banner2 = (RoundedImageView) view.findViewById(R.id.banner2);
-        RoundedImageView banner3 = (RoundedImageView) view.findViewById(R.id.banner3);
+        Drawable blankDrawable = new ColorDrawable(getResources().getColor(R.color.default_ad_color));
+
         banner1.setOnClickListener(adClickListenner);
         banner2.setOnClickListener(adClickListenner);
         banner3.setOnClickListener(adClickListenner);
 
-        Drawable blankDrawable = new ColorDrawable(getResources().getColor(R.color.default_ad_color));
         if (advertisementList != null && advertisementList.size() >= 3) {
-            WeCampusApi.requestImage(advertisementList.get(0).getImage(),
+            WeCampusApi.requestImage(advertisementList.get(2).getImage(),
                     WeCampusApi.getImageListener(banner1, null, blankDrawable));
             WeCampusApi.requestImage(advertisementList.get(1).getImage(),
                     WeCampusApi.getImageListener(banner2, null, blankDrawable));
-            WeCampusApi.requestImage(advertisementList.get(2).getImage(),
+            WeCampusApi.requestImage(advertisementList.get(0).getImage(),
                     WeCampusApi.getImageListener(banner3, null, blankDrawable));
         }
     }
