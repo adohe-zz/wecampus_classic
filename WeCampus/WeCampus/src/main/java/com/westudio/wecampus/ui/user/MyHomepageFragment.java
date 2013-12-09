@@ -49,7 +49,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
 /**
  * Created by Martian on 13-10-24.
  */
-public class UserHomepageFragment extends BaseFragment implements OnRefreshListener {
+public class MyHomepageFragment extends BaseFragment implements OnRefreshListener {
 
     private ParallaxScrollView mScrollview;
     private Activity mActivity;
@@ -245,7 +245,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     }
 
     private class UserActivityHandler implements Response.Listener<ActivityList.RequestData>,
-                Response.ErrorListener {
+            Response.ErrorListener {
 
         private View view;
         RelativeLayout rlActivityListItem;
@@ -329,7 +329,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 rlActivityListItem.setVisibility(View.GONE);
                 tvMoreActivity.setText(getResources().getString(R.string.no_attend_activity));
             } else {
-                WeCampusApi.getUserJActivity(UserHomepageFragment.this, uid, this, this);
+                WeCampusApi.getUserJActivity(MyHomepageFragment.this, uid, this, this);
             }
         }
 
@@ -393,7 +393,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 rlLikeOrganization.setVisibility(View.VISIBLE);
                 String orgNum = getResources().getString(R.string.homepage_like_org);
                 tvNumOrg.setText(String.format(orgNum, mUser.count_of_follow_organizations));
-                WeCampusApi.getUserFActivity(UserHomepageFragment.this, uid, this, this);
+                WeCampusApi.getUserFActivity(MyHomepageFragment.this, uid, this, this);
             }
         }
 
@@ -442,7 +442,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 rlFavoriteActivity.setVisibility(View.VISIBLE);
                 String activityNum = getResources().getString(R.string.homepage_like_activity);
                 tvNumActivity.setText(String.format(activityNum, mUser.count_of_follow_activities));
-                WeCampusApi.getUserFActivity(UserHomepageFragment.this, uid, this, this);
+                WeCampusApi.getUserFActivity(MyHomepageFragment.this, uid, this, this);
             }
         }
 
@@ -457,7 +457,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         //Get the user information from network
         public void fetchUserInfo() {
             mPullToRefreshAttacher.setRefreshing(true);
-            WeCampusApi.getProfile(UserHomepageFragment.this, this, this);
+            WeCampusApi.getProfile(MyHomepageFragment.this, this, this);
         }
 
         @Override

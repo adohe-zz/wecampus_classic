@@ -12,19 +12,12 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.data.model.ActivityCategory;
-import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
-import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.setting.SettingFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
-import com.westudio.wecampus.ui.user.UserHomepageFragment;
+import com.westudio.wecampus.ui.user.MyHomepageFragment;
 import com.westudio.wecampus.ui.user.UsersListFragment;
-
-import java.util.HashMap;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
@@ -134,7 +127,7 @@ public class MainActivity extends SherlockFragmentActivity {
             } else if (type == ContentType.SQUARE) {
                 clazz = SquareFragment.class;
             } else if (type == ContentType.HOMEPAGE) {
-                clazz = UserHomepageFragment.class;
+                clazz = MyHomepageFragment.class;
             } else if(type == ContentType.SETTINGS) {
                 clazz = SettingFragment.class;
             }

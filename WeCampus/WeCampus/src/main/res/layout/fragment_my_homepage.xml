@@ -1,373 +1,387 @@
 <?xml version="1.0" encoding="utf-8"?>
-<couk.jenxsol.parallaxscrollview.views.ParallaxScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll_view"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent">
-        <ImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/menu_header_bg"
+    <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ptr_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <couk.jenxsol.parallaxscrollview.views.ParallaxScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
 
-    </LinearLayout>
-
-    <couk.jenxsol.parallaxscrollview.views.ObservableScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Top User Information Par -->
-            <FrameLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-
-                <View
-                    android:layout_height="130dp"
-                    android:layout_width="match_parent"/>
-
-                <!-- User information -->
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white"
-                    android:layout_marginTop="130dp"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:textColor="#000000"
-                        android:textSize="22sp"
-                        android:text="蔡思雨"/>
-
-                    <TextView
-                        android:id="@+id/user_words"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        style="@style/HomePageTextSecondary"
-                        android:text="热爱移动互联网啊啊啊？？？"/>
-
-                    <!-- Follow button (hide in my home page)-->
-                    <com.westudio.wecampus.ui.view.FollowButton
-                        android:id="@+id/btn_follow"
-                        android:layout_height="36dp"
-                        android:layout_width="150dp"
-                        android:textColor="@android:color/white"
-                        android:layout_margin="15dp"
-                        android:visibility="gone"/>
-
-                     <LinearLayout
-                         android:layout_height="wrap_content"
-                         android:layout_width="match_parent"
-                         android:gravity="center_horizontal"
-                         android:layout_marginBottom="30dp">
-
-                         <TextView
-                             android:id="@id/user_profile_follow"
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:textColor="@color/intro_right_btn_bg"
-                             android:textSize="20sp"/>
-
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="3dp"
-                             android:text="@string/follow"
-                             style="@style/HomePageTextSecondary"/>
-
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:text="@string/horizontal_dot"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="6dp"
-                             android:layout_marginRight="6dp"
-                             style="@style/HomePageTextSecondary"/>
-
-                         <TextView
-                             android:id="@id/user_profile_fans"
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:textColor="@color/intro_right_btn_bg"
-                             android:textSize="20sp"/>
-
-                         <TextView
-                             android:layout_height="wrap_content"
-                             android:layout_width="wrap_content"
-                             android:layout_gravity="center_vertical"
-                             android:layout_marginLeft="3dp"
-                             android:text="@string/follower"
-                             style="@style/HomePageTextSecondary"/>
-                     </LinearLayout>
-
-                </LinearLayout>
-
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <ImageView
-                    android:id="@+id/img_avatar"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:src="@drawable/test_avatar"
-                    android:padding="2dp"
-                    android:background="@drawable/menu_avatar_bg"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_gravity="center_horizontal"/>
-
-            </FrameLayout>
-
-            <!-- Bottom Activity and Organization list -->
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:background="@color/bg_color">
-
-                <TextView
-                    android:id="@id/user_profile_attend_activity"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/attend_activity_num"
-                    style="@style/DetailTextOrg"/>
-
-                <!-- Activity Part -->
-                <RelativeLayout
-                    android:id="@id/activity_list_item"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/menu_header_bg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:clickable="true"
-                    android:background="@drawable/listitem_activity_selector">
-
-                    <ImageView
-                        android:id="@id/activity_list_item_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="centerCrop"
-                        android:background="#c9c9c9" />
-
-                    <TextView
-                        android:id="@id/activity_list_item_tag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:paddingLeft="15dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:paddingRight="15dp"
-                        android:background="@drawable/tag_background"
-                        android:textIsSelectable="false"
-                        style="@style/ActivityTagStyle" />
-
-                    <TextView
-                        android:id="@id/activity_list_item_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="13dp"
-                        android:layout_marginRight="3dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_below="@id/activity_list_item_image"
-                        android:singleLine="true"
-                        android:ellipsize="end" />
-
-                    <TextView
-                        android:id="@id/activity_list_item_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_below="@id/activity_list_item_title"
-                        android:layout_alignLeft="@id/activity_list_item_title"
-                        android:drawableLeft="@drawable/ic_list_activity_time"
-                        android:drawablePadding="5dp"
-                        style="@style/ActivityListTextView"/>
-
-                    <TextView
-                        android:id="@id/activity_list_item_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_below="@id/activity_list_item_time"
-                        android:layout_alignLeft="@id/activity_list_item_title"
-                        android:drawableLeft="@drawable/ic_list_activity_location"
-                        android:drawablePadding="5dp"
-                        android:singleLine="true"
-                        android:ellipsize="end"
-                        style="@style/ActivityListTextView" />
-
-                    <TextView
-                        android:id="@id/activity_list_item_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:layout_below="@id/activity_list_item_time"
-                        android:layout_alignBottom="@id/activity_list_item_location"
-                        android:layout_alignParentRight="true"
-                        android:drawableLeft="@drawable/ic_list_activity_like_sl"
-                        android:drawablePadding="5dp"
-                        style="@style/ActivityListTextView"/>
-
-                    <TextView
-                        android:id="@id/activity_list_item_summary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_below="@id/activity_list_item_location"
-                        android:layout_alignLeft="@id/activity_list_item_title"
-                        android:ellipsize="end"
-                        style="@style/ActivityListSummary"/>
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@id/activity_list_item_no_activity"
-                    android:layout_height="40dp"
-                    android:layout_width="match_parent"
-                    android:text="@string/view_more_activities"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    style="@style/HomePageTextSecondary"/>
-
-                <!-- Like Organizations Part -->
-                <RelativeLayout
-                    android:id="@id/user_like_organization"
-                    android:layout_height="93.3dp"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white"
-                    android:layout_marginBottom="2dp">
-
-                    <TextView
-                        android:id="@+id/num_like_org"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/homepage_like_org"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="9dp"
-                        android:layout_marginBottom="7dp"
-                        style="@style/HomePageTextSecondary"/>
-
-                    <ImageView
-                        android:id="@+id/icon_like_org"
-                        android:layout_height="55dp"
-                        android:layout_width="55dp"
-                        android:layout_marginLeft="9dp"
-                        android:src="@drawable/ic_launcher"
-                        android:layout_below="@id/num_like_org"/>
-
-                    <TextView
-                        android:id="@+id/text_like_org_name"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/icon_like_org"
-                        android:layout_alignTop="@id/icon_like_org"
-                        android:text="WeCampus官方账号"
-                        style="@style/HomePageTextPrimary"/>
-
-                    <TextView
-                        android:id="@+id/num_org_like_count"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/num_people_like"
-                        android:layout_below="@id/text_like_org_name"
-                        android:layout_alignLeft="@id/text_like_org_name"
-                        android:layout_marginTop="10dp"
-                        style="@style/HomePageTextSecondary"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
-                        android:layout_alignParentRight="true"/>
-
-                </RelativeLayout>
-
-                <!-- Like Activity Part -->
-                <RelativeLayout
-                    android:id="@id/user_like_activity"
-                    android:layout_height="93.3dp"
-                    android:layout_width="match_parent"
-                    android:background="@android:color/white"
-                    android:layout_marginBottom="4dp">
-
-                    <TextView
-                        android:id="@+id/num_like_activity"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/homepage_like_activity"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="9dp"
-                        android:layout_marginBottom="7dp"
-                        style="@style/HomePageTextSecondary"/>
-
-                    <ImageView
-                        android:id="@+id/icon_like_activity"
-                        android:layout_height="55dp"
-                        android:layout_width="55dp"
-                        android:layout_marginLeft="9dp"
-                        android:src="@drawable/ic_launcher"
-                        android:layout_below="@id/num_like_activity"/>
-
-                    <TextView
-                        android:id="@+id/text_like_activity_name"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/icon_like_activity"
-                        android:layout_alignTop="@id/icon_like_activity"
-                        android:text="WeCampus官方账号"
-                        style="@style/HomePageTextPrimary"/>
-
-                    <TextView
-                        android:id="@+id/text_like_activity_summary"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/num_people_like"
-                        android:layout_below="@id/text_like_activity_name"
-                        android:layout_alignLeft="@id/text_like_activity_name"
-                        android:layout_marginTop="10dp"
-                        style="@style/HomePageTextSecondary"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
-                        android:layout_alignParentRight="true"/>
-
-                </RelativeLayout>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
-        </LinearLayout>
+            <couk.jenxsol.parallaxscrollview.views.ObservableScrollView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
 
-    </couk.jenxsol.parallaxscrollview.views.ObservableScrollView>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
 
-</couk.jenxsol.parallaxscrollview.views.ParallaxScrollView>
+                    <!-- Top User Information Par -->
+                    <FrameLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+
+                        <View
+                            android:layout_height="130dp"
+                            android:layout_width="match_parent"/>
+
+                        <!-- User information -->
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@android:color/white"
+                            android:layout_marginTop="130dp"
+                            android:layout_gravity="bottom"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/user_name"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="50dp"
+                                android:textColor="@color/text_color_primary"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:id="@+id/user_words"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                style="@style/HomePageTextSecondary"/>
+
+                            <!-- Follow button (hide in my home page)-->
+                            <com.westudio.wecampus.ui.view.FollowButton
+                                android:id="@+id/btn_follow"
+                                android:layout_height="36dp"
+                                android:layout_width="150dp"
+                                android:textColor="@android:color/white"
+                                android:layout_margin="15dp"
+                                android:visibility="gone"/>
+
+                            <LinearLayout
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="center_horizontal"
+                                android:layout_marginBottom="30dp">
+
+                                <TextView
+                                    android:id="@id/user_profile_follow"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:textColor="@color/intro_right_btn_bg"
+                                    android:textSize="20sp"/>
+
+                                <TextView
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="@string/follow"
+                                    style="@style/HomePageTextSecondary"/>
+
+                                <TextView
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:text="@string/horizontal_dot"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="6dp"
+                                    style="@style/HomePageTextSecondary"/>
+
+                                <TextView
+                                    android:id="@id/user_profile_fans"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:textColor="@color/intro_right_btn_bg"
+                                    android:textSize="20sp"/>
+
+                                <TextView
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="@string/follower"
+                                    style="@style/HomePageTextSecondary"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/img_avatar"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:src="@drawable/test_avatar"
+                            android:padding="2dp"
+                            android:background="@drawable/menu_avatar_bg"
+                            android:layout_marginTop="90dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_gravity="center_horizontal"/>
+
+                    </FrameLayout>
+
+                    <!-- Bottom Activity and Organization list -->
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:background="@color/bg_color">
+
+                        <TextView
+                            android:id="@id/user_profile_attend_activity"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/attend_activity_num"
+                            style="@style/DetailTextOrg"/>
+
+                        <!-- Activity Part -->
+                        <RelativeLayout
+                            android:id="@id/activity_list_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:clickable="true"
+                            android:background="@drawable/listitem_activity_selector">
+
+                            <ImageView
+                                android:id="@id/activity_list_item_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_alignParentTop="true"
+                                android:scaleType="centerCrop"
+                                android:background="#c9c9c9" />
+
+                            <TextView
+                                android:id="@id/activity_list_item_tag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:paddingRight="15dp"
+                                android:background="@drawable/tag_background"
+                                android:textIsSelectable="false"
+                                style="@style/ActivityTagStyle" />
+
+                            <TextView
+                                android:id="@id/activity_list_item_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="13dp"
+                                android:layout_marginRight="3dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_below="@id/activity_list_item_image"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@id/activity_list_item_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_below="@id/activity_list_item_title"
+                                android:layout_alignLeft="@id/activity_list_item_title"
+                                android:drawableLeft="@drawable/ic_list_activity_time"
+                                android:drawablePadding="5dp"
+                                style="@style/ActivityListTextView"/>
+
+                            <TextView
+                                android:id="@id/activity_list_item_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_below="@id/activity_list_item_time"
+                                android:layout_alignLeft="@id/activity_list_item_title"
+                                android:drawableLeft="@drawable/ic_list_activity_location"
+                                android:drawablePadding="5dp"
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                style="@style/ActivityListTextView" />
+
+                            <TextView
+                                android:id="@id/activity_list_item_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="16dp"
+                                android:layout_below="@id/activity_list_item_time"
+                                android:layout_alignBottom="@id/activity_list_item_location"
+                                android:layout_alignParentRight="true"
+                                android:drawableLeft="@drawable/ic_list_activity_like_sl"
+                                android:drawablePadding="5dp"
+                                style="@style/ActivityListTextView"/>
+
+                            <TextView
+                                android:id="@id/activity_list_item_summary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_below="@id/activity_list_item_location"
+                                android:layout_alignLeft="@id/activity_list_item_title"
+                                android:ellipsize="end"
+                                style="@style/ActivityListSummary"/>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@id/activity_list_item_no_activity"
+                            android:layout_height="40dp"
+                            android:layout_width="match_parent"
+                            android:text="@string/view_more_activities"
+                            android:gravity="center"
+                            android:background="@android:color/white"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            style="@style/HomePageTextSecondary"/>
+
+                        <!-- Like Organizations Part -->
+                        <RelativeLayout
+                            android:id="@id/user_like_organization"
+                            android:layout_height="93.3dp"
+                            android:layout_width="match_parent"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="2dp">
+
+                            <TextView
+                                android:id="@+id/num_like_org"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/homepage_like_org"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginBottom="7dp"
+                                style="@style/HomePageTextSecondary"/>
+
+                            <ImageView
+                                android:id="@+id/icon_like_org"
+                                android:layout_height="55dp"
+                                android:layout_width="55dp"
+                                android:layout_marginLeft="9dp"
+                                android:src="@drawable/ic_launcher"
+                                android:layout_below="@id/num_like_org"/>
+
+                            <TextView
+                                android:id="@+id/text_like_org_name"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/icon_like_org"
+                                android:layout_alignTop="@id/icon_like_org"
+                                android:text="WeCampus官方账号"
+                                style="@style/HomePageTextPrimary"/>
+
+                            <TextView
+                                android:id="@+id/num_org_like_count"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/num_people_like"
+                                android:layout_below="@id/text_like_org_name"
+                                android:layout_alignLeft="@id/text_like_org_name"
+                                android:layout_marginTop="10dp"
+                                style="@style/HomePageTextSecondary"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_right_arrow"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="18dp"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+
+                        <!-- Like Activity Part -->
+                        <RelativeLayout
+                            android:id="@id/user_like_activity"
+                            android:layout_height="93.3dp"
+                            android:layout_width="match_parent"
+                            android:background="@android:color/white"
+                            android:layout_marginBottom="4dp">
+
+                            <TextView
+                                android:id="@+id/num_like_activity"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/homepage_like_activity"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginBottom="7dp"
+                                style="@style/HomePageTextSecondary"/>
+
+                            <ImageView
+                                android:id="@+id/icon_like_activity"
+                                android:layout_height="55dp"
+                                android:layout_width="55dp"
+                                android:layout_marginLeft="9dp"
+                                android:src="@drawable/ic_launcher"
+                                android:layout_below="@id/num_like_activity"/>
+
+                            <TextView
+                                android:id="@+id/text_like_activity_name"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/icon_like_activity"
+                                android:layout_alignTop="@id/icon_like_activity"
+                                android:text="WeCampus官方账号"
+                                style="@style/HomePageTextPrimary"/>
+
+                            <TextView
+                                android:id="@+id/text_like_activity_summary"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/num_people_like"
+                                android:layout_below="@id/text_like_activity_name"
+                                android:layout_alignLeft="@id/text_like_activity_name"
+                                android:layout_marginTop="10dp"
+                                style="@style/HomePageTextSecondary"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_right_arrow"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="18dp"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </couk.jenxsol.parallaxscrollview.views.ObservableScrollView>
+
+        </couk.jenxsol.parallaxscrollview.views.ParallaxScrollView>
+
+    </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
+
+</LinearLayout>

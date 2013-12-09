@@ -16,9 +16,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.data.model.Constants;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
 
 import java.util.HashMap;

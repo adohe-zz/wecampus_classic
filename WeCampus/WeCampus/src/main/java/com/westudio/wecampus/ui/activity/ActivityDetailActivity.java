@@ -608,13 +608,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             if(mPullToRefreshAttacher.isRefreshing()) {
                 mPullToRefreshAttacher.setRefreshComplete();
             }
-            //pbContent.setVisibility(View.GONE);
             lyContent.setVisibility(View.VISIBLE);
             activity = data;
             noContentContainer.setVisibility(View.GONE);
             contentContainer.setVisibility(View.VISIBLE);
-            //updateExtraUi();
-            //updateActivityToDb();
             updateUI();
             updateActivityToDb();
         }

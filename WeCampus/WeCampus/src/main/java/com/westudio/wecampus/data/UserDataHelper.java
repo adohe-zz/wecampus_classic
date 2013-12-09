@@ -37,6 +37,7 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.CONT_OF_FANS, user.count_of_fans);
         values.put(UserDBInfo.CONT_OF_FOLLOW_ACTIVITIES, user.count_of_follow_activities);
         values.put(UserDBInfo.CONT_OF_FOLLOW_ORGANIZATIONS, user.count_of_follow_organizations);
+        values.put(UserDBInfo.CONT_OF_JOIN_ACTIVITIES, user.count_of_join_activities);
         values.put(UserDBInfo.CONT_OF_FOLLOWER, user.count_of_followers);
         values.put(UserDBInfo.CONTANT_EMAIL, user.contact_email);
         values.put(UserDBInfo.EMAIL, user.email);
@@ -114,6 +115,7 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String CONT_OF_FOLLOWER = "cont_of_follower";
         public static final String CONT_OF_FOLLOW_ORGANIZATIONS = "cont_of_follow_organizations";
         public static final String CONT_OF_FOLLOW_ACTIVITIES = "count_of_follow_activities";
+        public static final String CONT_OF_JOIN_ACTIVITIES = "count_of_join_activities";
         public static final String EMAIL = "email";
         public static final String EMOTION = "emotion";
         public static final String NICKNAME = "nickname";
@@ -133,6 +135,7 @@ public class UserDataHelper extends BaseDataHelper {
                 .addColumn(CONT_OF_FOLLOWER, Column.DataType.INTEGER)
                 .addColumn(CONT_OF_FOLLOW_ORGANIZATIONS, Column.DataType.INTEGER)
                 .addColumn(CONT_OF_FOLLOW_ACTIVITIES, Column.DataType.INTEGER)
+                .addColumn(CONT_OF_JOIN_ACTIVITIES, Column.DataType.INTEGER)
                 .addColumn(EMAIL, Column.DataType.TEXT)
                 .addColumn(EMOTION, Column.DataType.TEXT)
                 .addColumn(NICKNAME, Column.DataType.TEXT)
