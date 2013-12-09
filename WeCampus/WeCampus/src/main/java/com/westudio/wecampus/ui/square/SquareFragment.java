@@ -1,11 +1,9 @@
 package com.westudio.wecampus.ui.square;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +21,7 @@ import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.ui.base.WebBrowserActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -125,18 +124,15 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
         public void onClick(View view) {
             String url = "";
             if (view.getId() == R.id.banner1 && advertisementList.size() > 0) {
-                url = advertisementList.get(0).getUrl();
+                url = advertisementList.get(2).getUrl();
             } else if (view.getId() == R.id.banner2 && advertisementList.size() > 1) {
                 url = advertisementList.get(1).getUrl();
             } else if (view.getId() == R.id.banner3 && advertisementList.size() > 2) {
-                url = advertisementList.get(2).getUrl();
+                url = advertisementList.get(0).getUrl();
             }
-            Intent intent = new Intent();
-            intent.setData(Uri.parse(url));
-            try {
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-            }
+            Intent intent = new Intent(getActivity(), WebBrowserActivity.class);
+            intent.putExtra(WebBrowserActivity.EXTRA_URL, url);
+            startActivity(intent);
         }
     };
 
