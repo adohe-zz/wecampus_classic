@@ -1,16 +1,18 @@
 package com.westudio.wecampus.ui.square;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
-import com.westudio.wecampus.util.Utility;
+import com.westudio.wecampus.ui.activity.ActivityListActivity;
 
 /**
  * Created by martian on 13-11-27.
@@ -22,13 +24,7 @@ public class ActivityCategoryView extends LinearLayout implements View.OnClickLi
     private ActivityCategory category;
 
     public ActivityCategoryView(Context context) {
-        super(context);
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        inflater.inflate(R.layout.row_activity_category, this);
-
-        tvSectionName = (TextView) findViewById(R.id.section_name);
-        colorMark = findViewById(R.id.color_mark);
-        setOnClickListener(this);
+        this(context, null);
     }
 
     public ActivityCategoryView(Context context, AttributeSet attrs) {
@@ -39,7 +35,8 @@ public class ActivityCategoryView extends LinearLayout implements View.OnClickLi
 
         tvSectionName = (TextView) findViewById(R.id.section_name);
         colorMark = findViewById(R.id.color_mark);
-        setOnClickListener(this);
+        ViewGroup section = (ViewGroup) findViewById(R.id.section);
+        section.setOnClickListener(this);
     }
 
     public void setCategory(ActivityCategory category) {
@@ -50,9 +47,14 @@ public class ActivityCategoryView extends LinearLayout implements View.OnClickLi
 
     }
 
+    public ActivityCategory getCategory() {
+        return category;
+    }
 
     @Override
     public void onClick(View view) {
-        Utility.log("click",tvSectionName.getText().toString());
+        Intent intent = new Intent(getContext(), ActivityListActivity.class);
+        intent.putExtra(ActivityListActivity.EXTRA_CATEGORY, category.name);
+        getContext().startActivity(intent);
     }
 }

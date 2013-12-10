@@ -1,9 +1,12 @@
 package com.westudio.wecampus.ui.square;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -12,7 +15,12 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.model.ActivityList;
+import com.westudio.wecampus.data.model.Organization;
+import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
+import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
+import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
@@ -45,6 +53,7 @@ public class SearchActivity extends BaseDetailActivity{
         mAttacher.loadingFooter = new LoadingFooter(this);
         mLvResult.addFooterView(mAttacher.loadingFooter.getView());
         mLvResult.setOnScrollListener(onScrollChangedListener);
+        mLvResult.setOnItemClickListener(onItemClickListener);
 
         mEtKeywords = (EditText) findViewById(R.id.search_bar);
         mEtKeywords.setOnEditorActionListener(new OnSearchActionListener());
@@ -177,6 +186,34 @@ public class SearchActivity extends BaseDetailActivity{
                         mOrgAdapter.requestData(mKeywords, mAttacher.page);
                         break;
                 }
+            }
+        }
+    };
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Intent intent;
+            switch (mHeaderTab.getCurrentPosition()) {
+                case 0:
+                    ActivityList activity = (ActivityList) adapterView.getAdapter().getItem(i);
+                    intent = new Intent(SearchActivity.this, ActivityDetailActivity.class);
+                    intent.putExtra(ActivityListFragment.ACTIVITY_ID, activity.id);
+                    startActivity(intent);
+                    SearchActivity.this.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                    break;
+                case 1:
+                    //TODO 别人的主页
+                    break;
+                case 2:
+                    //组织详情
+                    Organization org = (Organization) adapterView.getAdapter().getItem(i);
+                    intent = new Intent(SearchActivity.this, OrganizationHomepageActivity.class);
+                    intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.getId());
+                    startActivity(intent);
+                    SearchActivity.this.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                    break;
+
             }
         }
     };
