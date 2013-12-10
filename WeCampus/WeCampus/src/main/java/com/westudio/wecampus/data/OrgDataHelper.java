@@ -30,13 +30,14 @@ public class OrgDataHelper extends BaseDataHelper {
 
     private ContentValues getContentValues(Organization org) {
         ContentValues values = new ContentValues();
-        values.put(OrganiztionDBInfo.ID, org.getId());
-        values.put(OrganiztionDBInfo.ADMIN_NAME, org.getAdmin_name());
-        values.put(OrganiztionDBInfo.ADMIN_URL, org.getAdmin_url());
-        values.put(OrganiztionDBInfo.AVATAR, org.getAvatar());
-        values.put(OrganiztionDBInfo.COUNT_OF_FANS, org.getCount_of_fans());
-        values.put(OrganiztionDBInfo.DESCRIPTION, org.getDescription());
-        values.put(OrganiztionDBInfo.NAME, org.getName());
+        values.put(OrganiztionDBInfo.ID, org.id);
+        values.put(OrganiztionDBInfo.ADMIN_NAME, org.admin_name);
+        values.put(OrganiztionDBInfo.ADMIN_URL, org.admin_url);
+        values.put(OrganiztionDBInfo.AVATAR, org.avatar);
+        values.put(OrganiztionDBInfo.COUNT_OF_FANS, org.count_of_fans);
+        values.put(OrganiztionDBInfo.DESCRIPTION, org.description);
+        values.put(OrganiztionDBInfo.NAME, org.name);
+        values.put(OrganiztionDBInfo.CAN_FOLLOW, org.can_follow);
         return values;
     }
 
@@ -97,6 +98,7 @@ public class OrgDataHelper extends BaseDataHelper {
         public static final String COUNT_OF_FANS = "count_of_fans";
         public static final String DESCRIPTION = "description";
         public static final String NAME = "name";
+        public static final String CAN_FOLLOW = "can_follow";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
@@ -105,6 +107,7 @@ public class OrgDataHelper extends BaseDataHelper {
                 .addColumn(AVATAR, Column.DataType.TEXT)
                 .addColumn(COUNT_OF_FANS, Column.DataType.INTEGER)
                 .addColumn(DESCRIPTION, Column.DataType.TEXT)
-                .addColumn(NAME, Column.DataType.TEXT);
+                .addColumn(NAME, Column.DataType.TEXT)
+                .addColumn(CAN_FOLLOW, Column.DataType.BOOLEAN);
     }
 }

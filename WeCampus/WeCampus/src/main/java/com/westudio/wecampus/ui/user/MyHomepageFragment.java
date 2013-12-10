@@ -393,7 +393,7 @@ public class MyHomepageFragment extends BaseFragment implements OnRefreshListene
                 rlLikeOrganization.setVisibility(View.VISIBLE);
                 String orgNum = getResources().getString(R.string.homepage_like_org);
                 tvNumOrg.setText(String.format(orgNum, mUser.count_of_follow_organizations));
-                WeCampusApi.getUserFActivity(MyHomepageFragment.this, uid, this, this);
+                WeCampusApi.getUserFOrganization(MyHomepageFragment.this, uid, this, this);
             }
         }
 

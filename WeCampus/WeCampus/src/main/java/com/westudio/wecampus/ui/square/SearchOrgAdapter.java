@@ -49,11 +49,11 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
         if(org.avatar.equals(ImageUtil.IMAGE_NOT_FOUND)) {
             viewHolder.imageView.setImageDrawable(defalutDrawable);
         } else {
-            WeCampusApi.requestImage(org.getAvatar(),
+            WeCampusApi.requestImage(org.avatar,
                     WeCampusApi.getImageListener(viewHolder.imageView, defalutDrawable, defalutDrawable));
         }
 
-        viewHolder.textName.setText(org.getName());
+        viewHolder.textName.setText(org.name);
 
         return convertView;
     }

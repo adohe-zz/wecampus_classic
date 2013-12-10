@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.android.volley.Cache;
@@ -396,7 +395,7 @@ public class WeCampusApi {
      */
     public static void getOrganization(Object tag, final int id, Response.Listener listener,
                                        Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<Organization>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
+        Request request = new AuthedGsonRequest<Organization>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
                 HttpUtil.OrganizationOp.DETAIL, 0, null),
                 Organization.class, listener, errorListener);
         if (tag != null) {
@@ -431,7 +430,7 @@ public class WeCampusApi {
      * @param errorListener
      */
     public static void followOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FOLLOW, 0, null),
+        Request request = new AuthedGsonRequest(Request.Method.POST, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FOLLOW, 0, null),
                 Organization.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);
@@ -447,7 +446,7 @@ public class WeCampusApi {
      * @param errorListener
      */
     public static void unfollowOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.UNFOLLOW, 0, null),
+        Request request = new AuthedGsonRequest(Request.Method.POST, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.UNFOLLOW, 0, null),
                 Organization.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);

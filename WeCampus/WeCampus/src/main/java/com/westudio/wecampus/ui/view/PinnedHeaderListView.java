@@ -101,13 +101,6 @@ public class PinnedHeaderListView extends ListView {
         header.findViewById(R.id.text_user_words).setVisibility(GONE);
         mLike = (TextView)header.findViewById(R.id.user_like);
         mLike.setVisibility(VISIBLE);
-        //TODO:把点击事件的响应封装再这里
-        mLike.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         mAvatar = (ImageView) header.findViewById(R.id.img_avatar);
         mName = (TextView) header.findViewById(R.id.text_user_name);
 

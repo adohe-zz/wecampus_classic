@@ -96,7 +96,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
-
+        Utility.log("id", activityId);
         acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
         //refreshActivityFromDb();
@@ -212,7 +212,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         //If the organization is not null
         if (activity.organization != null) {
-            tvOrg.setText(activity.organization.getName());
+            tvOrg.setText(activity.organization.name);
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
             WeCampusApi.requestImage(activity.organization.avatar, new ImageLoader.ImageListener() {
 
@@ -261,7 +261,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         //If the organization is not null
         if (activity.organization != null) {
-            tvOrg.setText(activity.organization.getName());
+            tvOrg.setText(activity.organization.name);
             final Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.detail_organization);
             WeCampusApi.requestImage(activity.organization.avatar, new ImageLoader.ImageListener() {
 

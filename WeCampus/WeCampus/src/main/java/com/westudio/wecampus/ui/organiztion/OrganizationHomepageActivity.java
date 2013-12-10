@@ -46,6 +46,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     private PinnedHeaderListView mListView;
     private LoadingFooter loadingFooter;
     private HeaderTabBar mPinnedHeader;
+    private TextView tvLike;
+
     private IntroAdapter mIntroAdapter;
     private OrganizationActivityAdapter activityAdapter;
 
@@ -55,11 +57,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     private OrgQueryTask mOrgQueryTask;
     private RequestOrgHandler mRequestOrgHandler;
     private RequestOrgActivityHandler mRequestOrgAcHandler;
-    private RequestOrgFansHandler mRequestOrgFansHandler;
     private FollowOrganizationHandler followOrganizationHandler;
     private PullToRefreshAttacher mPullToRefreshAttacher;
-
-    private List<OrgFans> fansList = new ArrayList<OrgFans>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mOrgDataHelper = new OrgDataHelper(this);
         mRequestOrgHandler = new RequestOrgHandler();
         mRequestOrgAcHandler = new RequestOrgActivityHandler();
-        mRequestOrgFansHandler = new RequestOrgFansHandler(this);
         followOrganizationHandler = new FollowOrganizationHandler(this);
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
@@ -130,6 +128,18 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
             }
         });
 
+        tvLike = (TextView)findViewById(R.id.user_like);
+        tvLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(BaseApplication.getInstance().hasAccount) {
+                    followOrganizationHandler.followOrganization(mOrganization.can_follow);
+                } else {
+                    Toast.makeText(OrganizationHomepageActivity.this, R.string.please_login, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         mOrgQueryTask = new OrgQueryTask();
         Utility.executeAsyncTask(mOrgQueryTask);
         getOrgActivity(1);
@@ -180,12 +190,28 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mListView.setAvatar(mOrganization.avatar);
         mIntroAdapter.setData(mOrganization.admin_name, mOrganization.description,
                 mOrganization.admin_url);
-        mRequestOrgFansHandler.refreshUI();
+        tvLike.setText(String.valueOf(mOrganization.count_of_fans));
+        if(mOrganization.can_follow) {
+
+        } else {
+            tvLike.setCompoundDrawables(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
+                    null, null);
+        }
     }
 
     @Override
     public void onRefreshStarted(View view) {
         WeCampusApi.getOrganization(this, mId, mRequestOrgHandler, mRequestOrgHandler);
+    }
+
+    public void updateOrgToDb() {
+        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object... objects) {
+                mOrgDataHelper.update(mOrganization);
+                return null;
+            }
+        });
     }
 
     private class OrgQueryTask extends AsyncTask<Object, Object, Object> {
@@ -198,11 +224,23 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         @Override
         protected void onPostExecute(Object o) {
-            updateUI();
+            if(mOrganization != null) {
+                updateUI();
+            } else {
+                mRequestOrgHandler.requestOrg();
+            }
         }
     }
 
     private class RequestOrgHandler implements Response.Listener<Organization>, Response.ErrorListener{
+
+        public RequestOrgHandler() {
+
+        }
+
+        public void requestOrg() {
+            WeCampusApi.getOrganization(OrganizationHomepageActivity.this, mId, this, this);
+        }
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
@@ -213,19 +251,10 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         public void onResponse(final Organization organization) {
             mPullToRefreshAttacher.setRefreshComplete();
             if (organization != null) {
-                Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-                    @Override
-                    protected Object doInBackground(Object... objects) {
-                        mOrgDataHelper.update(organization);
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Object o) {
-                        mOrgQueryTask = new OrgQueryTask();
-                        Utility.executeAsyncTask(mOrgQueryTask);
-                    }
-                });
+                mOrganization = organization;
+                updateUI();
+                //Update the database
+                updateOrgToDb();
             }
         }
     }
@@ -250,7 +279,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         }
     }
 
-    //Request Organization fans handler
+    /*//Request Organization fans handler
     private class RequestOrgFansHandler implements Response.Listener<OrgFans.RequestData>, Response.ErrorListener {
 
         private Activity ac;
@@ -291,7 +320,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         public void refreshUI() {
             WeCampusApi.getOrganizationFans(OrganizationHomepageActivity.this, mId, this, this);
         }
-    }
+    }*/
 
     //Follow organization handler
     private class FollowOrganizationHandler implements Response.Listener<Organization>, Response.ErrorListener {
@@ -306,10 +335,15 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         @Override
         public void onResponse(Organization organization) {
-
+            Utility.log("success", "success");
         }
 
-        public void followOrganization() {
+        public void followOrganization(boolean can_follow) {
+            if(can_follow) {
+                WeCampusApi.followOrganization(OrganizationHomepageActivity.this, mId, this, this);
+            } else {
+                WeCampusApi.unfollowOrganization(OrganizationHomepageActivity.this, mId, this, this);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ public class ActivityDataHelper extends BaseDataHelper{
         values.put(ActivityDBInfo.END, activity.end);
         values.put(ActivityDBInfo.TITLE, activity.title);
         if (activity.organization != null) {
-            values.put(ActivityDBInfo.ORGANIZATION_ID, activity.organization.getId());
+            values.put(ActivityDBInfo.ORGANIZATION_ID, activity.organization.id);
         }
         values.put(ActivityDBInfo.LOCATION, activity.location);
         values.put(ActivityDBInfo.CATEGORY, activity.category);
@@ -82,7 +82,7 @@ public class ActivityDataHelper extends BaseDataHelper{
 
     public void update(Activity activity) {
         if (activity.organization != null) {
-            activity.organization_id = activity.organization.getId();
+            activity.organization_id = activity.organization.id;
         }
         ContentValues values = getContentValues(activity);
 

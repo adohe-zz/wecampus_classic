@@ -161,4 +161,8 @@
     <item name="forget_email" type="id">false</item>
     <item name="forget_submit" type="id">false</item>
 
+    <!-- Organization Part -->
+    <item name="org_list_avatar" type="id">false</item>
+    <item name="org_list_name" type="id">false</item>
+
 </resources>

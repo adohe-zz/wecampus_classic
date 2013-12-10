@@ -25,8 +25,10 @@ public class Organization {
     public String description;
     //Organization name
     public String name;
+    public boolean can_follow;
 
-    public Organization(int id, String admin_url, String admin_name, String avatar, String description, int count_of_fans, String name) {
+    public Organization(int id, String admin_url, String admin_name,
+       String avatar, String description, int count_of_fans, String name, boolean can_follow) {
         this.id = id;
         this.admin_url = admin_url;
         this.admin_name = admin_name;
@@ -34,6 +36,7 @@ public class Organization {
         this.description = description;
         this.count_of_fans = count_of_fans;
         this.name = name;
+        this.can_follow = can_follow;
     }
 
     public static Organization fromCursor(Cursor cursor) {
@@ -45,6 +48,7 @@ public class Organization {
         org.count_of_fans = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.COUNT_OF_FANS));
         org.description = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.DESCRIPTION));
         org.name = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.NAME));
+        org.can_follow = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.CAN_FOLLOW)) > 0;
         return org;
     }
 
@@ -61,61 +65,5 @@ public class Organization {
         public void setObjects(ArrayList<Organization> objects) {
             this.objects = objects;
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getAdmin_url() {
-        return admin_url;
-    }
-
-    public void setAdmin_url(String admin_url) {
-        this.admin_url = admin_url;
-    }
-
-    public String getAdmin_name() {
-        return admin_name;
-    }
-
-    public void setAdmin_name(String admin_name) {
-        this.admin_name = admin_name;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public int getCount_of_fans() {
-        return count_of_fans;
-    }
-
-    public void setCount_of_fans(int count_of_fans) {
-        this.count_of_fans = count_of_fans;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
