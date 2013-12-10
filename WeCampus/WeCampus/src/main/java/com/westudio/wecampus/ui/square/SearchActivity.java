@@ -17,10 +17,12 @@ import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Organization;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.ui.user.UserHomepageActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
@@ -200,10 +202,13 @@ public class SearchActivity extends BaseDetailActivity{
                     intent = new Intent(SearchActivity.this, ActivityDetailActivity.class);
                     intent.putExtra(ActivityListFragment.ACTIVITY_ID, activity.id);
                     startActivity(intent);
-                    SearchActivity.this.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
                     break;
                 case 1:
-                    //TODO 别人的主页
+                    //别人的主页
+                    User user = (User) adapterView.getAdapter().getItem(i);
+                    intent = new Intent(SearchActivity.this, UserHomepageActivity.class);
+                    intent.putExtra(UserHomepageActivity.USER_ID, user.id);
+                    startActivity(intent);
                     break;
                 case 2:
                     //组织详情
@@ -211,10 +216,10 @@ public class SearchActivity extends BaseDetailActivity{
                     intent = new Intent(SearchActivity.this, OrganizationHomepageActivity.class);
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.getId());
                     startActivity(intent);
-                    SearchActivity.this.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
                     break;
 
             }
+            SearchActivity.this.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
         }
     };
 
