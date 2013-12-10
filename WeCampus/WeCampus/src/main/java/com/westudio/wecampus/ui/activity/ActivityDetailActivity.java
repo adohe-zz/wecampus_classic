@@ -191,8 +191,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getSupportMenuInflater();
-        inflater.inflate(R.menu.detail_menu, menu);
+        if (BaseApplication.getInstance().hasAccount) {
+            MenuInflater inflater = getSupportMenuInflater();
+            inflater.inflate(R.menu.detail_menu, menu);
+        }
         return true;
     }
 
@@ -422,6 +424,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         public void quit() {
             icon.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
             WeCampusApi.quitActivityWithId(ActivityDetailActivity.this, activity.id, this, this);
         }
 

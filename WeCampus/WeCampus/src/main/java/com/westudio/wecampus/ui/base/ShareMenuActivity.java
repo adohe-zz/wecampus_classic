@@ -26,7 +26,6 @@ import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.database.WxShareTool;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
