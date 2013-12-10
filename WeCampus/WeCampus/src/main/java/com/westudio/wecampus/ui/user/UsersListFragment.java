@@ -51,7 +51,6 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -82,7 +81,11 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getActivity(), UserHomepageActivity.class));
+                Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(UserHomepageActivity.USER_ID, mAdapter.getItem(position - 2).id);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

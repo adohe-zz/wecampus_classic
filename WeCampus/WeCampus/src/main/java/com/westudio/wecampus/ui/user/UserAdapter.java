@@ -2,6 +2,8 @@ package com.westudio.wecampus.ui.user;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +20,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.PinYin;
 
 /**
@@ -31,11 +34,15 @@ public class UserAdapter extends CursorAdapter implements SectionIndexer {
     private ListView mListView;
 
     private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+    private Bitmap defaultMaleDrawable;
+    private Bitmap defaultFemaleDrawable;
 
     public UserAdapter(Context context, ListView listView) {
         super(context, null , false);
         mLayoutInflater = LayoutInflater.from(context);
         mListView = listView;
+        defaultMaleDrawable = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_male);
+        defaultFemaleDrawable = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_default_female);
     }
 
 
@@ -57,8 +64,16 @@ public class UserAdapter extends CursorAdapter implements SectionIndexer {
 
         User user = User.fromCursor(cursor);
         holder.nickname.setText(user.nickname);
-        holder.imageRequest = WeCampusApi.requestImage(user.avatar,
-                WeCampusApi.getImageListener(holder.avatar, defaultDrawable, defaultDrawable));
+        if(Constants.IMAGE_NOT_FOUND.equals(user.avatar)) {
+            if(Constants.MALE.equals(user.gender)) {
+                holder.avatar.setImageBitmap(defaultMaleDrawable);
+            } else {
+                holder.avatar.setImageBitmap(defaultFemaleDrawable);
+            }
+        } else {
+            holder.imageRequest = WeCampusApi.requestImage(user.avatar,
+                    WeCampusApi.getImageListener(holder.avatar, defaultDrawable, defaultDrawable));
+        }
     }
 
     @Override

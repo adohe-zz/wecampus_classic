@@ -62,7 +62,7 @@ public class HttpUtil {
     }
 
     public static enum UserOp {
-        FOLLOW, UNFOLLOW, FANS, FOLLOWERS, FRIENDS,JACTIVITY,FACTIVITY,FORGANIZATION,SEARCH
+        DETAIL, FOLLOW, UNFOLLOW, FANS, FOLLOWERS, FRIENDS, JACTIVITY, FACTIVITY, FORGANIZATION, SEARCH
     }
 
     /**
@@ -269,6 +269,9 @@ public class HttpUtil {
                 .append(SLASH).append(BASE_USER_PATH).append(SLASH);
 
         switch (op) {
+            case DETAIL:
+                sb.append(id);
+                break;
             case FOLLOW:
                 sb.append(id).append(SLASH).append("follow");
                 break;

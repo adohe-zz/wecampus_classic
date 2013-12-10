@@ -35,6 +35,7 @@ import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
@@ -75,6 +76,14 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     private TextView tvMoreActivity;
     private TextView tvAttendActivity;
 
+    private FollowButton btnFollow;
+
+    public static UserHomepageFragment newInstance(Bundle args) {
+        UserHomepageFragment fragment = new UserHomepageFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -85,6 +94,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Bundle bundle = getArguments();
         uid = BaseApplication.getInstance().getAccountMgr().getUserId();
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
@@ -97,7 +107,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mScrollview = (ParallaxScrollView) mView.findViewById(R.id.scroll_view);
         mScrollview.setParallaxOffset(0.3f);
 
-        mPullToRefreshAttacher = ((MainActivity)mActivity).getPullToRefreshAttacher();
+        mPullToRefreshAttacher = ((UserHomepageActivity)mActivity).getPullToRefreshAttacher();
         PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
         pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
@@ -161,7 +171,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvMoreActivity = (TextView)view.findViewById(R.id.activity_list_item_no_activity);
         tvMoreActivity.setOnClickListener(clickListener);
         tvAttendActivity = (TextView)view.findViewById(R.id.user_profile_attend_activity);
-
+        btnFollow = (FollowButton)view.findViewById(R.id.btn_follow);
+        btnFollow.setVisibility(View.VISIBLE);
         mJActivityHandler = new UserActivityHandler(mView);
         mFActivityHandler = new UserFActivityHandler(mView);
         mOrganizationHandler = new UserOrganizationHandler(mView);
@@ -241,7 +252,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onRefreshStarted(View view) {
-
+        mPullToRefreshAttacher.setRefreshComplete();
     }
 
     private class UserActivityHandler implements Response.Listener<ActivityList.RequestData>,

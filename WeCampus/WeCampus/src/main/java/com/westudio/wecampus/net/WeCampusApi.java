@@ -50,17 +50,7 @@ public class WeCampusApi {
     }
 
     /**
-     * Add common request parameter
-     * @return
-     */
-    private static Bundle getBundle() {
-        Bundle bundle = new Bundle();
-
-        return bundle;
-    }
-
-    /**
-     * Open the disk cache for the response
+     * Open Disk Cache for response
      * @return
      */
     private static Cache openCache() {
@@ -540,8 +530,25 @@ public class WeCampusApi {
      */
     public static void getUserFOrganization(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null),
+        Request request = new AuthedGsonRequest<Organization.OrganizationRequestData>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null),
                 Organization.OrganizationRequestData.class, listener, errorListener);
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * Get the user information by id
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getUserInfoById(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new GsonRequest<User>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.DETAIL, null),
+                User.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);
         }
@@ -556,7 +563,7 @@ public class WeCampusApi {
      */
     public static void getProfile(Object tag, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL),
+        Request request = new AuthedGsonRequest<User>(Request.Method.GET, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL),
                 User.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);

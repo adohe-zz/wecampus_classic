@@ -1,14 +1,11 @@
 package com.westudio.wecampus.ui.user;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
 
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.ui.activity.ActivityAdapter;
-import com.westudio.wecampus.ui.adapter.CardsAnimationAdapter;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
-import com.westudio.wecampus.ui.view.LoadingFooter;
+
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
 /**
  * Created by nankonami on 13-10-6.
@@ -16,29 +13,23 @@ import com.westudio.wecampus.ui.view.LoadingFooter;
  */
 public class UserHomepageActivity extends BaseDetailActivity {
 
-    private ListView listView;
-    private ActivityAdapter activityAdapter;
-    private LoadingFooter loadingFooter;
+    public static String USER_ID = "user_id";
+    private static String FRAGMENT = "USER_HOME_PAGE";
+
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homepage);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
-        listView = (ListView)findViewById(R.id.user_profile_listview);
-        View header = new View(this);
-        loadingFooter = new LoadingFooter(this);
-        activityAdapter = new ActivityAdapter(this, listView);
-        CardsAnimationAdapter animationAdapter = new CardsAnimationAdapter(this, activityAdapter);
-        animationAdapter.setListView(listView);
-
-        listView.addHeaderView(header);
-        listView.addFooterView(loadingFooter.getView());
-        listView.setAdapter(animationAdapter);
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.user_home_page,
+                UserHomepageFragment.newInstance(getIntent().getExtras()), FRAGMENT).commit();
     }
 
-
+    public PullToRefreshAttacher getPullToRefreshAttacher() {
+        return mPullToRefreshAttacher;
+    }
 }
