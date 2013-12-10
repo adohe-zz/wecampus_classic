@@ -1,48 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/user_profile_header" />
-
-        <Button
-            android:id="@id/user_profile_watch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="关注他"
-            android:visibility="gone"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="参加的活动"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal" />
-
-        <ListView
-            android:id="@id/user_profile_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:headerDividersEnabled="true"
-            android:footerDividersEnabled="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:choiceMode="singleChoice"
-            android:dividerHeight="13dp"
-            android:drawSelectorOnTop="true"
-            android:listSelector="@drawable/selectable_background_we"
-            android:divider="@android:color/transparent" />
-
-    </LinearLayout>
-
-</ScrollView>
+    android:layout_height="match_parent"
+    android:id="@id/user_home_page">
+</FrameLayout>
