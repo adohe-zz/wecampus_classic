@@ -1,13 +1,9 @@
 package com.westudio.wecampus.ui.square;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.organiztion.OrganizationActivityAdapter;
@@ -19,44 +15,42 @@ import com.westudio.wecampus.ui.organiztion.OrganizationActivityAdapter;
 public class SearchActivityAdapter extends OrganizationActivityAdapter implements
         Response.Listener<ActivityList.RequestData>, Response.ErrorListener{
     private boolean isLastPage;
-    private ImageView mEmptyImage;
-    private ProgressBar mProgressBar;
+
+    private SearchListAttacher attacher;
     public SearchActivityAdapter(Context context) {
         super(context);
     }
 
     public void requestData(String keywords, int page) {
         if (page == 1) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mEmptyImage.setVisibility(View.GONE);
+            attacher.setStatus(SearchListAttacher.Status.LOADING);
+        } else {
+            attacher.setStatus(SearchListAttacher.Status.LOADING_MORE);
         }
         WeCampusApi.searchActivity(mContext, page, keywords, this, this);
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        mEmptyImage.setImageResource(R.drawable.search_no_result);
-        mProgressBar.setVisibility(View.GONE);
-        mEmptyImage.setVisibility(View.VISIBLE);
+        attacher.setStatus(SearchListAttacher.Status.NO_RESULT);
     }
 
     @Override
     public void onResponse(ActivityList.RequestData data) {
-        mProgressBar.setVisibility(View.GONE);
-        mEmptyImage.setVisibility(View.VISIBLE);
         isLastPage = data.getObjects().isEmpty();
         addAll(data.getObjects());
-        if (activityLists.isEmpty()) {
-            mEmptyImage.setImageResource(R.drawable.search_no_result);
+        if (activityLists.isEmpty() && isLastPage) {
+            attacher.setStatus(SearchListAttacher.Status.NO_RESULT);
+        } else {
+            attacher.page++;
+        }
+        if (isLastPage) {
+            attacher.setStatus(SearchListAttacher.Status.LOADING_END);
         }
     }
 
-    public void setEmptyImage(ImageView image) {
-        mEmptyImage = image;
-    }
-
-    public void setProgressBar(ProgressBar mProgressBar) {
-        this.mProgressBar = mProgressBar;
+    public void setAttacher(SearchListAttacher attacher) {
+        this.attacher = attacher;
     }
 
     public void clear() {

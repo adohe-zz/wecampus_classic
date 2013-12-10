@@ -41,7 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
-            android:layout_weight="1.0"/>
+            android:layout_weight="1.0"
+            android:choiceMode="singleChoice"
+            android:scrollingCache="true"
+            android:smoothScrollbar="true"
+            android:drawSelectorOnTop="true"
+            android:divider="@android:color/transparent"
+            android:listSelector="@drawable/selectable_background_we"/>
 
     </LinearLayout>
 
