@@ -19,6 +19,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.base.WebBrowserActivity;

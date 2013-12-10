@@ -16,6 +16,8 @@ public class UserHomepageActivity extends BaseDetailActivity {
     public static String USER_ID = "user_id";
     private static String FRAGMENT = "USER_HOME_PAGE";
 
+    private int mUserId;
+
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override
@@ -23,6 +25,8 @@ public class UserHomepageActivity extends BaseDetailActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homepage);
 
+        mUserId = getIntent().getIntExtra(USER_ID, -1);
+        
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.user_home_page,
