@@ -4,9 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 
 import java.util.ArrayList;
@@ -14,13 +15,12 @@ import java.util.ArrayList;
 /**
  * Created by martian on 13-12-5.
  */
-public abstract class BaseSearchAdapter<T> extends BaseAdapter {
+public abstract class BaseSearchAdapter<T> extends BaseAdapter implements Response.ErrorListener {
 
     protected ArrayList<T> mList;
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
-    protected ImageView mEmptyImage;
-    protected ProgressBar mProgressBar;
+    protected SearchListAttacher mAttacher;
 
     public BaseSearchAdapter(Context context) {
         mLayoutInflater = LayoutInflater.from(context);
@@ -53,17 +53,18 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        mAttacher.setStatus(SearchListAttacher.Status.NO_RESULT);
+    }
+
     public static class ViewHolder {
         ImageView imageView;
         TextView textName;
         ImageLoader.ImageContainer imageRequest;
     }
 
-    public void setmEmptyImage(ImageView image) {
-        this.mEmptyImage = image;
-    }
-
-    public void setProgressBar(ProgressBar progressBar) {
-        this.mProgressBar = progressBar;
+    public void setAttacher(SearchListAttacher attacher) {
+        this.mAttacher = attacher;
     }
 }

@@ -19,7 +19,7 @@ import com.westudio.wecampus.util.ImageUtil;
  * Created by martian on 13-12-5.
  */
 public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
-        Response.Listener<Organization.OrganizationRequestData>, Response.ErrorListener{
+        Response.Listener<Organization.OrganizationRequestData> {
     private Drawable defalutDrawable;
     private boolean isLastPage;
 
@@ -60,28 +60,26 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
 
     public void requestData(String keywords, int page) {
         if (page == 1) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mEmptyImage.setVisibility(View.GONE);
+            mAttacher.setStatus(SearchListAttacher.Status.LOADING);
+        } else {
+            mAttacher.setStatus(SearchListAttacher.Status.LOADING_MORE);
         }
 
         WeCampusApi.searchOrgs(mContext, page, keywords, this, this);
     }
 
     @Override
-    public void onErrorResponse(VolleyError volleyError) {
-        mEmptyImage.setImageResource(R.drawable.search_no_result);
-        mProgressBar.setVisibility(View.GONE);
-        mEmptyImage.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public void onResponse(Organization.OrganizationRequestData data) {
-        mProgressBar.setVisibility(View.GONE);
-        mEmptyImage.setVisibility(View.VISIBLE);
-        if (mList.isEmpty()) {
-            mEmptyImage.setImageResource(R.drawable.search_no_result);
-        }
         isLastPage = data.getObjects().isEmpty();
+        if (isLastPage && mList.isEmpty()) {
+            mAttacher.setStatus(SearchListAttacher.Status.NO_RESULT);
+        } else {
+            mAttacher.page++;
+        }
+
+        if (isLastPage) {
+            mAttacher.setStatus(SearchListAttacher.Status.LOADING_END);
+        }
         addAll(data.getObjects());
 
     }
