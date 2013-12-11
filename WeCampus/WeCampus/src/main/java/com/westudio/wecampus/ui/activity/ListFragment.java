@@ -110,6 +110,11 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
     }
 
     @Override
+    protected void updateUI(Activity.ActivityRequestData data) {
+
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return mDataHelper.getCursorLoader(mCategory);
     }
@@ -118,7 +123,6 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         getAdapter().changeCursor(cursor);
         if(cursor != null && cursor.getCount() == 0) {
-            Utility.log("no data", "no");
             loadFirstPage();
         }
     }

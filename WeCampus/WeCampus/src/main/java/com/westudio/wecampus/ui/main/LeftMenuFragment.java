@@ -175,7 +175,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                 break;
             }
             case R.id.img_avatar: {
-                mainActivity.changeContent(MainActivity.ContentType.HOMEPAGE);
+                if(BaseApplication.getInstance().hasAccount) {
+                    mainActivity.changeContent(MainActivity.ContentType.HOMEPAGE);
+                }
                 break;
             }
             case R.id.edit_button: {

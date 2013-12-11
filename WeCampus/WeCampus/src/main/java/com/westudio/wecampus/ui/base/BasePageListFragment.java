@@ -48,7 +48,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.mActivity = activity;
+        mActivity = activity;
     }
 
     @Override
@@ -66,7 +66,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
         listView.addHeaderView(header);
         listView.addFooterView(loadingFooter.getView());
 
-        mPullToRefreshAttacher = ((ActivityListActivity)mActivity).getmPullToRefreshAttacher();
+        mPullToRefreshAttacher = ((BaseListActivity)mActivity).mPullToRefreshAttacher;
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.base_page_ptr_layout);
         ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
@@ -110,6 +110,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
      * Load the next page data
      */
     protected void loadNextPage() {
+        Utility.log("load", "next");
         loadingFooter.setState(LoadingFooter.State.Loading);
         loadData(page + 1);
     }
@@ -142,6 +143,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
+                        updateUI(t);
                         if(isRefreshFromTop) {
                             mPullToRefreshAttacher.setRefreshComplete();
                         } else {
@@ -206,6 +208,12 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
      * Process the response data
      */
     protected abstract void processResponseData(T data);
+
+    /**
+     * Update the ui in the main thread
+     * @param data
+     */
+    protected abstract void updateUI(T data);
 
     @Override
     public void onRefreshStarted(View view) {

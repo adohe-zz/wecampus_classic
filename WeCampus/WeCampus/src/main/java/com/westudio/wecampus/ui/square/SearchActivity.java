@@ -214,7 +214,7 @@ public class SearchActivity extends BaseDetailActivity{
                     //组织详情
                     Organization org = (Organization) adapterView.getAdapter().getItem(i);
                     intent = new Intent(SearchActivity.this, OrganizationHomepageActivity.class);
-                    intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.getId());
+                    intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.id);
                     startActivity(intent);
                     break;
 

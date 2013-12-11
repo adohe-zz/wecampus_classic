@@ -265,7 +265,7 @@
                         <!-- Like Organizations Part -->
                         <RelativeLayout
                             android:id="@id/user_like_organization"
-                            android:layout_height="93.3dp"
+                            android:layout_height="99.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
                             android:layout_marginBottom="2dp">
@@ -321,7 +321,7 @@
                         <!-- Like Activity Part -->
                         <RelativeLayout
                             android:id="@id/user_like_activity"
-                            android:layout_height="93.3dp"
+                            android:layout_height="102.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
                             android:layout_marginBottom="4dp">
@@ -341,7 +341,6 @@
                                 android:layout_height="55dp"
                                 android:layout_width="55dp"
                                 android:layout_marginLeft="9dp"
-                                android:src="@drawable/ic_launcher"
                                 android:layout_below="@id/num_like_activity"/>
 
                             <TextView
@@ -349,9 +348,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="20dp"
                                 android:layout_toRightOf="@id/icon_like_activity"
                                 android:layout_alignTop="@id/icon_like_activity"
-                                android:text="WeCampus官方账号"
                                 style="@style/HomePageTextPrimary"/>
 
                             <TextView
@@ -362,6 +361,9 @@
                                 android:layout_below="@id/text_like_activity_name"
                                 android:layout_alignLeft="@id/text_like_activity_name"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:singleLine="true"
+                                android:ellipsize="end"
                                 style="@style/HomePageTextSecondary"/>
 
                             <ImageView
