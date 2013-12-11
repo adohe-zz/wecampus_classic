@@ -30,11 +30,9 @@ import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
-import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
-import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
-import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
@@ -95,7 +93,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
-        uid = BaseApplication.getInstance().getAccountMgr().getUserId();
+        uid = bundle.getInt(UserHomepageActivity.USER_ID, -1);
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
     }
@@ -240,8 +238,11 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 } else if(mUser.count_of_join_activities == 1) {
                     Toast.makeText(mActivity, R.string.only_one_activity, Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(mActivity, ActivityListActivity.class);
-                    intent.putExtra(ActivityListActivity.EXTRA_CATEGORY, "学术讲座");
+                    Intent intent = new Intent(mActivity, ListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(ListActivity.USER_ID, uid);
+                    bundle.putInt(ListActivity.TYPE, 1);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             } else if(v.getId() == R.id.img_avatar) {
@@ -365,7 +366,12 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             rlLikeOrganization.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mActivity, ListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(ListActivity.USER_ID, uid);
+                    bundle.putInt(ListActivity.TYPE, 3);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
         }
@@ -380,7 +386,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             Organization organization = organizationRequestData.getObjects().get(0);
             tvOrgName.setText(organization.name);
             String orgFans = getResources().getString(R.string.num_people_like);
-            tvLikeOrg.setText(String.format(orgFans, String.valueOf(organization.count_of_fans)));
+            tvLikeOrg.setText(String.format(orgFans, organization.count_of_fans));
             WeCampusApi.requestImage(organization.avatar, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
@@ -404,7 +410,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 rlLikeOrganization.setVisibility(View.VISIBLE);
                 String orgNum = getResources().getString(R.string.homepage_like_org);
                 tvNumOrg.setText(String.format(orgNum, mUser.count_of_follow_organizations));
-                WeCampusApi.getUserFActivity(UserHomepageFragment.this, uid, this, this);
+                WeCampusApi.getUserFOrganization(UserHomepageFragment.this, uid, this, this);
             }
         }
 
@@ -429,7 +435,12 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             rlFavoriteActivity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mActivity, ListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(ListActivity.USER_ID, uid);
+                    bundle.putInt(ListActivity.TYPE, 2);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
         }
@@ -444,6 +455,20 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             ActivityList ac = requestData.getObjects().get(0);
             tvActivityName.setText(ac.title);
             tvActivitySummary.setText(ac.summary);
+            WeCampusApi.requestImage(ac.image, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    Bitmap data = imageContainer.getBitmap();
+                    if(data != null) {
+                        ivActivityIcon.setImageBitmap(data);
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
         }
 
         public void refreshUI() {
@@ -468,7 +493,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         //Get the user information from network
         public void fetchUserInfo() {
             mPullToRefreshAttacher.setRefreshing(true);
-            WeCampusApi.getProfile(UserHomepageFragment.this, this, this);
+            WeCampusApi.getUserInfoById(UserHomepageFragment.this, uid, this, this);
         }
 
         @Override
