@@ -1,6 +1,5 @@
 package com.westudio.wecampus.util;
 
-import com.android.volley.Cache;
 import com.android.volley.toolbox.DiskBasedCache;
 
 import java.io.File;
@@ -26,5 +25,10 @@ public class ResponseDiskCache extends DiskBasedCache {
         }
 
         super.put(key, entry);
+    }
+
+    @Override
+    public File getFileForKey(String key) {
+        return super.getFileForKey(key);
     }
 }

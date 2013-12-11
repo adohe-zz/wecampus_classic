@@ -318,6 +318,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 case R.id.detail_img_poster: {
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
+                    intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, activity.title);
                     startActivity(intent);
                     break;
                 }

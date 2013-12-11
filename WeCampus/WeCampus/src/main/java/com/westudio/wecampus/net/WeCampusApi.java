@@ -41,7 +41,7 @@ public class WeCampusApi {
             getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass() / 3;
 
     private static RequestQueue requestQueue = newRequestQueue();
-    private static RequestQueue imageRequestQueue = newRequestQueueForImage();
+    public static RequestQueue imageRequestQueue = newRequestQueueForImage();
 
     private static ImageLoader imageLoader = new ImageLoader(imageRequestQueue, new BitmapLruCache(MEM_CACHE_SIZE));
 

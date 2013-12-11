@@ -35,7 +35,7 @@
     <color name="detail_ticket">#80929f</color>
     <color name="detail_content">#6a6a6a</color>
     <color name="detail_bg">#e5e1e1</color>
-    <color name="bottom_bar_bg">#f23e3e3e</color>
+    <color name="bottom_bar_bg">#f2000000</color>
     <color name="list_item_select_bg">#0a000000</color>
 
     <!-- Main color for text -->

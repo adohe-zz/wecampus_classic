@@ -68,12 +68,6 @@ public class ListFragment extends BaseFragment implements OnRefreshListener,
 
         mUserList = (IndexableListView) view.findViewById(R.id.user_list);
 
-        /*//TODO
-        View introHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_intro_header, null);
-        mUserList.addHeaderView(introHeader);
-        View searchHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_search_header, null);
-        mUserList.addHeaderView(searchHeader);*/
-
         mAdapter = new UserListAdapter(getActivity());
         mUserList.setAdapter(mAdapter);
 
