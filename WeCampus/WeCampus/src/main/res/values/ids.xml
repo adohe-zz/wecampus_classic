@@ -165,4 +165,7 @@
     <item name="org_list_avatar" type="id">false</item>
     <item name="org_list_name" type="id">false</item>
 
+    <!-- User List Part -->
+    <item name="user_list_frame" type="id">false</item>
+
 </resources>

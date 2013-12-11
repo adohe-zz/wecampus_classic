@@ -18,7 +18,7 @@
 -->
 
 <resources>
-    <color name="pressed_we">#30000000</color>
+    <color name="pressed_we">#0c000000</color>
     <color name="bg_color">#DEDEDE</color>
     <color name="menu_list_divider">#b1b1b1</color>
     <color name="intro_activity_bg">#2eddae</color>
@@ -35,7 +35,7 @@
     <color name="detail_ticket">#80929f</color>
     <color name="detail_content">#6a6a6a</color>
     <color name="detail_bg">#e5e1e1</color>
-    <color name="bottom_bar_bg">#3e3e3e</color>
+    <color name="bottom_bar_bg">#f23e3e3e</color>
     <color name="list_item_select_bg">#0a000000</color>
 
     <!-- Main color for text -->

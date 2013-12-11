@@ -131,6 +131,8 @@
 
         <activity android:name=".ui.list.ListActivity"/>
 
+        <activity android:name=".ui.user.UserListActivity"/>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

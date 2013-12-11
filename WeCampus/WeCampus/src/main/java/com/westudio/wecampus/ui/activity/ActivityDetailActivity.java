@@ -35,9 +35,10 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.ui.user.UserListActivity;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
-import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -96,7 +97,6 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
-        Utility.log("id", activityId);
         acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
         //refreshActivityFromDb();
@@ -144,7 +144,6 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         ivCat.setOnClickListener(clickListener);
         noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
         progressBar = (ProgressBar)findViewById(R.id.detail_no_content_pb);
-        //pbContent = (ProgressBar)findViewById(R.id.detail_content_pb);
         lyContent = (LinearLayout)findViewById(R.id.detail_content);
         contentContainer = (FrameLayout)findViewById(R.id.detail_content_container);
         rlOrganization = (RelativeLayout)findViewById(R.id.detail_part_three);
@@ -153,28 +152,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         rlParticipants.setOnClickListener(clickListener);
         rlCompany = (RelativeLayout)findViewById(R.id.detail_rl_sponsor);
         rlCompany.setOnClickListener(clickListener);
-        //showBottomActionBar();
 
-        /*if (activity == null) {
-            return;
-        }
-
-        tvTitle.setText(activity.title);
-        tvLocation.setText(activity.location);
-        tvTag.setText(activity.category);
-
-        Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
-                defaultDrawable, defaultDrawable));
-        ivPoster.setOnClickListener(clickListener);
-
-        updater = new ActivityDetailUpdater();
-        //TODO:IF NO NETWORK CONNECTED
-        updater.fetchActivityDetail();
-        participateHandler = new ParticipateHandler(this);*/
-        /*joinHandler = new JoinHandler(this);
-        joinHandler.refreshUi(activity.can_join);
-        likeHandler = new LikeHandler(this);*/
         participateHandler = new ParticipateHandler(this);
         joinHandler = new JoinHandler(this);
         likeHandler = new LikeHandler(this);
@@ -231,17 +209,16 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             });
         }
 
-        if (activity.have_ticket) {
-            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.detail_tv_ticket)).setText(activity.ticket_service);
+        if (activity.have_ticket && activity.ticket_service != null) {
+            tvTicket.setVisibility(View.VISIBLE);
+            tvTicket.setText(activity.ticket_service);
         } else {
-            findViewById(R.id.detail_tv_ticket).setVisibility(View.GONE);
+            findViewById(R.id.detail_rl_ticket).setVisibility(View.GONE);
         }
 
-        if (activity.have_sponsor) {
-            findViewById(R.id.detail_tv_ticket).setVisibility(View.VISIBLE);
+        if (activity.have_sponsor && activity.sponsor_name != null && activity.sponsor_url != null) {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.detail_tv_company)).setText(activity.sponsor_name);
+            tvCompany.setText(activity.sponsor_name);
         } else {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
         }
@@ -366,6 +343,15 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     Intent intent = new Intent("android.intent.action.VIEW");
                     intent.setData(Uri.parse(activity.sponsor_url));
                     startActivity(intent);
+                    break;
+                }
+                case R.id.detail_part_four: {
+                    Intent intent = new Intent(ActivityDetailActivity.this, UserListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(UserListActivity.ACTIVITY_ID, activityId);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
                 }
             }
         }
@@ -551,7 +537,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
                 layoutParams.setMargins(0, 0, 10, 0);
                 imageView.setLayoutParams(layoutParams);
-                if(HttpUtil.IMAGE_NOT_FOUND.equals(participants.avatar)) {
+                if(Constants.IMAGE_NOT_FOUND.equals(participants.avatar)) {
                     imageView.setImageBitmap(defaulMaleDrawable);
                     container.addView(imageView);
                 } else {

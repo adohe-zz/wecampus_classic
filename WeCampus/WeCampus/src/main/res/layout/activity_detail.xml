@@ -124,21 +124,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp">
 
-                        <TextView
-                            android:id="@id/detail_tv_ticket"
-                            android:layout_width="match_parent"
+                        <RelativeLayout
+                            android:id="@+id/detail_rl_ticket"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="1.3dp"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:drawableLeft="@drawable/detail_ticket"
-                            android:drawablePadding="5dp"
-                            android:background="@android:color/white"
-                            android:gravity="center_vertical"
-                            style="@style/DetailTextTicket"
-                            />
+                            android:layout_width="match_parent"
+                            android:background="@drawable/selector_activity_detail_section">
+
+                            <TextView
+                                android:id="@id/detail_tv_ticket"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="1.3dp"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:drawableLeft="@drawable/detail_ticket"
+                                android:drawablePadding="5dp"
+                                android:background="@android:color/white"
+                                android:gravity="center_vertical"
+                                style="@style/DetailTextTicket"/>
+
+                        </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@id/detail_rl_sponsor"
@@ -148,7 +155,7 @@
                             android:paddingBottom="10dp"
                             android:clickable="true"
                             android:background="@drawable/selector_activity_detail_section"
-                            android:layout_below="@id/detail_tv_ticket">
+                            android:layout_below="@id/detail_rl_ticket">
 
                             <TextView
                                 android:id="@id/detail_tv_company"

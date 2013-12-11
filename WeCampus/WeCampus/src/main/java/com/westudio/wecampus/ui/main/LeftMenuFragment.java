@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -127,7 +128,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onResume() {
         super.onResume();
-        WeCampusApi.getProfile(mActivity, this, this);
+        if(BaseApplication.getInstance().hasAccount) {
+            WeCampusApi.getProfile(mActivity, this, this);
+        }
     }
 
     private void updateUI() {
@@ -138,6 +141,15 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         mBtnSignIn.setVisibility(View.GONE);
         mBtnSignOut.setVisibility(View.VISIBLE);
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
+            if(Constants.MALE.equals(mUser.gender)) {
+                ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.ic_default_male
+                )));
+            } else {
+                ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.ic_default_female
+                )));
+            }
         } else {
             WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
                 @Override
