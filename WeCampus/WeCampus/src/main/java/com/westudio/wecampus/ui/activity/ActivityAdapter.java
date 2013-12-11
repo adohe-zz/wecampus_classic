@@ -33,7 +33,7 @@ public class ActivityAdapter extends CursorAdapter {
     private ListView mListView;
 
     //The default image
-    private Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+    private Drawable defaultDrawable = new ColorDrawable(Color.argb(223, 201, 201, 201));
 
     private Context mContext;
 
@@ -89,6 +89,7 @@ public class ActivityAdapter extends CursorAdapter {
             color = colors.get(activity.category);
         }
         Drawable drawable = new ColorDrawable(Color.parseColor(color));
+        drawable.setAlpha(223);
         holder.text_tag.setBackgroundDrawable(drawable);
         holder.text_like.setText(String.valueOf(activity.count_of_fans));
     }

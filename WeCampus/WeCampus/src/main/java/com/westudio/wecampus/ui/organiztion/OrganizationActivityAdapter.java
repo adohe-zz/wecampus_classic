@@ -31,7 +31,7 @@ public class OrganizationActivityAdapter extends BaseAdapter {
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;
 
-    protected Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+    protected Drawable defaultDrawable = new ColorDrawable(Color.argb(223, 201, 201, 201));
     protected HashMap<String, String> colors;
 
     public OrganizationActivityAdapter(Context context) {
@@ -98,6 +98,7 @@ public class OrganizationActivityAdapter extends BaseAdapter {
             color = colors.get(activityList.category);
         }
         Drawable drawable = new ColorDrawable(Color.parseColor(color));
+        drawable.setAlpha(223);
         viewHolder.text_tag.setBackgroundDrawable(drawable);
         viewHolder.text_like.setText(String.valueOf(activityList.count_of_fans));
 
