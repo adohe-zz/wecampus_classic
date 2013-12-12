@@ -32,7 +32,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 /**
  * Created by jam on 13-9-19.
  *
- * Fragment display user list
+ * 展示好友的的Fragment
  */
 public class UsersListFragment extends BaseFragment implements OnRefreshListener,
         LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener,
@@ -141,4 +141,5 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
             }
         });
     }
+
 }
