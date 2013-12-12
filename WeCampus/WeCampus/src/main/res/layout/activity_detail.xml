@@ -102,7 +102,7 @@
                             android:drawablePadding="5dp"
                             android:maxLines="2"
                             android:ellipsize="end"
-                            style="@style/DetailTextView" />
+                            style="@style/DetailTextLocation" />
 
                         <TextView
                             android:layout_width="wrap_content"

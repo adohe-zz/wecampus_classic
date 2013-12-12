@@ -134,6 +134,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         tvTitle = (TextView)findViewById(R.id.detail_tv_title);
         tvTime = (TextView)findViewById(R.id.detail_tv_time);
         tvLocation = (TextView)findViewById(R.id.detail_tv_location);
+        tvLocation.setOnClickListener(clickListener);
         tvTag = (TextView)findViewById(R.id.detail_tv_tag);
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
@@ -315,6 +316,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
+                case R.id.detail_tv_location:
+                    break;
                 case R.id.detail_img_poster: {
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);

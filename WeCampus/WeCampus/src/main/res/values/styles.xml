@@ -76,6 +76,10 @@
         <item name="android:textColor">@color/login_textview_bg</item>
     </style>
 
+    <style name="DetailTextLocation" parent="DetailTextView">
+        <item name="android:textColor">#1ba1e2</item>
+    </style>
+
     <style name="DetailTextTitle">
         <item name="android:textColor">@color/login_textview_bg</item>
         <item name="android:textSize">17sp</item>
