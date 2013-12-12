@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -74,11 +77,13 @@ public class ActivityAdapter extends CursorAdapter {
             holder.imageView.setVisibility(View.GONE);
             holder.text_summary.setVisibility(View.VISIBLE);
             holder.text_summary.setText(activity.summary);
+            holder.text_title.setPadding(0, 0, 108, 0);
         } else {
             holder.imageView.setVisibility(View.VISIBLE);
             holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
             holder.text_summary.setVisibility(View.GONE);
+            holder.text_title.setPadding(0, 0, 0, 0);
         }
         holder.text_title.setText(activity.title);
         holder.text_time.setText(DateUtil.getActivityTime(mContext, activity.begin, activity.end));
