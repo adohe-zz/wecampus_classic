@@ -166,6 +166,14 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    private void refreshUI() {
+        tvName.setText(getResources().getString(R.string.menu_no_login));
+        tvWord.setVisibility(View.GONE);
+        mUserSection.setVisibility(View.GONE);
+        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_default_avatar)));
+    }
+
     @Override
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
@@ -276,6 +284,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         @Override
         public void onResponse(Object o) {
             progressDialog.dismiss();
+            refreshUI();
             mBtnSignOut.setVisibility(View.GONE);
             mBtnSignIn.setVisibility(View.VISIBLE);
         }
