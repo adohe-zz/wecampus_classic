@@ -46,7 +46,8 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.NAME, user.name);
         values.put(UserDBInfo.NICKNAME, user.nickname);
         values.put(UserDBInfo.PHONE, user.phone);
-        values.put(UserDBInfo.SCHOOL_ID, user.school_id);
+        values.put(UserDBInfo.SCHOOL_ID, user.school.getId());
+        values.put(UserDBInfo.SCHOOL_NAME, user.school.getName());
         values.put(UserDBInfo.STAGE, user.stage);
         values.put(UserDBInfo.WORDS, user.words);
         values.put(UserDBInfo.CAN_FOLLOW, user.can_follow);
@@ -121,6 +122,7 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String EMOTION = "emotion";
         public static final String NICKNAME = "nickname";
         public static final String SCHOOL_ID = "school_id";
+        public static final String SCHOOL_NAME = "school_name";
         public static final String GENDER = "gender";
         public static final String PHONE = "phone";
         public static final String STAGE = "stage";
@@ -142,6 +144,7 @@ public class UserDataHelper extends BaseDataHelper {
                 .addColumn(EMOTION, Column.DataType.TEXT)
                 .addColumn(NICKNAME, Column.DataType.TEXT)
                 .addColumn(SCHOOL_ID, Column.DataType.INTEGER)
+                .addColumn(SCHOOL_NAME, Column.DataType.TEXT)
                 .addColumn(GENDER, Column.DataType.TEXT)
                 .addColumn(PHONE, Column.DataType.TEXT)
                 .addColumn(STAGE, Column.DataType.TEXT)

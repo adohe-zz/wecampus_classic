@@ -24,6 +24,7 @@ public class User {
     public String emotion;
     public String nickname;
     public int school_id;
+    public String school_name;
     public String gender;
     public String phone;
     public String stage;
@@ -52,6 +53,7 @@ public class User {
         user.emotion = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.EMOTION));
         user.nickname = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.NICKNAME));
         user.school_id = cursor.getInt(cursor.getColumnIndex(UserDataHelper.UserDBInfo.SCHOOL_ID));
+        user.school_name = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.SCHOOL_NAME));
         user.gender = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.GENDER));
         user.phone = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.PHONE));
         user.stage = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.STAGE));
