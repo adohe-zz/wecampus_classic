@@ -31,6 +31,7 @@ import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.view.FollowButton;
@@ -173,6 +174,17 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvAttendActivity = (TextView)view.findViewById(R.id.user_profile_attend_activity);
         btnFollow = (FollowButton)view.findViewById(R.id.btn_follow);
         btnFollow.setVisibility(View.VISIBLE);
+        btnFollow.setOnStateChangeListener(new FollowButton.OnStateChangeListener() {
+            @Override
+            public void onFollowListener() {
+                Utility.log("i Want to", "follow you");
+            }
+
+            @Override
+            public void onUnFollowListener() {
+
+            }
+        });
         //btnFollow.setOnClickListener(clickListener);
 
         mJActivityHandler = new UserActivityHandler(mView);
@@ -193,6 +205,16 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvUserWords.setText("他没有words");
         tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
+        Utility.log("follow", mUser.can_follow);
+        if(mUser.can_follow) {
+            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+        } else {
+            if(BaseApplication.getInstance().hasAccount) {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+            } else {
+                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            }
+        }
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
                 ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
@@ -519,6 +541,19 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             mOrganizationHandler.refreshUI();
             mFActivityHandler.refreshUI();
             //updateUserToDb();
+        }
+    }
+
+    private class FollowUserHandler implements Response.Listener<User>, Response.ErrorListener {
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+
+        }
+
+        @Override
+        public void onResponse(User user) {
+
         }
     }
 }

@@ -49,6 +49,7 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.SCHOOL_ID, user.school_id);
         values.put(UserDBInfo.STAGE, user.stage);
         values.put(UserDBInfo.WORDS, user.words);
+        values.put(UserDBInfo.CAN_FOLLOW, user.can_follow);
         return values;
     }
 
@@ -124,6 +125,7 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String PHONE = "phone";
         public static final String STAGE = "stage";
         public static final String WORDS = "words";
+        public static final String CAN_FOLLOW = "can_follow";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
@@ -143,6 +145,7 @@ public class UserDataHelper extends BaseDataHelper {
                 .addColumn(GENDER, Column.DataType.TEXT)
                 .addColumn(PHONE, Column.DataType.TEXT)
                 .addColumn(STAGE, Column.DataType.TEXT)
-                .addColumn(WORDS, Column.DataType.TEXT);
+                .addColumn(WORDS, Column.DataType.TEXT)
+                .addColumn(CAN_FOLLOW, Column.DataType.BOOLEAN);
     }
 }

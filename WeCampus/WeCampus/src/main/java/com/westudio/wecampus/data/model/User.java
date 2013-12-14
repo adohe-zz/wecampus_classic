@@ -31,6 +31,7 @@ public class User {
     public String password;
     public String token;
     public School school;
+    public boolean can_follow;
 
     public static User fromCursor(Cursor cursor) {
         User user = new User();
@@ -54,6 +55,7 @@ public class User {
         user.gender = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.GENDER));
         user.phone = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.PHONE));
         user.stage = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.STAGE));
+        user.can_follow = cursor.getInt(cursor.getColumnIndex(UserDataHelper.UserDBInfo.CAN_FOLLOW)) > 0;
         return user;
     }
 
