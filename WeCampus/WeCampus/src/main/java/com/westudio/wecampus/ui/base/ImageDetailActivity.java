@@ -78,7 +78,7 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setTitle(extraInfo);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_bg));
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_image_bg));
     }
 
     @Override

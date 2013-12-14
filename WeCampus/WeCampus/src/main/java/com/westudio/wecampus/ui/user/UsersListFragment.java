@@ -21,8 +21,10 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.square.SearchActivity;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
+import com.westudio.wecampus.util.WxShareTool;
 import com.woozzu.android.widget.IndexableListView;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -81,11 +83,18 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt(UserHomepageActivity.USER_ID, mAdapter.getItem(position - 2).id);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (position == 0) {
+                    WxShareTool tool = new WxShareTool(getActivity());
+                    tool.buildAppMessage().fireShareToWx(WxShareTool.ShareType.FRIENDS);
+                } else if(position == 1) {
+                    startActivity(new Intent(getActivity(), UserSearchActivity.class));
+                } else {
+                    Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(UserHomepageActivity.USER_ID, mAdapter.getItem(position - 2).id);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
 

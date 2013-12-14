@@ -1,4 +1,4 @@
-package com.westudio.wecampus.util.database;
+package com.westudio.wecampus.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,7 +8,6 @@ import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.WXWebpageObject;
-import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by martian on 13-11-28.
