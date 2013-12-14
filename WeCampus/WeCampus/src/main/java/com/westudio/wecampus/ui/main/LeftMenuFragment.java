@@ -140,6 +140,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         mUserSection.setVisibility(View.VISIBLE);
         mBtnSignIn.setVisibility(View.GONE);
         mBtnSignOut.setVisibility(View.VISIBLE);
+        mBtnEdit.setVisibility(View.VISIBLE);
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
                 ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(
@@ -155,7 +156,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     Bitmap data = imageContainer.getBitmap();
-                    ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                    if(data != null) {
+                        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                    }
                 }
 
                 @Override
@@ -164,6 +167,14 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                 }
             });
         }
+    }
+
+    private void refreshUI() {
+        tvName.setText(getResources().getString(R.string.menu_no_login));
+        tvWord.setVisibility(View.GONE);
+        mUserSection.setVisibility(View.GONE);
+        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_default_avatar)));
     }
 
     @Override
@@ -262,7 +273,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
             app.getAccountMgr().clearAccountInfo();
             WeCampusApi.logout(LeftMenuFragment.this, id, this, this);
 
-            if ( progressDialog == null) {
+            if (progressDialog == null) {
                 progressDialog = new ProgressDialog(getActivity());
             }
             progressDialog.setMessage(getString(R.string.please_wait));
@@ -276,6 +287,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         @Override
         public void onResponse(Object o) {
             progressDialog.dismiss();
+            refreshUI();
             mBtnSignOut.setVisibility(View.GONE);
             mBtnSignIn.setVisibility(View.VISIBLE);
         }

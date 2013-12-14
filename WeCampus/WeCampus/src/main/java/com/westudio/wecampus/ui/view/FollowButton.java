@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.base.BaseApplication;
 
 
 /**
@@ -91,7 +93,12 @@ public class FollowButton extends Button {
 
         @Override
         public void onClick(View view) {
-            handleFollowState();
+            if(BaseApplication.getInstance().hasAccount) {
+                handleFollowState();
+            } else {
+                Toast.makeText(BaseApplication.getContext(), getResources().getString(R.string.please_login),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     };
 

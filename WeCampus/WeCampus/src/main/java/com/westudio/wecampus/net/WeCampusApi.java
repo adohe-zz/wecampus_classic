@@ -546,7 +546,7 @@ public class WeCampusApi {
      */
     public static void getUserInfoById(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<User>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.DETAIL, null),
+        Request request = new AuthedGsonRequest<User>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.DETAIL, null),
                 User.class, listener, errorListener);
         if(tag != null) {
             request.setTag(tag);

@@ -112,7 +112,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
     protected void loadNextPage() {
         Utility.log("load", "next");
         loadingFooter.setState(LoadingFooter.State.Loading);
-        loadData(page + 1);
+        loadData(page);
     }
 
     /**
@@ -123,8 +123,8 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
         loadFirstPage();
     }
 
-    protected void loadData(final int page) {
-        final boolean isRefreshFromTop = page == 1;
+    protected void loadData(final int p) {
+        final boolean isRefreshFromTop = p == 1;
         if(!mPullToRefreshAttacher.isRefreshing() && isRefreshFromTop) {
             mPullToRefreshAttacher.setRefreshing(true);
         }
@@ -133,6 +133,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
             @Override
             public void onResponse(final T t) {
                 mPullToRefreshAttacher.setRefreshComplete();
+                ++page;
                 Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
                     @Override
                     protected Object doInBackground(Object... params) {

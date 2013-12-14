@@ -46,9 +46,11 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.NAME, user.name);
         values.put(UserDBInfo.NICKNAME, user.nickname);
         values.put(UserDBInfo.PHONE, user.phone);
-        values.put(UserDBInfo.SCHOOL_ID, user.school_id);
+        values.put(UserDBInfo.SCHOOL_ID, user.school.getId());
+        values.put(UserDBInfo.SCHOOL_NAME, user.school.getName());
         values.put(UserDBInfo.STAGE, user.stage);
         values.put(UserDBInfo.WORDS, user.words);
+        values.put(UserDBInfo.CAN_FOLLOW, user.can_follow);
         return values;
     }
 
@@ -120,10 +122,12 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String EMOTION = "emotion";
         public static final String NICKNAME = "nickname";
         public static final String SCHOOL_ID = "school_id";
+        public static final String SCHOOL_NAME = "school_name";
         public static final String GENDER = "gender";
         public static final String PHONE = "phone";
         public static final String STAGE = "stage";
         public static final String WORDS = "words";
+        public static final String CAN_FOLLOW = "can_follow";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
@@ -140,9 +144,11 @@ public class UserDataHelper extends BaseDataHelper {
                 .addColumn(EMOTION, Column.DataType.TEXT)
                 .addColumn(NICKNAME, Column.DataType.TEXT)
                 .addColumn(SCHOOL_ID, Column.DataType.INTEGER)
+                .addColumn(SCHOOL_NAME, Column.DataType.TEXT)
                 .addColumn(GENDER, Column.DataType.TEXT)
                 .addColumn(PHONE, Column.DataType.TEXT)
                 .addColumn(STAGE, Column.DataType.TEXT)
-                .addColumn(WORDS, Column.DataType.TEXT);
+                .addColumn(WORDS, Column.DataType.TEXT)
+                .addColumn(CAN_FOLLOW, Column.DataType.BOOLEAN);
     }
 }

@@ -6,9 +6,10 @@
             android:background="@color/bg_color"
             android:id="@+id/content_frame">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,13 +33,21 @@
                     android:layout_weight="1"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/nickname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/nickname_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
 
             <View
@@ -61,13 +70,20 @@
                     android:text="@string/gender"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/gender_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -91,12 +107,19 @@
                     android:text="@string/school"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/school"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -120,7 +143,7 @@
                     android:text="@string/words"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/words"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -128,7 +151,15 @@
                     android:background="#00000000"
                     android:hint="@string/words_hint"/>
 
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
+
         </LinearLayout>
 
 
@@ -154,13 +185,20 @@
                     android:text="@string/real_name"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/real_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/real_name_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -184,13 +222,21 @@
                     android:text="@string/telephone"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/telephone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/telephone_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
 
             <View
@@ -213,13 +259,58 @@
                     android:text="@string/email"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/email_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Birthday -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/birthday"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="#00000000"
+                    android:hint="@string/click_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
 
             <View
@@ -242,42 +333,21 @@
                     android:text="@string/relationship"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/relationship"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/click_hint"/>
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.3dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
-                android:background="@color/divider_bg" />
-
-            <!-- College -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/square_section_height">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:text="@string/college"
-                    style="@style/RegisterTextView"/>
-
-                <EditText
-                    android:id="@+id/college"
-                    android:layout_width="0dp"
+                <ImageView
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="#00000000"
-                    android:hint="@string/click_hint"/>
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
 
             <View
@@ -300,13 +370,21 @@
                     android:text="@string/role"
                     style="@style/RegisterTextView"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/role"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="#00000000"
                     android:hint="@string/click_hint"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
             </LinearLayout>
 
         </LinearLayout>

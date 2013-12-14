@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -77,8 +78,11 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setTitle(extraInfo);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_image_bg));
+        String title = "<font color=\"#999999\">" + extraInfo + "</font>";
+        getSupportActionBar().setTitle(Html.fromHtml(title));
+        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.image_detail_icon));
+        //getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.image_detail_ab));
     }
 
     @Override
