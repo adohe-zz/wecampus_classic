@@ -157,6 +157,7 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/attend_activity_num"
+                            android:visibility="gone"
                             style="@style/DetailTextOrg"/>
 
                         <!-- Activity Part -->
@@ -166,6 +167,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:clickable="true"
+                            android:visibility="gone"
                             android:background="@drawable/listitem_activity_selector">
 
                             <ImageView
@@ -260,6 +262,7 @@
                             android:background="@android:color/white"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:visibility="gone"
                             style="@style/HomePageTextSecondary"/>
 
                         <!-- Like Organizations Part -->
@@ -268,7 +271,8 @@
                             android:layout_height="99.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
-                            android:layout_marginBottom="2dp">
+                            android:layout_marginBottom="2dp"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/num_like_org"
@@ -324,7 +328,8 @@
                             android:layout_height="102.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
-                            android:layout_marginBottom="4dp">
+                            android:layout_marginBottom="4dp"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/num_like_activity"

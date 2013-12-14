@@ -26,6 +26,7 @@ public class UserHomepageActivity extends BaseDetailActivity {
         setContentView(R.layout.activity_user_homepage);
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
+
         updateActionBar();
         getSupportFragmentManager().beginTransaction().replace(R.id.user_home_page,
                 UserHomepageFragment.newInstance(getIntent().getExtras()), FRAGMENT).commit();
