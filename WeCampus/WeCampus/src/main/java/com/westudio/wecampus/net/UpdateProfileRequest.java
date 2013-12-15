@@ -19,7 +19,7 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
     private User mUser;
 
     public UpdateProfileRequest(User user, Response.Listener successListener, Response.ErrorListener errorListener) {
-        super(Method.POST, HttpUtil.URL_PROFILE, User.class, successListener, errorListener);
+        super(Method.POST, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL), User.class, successListener, errorListener);
         this.mUser = user;
     }
 
@@ -27,8 +27,13 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
     public byte[] getBody() throws AuthFailureError {
         JSONObject json = new JSONObject();
         try {
-            json.put("name", mUser.name);
+            json.put("nickname", mUser.nickname);
             json.put("words", mUser.words);
+            json.put("gender", mUser.gender);
+            json.put("name", mUser.name);
+            json.put("email", mUser.email);
+            json.put("phone", mUser.phone);
+            json.put("birthday", mUser.birthday);
         } catch (JSONException e) {
             e.printStackTrace();
         }
