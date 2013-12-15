@@ -133,6 +133,10 @@
 
         <activity android:name=".ui.user.UserListActivity"/>
 
+        <activity android:name=".ui.user.PickEmotionActivity" />
+
+        <activity android:name=".ui.user.PickStageActivity"/>
+        
         <activity android:name=".ui.user.UserSearchActivity"></activity>
 
         <provider

@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.user;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -55,21 +56,36 @@ public class MyProfileActivity extends BaseDetailActivity {
 
     private void initWidget() {
         tvNickName = (TextView)findViewById(R.id.nickname);
+        tvNickName.setOnClickListener(clickListener);
         tvGender = (TextView)findViewById(R.id.gender);
+        tvGender.setOnClickListener(clickListener);
         tvSchool = (TextView)findViewById(R.id.school);
         tvWord = (TextView)findViewById(R.id.words);
+        tvWord.setOnClickListener(clickListener);
         tvName = (TextView)findViewById(R.id.real_name);
+        tvName.setOnClickListener(clickListener);
         tvPhone = (TextView)findViewById(R.id.telephone);
+        tvPhone.setOnClickListener(clickListener);
         tvEmail = (TextView)findViewById(R.id.email);
+        tvEmail.setOnClickListener(clickListener);
         tvBirthday = (TextView)findViewById(R.id.birthday);
+        tvBirthday.setOnClickListener(clickListener);
         tvLove = (TextView)findViewById(R.id.relationship);
+        tvLove.setOnClickListener(clickListener);
         tvRole = (TextView)findViewById(R.id.role);
+        tvRole.setOnClickListener(clickListener);
     }
 
     private void updateUI() {
         tvNickName.setText(mUser.nickname);
         tvGender.setText(mUser.gender);
         tvSchool.setText(mUser.school.getName());
+        tvWord.setText(mUser.words);
+        tvName.setText(mUser.name);
+        tvPhone.setText(mUser.phone);
+        tvEmail.setText(mUser.email);
+        tvLove.setText(mUser.emotion);
+        tvRole.setText(mUser.stage);
     }
 
     private void refreshUserFromDb() {
@@ -90,6 +106,13 @@ public class MyProfileActivity extends BaseDetailActivity {
             });
         }
     }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

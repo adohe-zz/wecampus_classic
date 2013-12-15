@@ -63,5 +63,13 @@ public class User {
 
     public class UserListData {
         public ArrayList<User> objects;
+
+        public ArrayList<User> getObjects() {
+            return objects;
+        }
+
+        public void setObjects(ArrayList<User> objects) {
+            this.objects = objects;
+        }
     }
 }
