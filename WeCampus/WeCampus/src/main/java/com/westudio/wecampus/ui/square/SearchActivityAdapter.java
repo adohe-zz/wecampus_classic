@@ -21,13 +21,16 @@ public class SearchActivityAdapter extends OrganizationActivityAdapter implement
         super(context);
     }
 
-    public void requestData(String keywords, int page) {
-        if (page == 1) {
+    public void requestData(String keywords, boolean searchNew) {
+        if (searchNew) {
+            attacher.page = 1;
+        }
+        if (attacher.page == 1) {
             attacher.setStatus(SearchListAttacher.Status.LOADING);
         } else {
             attacher.setStatus(SearchListAttacher.Status.LOADING_MORE);
         }
-        WeCampusApi.searchActivity(mContext, page, keywords, this, this);
+        WeCampusApi.searchActivity(mContext, attacher.page, keywords, this, this);
     }
 
     @Override

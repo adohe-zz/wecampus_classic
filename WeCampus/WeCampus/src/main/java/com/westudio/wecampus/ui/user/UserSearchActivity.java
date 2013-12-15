@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.user;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -22,7 +23,7 @@ public class UserSearchActivity extends BaseGestureActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setIcon(null);
+        getSupportActionBar().setIcon(new ColorDrawable(android.R.color.transparent));
 
         mList = (ListView) findViewById(R.id.listview);
 

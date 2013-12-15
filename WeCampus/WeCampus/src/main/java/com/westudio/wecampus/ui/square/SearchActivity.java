@@ -31,6 +31,8 @@ import com.westudio.wecampus.util.Utility;
  * Created by Martian on 13-10-21.
  */
 public class SearchActivity extends BaseDetailActivity{
+    public static final String SELECTED_POSITION = "selected_position";
+
     private ListView mLvResult;
     private EditText mEtKeywords;
     private HeaderTabBar mHeaderTab;
@@ -63,6 +65,7 @@ public class SearchActivity extends BaseDetailActivity{
         mHeaderTab.setTexts(R.string.search_tab_activity, R.string.serach_tab_user,
                 R.string.search_tab_org);
         mHeaderTab.setmOnTabSelectedListener(tabSelectedListener);
+        mHeaderTab.setSelected(getIntent().getIntExtra(SELECTED_POSITION, 0), true);
 
         // 设置适配器
         mAttacher.emptyView = (ImageView) findViewById(R.id.empty_image);
@@ -94,21 +97,21 @@ public class SearchActivity extends BaseDetailActivity{
                     case 0: {
                         // 如果当前显示的是活动标签
                         mActivityAdapter.clear();
-                        mActivityAdapter.requestData(mKeywords, 1);
+                        mActivityAdapter.requestData(mKeywords, true);
                         mLvResult.setAdapter(mActivityAdapter);
                         mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 13f));
                         break;
                     }
                     case 1: {
                         mSearchUserAdapter.clear();
-                        mSearchUserAdapter.requestData(mKeywords, 1);
+                        mSearchUserAdapter.requestData(mKeywords, true);
                         mLvResult.setAdapter(mSearchUserAdapter);
                         mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
                         break;
                     }
                     case 2: {
                         mOrgAdapter.clear();
-                        mOrgAdapter.requestData(mKeywords, 1);
+                        mOrgAdapter.requestData(mKeywords, true);
                         mLvResult.setAdapter(mOrgAdapter);
                         mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
                         break;
@@ -129,7 +132,7 @@ public class SearchActivity extends BaseDetailActivity{
         public void onFirstTabSelected() {
             if (mHeaderTab.getCurrentPosition() != 0 && mEtKeywords.getText().length() > 0) {
                 mActivityAdapter.clear();
-                mActivityAdapter.requestData(mEtKeywords.getText().toString(), 1);
+                mActivityAdapter.requestData(mEtKeywords.getText().toString(), true);
             }
             mLvResult.setAdapter(mActivityAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 13f));
@@ -140,7 +143,7 @@ public class SearchActivity extends BaseDetailActivity{
         public void onSecondTabSelected() {
             if (mHeaderTab.getCurrentPosition() != 1 && mEtKeywords.getText().length() > 0) {
                 mSearchUserAdapter.clear();
-                mSearchUserAdapter.requestData(mEtKeywords.getText().toString(), 1);
+                mSearchUserAdapter.requestData(mEtKeywords.getText().toString(), true);
             }
             mLvResult.setAdapter(mSearchUserAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
@@ -151,7 +154,7 @@ public class SearchActivity extends BaseDetailActivity{
         public void onThirdTabSelected() {
             if (mHeaderTab.getCurrentPosition() != 2 && mEtKeywords.getText().length() > 0) {
                 mOrgAdapter.clear();
-                mOrgAdapter.requestData(mEtKeywords.getText().toString(), 1);
+                mOrgAdapter.requestData(mEtKeywords.getText().toString(), true);
             }
             mLvResult.setAdapter(mOrgAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
@@ -179,13 +182,13 @@ public class SearchActivity extends BaseDetailActivity{
                     mLvResult.getFooterViewsCount() && mLvResult.getAdapter().getCount() > 0) {
                 switch(mHeaderTab.getCurrentPosition()) {
                     case 0:
-                        mActivityAdapter.requestData(mKeywords, mAttacher.page);
+                        mActivityAdapter.requestData(mKeywords, false);
                         break;
                     case 1:
-                        mSearchUserAdapter.requestData(mKeywords, mAttacher.page);
+                        mSearchUserAdapter.requestData(mKeywords, false);
                         break;
                     case 2:
-                        mOrgAdapter.requestData(mKeywords, mAttacher.page);
+                        mOrgAdapter.requestData(mKeywords, false);
                         break;
                 }
             }

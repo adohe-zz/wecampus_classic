@@ -100,16 +100,19 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
                 mTab1.setSelected(selected);
                 mTab2.setSelected(!selected);
                 mTab3.setSelected(!selected);
+                mCurrentPosition = 0;
                 break;
             case 1:
                 mTab2.setSelected(selected);
                 mTab1.setSelected(!selected);
                 mTab3.setSelected(!selected);
+                mCurrentPosition = 1;
                 break;
             case 2:
                 mTab3.setSelected(selected);
                 mTab2.setSelected(!selected);
                 mTab1.setSelected(!selected);
+                mCurrentPosition = 2;
                 break;
         }
     }
@@ -131,4 +134,5 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
     public int getCurrentPosition() {
         return mCurrentPosition;
     }
+
 }

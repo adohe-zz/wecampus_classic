@@ -57,14 +57,16 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
         return convertView;
     }
 
-    public void requestData(String keywords, int page) {
-        if (page == 1) {
+    public void requestData(String keywords, boolean searchNew) {
+        if (searchNew) {
+            mAttacher.page = 1;
+        }
+        if (mAttacher.page == 1) {
             mAttacher.setStatus(SearchListAttacher.Status.LOADING);
         } else {
             mAttacher.setStatus(SearchListAttacher.Status.LOADING_MORE);
         }
-
-        WeCampusApi.searchOrgs(mContext, page, keywords, this, this);
+        WeCampusApi.searchOrgs(mContext, mAttacher.page, keywords, this, this);
     }
 
     @Override

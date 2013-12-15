@@ -9,7 +9,6 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 
 import com.android.volley.Response;
@@ -22,7 +21,6 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.square.SearchActivity;
-import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.WxShareTool;
 import com.woozzu.android.widget.IndexableListView;
@@ -87,7 +85,9 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
                     WxShareTool tool = new WxShareTool(getActivity());
                     tool.buildAppMessage().fireShareToWx(WxShareTool.ShareType.FRIENDS);
                 } else if(position == 1) {
-                    startActivity(new Intent(getActivity(), UserSearchActivity.class));
+                    Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+                    searchIntent.putExtra(SearchActivity.SELECTED_POSITION, 1);
+                    startActivity(searchIntent);
                 } else {
                     Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
                     Bundle bundle = new Bundle();

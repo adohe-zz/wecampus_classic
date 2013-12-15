@@ -66,13 +66,16 @@ public class SearchUserAdapter extends BaseSearchAdapter<User> implements
         return convertView;
     }
 
-    public void requestData(String keywords, int page) {
-        if (page == 1) {
+    public void requestData(String keywords, boolean searchNew) {
+        if (searchNew) {
+            mAttacher.page = 1;
+        }
+        if (mAttacher.page == 1) {
             mAttacher.setStatus(SearchListAttacher.Status.LOADING);
         } else {
             mAttacher.setStatus(SearchListAttacher.Status.LOADING_MORE);
         }
-        WeCampusApi.searchUser(mContext, page, keywords, this, this);
+        WeCampusApi.searchUser(mContext, mAttacher.page, keywords, this, this);
     }
 
     @Override
