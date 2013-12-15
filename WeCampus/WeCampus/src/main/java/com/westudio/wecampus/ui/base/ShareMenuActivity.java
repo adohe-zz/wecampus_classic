@@ -23,7 +23,7 @@ import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
-import com.westudio.wecampus.util.database.WxShareTool;
+import com.westudio.wecampus.util.WxShareTool;
 
 import java.io.File;
 import java.io.FileOutputStream;

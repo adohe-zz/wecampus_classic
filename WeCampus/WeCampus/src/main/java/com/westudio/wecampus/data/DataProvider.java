@@ -34,14 +34,17 @@ public class DataProvider extends ContentProvider {
     public static final String PATH_ACTIVITIES = "activities";
     public static final String PATH_ORGANIZATIONS = "organizations";
     public static final String PATH_USERS = "users";
+    public static final String PATH_SEARCH_USER = "search_user";
 
     public static final Uri ACTIVITIES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ACTIVITIES);
     public static final Uri ORGANIZATIONS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_ORGANIZATIONS);
     public static final Uri USERS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_USERS);
+    public static final Uri SEARCH_USER_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + SLASH + PATH_SEARCH_USER);
 
     private static final int ACTIVITES = 0;
     private static final int ORGANIZATIONS = 1;
     private static final int USERS = 2;
+    private static final int SEARCH_USER = 3;
 
     /*
      * MIME type definitions

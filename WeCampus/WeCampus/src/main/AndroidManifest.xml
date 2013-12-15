@@ -137,6 +137,8 @@
 
         <activity android:name=".ui.user.PickStageActivity"/>
         
+        <activity android:name=".ui.user.UserSearchActivity"></activity>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"
