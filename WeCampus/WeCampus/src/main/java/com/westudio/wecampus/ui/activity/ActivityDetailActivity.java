@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -608,6 +609,20 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             updateUI();
             updateActivityToDb();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (activity != null) {
+                Intent i = new Intent(this, ShareMenuActivity.class);
+                i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
+                i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
+                startActivityForResult(i, REQUEST_MENU);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void updateActivityToDb() {
