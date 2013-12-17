@@ -556,12 +556,18 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onResponse(User user) {
+            if(user.can_follow) {
 
+            } else {
+                
+            }
         }
 
         public void follow(boolean can_follow) {
             if(can_follow) {
                 WeCampusApi.followUser(UserHomepageFragment.this, uid, this, this);
+            } else {
+                WeCampusApi.unfollowOrganization(UserHomepageFragment.this, uid, this, this);
             }
         }
     }
