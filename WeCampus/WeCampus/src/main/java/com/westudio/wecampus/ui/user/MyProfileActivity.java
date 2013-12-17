@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.user;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,19 @@ import com.westudio.wecampus.util.Utility;
  * Created by Martian on 13-10-20.
  */
 public class MyProfileActivity extends BaseDetailActivity {
+
+    public static final String NICK_NAME = "nick_name";
+    public static final String REAL_NAME = "real_name";
+    public static final String PHONE = "phone";
+    public static final String EMAIL = "email";
+    public static final int UPDATE_NICK_REQUEST = 1;
+    public static final int UPDATE_NICK_RESULT = 2;
+    public static final int UPDATE_NAME_REQUEST = 3;
+    public static final int UPDATE_NAME_RESULT = 4;
+    public static final int UPDATE_PHONE_REQUEST = 5;
+    public static final int UPDATE_PHONE_RESULT = 6;
+    public static final int UPDATE_EMAIL_REQUEST = 7;
+    public static final int UPDATE_EMAIL_RESULT = 8;
 
     private TextView tvNickName;
     private TextView tvGender;
@@ -79,7 +93,7 @@ public class MyProfileActivity extends BaseDetailActivity {
     private void updateUI() {
         tvNickName.setText(mUser.nickname);
         tvGender.setText(mUser.gender);
-        tvSchool.setText(mUser.school.getName());
+        tvSchool.setText(mUser.school_name);
         tvWord.setText(mUser.words);
         tvName.setText(mUser.name);
         tvPhone.setText(mUser.phone);
@@ -110,7 +124,38 @@ public class MyProfileActivity extends BaseDetailActivity {
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            switch (v.getId()) {
+                case R.id.nickname: {
+                    Intent intent = new Intent(MyProfileActivity.this, UpdateNickActivity.class);
+                    intent.putExtra(NICK_NAME, mUser.nickname);
+                    startActivityForResult(intent, UPDATE_NICK_REQUEST);
+                    break;
+                }
+                case R.id.real_name: {
+                    Intent intent = new Intent(MyProfileActivity.this, UpdateNameActivity.class);
+                    intent.putExtra(REAL_NAME, mUser.name);
+                    startActivityForResult(intent, UPDATE_NAME_REQUEST);
+                    break;
+                }
+                case R.id.telephone: {
+                    Intent intent = new Intent(MyProfileActivity.this, UpdatePhoneActivity.class);
+                    intent.putExtra(PHONE, mUser.phone);
+                    startActivityForResult(intent, UPDATE_PHONE_REQUEST);
+                    break;
+                }
+                case R.id.email: {
+                    Intent intent = new Intent(MyProfileActivity.this, UpdateEmailActivity.class);
+                    intent.putExtra(EMAIL, mUser.nickname);
+                    startActivityForResult(intent, UPDATE_EMAIL_REQUEST);
+                    break;
+                }
+                case R.id.school: {
+                    break;
+                }
+                case R.id.gender: {
+                    break;
+                }
+            }
         }
     };
 
@@ -121,5 +166,10 @@ public class MyProfileActivity extends BaseDetailActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -139,6 +139,16 @@
         
         <activity android:name=".ui.user.UserSearchActivity"></activity>
 
+        <activity android:name=".ui.user.UpdateNickActivity" />
+
+        <activity android:name=".ui.user.UpdateNameActivity" />
+
+        <activity android:name=".ui.user.UpdatePhoneActivity" />
+
+        <activity android:name=".ui.user.UpdateEmailActivity" />
+
+        <activity android:name=".ui.user.UpdateWordsActivity" />
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

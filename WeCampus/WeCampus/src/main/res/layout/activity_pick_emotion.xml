@@ -16,7 +16,7 @@
         android:background="@android:color/white">
 
         <RelativeLayout
-            android:id="@+id/item_male"
+            android:id="@+id/item_love_secret"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/input_select_item_height"
             android:clickable="true"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="@string/gender_male"
+                android:text="@string/love_sercert"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
@@ -42,6 +42,7 @@
                 android:layout_marginRight="20dp"
                 android:src="@drawable/ic_item_select"
                 android:visibility="gone"/>
+                
         </RelativeLayout>
 
         <View
@@ -52,7 +53,7 @@
             android:background="@color/divider_bg"/>
 
         <RelativeLayout
-            android:id="@+id/item_female"
+            android:id="@+id/item_love_first"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/input_select_item_height"
             android:clickable="true"
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="@string/gender_female"
+                android:text="@string/love_first"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
@@ -78,8 +79,157 @@
                 android:layout_marginRight="20dp"
                 android:src="@drawable/ic_item_select"
                 android:visibility="gone"/>
+                
         </RelativeLayout>
 
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/divider_bg"/>
+            
+        <RelativeLayout
+            android:id="@+id/item_love_single"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/input_select_item_height"
+            android:clickable="true"
+            android:background="@drawable/selectable_background_we">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/love_single"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_item_select"
+                android:visibility="gone"/>
+                
+        </RelativeLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/divider_bg"/>
+            
+        <RelativeLayout
+            android:id="@+id/item_love_fuck"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/input_select_item_height"
+            android:clickable="true"
+            android:background="@drawable/selectable_background_we">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/love_fuck"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_item_select"
+                android:visibility="gone"/>
+                
+        </RelativeLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/divider_bg"/>
+            
+        <RelativeLayout
+            android:id="@+id/item_love_going"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/input_select_item_height"
+            android:clickable="true"
+            android:background="@drawable/selectable_background_we">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/love_going"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_item_select"
+                android:visibility="gone"/>
+                
+        </RelativeLayout>
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/divider_bg"/>
+            
+        <RelativeLayout
+            android:id="@+id/item_love_break"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/input_select_item_height"
+            android:clickable="true"
+            android:background="@drawable/selectable_background_we">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/love_break"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_item_select"
+                android:visibility="gone"/>
+                
+        </RelativeLayout>
+            
     </LinearLayout>
 
 

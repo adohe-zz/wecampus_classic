@@ -562,6 +562,42 @@ public class WeCampusApi {
     }
 
     /**
+     * Follow user
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void followUser(Object tag, final int id, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<User>(Request.Method.POST, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FOLLOW, null),
+                User.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
+     * UnFollow user
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void unFollowUser(Object tag, final int id, Response.Listener listener,
+                                  Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest<User>(Request.Method.POST, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.UNFOLLOW, null),
+                User.class, listener, errorListener);
+
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
+    /**
      * Get the profile of current user
      * @param tag
      * @param listener

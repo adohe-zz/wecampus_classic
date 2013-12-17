@@ -37,7 +37,7 @@
                     android:id="@+id/nickname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/nickname_hint"/>
 
@@ -74,7 +74,7 @@
                     android:id="@+id/gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/gender_hint"/>
 
@@ -111,7 +111,7 @@
                     android:id="@+id/school"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"/>
 
                 <ImageView
@@ -147,7 +147,7 @@
                     android:id="@+id/words"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/words_hint"/>
 
@@ -189,7 +189,7 @@
                     android:id="@+id/real_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/real_name_hint"/>
 
@@ -226,7 +226,7 @@
                     android:id="@+id/telephone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/telephone_hint"/>
 
@@ -263,7 +263,7 @@
                     android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/email_hint"/>
 
@@ -300,7 +300,7 @@
                     android:id="@+id/birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/click_hint"/>
 
@@ -337,7 +337,7 @@
                     android:id="@+id/relationship"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/click_hint"/>
 
@@ -374,7 +374,7 @@
                     android:id="@+id/role"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/click_hint"/>
 

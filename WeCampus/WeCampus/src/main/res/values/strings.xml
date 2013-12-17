@@ -216,4 +216,21 @@
     <string name="only_one_activity">你暂时只参加了一个活动哦~</string>
     <string name="get_join_activity_error">获取活动失败</string>
     <string name="save_success">保存成功</string>
+    
+    <!-- Emotion -->
+    <string name="love_sercert">保密</string>
+    <string name="love_single">单身</string>
+    <string name="love_first">初恋还在</string>
+    <string name="love_fuck">暧昧中</string>
+    <string name="love_going">热恋中</string>
+    <string name="love_break">刚分手</string>
+    
+    <!-- Stage -->
+    <string name="small_sister">可爱学妹</string>
+    <string name="small_brother">正太学弟</string>
+    <string name="big_brother">阳光学长</string>
+    <string name="big_sister">成熟学姐</string>
+
+    <string name="update_profile">更新资料</string>
+
 </resources>
