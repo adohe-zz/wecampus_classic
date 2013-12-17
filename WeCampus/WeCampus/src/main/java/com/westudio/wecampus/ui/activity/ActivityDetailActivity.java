@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -35,6 +34,7 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
+import com.westudio.wecampus.ui.base.WebBrowserActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.ui.user.UserListActivity;
 import com.westudio.wecampus.util.Constants;
@@ -345,8 +345,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     break;
                 }
                 case R.id.detail_rl_sponsor: {
-                    Intent intent = new Intent("android.intent.action.VIEW");
-                    intent.setData(Uri.parse(activity.sponsor_url));
+                    Intent intent = new Intent(ActivityDetailActivity.this, WebBrowserActivity.class);
+                    intent.putExtra(WebBrowserActivity.EXTRA_URL, activity.sponsor_url);
                     startActivity(intent);
                     break;
                 }

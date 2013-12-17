@@ -3,17 +3,16 @@ package com.westudio.wecampus.ui.user;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.ui.base.BaseListActivity;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
 /**
  * Created by nankonami on 13-12-11.
  */
-public class UserListActivity extends SherlockFragmentActivity {
+public class UserListActivity extends BaseGestureActivity {
 
     public static String ACTIVITY_ID = "activity_id";
     private PullToRefreshAttacher mPullToRefreshAttacher;
