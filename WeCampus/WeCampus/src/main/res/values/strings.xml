@@ -230,5 +230,7 @@
     <string name="small_brother">正太学弟</string>
     <string name="big_brother">阳光学长</string>
     <string name="big_sister">成熟学姐</string>
-    
+
+    <string name="update_profile">更新资料</string>
+
 </resources>

@@ -64,6 +64,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     private UserActivityHandler mJActivityHandler;
     private UserFActivityHandler mFActivityHandler;
     private UserOrganizationHandler mOrganizationHandler;
+    private FollowUserHandler followUserHandler;
     private User mUser;
 
     //Widgets
@@ -97,8 +98,10 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         uid = bundle.getInt(UserHomepageActivity.USER_ID, -1);
+        Utility.log("uid", uid);
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
+        followUserHandler = new FollowUserHandler();
     }
 
     @Override
@@ -177,7 +180,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         btnFollow.setOnStateChangeListener(new FollowButton.OnStateChangeListener() {
             @Override
             public void onFollowListener() {
-                Utility.log("i Want to", "follow you");
+                followUserHandler.follow(true);
             }
 
             @Override
@@ -185,7 +188,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
             }
         });
-        //btnFollow.setOnClickListener(clickListener);
 
         mJActivityHandler = new UserActivityHandler(mView);
         mFActivityHandler = new UserFActivityHandler(mView);
@@ -272,8 +274,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     startActivity(intent);
                 }
             } else if(v.getId() == R.id.img_avatar) {
-
-            } else if(v.getId() == R.id.btn_follow) {
 
             }
         }
@@ -540,11 +540,14 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             mJActivityHandler.refreshUI();
             mOrganizationHandler.refreshUI();
             mFActivityHandler.refreshUI();
-            //updateUserToDb();
         }
     }
 
     private class FollowUserHandler implements Response.Listener<User>, Response.ErrorListener {
+
+        public FollowUserHandler() {
+
+        }
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
@@ -554,6 +557,12 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onResponse(User user) {
 
+        }
+
+        public void follow(boolean can_follow) {
+            if(can_follow) {
+                WeCampusApi.followUser(UserHomepageFragment.this, uid, this, this);
+            }
         }
     }
 }
