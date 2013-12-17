@@ -98,13 +98,17 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
             }
         });
 
+        requestUsers();
+
         return view;
     }
 
     private void requestUsers() {
+        if (!mPullToRefreshAttacher.isRefreshing()) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
         int id = BaseApplication.getInstance().getAccountMgr().getUserId();
         WeCampusApi.getFriends(this, id, this, this);
-        mPullToRefreshAttacher.setRefreshing(true);
     }
 
     @Override
@@ -139,7 +143,9 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
+                mDataHelper.deleteAll();
                 mDataHelper.bulkInsert(userListData.objects);
+
                 return null;
             }
 
