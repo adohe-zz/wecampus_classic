@@ -51,6 +51,9 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.STAGE, user.stage);
         values.put(UserDBInfo.WORDS, user.words);
         values.put(UserDBInfo.CAN_FOLLOW, user.can_follow);
+        values.put(UserDBInfo.LIKE_ACTIVITY, user.like_activity);
+        values.put(UserDBInfo.ATTEND_ACTIVITY, user.attend_activity);
+        values.put(UserDBInfo.LIKE_ORGANIZATION, user.like_organization);
         return values;
     }
 
@@ -128,6 +131,9 @@ public class UserDataHelper extends BaseDataHelper {
         public static final String STAGE = "stage";
         public static final String WORDS = "words";
         public static final String CAN_FOLLOW = "can_follow";
+        public static final String LIKE_ACTIVITY = "like_activity";
+        public static final String ATTEND_ACTIVITY = "attend_activity";
+        public static final String LIKE_ORGANIZATION = "like_organization";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
@@ -149,6 +155,9 @@ public class UserDataHelper extends BaseDataHelper {
                 .addColumn(PHONE, Column.DataType.TEXT)
                 .addColumn(STAGE, Column.DataType.TEXT)
                 .addColumn(WORDS, Column.DataType.TEXT)
-                .addColumn(CAN_FOLLOW, Column.DataType.BOOLEAN);
+                .addColumn(CAN_FOLLOW, Column.DataType.BOOLEAN)
+                .addColumn(LIKE_ACTIVITY, Column.DataType.TEXT)
+                .addColumn(ATTEND_ACTIVITY, Column.DataType.TEXT)
+                .addColumn(LIKE_ORGANIZATION, Column.DataType.TEXT);
     }
 }
