@@ -128,7 +128,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onResume() {
         super.onResume();
-        if(BaseApplication.getInstance().hasAccount) {
+        if(Utility.isConnect(mActivity) && BaseApplication.getInstance().hasAccount) {
             WeCampusApi.getProfile(mActivity, this, this);
         }
     }
