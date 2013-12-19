@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.google.gson.Gson;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
@@ -78,7 +79,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
     private FollowButton btnFollow;
 
-    private boolean bNetworkFinished = false;
+    private boolean from_user_list = false;
+
+    private Gson gson = new Gson();
 
     public static UserHomepageFragment newInstance(Bundle args) {
         UserHomepageFragment fragment = new UserHomepageFragment();
@@ -99,6 +102,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         Bundle bundle = getArguments();
         mUser = (User)bundle.getSerializable(UserHomepageActivity.USER);
         uid = mUser.id;
+        from_user_list = bundle.getBoolean(UserHomepageActivity.USER_LIST, false);
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
         followUserHandler = new FollowUserHandler();
@@ -155,7 +159,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
                 @Override
                 protected void onPostExecute(Object o) {
-                    if(mUser != null && !bNetworkFinished) {
+                    if(mUser != null) {
                         updateUI();
                     }
                 }
@@ -222,6 +226,16 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     }
                 }
             });
+        }
+
+        if(mUser.attend_activity != null) {
+            mJActivityHandler.setupUI(gson.fromJson(mUser.attend_activity, ActivityList.class));
+        }
+        if(mUser.like_organization != null) {
+            mOrganizationHandler.setupUI(gson.fromJson(mUser.like_organization, Organization.class));
+        }
+        if(mUser.like_activity != null) {
+            mFActivityHandler.setupUI(gson.fromJson(mUser.like_activity, ActivityList.class));
         }
     }
 
@@ -356,6 +370,29 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onResponse(ActivityList.RequestData activityRequestData) {
             ac = activityRequestData.getObjects().get(0);
+            setupUI(ac);
+            if(from_user_list) {
+                mUser.attend_activity = gson.toJson(ac);
+                mDataHelper.update(mUser);
+            }
+        }
+
+        public void refreshUI() {
+            String attend = getResources().getString(R.string.attend_activity_num);
+            tvAttendActivity.setText(String.format(attend, mUser.count_of_join_activities));
+
+            if(mUser.count_of_join_activities == 0) {
+                rlActivityListItem.setVisibility(View.GONE);
+                tvAttendActivity.setVisibility(View.VISIBLE);
+                tvMoreActivity.setText(getResources().getString(R.string.no_attend_activity));
+                tvMoreActivity.setVisibility(View.VISIBLE);
+            } else {
+                WeCampusApi.getUserJActivity(UserHomepageFragment.this, uid, this, this);
+            }
+        }
+
+        //Set up the joined activity part
+        public void setupUI(ActivityList ac) {
             rlActivityListItem.setVisibility(View.VISIBLE);
             tvAttendActivity.setVisibility(View.VISIBLE);
             tvMoreActivity.setVisibility(View.VISIBLE);
@@ -393,21 +430,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 });
             }
         }
-
-        public void refreshUI() {
-            String attend = getResources().getString(R.string.attend_activity_num);
-            tvAttendActivity.setText(String.format(attend, mUser.count_of_join_activities));
-
-            if(mUser.count_of_join_activities == 0) {
-                rlActivityListItem.setVisibility(View.GONE);
-                tvAttendActivity.setVisibility(View.VISIBLE);
-                tvMoreActivity.setText(getResources().getString(R.string.no_attend_activity));
-                tvMoreActivity.setVisibility(View.VISIBLE);
-            } else {
-                WeCampusApi.getUserJActivity(UserHomepageFragment.this, uid, this, this);
-            }
-        }
-
     }
 
     private class UserOrganizationHandler implements Response.Listener<Organization.OrganizationRequestData>, Response.ErrorListener {
@@ -447,6 +469,20 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onResponse(Organization.OrganizationRequestData organizationRequestData) {
             Organization organization = organizationRequestData.getObjects().get(0);
+            setupUI(organization);
+            if(from_user_list) {
+                mUser.like_organization = gson.toJson(organization);
+                mDataHelper.update(mUser);
+            }
+        }
+
+        public void refreshUI() {
+            if(mUser.count_of_follow_organizations != 0) {
+                WeCampusApi.getOrganization(UserHomepageFragment.this, uid, this, this);
+            }
+        }
+
+        public void setupUI(Organization organization) {
             rlLikeOrganization.setVisibility(View.VISIBLE);
             tvOrgName.setText(organization.name);
             String orgNum = getResources().getString(R.string.homepage_like_org);
@@ -468,13 +504,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 }
             });
         }
-
-        public void refreshUI() {
-            if(mUser.count_of_follow_organizations != 0) {
-                WeCampusApi.getOrganization(UserHomepageFragment.this, uid, this, this);
-            }
-        }
-
     }
 
     private class UserFActivityHandler implements Response.Listener<ActivityList.RequestData>, Response.ErrorListener {
@@ -514,6 +543,20 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onResponse(ActivityList.RequestData requestData) {
             ActivityList ac = requestData.getObjects().get(0);
+            setupUI(ac);
+            if(from_user_list) {
+                mUser.like_activity = gson.toJson(ac);
+                mDataHelper.update(mUser);
+            }
+        }
+
+        public void refreshUI() {
+            if(mUser.count_of_follow_activities != 0) {
+                WeCampusApi.getUserFActivity(UserHomepageFragment.this, uid, this, this);
+            }
+        }
+
+        public void setupUI(ActivityList ac) {
             rlFavoriteActivity.setVisibility(View.VISIBLE);
             tvActivityName.setText(ac.title);
             tvActivitySummary.setText(ac.summary);
@@ -534,13 +577,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 }
             });
         }
-
-        public void refreshUI() {
-            if(mUser.count_of_follow_activities != 0) {
-                WeCampusApi.getUserFActivity(UserHomepageFragment.this, uid, this, this);
-            }
-        }
-
     }
 
     private class UserInfoHandler implements Response.Listener<User>, Response.ErrorListener {
@@ -558,26 +594,23 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             mPullToRefreshAttacher.setRefreshComplete();
-            bNetworkFinished = true;
         }
 
         @Override
         public void onResponse(User user) {
             mPullToRefreshAttacher.setRefreshComplete();
             mUser = user;
-            bNetworkFinished = true;
             updateUI();
             mJActivityHandler.refreshUI();
             mOrganizationHandler.refreshUI();
             mFActivityHandler.refreshUI();
+            if(from_user_list) {
+                mDataHelper.update(mUser);
+            }
         }
     }
 
     private class FollowUserHandler implements Response.Listener<User>, Response.ErrorListener {
-
-        public FollowUserHandler() {
-
-        }
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
@@ -587,9 +620,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         @Override
         public void onResponse(User user) {
             if(user.can_follow) {
-
+                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
             } else {
-                
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
             }
         }
 

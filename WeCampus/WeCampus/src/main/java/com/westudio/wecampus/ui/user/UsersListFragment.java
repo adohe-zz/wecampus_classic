@@ -91,7 +91,8 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
                 } else {
                     Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(UserHomepageActivity.USER_ID, mAdapter.getItem(position - 2).id);
+                    bundle.putSerializable(UserHomepageActivity.USER, mAdapter.getItem(position - 2));
+                    bundle.putBoolean(UserHomepageActivity.USER_LIST, true);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
