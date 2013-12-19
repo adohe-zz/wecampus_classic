@@ -1,9 +1,6 @@
 package com.westudio.wecampus.ui.base;
 
-import android.os.Bundle;
-
 import com.actionbarsherlock.app.SherlockFragment;
-import com.westudio.wecampus.data.BaseDataHelper;
 
 import java.util.HashMap;
 

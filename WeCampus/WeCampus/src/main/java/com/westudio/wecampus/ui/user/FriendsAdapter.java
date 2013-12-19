@@ -26,7 +26,7 @@ import com.westudio.wecampus.util.PinYin;
 /**
  * Created by martian on 13-9-19.
  */
-public class UserAdapter extends CursorAdapter implements SectionIndexer {
+public class FriendsAdapter extends CursorAdapter implements SectionIndexer {
 
     private String mSections = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -37,7 +37,7 @@ public class UserAdapter extends CursorAdapter implements SectionIndexer {
     private Bitmap defaultMaleDrawable;
     private Bitmap defaultFemaleDrawable;
 
-    public UserAdapter(Context context, ListView listView) {
+    public FriendsAdapter(Context context, ListView listView) {
         super(context, null , false);
         mLayoutInflater = LayoutInflater.from(context);
         mListView = listView;

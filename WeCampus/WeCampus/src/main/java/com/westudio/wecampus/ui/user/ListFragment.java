@@ -1,28 +1,18 @@
 package com.westudio.wecampus.ui.user;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.data.UserDataHelper;
-import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
-import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
-import com.westudio.wecampus.ui.main.MainActivity;
-import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.Utility;
 import com.woozzu.android.widget.IndexableListView;
 
@@ -37,7 +27,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  */
 public class ListFragment extends BaseFragment implements OnRefreshListener,
         Response.ErrorListener,
-        Response.Listener<Participants.ParticipantsRequestData> {
+        Response.Listener<User.UserListData> {
 
     private int id;
 
@@ -64,7 +54,7 @@ public class ListFragment extends BaseFragment implements OnRefreshListener,
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_friends_list, container, false);
 
         mUserList = (IndexableListView) view.findViewById(R.id.user_list);
 
@@ -109,9 +99,9 @@ public class ListFragment extends BaseFragment implements OnRefreshListener,
 
 
     @Override
-    public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
-        Utility.log("size", participantsRequestData.getObjects().size());
+    public void onResponse(User.UserListData data) {
+        Utility.log("size", data.getObjects().size());
         mPullToRefreshAttacher.setRefreshComplete();
-        mAdapter.addAll(participantsRequestData.getObjects());
+        mAdapter.addAll(data.getObjects());
     }
 }
