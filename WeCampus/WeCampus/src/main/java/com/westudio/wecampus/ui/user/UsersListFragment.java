@@ -118,15 +118,14 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return mDataHelper.getCursorLoader();
+        int uid = BaseApplication.getInstance().getAccountMgr().getUserId();
+        return mDataHelper.getFriendsCursorLoader(uid);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
-        if(cursor != null && cursor.getCount() == 0) {
-            //requestUsers();
-        }
+
     }
 
     @Override
