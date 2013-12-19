@@ -97,8 +97,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
-        uid = bundle.getInt(UserHomepageActivity.USER_ID, -1);
-        Utility.log("uid", uid);
+        mUser = (User)bundle.getSerializable(UserHomepageActivity.USER);
+        uid = mUser.id;
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
         followUserHandler = new FollowUserHandler();
@@ -117,7 +117,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         initWidget(mView);
 
-        refreshUserFromDb();
+        //refreshUserFromDb();
+        setupUI();
         mInfoHandler.fetchUserInfo();
 
         return mView;
@@ -194,6 +195,36 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mOrganizationHandler = new UserOrganizationHandler(mView);
     }
 
+    private void setupUI() {
+        tvUserName.setText(mUser.nickname);
+        if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
+            if(Constants.MALE.equals(mUser.gender)) {
+                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
+            } else {
+                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female)));
+            }
+        } else {
+            WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    Bitmap data = imageContainer.getBitmap();
+                    if(data != null) {
+                        ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    if(Constants.MALE.equals(mUser.gender)) {
+                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male));
+                    } else {
+                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female));
+                    }
+                }
+            });
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -207,7 +238,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvUserWords.setText("他没有words");
         tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
-        Utility.log("follow", mUser.can_follow);
         if(mUser.can_follow) {
             btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
         } else {

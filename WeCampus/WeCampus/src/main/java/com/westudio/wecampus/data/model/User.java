@@ -4,12 +4,13 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.UserDataHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by jam on 13-9-19.
  */
-public class User {
+public class User implements Serializable {
     public int id;
     public String name;
     public String birthday;
@@ -33,6 +34,9 @@ public class User {
     public String token;
     public School school;
     public boolean can_follow;
+    public String like_activity;
+    public String attend_activity;
+    public String like_organization;
 
     public static User fromCursor(Cursor cursor) {
         User user = new User();
@@ -58,6 +62,9 @@ public class User {
         user.phone = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.PHONE));
         user.stage = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.STAGE));
         user.can_follow = cursor.getInt(cursor.getColumnIndex(UserDataHelper.UserDBInfo.CAN_FOLLOW)) > 0;
+        user.like_activity = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.LIKE_ACTIVITY));
+        user.attend_activity = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.ATTEND_ACTIVITY));
+        user.like_organization = cursor.getString(cursor.getColumnIndex(UserDataHelper.UserDBInfo.LIKE_ORGANIZATION));
         return user;
     }
 

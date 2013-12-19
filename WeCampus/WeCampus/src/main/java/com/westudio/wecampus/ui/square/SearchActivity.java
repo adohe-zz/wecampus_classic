@@ -210,7 +210,9 @@ public class SearchActivity extends BaseDetailActivity{
                     //别人的主页
                     User user = (User) adapterView.getAdapter().getItem(i);
                     intent = new Intent(SearchActivity.this, UserHomepageActivity.class);
-                    intent.putExtra(UserHomepageActivity.USER_ID, user.id);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(UserHomepageActivity.USER, user);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     break;
                 case 2:
