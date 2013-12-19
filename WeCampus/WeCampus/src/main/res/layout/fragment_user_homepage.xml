@@ -158,6 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="8dp"
+                        android:visibility="gone"
                         android:background="@drawable/listitem_activity_selector">
 
                         <ImageView
@@ -333,11 +334,10 @@
                             android:layout_marginLeft="10dp"
                             android:layout_toRightOf="@id/icon_like_activity"
                             android:layout_alignTop="@id/icon_like_activity"
-                            android:text="WeCampus官方账号"
                             style="@style/HomePageTextPrimary"/>
 
                         <TextView
-                            android:id="@+id/num_org_like_count"
+                            android:id="@+id/text_like_activity_summary"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="@string/num_people_like"
