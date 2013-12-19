@@ -192,9 +192,10 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
                 mOrganization.admin_url);
         tvLike.setText(String.valueOf(mOrganization.count_of_fans));
         if(mOrganization.can_follow) {
-
+            tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
+                    null, null);
         } else {
-            tvLike.setCompoundDrawables(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
+            tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
                     null, null);
         }
     }
