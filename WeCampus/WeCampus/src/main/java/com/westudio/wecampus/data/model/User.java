@@ -4,12 +4,13 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.UserDataHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by jam on 13-9-19.
  */
-public class User {
+public class User implements Serializable {
     public int id;
     public String name;
     public String birthday;

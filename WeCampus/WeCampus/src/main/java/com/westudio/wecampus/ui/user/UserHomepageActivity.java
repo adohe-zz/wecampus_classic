@@ -17,6 +17,7 @@ public class UserHomepageActivity extends BaseDetailActivity {
 
     public static String USER_ID = "user_id";
     private static String FRAGMENT = "USER_HOME_PAGE";
+    public static String USER = "user";
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
