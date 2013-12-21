@@ -323,9 +323,12 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             }
 
             switch (view.getId()) {
-                case R.id.detail_tv_location:
+                case R.id.detail_tv_location: {
+
                     break;
+                }
                 case R.id.detail_img_poster: {
+                    // 查看海报
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
                     intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, activity.title);
@@ -333,6 +336,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     break;
                 }
                 case R.id.detail_part_three: {
+                    // 组织
                     Intent intent = new Intent(ActivityDetailActivity.this, OrganizationHomepageActivity.class);
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, activity.organization_id);
                     startActivity(intent);
@@ -357,6 +361,10 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     break;
                 }
                 case R.id.detail_part_four: {
+                    // 已经参加的人
+                    if (activity.count_of_participants == 0) {
+                        return;
+                    }
                     Intent intent = new Intent(ActivityDetailActivity.this, UserListActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt(UserListFragment.USER_LIST_TYPE, UserListFragment.PARTICIPATES);
