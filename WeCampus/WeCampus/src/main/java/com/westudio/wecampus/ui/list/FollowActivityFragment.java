@@ -68,7 +68,7 @@ public class FollowActivityFragment extends BasePageListFragment<ActivityList.Re
 
     @Override
     protected String getRequestUrl() {
-        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.FACTIVITY, null);
+        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.FACTIVITY, null, 0);
     }
 
     @Override

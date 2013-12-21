@@ -339,11 +339,11 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         @Override
         public void onResponse(Organization organization) {
             if(organization.can_follow) {
-                Toast.makeText(ac, getResource().getString(R.string.unfollow_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ac, getResources().getString(R.string.unfollow_success), Toast.LENGTH_SHORT).show();
                 tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
                     null, null);
             } else {
-                Toast.makeText(ac, getResource().getString(R.string.follow_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ac, getResources().getString(R.string.follow_success), Toast.LENGTH_SHORT).show();
                 tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
                     null, null);
             }

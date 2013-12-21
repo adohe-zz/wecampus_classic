@@ -67,7 +67,7 @@ public class JoinActivityFragment extends BasePageListFragment<ActivityList.Requ
 
     @Override
     protected String getRequestUrl() {
-        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.JACTIVITY, null);
+        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.JACTIVITY, null, 0);
     }
 
     @Override

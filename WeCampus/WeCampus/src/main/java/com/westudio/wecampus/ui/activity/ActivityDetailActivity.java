@@ -397,6 +397,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (ActivityDetailActivity.this.activity == null) {
+                        return;
+                    }
                     //Check the session
                     if(BaseApplication.getInstance().hasAccount) {
                         if(Utility.isConnect(ActivityDetailActivity.this)) {
@@ -472,6 +475,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (ActivityDetailActivity.this.activity == null) {
+                        return;
+                    }
                     if(BaseApplication.getInstance().hasAccount) {
                         if(Utility.isConnect(ActivityDetailActivity.this)) {
                             changeLikeState();
@@ -579,7 +585,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             if(activity.count_of_participants == 0) {
                 tvNoAttend.setVisibility(View.VISIBLE);
             } else {
-                WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, this, this);
+                WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, 1, this, this);
             }
         }
     }

@@ -67,7 +67,7 @@ public class FollowOrganizationFragment extends BasePageListFragment<Organizatio
 
     @Override
     protected String getRequestUrl() {
-        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.FORGANIZATION, null);
+        return HttpUtil.getUserByIdWithOp(uid, HttpUtil.UserOp.FORGANIZATION, null, 0);
     }
 
     @Override

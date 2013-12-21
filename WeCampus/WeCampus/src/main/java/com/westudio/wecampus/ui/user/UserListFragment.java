@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.android.volley.Response;
@@ -14,13 +15,15 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.view.LoadingFooter;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 
 /**
  * Created by martian on 13-12-19.
  */
-public class UserListFragment extends SherlockFragment implements Response.Listener<User.UserListData>,
+public class UserListFragment extends SherlockFragment implements OnRefreshListener, Response.Listener<User.UserListData>,
         Response.ErrorListener {
     public static final String USER_LIST_TYPE = "user_list_type";
     public static final String USER_OR_ACTIVITY_ID = "user_or_activity_id";
@@ -48,8 +51,8 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mType = savedInstanceState.getInt(USER_LIST_TYPE);
-        mUserOrActivitiyId = savedInstanceState.getInt(USER_OR_ACTIVITY_ID);
+        mType = getArguments().getInt(USER_LIST_TYPE);
+        mUserOrActivitiyId = getArguments().getInt(USER_OR_ACTIVITY_ID);
     }
 
     @Override
@@ -62,8 +65,9 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
         mUserList.setOnScrollListener(onScrollListener);
         mAdapter = new UserListAdapter(getActivity());
         mPullToRefreshAttacher = ((UserListActivity)getActivity()).getPullToRefreshAttacher();
+        PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
+        ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
-        requestData(1);
         return view;
     }
 
@@ -91,22 +95,30 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
     };
 
     public void requestData(int page) {
+        if(!mPullToRefreshAttacher.isRefreshing() &&  page == 1) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
+
         switch (mType) {
             case PARTICIPATES:
-                WeCampusApi.getActivityParticipantsWithId(this, mUserOrActivitiyId, this, this);
+                WeCampusApi.getActivityParticipantsWithId(this, mUserOrActivitiyId, page, this, this);
                 break;
             case FANS:
-                // TODO 获取粉丝列表
+                // 获取粉丝列表
+                WeCampusApi.getFans(this, mUserOrActivitiyId, page, this, this);
                 break;
             case FOLLOWERS:
-                // TODO 获取关注列表
+                // 获取关注列表
+                WeCampusApi.getFollowers(this, mUserOrActivitiyId, page, this, this);
                 break;
         }
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        // TODO 错误提示
+        Toast.makeText(getActivity(), getResources().getString(R.string.network_problem),
+                Toast.LENGTH_SHORT).show();
+
         mLoadingFooter.setState(LoadingFooter.State.TheEnd);
         mPullToRefreshAttacher.setRefreshComplete();
     }
@@ -120,5 +132,10 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
             mPullToRefreshAttacher.setRefreshComplete();
             mPage++;
         }
+    }
+
+    @Override
+    public void onRefreshStarted(View view) {
+        requestData(1);
     }
 }

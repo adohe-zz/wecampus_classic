@@ -52,7 +52,6 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
  */
 public class UserHomepageFragment extends BaseFragment implements OnRefreshListener {
 
-    private ParallaxScrollView mScrollview;
     private Activity mActivity;
     private View mView;
     private PullToRefreshAttacher mPullToRefreshAttacher;
@@ -111,9 +110,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_user_homepage, container, false);
-
-        mScrollview = (ParallaxScrollView) mView.findViewById(R.id.scroll_view);
-        mScrollview.setParallaxOffset(0.3f);
 
         mPullToRefreshAttacher = ((UserHomepageActivity)mActivity).getPullToRefreshAttacher();
         PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
