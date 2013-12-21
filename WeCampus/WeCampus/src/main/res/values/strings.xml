@@ -233,4 +233,7 @@
 
     <string name="update_profile">更新资料</string>
 
+    <string name="follow_success">关注成功</string>
+    <string name="unfollow_success">取消关注</string>
+    
 </resources>
