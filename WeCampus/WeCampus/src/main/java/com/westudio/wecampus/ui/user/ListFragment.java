@@ -43,7 +43,7 @@ public class ListFragment extends BaseFragment implements OnRefreshListener,
 
     private void parseArgument() {
         Bundle bundle = getArguments();
-        id = bundle.getInt(UserListActivity.ACTIVITY_ID);
+        //id = bundle.getInt(UserListActivity);
     }
 
     @Override

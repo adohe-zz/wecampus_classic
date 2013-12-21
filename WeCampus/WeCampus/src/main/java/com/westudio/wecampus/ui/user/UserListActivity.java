@@ -14,7 +14,6 @@ import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefresh
  */
 public class UserListActivity extends BaseGestureActivity {
 
-    public static String ACTIVITY_ID = "activity_id";
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
     @Override

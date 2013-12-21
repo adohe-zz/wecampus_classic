@@ -37,6 +37,7 @@ import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.base.WebBrowserActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.ui.user.UserListActivity;
+import com.westudio.wecampus.ui.user.UserListFragment;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
@@ -316,6 +317,11 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         @Override
         public void onClick(View view) {
+            // 空指针保护，未加载成功时
+            if (activity == null) {
+                return;
+            }
+
             switch (view.getId()) {
                 case R.id.detail_tv_location:
                     break;
@@ -353,7 +359,8 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                 case R.id.detail_part_four: {
                     Intent intent = new Intent(ActivityDetailActivity.this, UserListActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(UserListActivity.ACTIVITY_ID, activityId);
+                    bundle.putInt(UserListFragment.USER_LIST_TYPE, UserListFragment.PARTICIPATES);
+                    bundle.putInt(UserListFragment.USER_OR_ACTIVITY_ID, activityId);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     break;

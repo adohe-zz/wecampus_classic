@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -21,6 +22,12 @@ import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefresh
  */
 public class UserListFragment extends SherlockFragment implements Response.Listener<User.UserListData>,
         Response.ErrorListener {
+    public static final String USER_LIST_TYPE = "user_list_type";
+    public static final String USER_OR_ACTIVITY_ID = "user_or_activity_id";
+    public static final int PARTICIPATES = 0;
+    public static final int FANS = 1;
+    public static final int FOLLOWERS = 2;
+
 
     protected ListView mUserList;
     protected LoadingFooter mLoadingFooter;
@@ -29,15 +36,20 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
     protected UserListAdapter mAdapter;
 
     protected int mPage = 1;
+    protected int mType = PARTICIPATES;
+    protected int mUserOrActivitiyId;
 
-    public static UserListFragment newInstance() {
+    public static UserListFragment newInstance(Bundle args) {
         UserListFragment f = new UserListFragment();
+        f.setArguments(args);
         return f;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mType = savedInstanceState.getInt(USER_LIST_TYPE);
+        mUserOrActivitiyId = savedInstanceState.getInt(USER_OR_ACTIVITY_ID);
     }
 
     @Override
@@ -79,12 +91,22 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
     };
 
     public void requestData(int page) {
-        //TODO
+        switch (mType) {
+            case PARTICIPATES:
+                WeCampusApi.getActivityParticipantsWithId(this, mUserOrActivitiyId, this, this);
+                break;
+            case FANS:
+                // TODO 获取粉丝列表
+                break;
+            case FOLLOWERS:
+                // TODO 获取关注列表
+                break;
+        }
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        // TODO
+        // TODO 错误提示
         mLoadingFooter.setState(LoadingFooter.State.TheEnd);
         mPullToRefreshAttacher.setRefreshComplete();
     }
@@ -96,6 +118,7 @@ public class UserListFragment extends SherlockFragment implements Response.Liste
         } else {
             mAdapter.addAll(userListData.objects);
             mPullToRefreshAttacher.setRefreshComplete();
+            mPage++;
         }
     }
 }
