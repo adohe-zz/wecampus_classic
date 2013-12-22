@@ -106,6 +106,10 @@ public class MainActivity extends SherlockFragmentActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
             return true;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_BACK &&
+            mCurrentContent != ContentType.ACTIVITY) {
+            changeContent(ContentType.ACTIVITY);
+            return true;
         }
 
         return super.onKeyUp(keyCode, event);

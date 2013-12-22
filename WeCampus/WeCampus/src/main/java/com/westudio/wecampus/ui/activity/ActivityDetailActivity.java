@@ -29,7 +29,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.data.model.Participants;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
@@ -535,7 +535,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         }
     }
 
-    private class ParticipateHandler implements Response.Listener<Participants.ParticipantsRequestData>, Response.ErrorListener {
+    private class ParticipateHandler implements Response.Listener<User.UserListData>, Response.ErrorListener {
 
         private android.app.Activity ac;
         TextView tvNoAttend;
@@ -555,19 +555,19 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         }
 
         @Override
-        public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
+        public void onResponse(User.UserListData data) {
             container.removeAllViews();
             for(int i = 0; i < (activity.count_of_participants > 5 ? 5 : activity.count_of_participants); i++) {
-                Participants participants = participantsRequestData.getObjects().get(i);
+                User user = data.getObjects().get(i);
                 final ImageView imageView = new ImageView(ac);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
                 layoutParams.setMargins(0, 0, 10, 0);
                 imageView.setLayoutParams(layoutParams);
-                if(Constants.IMAGE_NOT_FOUND.equals(participants.avatar)) {
+                if(Constants.IMAGE_NOT_FOUND.equals(user.avatar)) {
                     imageView.setImageBitmap(defaulMaleDrawable);
                     container.addView(imageView);
                 } else {
-                    WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
+                    WeCampusApi.requestImage(user.avatar, new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                             Bitmap data = imageContainer.getBitmap();

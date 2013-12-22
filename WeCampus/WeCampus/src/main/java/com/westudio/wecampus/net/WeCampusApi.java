@@ -219,9 +219,9 @@ public class WeCampusApi {
     public static void getActivityParticipantsWithId(Object tag, final int id, int page,
                                                      Response.Listener listener,
                                                      Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Participants.ParticipantsRequestData>(Request.Method.GET,
+        Request request = new AuthedGsonRequest< User.UserListData>(Request.Method.GET,
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE, page),
-                Participants.ParticipantsRequestData.class, listener, errorListener);
+                User.UserListData.class, listener, errorListener);
 
         addToRequestQueue(tag, request);
     }

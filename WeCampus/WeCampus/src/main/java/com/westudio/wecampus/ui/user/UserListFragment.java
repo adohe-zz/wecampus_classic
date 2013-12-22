@@ -1,10 +1,12 @@
 package com.westudio.wecampus.ui.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -62,12 +64,23 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
         mUserList = (ListView) view.findViewById(R.id.user_list);
         mLoadingFooter = new LoadingFooter(getActivity());
         mUserList.addFooterView(mLoadingFooter.getView());
-        mUserList.setOnScrollListener(onScrollListener);
         mAdapter = new UserListAdapter(getActivity());
+        mUserList.setAdapter(mAdapter);
+        mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
+                intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
+                intent.putExtra(UserHomepageActivity.USER_LIST, true);
+                startActivity(intent);
+            }
+        });
+
         mPullToRefreshAttacher = ((UserListActivity)getActivity()).getPullToRefreshAttacher();
         PullToRefreshLayout ptrLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
         ptrLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
+        mUserList.setOnScrollListener(onScrollListener);
         return view;
     }
 
@@ -81,7 +94,8 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
         public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount,
                              int totalItemCount) {
             if(mLoadingFooter.getState() == LoadingFooter.State.Loading ||
-                    mLoadingFooter.getState() == LoadingFooter.State.TheEnd ) {
+                    mLoadingFooter.getState() == LoadingFooter.State.TheEnd ||
+                    mPullToRefreshAttacher.isRefreshing()) {
                 return;
             }
 
@@ -98,7 +112,6 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
         if(!mPullToRefreshAttacher.isRefreshing() &&  page == 1) {
             mPullToRefreshAttacher.setRefreshing(true);
         }
-
         switch (mType) {
             case PARTICIPATES:
                 WeCampusApi.getActivityParticipantsWithId(this, mUserOrActivitiyId, page, this, this);
@@ -128,6 +141,9 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
         if (userListData.objects.isEmpty()) {
             mLoadingFooter.setState(LoadingFooter.State.TheEnd);
         } else {
+            if (mPage == 1) {
+                mAdapter.clear();
+            }
             mAdapter.addAll(userListData.objects);
             mPullToRefreshAttacher.setRefreshComplete();
             mPage++;
@@ -137,5 +153,6 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
     @Override
     public void onRefreshStarted(View view) {
         requestData(1);
+        mPage = 1;
     }
 }

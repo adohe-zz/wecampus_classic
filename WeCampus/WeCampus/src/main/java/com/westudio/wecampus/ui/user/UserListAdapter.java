@@ -83,6 +83,11 @@ public class UserListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void clear() {
+        data.clear();
+        notifyDataSetChanged();
+    }
+
     private static class ViewHolder {
         ImageView avatar;
         TextView nickname;
