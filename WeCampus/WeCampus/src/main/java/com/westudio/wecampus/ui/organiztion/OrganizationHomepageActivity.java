@@ -336,7 +336,6 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         @Override
         public void onResponse(Organization organization) {
-            Utility.log("success", "success");
         }
 
         public void followOrganization(boolean can_follow) {
