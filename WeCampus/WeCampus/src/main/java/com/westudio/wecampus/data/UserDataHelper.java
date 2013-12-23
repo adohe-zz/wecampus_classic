@@ -105,6 +105,14 @@ public class UserDataHelper extends BaseDataHelper {
                 UserDBInfo.ID + " DESC");
     }
 
+    public CursorLoader getFriendsCursorLoader(int uid) {
+        return new CursorLoader(getContext(),
+                getContentUri(), null ,
+                UserDBInfo.ID + "!= ?",
+                new String[]{"" + uid},
+                UserDBInfo.ID + " DESC");
+    }
+
     public static class UserDBInfo implements BaseColumns {
         private UserDBInfo() {
         }

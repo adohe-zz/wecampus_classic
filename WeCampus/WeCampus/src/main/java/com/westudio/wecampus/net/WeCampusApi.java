@@ -90,6 +90,13 @@ public class WeCampusApi {
         requestQueue.cancelAll(tag);
     }
 
+    private static void addToRequestQueue(Object tag, Request request) {
+        if(tag != null) {
+            request.setTag(tag);
+        }
+        requestQueue.add(request);
+    }
+
     /**
      * GET ACTIVITY LIST
      * @param page
@@ -102,10 +109,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST, page),
                 Activity.ActivityRequestData.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -121,10 +125,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DETAIL, 0),
                 Activity.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -141,10 +142,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityOfCategory(category, page),
                 Activity.ActivityRequestData.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -160,10 +158,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.LIKE, 0),
                 Activity.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -179,10 +174,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.DISLIKE, 0),
                 Activity.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -198,10 +190,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.JOIN, 0),
                 Activity.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -217,10 +206,7 @@ public class WeCampusApi {
                 HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.QUIT, 0),
                 Activity.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -230,17 +216,14 @@ public class WeCampusApi {
      * @param listener
      * @param errorListener
      */
-    public static void getActivityParticipantsWithId(Object tag, final int id, Response.Listener listener,
-                Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Participants.ParticipantsRequestData>(Request.Method.GET,
-                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE, 0),
-                Participants.ParticipantsRequestData.class, listener, errorListener);
+    public static void getActivityParticipantsWithId(Object tag, final int id, int page,
+                                                     Response.Listener listener,
+                                                     Response.ErrorListener errorListener) {
+        Request request = new AuthedGsonRequest< User.UserListData>(Request.Method.GET,
+                HttpUtil.getActivityByIdWithOp(id, HttpUtil.ActivityOp.PARTICIPATE, page),
+                User.UserListData.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -254,10 +237,7 @@ public class WeCampusApi {
         Request request = new GsonRequest<ActivityCategory.CategoryRequestData>(Request.Method.GET, HttpUtil.getActivityCategory(),
                 ActivityCategory.CategoryRequestData.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -271,10 +251,7 @@ public class WeCampusApi {
                 Response.ErrorListener errorListener) {
         Request request = new GsonRequest<School.SchoolRequestData>(Request.Method.GET, HttpUtil.URL_GET_SCHOOLS, School.SchoolRequestData.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -290,10 +267,7 @@ public class WeCampusApi {
         Request request = new CreateSessionRequest(Request.Method.POST, HttpUtil.URL_POST_SESSION,
                 account, pwd, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -307,10 +281,7 @@ public class WeCampusApi {
                                        Response.ErrorListener errorListener) {
         Request request = new GsonRequest(Request.Method.GET, url, clazz, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -325,10 +296,7 @@ public class WeCampusApi {
         Request request = new AuthedGsonRequest(Request.Method.DELETE,
                 HttpUtil.URL_POST_SESSION + "/" + id, Object.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -354,28 +322,21 @@ public class WeCampusApi {
 
         Request request = new RegisterRequest(Request.Method.POST, HttpUtil.URL_POST_USERS, data, listener, errorListener);
 
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     public static void getAdvertisement(Object tag, Response.Listener listener,
                                         Response.ErrorListener errorListener) {
         Request request = new GsonRequest<Advertisement.AdResultData>(Request.Method.GET,
                 HttpUtil.URL_GET_ADVERTISEMENTS, Advertisement.AdResultData.class, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     public static void postUpdateAvatar(Object tag, String path, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new UploadAvatarRequest(path, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -387,10 +348,8 @@ public class WeCampusApi {
      */
     public static void postUpdateProfile(Object tag, User user, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new UpdateProfileRequest(user, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -405,10 +364,8 @@ public class WeCampusApi {
         Request request = new AuthedGsonRequest<Organization>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
                 HttpUtil.OrganizationOp.DETAIL, 0, null),
                 Organization.class, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -424,10 +381,8 @@ public class WeCampusApi {
         Request request = new GsonRequest<ActivityList.RequestData>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id,
                 HttpUtil.OrganizationOp.ACTIVITY, page, null),
                 ActivityList.RequestData.class, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -439,10 +394,8 @@ public class WeCampusApi {
     public static void followOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.POST, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FOLLOW, 0, null),
                 Organization.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -455,10 +408,8 @@ public class WeCampusApi {
     public static void unfollowOrganization(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new AuthedGsonRequest(Request.Method.POST, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.UNFOLLOW, 0, null),
                 Organization.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -471,10 +422,8 @@ public class WeCampusApi {
     public static void getOrganizationFans(Object tag, final int id, Response.Listener listener, Response.ErrorListener errorListener) {
         Request request = new GsonRequest<OrgFans.RequestData>(Request.Method.GET, HttpUtil.getOrganizationByIdWithOp(id, HttpUtil.OrganizationOp.FANS, 0, null),
                 OrgFans.RequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -486,12 +435,42 @@ public class WeCampusApi {
      */
     public static void getFriends(Object tag, final int id, Response.Listener listener,
                                   Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FRIENDS, null),
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FRIENDS, null, 0),
                 User.UserListData.class, listener, errorListener);
-        if (tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
+    }
+
+    /**
+     * 获取粉丝列表
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getFans(Object tag, int id, int page, Response.Listener listener,
+                               Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(Request.Method.GET,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FANS, null, page),
+                User.UserListData.class, listener, errorListener);
+
+        addToRequestQueue(tag, request);
+    }
+
+    /**
+     * 获取关注列表
+     * @param tag
+     * @param id
+     * @param listener
+     * @param errorListener
+     */
+    public static void getFollowers(Object tag, int id, int page, Response.Listener listener,
+                                   Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(Request.Method.GET,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FOLLOWERS, null, page),
+                User.UserListData.class, listener, errorListener);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -502,12 +481,11 @@ public class WeCampusApi {
      */
     public static void getUserJActivity(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.JACTIVITY, null),
+        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id,
+                HttpUtil.UserOp.JACTIVITY, null, 0),
                 ActivityList.RequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -519,12 +497,11 @@ public class WeCampusApi {
      */
     public static void getUserFActivity(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FACTIVITY, null),
+        Request request = new AuthedGsonRequest(Request.Method.GET,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FACTIVITY, null, 0),
                 ActivityList.RequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -536,12 +513,11 @@ public class WeCampusApi {
      */
     public static void getUserFOrganization(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<Organization.OrganizationRequestData>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null),
+        Request request = new AuthedGsonRequest<Organization.OrganizationRequestData>(
+                Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FORGANIZATION, null, 0),
                 Organization.OrganizationRequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -553,12 +529,11 @@ public class WeCampusApi {
      */
     public static void getUserInfoById(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<User>(Request.Method.GET, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.DETAIL, null),
+        Request request = new AuthedGsonRequest<User>(Request.Method.GET,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.DETAIL, null, 0),
                 User.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -570,13 +545,11 @@ public class WeCampusApi {
      */
     public static void followUser(Object tag, final int id, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<User>(Request.Method.POST, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FOLLOW, null),
+        Request request = new AuthedGsonRequest<User>(Request.Method.POST,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.FOLLOW, null, 0),
                 User.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -588,13 +561,11 @@ public class WeCampusApi {
      */
     public static void unFollowUser(Object tag, final int id, Response.Listener listener,
                                   Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<User>(Request.Method.POST, HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.UNFOLLOW, null),
+        Request request = new AuthedGsonRequest<User>(Request.Method.POST,
+                HttpUtil.getUserByIdWithOp(id, HttpUtil.UserOp.UNFOLLOW, null, 0),
                 User.class, listener, errorListener);
 
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -605,12 +576,11 @@ public class WeCampusApi {
      */
     public static void getProfile(Object tag, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new AuthedGsonRequest<User>(Request.Method.GET, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL),
+        Request request = new AuthedGsonRequest<User>(Request.Method.GET,
+                HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL),
                 User.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     /**
@@ -624,13 +594,11 @@ public class WeCampusApi {
     public static void updatePwd(Object tag, String oldPwd, String newPwd, Response.Listener listener,
                 Response.ErrorListener errorListener) {
         Request request = new ModifyPwdRequest(oldPwd, newPwd, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
-    //搜索API#############################################################################
+    //搜索API-START#############################################################################
 
     public static void searchActivity(Object tag, int page, String keywords, Response.Listener listener,
                                       Response.ErrorListener errorListener) {
@@ -638,10 +606,8 @@ public class WeCampusApi {
                 Request.Method.GET,
                 HttpUtil.searchActivityByKeywords(keywords, page),
                 ActivityList.RequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     public static void searchOrgs(Object tag, int page, String keywords, Response.Listener listener,
@@ -650,25 +616,21 @@ public class WeCampusApi {
                 Request.Method.GET,
                 HttpUtil.getOrganizationByIdWithOp(0, HttpUtil.OrganizationOp.SEARCH, page, keywords),
                 Organization.OrganizationRequestData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
     public static void searchUser(Object tag, int page, String keywords, Response.Listener listener,
                                   Response.ErrorListener errorListener) {
         Request request = new GsonRequest(
                 Request.Method.GET,
-                HttpUtil.getUserByIdWithOp(0, HttpUtil.UserOp.SEARCH, keywords) + "&page=" + page,
+                HttpUtil.getUserByIdWithOp(0, HttpUtil.UserOp.SEARCH, keywords, page),
                 User.UserListData.class, listener, errorListener);
-        if(tag != null) {
-            request.setTag(tag);
-        }
-        requestQueue.add(request);
+
+        addToRequestQueue(tag, request);
     }
 
-    //####################################################################################
+    //搜索API-END####################################################################################
 
     /**
      * Request Image from network

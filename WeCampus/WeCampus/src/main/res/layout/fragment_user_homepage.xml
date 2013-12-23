@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<couk.jenxsol.parallaxscrollview.views.ParallaxScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <couk.jenxsol.parallaxscrollview.views.ObservableScrollView
+        <ScrollView
             android:layout_height="match_parent"
             android:layout_width="match_parent">
 
@@ -359,8 +358,8 @@
 
             </LinearLayout>
 
-        </couk.jenxsol.parallaxscrollview.views.ObservableScrollView>
+        </ScrollView>
 
     </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
 
-</couk.jenxsol.parallaxscrollview.views.ParallaxScrollView>
+</FrameLayout>

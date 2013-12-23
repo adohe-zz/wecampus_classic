@@ -34,17 +34,17 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  *
  * 展示好友的的Fragment
  */
-public class UsersListFragment extends BaseFragment implements OnRefreshListener,
+public class FriendsListFragment extends BaseFragment implements OnRefreshListener,
         LoaderManager.LoaderCallbacks<Cursor>, Response.ErrorListener,
         Response.Listener<User.UserListData> {
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private IndexableListView mUserList;
-    private UserAdapter mAdapter;
+    private FriendsAdapter mAdapter;
     private UserDataHelper mDataHelper;
 
-    public static UsersListFragment newInstance() {
-        UsersListFragment f = new UsersListFragment();
+    public static FriendsListFragment newInstance() {
+        FriendsListFragment f = new FriendsListFragment();
         return f;
     }
 
@@ -55,7 +55,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_friends_list, container, false);
 
         mUserList = (IndexableListView) view.findViewById(R.id.user_list);
 
@@ -65,7 +65,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         View searchHeader = getActivity().getLayoutInflater().inflate(R.layout.friends_list_search_header, null);
         mUserList.addHeaderView(searchHeader);
 
-        mAdapter = new UserAdapter(getActivity(), mUserList);
+        mAdapter = new FriendsAdapter(getActivity(), mUserList);
         mUserList.setAdapter(mAdapter);
 
         mPullToRefreshAttacher = ((MainActivity)getActivity()).getPullToRefreshAttacher();
@@ -75,7 +75,7 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         mDataHelper = new UserDataHelper(getActivity());
         getLoaderManager().initLoader(1, null, this);
 
-        mAdapter = new UserAdapter(getActivity(), mUserList);
+        mAdapter = new FriendsAdapter(getActivity(), mUserList);
         mUserList.setFastScrollEnabled(true);
         mUserList.setAdapter(mAdapter);
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -99,13 +99,17 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
             }
         });
 
+        requestUsers();
+
         return view;
     }
 
     private void requestUsers() {
+        if (!mPullToRefreshAttacher.isRefreshing()) {
+            mPullToRefreshAttacher.setRefreshing(true);
+        }
         int id = BaseApplication.getInstance().getAccountMgr().getUserId();
         WeCampusApi.getFriends(this, id, this, this);
-        mPullToRefreshAttacher.setRefreshing(true);
     }
 
     @Override
@@ -115,15 +119,14 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return mDataHelper.getCursorLoader();
+        int uid = BaseApplication.getInstance().getAccountMgr().getUserId();
+        return mDataHelper.getFriendsCursorLoader(uid);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
-        if(cursor != null && cursor.getCount() == 0) {
-            //requestUsers();
-        }
+
     }
 
     @Override
@@ -140,7 +143,9 @@ public class UsersListFragment extends BaseFragment implements OnRefreshListener
         Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object... params) {
+                mDataHelper.deleteAll();
                 mDataHelper.bulkInsert(userListData.objects);
+
                 return null;
             }
 

@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -30,13 +29,15 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.data.model.Participants;
+import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
+import com.westudio.wecampus.ui.base.WebBrowserActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.ui.user.UserListActivity;
+import com.westudio.wecampus.ui.user.UserListFragment;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
@@ -316,10 +317,18 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
 
         @Override
         public void onClick(View view) {
+            // 空指针保护，未加载成功时
+            if (activity == null) {
+                return;
+            }
+
             switch (view.getId()) {
-                case R.id.detail_tv_location:
+                case R.id.detail_tv_location: {
+
                     break;
+                }
                 case R.id.detail_img_poster: {
+                    // 查看海报
                     Intent intent = new Intent(ActivityDetailActivity.this, ImageDetailActivity.class);
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
                     intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, activity.title);
@@ -327,6 +336,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     break;
                 }
                 case R.id.detail_part_three: {
+                    // 组织
                     Intent intent = new Intent(ActivityDetailActivity.this, OrganizationHomepageActivity.class);
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, activity.organization_id);
                     startActivity(intent);
@@ -345,15 +355,20 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
                     break;
                 }
                 case R.id.detail_rl_sponsor: {
-                    Intent intent = new Intent("android.intent.action.VIEW");
-                    intent.setData(Uri.parse(activity.sponsor_url));
+                    Intent intent = new Intent(ActivityDetailActivity.this, WebBrowserActivity.class);
+                    intent.putExtra(WebBrowserActivity.EXTRA_URL, activity.sponsor_url);
                     startActivity(intent);
                     break;
                 }
                 case R.id.detail_part_four: {
+                    // 已经参加的人
+                    if (activity.count_of_participants == 0) {
+                        return;
+                    }
                     Intent intent = new Intent(ActivityDetailActivity.this, UserListActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(UserListActivity.ACTIVITY_ID, activityId);
+                    bundle.putInt(UserListFragment.USER_LIST_TYPE, UserListFragment.PARTICIPATES);
+                    bundle.putInt(UserListFragment.USER_OR_ACTIVITY_ID, activityId);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     break;
@@ -390,6 +405,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (ActivityDetailActivity.this.activity == null) {
+                        return;
+                    }
                     //Check the session
                     if(BaseApplication.getInstance().hasAccount) {
                         if(Utility.isConnect(ActivityDetailActivity.this)) {
@@ -465,6 +483,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (ActivityDetailActivity.this.activity == null) {
+                        return;
+                    }
                     if(BaseApplication.getInstance().hasAccount) {
                         if(Utility.isConnect(ActivityDetailActivity.this)) {
                             changeLikeState();
@@ -514,7 +535,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         }
     }
 
-    private class ParticipateHandler implements Response.Listener<Participants.ParticipantsRequestData>, Response.ErrorListener {
+    private class ParticipateHandler implements Response.Listener<User.UserListData>, Response.ErrorListener {
 
         private android.app.Activity ac;
         TextView tvNoAttend;
@@ -534,19 +555,19 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         }
 
         @Override
-        public void onResponse(Participants.ParticipantsRequestData participantsRequestData) {
+        public void onResponse(User.UserListData data) {
             container.removeAllViews();
             for(int i = 0; i < (activity.count_of_participants > 5 ? 5 : activity.count_of_participants); i++) {
-                Participants participants = participantsRequestData.getObjects().get(i);
+                User user = data.getObjects().get(i);
                 final ImageView imageView = new ImageView(ac);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Utility.dip2px(ac, 43), Utility.dip2px(ac, 43));
                 layoutParams.setMargins(0, 0, 10, 0);
                 imageView.setLayoutParams(layoutParams);
-                if(Constants.IMAGE_NOT_FOUND.equals(participants.avatar)) {
+                if(Constants.IMAGE_NOT_FOUND.equals(user.avatar)) {
                     imageView.setImageBitmap(defaulMaleDrawable);
                     container.addView(imageView);
                 } else {
-                    WeCampusApi.requestImage(participants.avatar, new ImageLoader.ImageListener() {
+                    WeCampusApi.requestImage(user.avatar, new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                             Bitmap data = imageContainer.getBitmap();
@@ -572,7 +593,7 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
             if(activity.count_of_participants == 0) {
                 tvNoAttend.setVisibility(View.VISIBLE);
             } else {
-                WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, this, this);
+                WeCampusApi.getActivityParticipantsWithId(ActivityDetailActivity.this, activity.id, 1, this, this);
             }
         }
     }

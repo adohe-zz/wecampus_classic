@@ -30,7 +30,6 @@ import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
-import com.westudio.wecampus.ui.activity.ActivityListActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
@@ -41,10 +40,9 @@ import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
-import couk.jenxsol.parallaxscrollview.views.ParallaxScrollView;
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 
 
 /**
@@ -52,7 +50,6 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefres
  */
 public class  MyHomepageFragment extends BaseFragment implements OnRefreshListener {
 
-    private ParallaxScrollView mScrollview;
     private Activity mActivity;
     private View mView;
     private PullToRefreshAttacher mPullToRefreshAttacher;
@@ -96,9 +93,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_my_homepage, container, false);
-
-        mScrollview = (ParallaxScrollView) mView.findViewById(R.id.scroll_view);
-        mScrollview.setParallaxOffset(0.3f);
 
         mPullToRefreshAttacher = ((MainActivity)mActivity).getPullToRefreshAttacher();
         PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
@@ -162,8 +156,10 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         tvUserFollow = (TextView)view.findViewById(R.id.user_profile_follow);
         tvUserFans = (TextView)view.findViewById(R.id.user_profile_fans);
         tvMoreActivity = (TextView)view.findViewById(R.id.activity_list_item_no_activity);
-        tvMoreActivity.setOnClickListener(clickListener);
         tvAttendActivity = (TextView)view.findViewById(R.id.user_profile_attend_activity);
+
+        view.findViewById(R.id.clickable_follow).setOnClickListener(clickListener);
+        view.findViewById(R.id.clickable_fans).setOnClickListener(clickListener);
 
         mJActivityHandler = new UserActivityHandler(mView);
         mFActivityHandler = new UserFActivityHandler(mView);
@@ -241,6 +237,16 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                 }
             } else if(v.getId() == R.id.img_avatar) {
 
+            } else if (v.getId() == R.id.clickable_follow) {
+                Intent intent = new Intent(getActivity(), UserListActivity.class);
+                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
+                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
+                startActivity(intent);
+            } else if (v.getId() == R.id.clickable_fans) {
+                Intent intent = new Intent(getActivity(), UserListActivity.class);
+                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
+                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
+                startActivity(intent);
             }
         }
     };

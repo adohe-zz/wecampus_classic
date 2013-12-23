@@ -16,8 +16,8 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.setting.SettingFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
+import com.westudio.wecampus.ui.user.FriendsListFragment;
 import com.westudio.wecampus.ui.user.MyHomepageFragment;
-import com.westudio.wecampus.ui.user.UsersListFragment;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
@@ -106,6 +106,10 @@ public class MainActivity extends SherlockFragmentActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
             return true;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_BACK &&
+            mCurrentContent != ContentType.ACTIVITY) {
+            changeContent(ContentType.ACTIVITY);
+            return true;
         }
 
         return super.onKeyUp(keyCode, event);
@@ -123,7 +127,7 @@ public class MainActivity extends SherlockFragmentActivity {
             if (type == ContentType.ACTIVITY) {
                 clazz = ActivityListFragment.class;
             } else if (type == ContentType.USERS) {
-                clazz = UsersListFragment.class;
+                clazz = FriendsListFragment.class;
             } else if (type == ContentType.SQUARE) {
                 clazz = SquareFragment.class;
             } else if (type == ContentType.HOMEPAGE) {

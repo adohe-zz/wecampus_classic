@@ -131,10 +131,10 @@ public class HttpUtil {
                 sb.append(id).append("/quit");
                 break;
             case FANS:
-                sb.append(id).append("/fans");
+                sb.append(id).append("/fans?page=").append(page);
                 break;
             case PARTICIPATE:
-                sb.append(id).append("/participants");
+                sb.append(id).append("/participants?page=").append(page);
                 break;
         }
 
@@ -263,7 +263,7 @@ public class HttpUtil {
      * @param keyword
      * @return
      */
-    public static String getUserByIdWithOp(final int id, UserOp op, final String keyword) {
+    public static String getUserByIdWithOp(final int id, UserOp op, final String keyword, int page) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
                 .append(SLASH).append(BASE_USER_PATH).append(SLASH);
@@ -279,10 +279,10 @@ public class HttpUtil {
                 sb.append(id).append(SLASH).append("unfollow");
                 break;
             case FANS:
-                sb.append(id).append(SLASH).append("fans");
+                sb.append(id).append(SLASH).append("fans?page=").append(page);
                 break;
             case FOLLOWERS:
-                sb.append(id).append(SLASH).append("followers");
+                sb.append(id).append(SLASH).append("followers?page=").append(page);
                 break;
             case FRIENDS:
                 sb.append(id).append(SLASH).append("friends");
@@ -298,7 +298,7 @@ public class HttpUtil {
                 break;
             case SEARCH:
                 try {
-                    sb.append("?keywords=").append(URLEncoder.encode(keyword, "UTF-8"));
+                    sb.append("?keywords=").append(URLEncoder.encode(keyword, "UTF-8")).append("&page=").append(page);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
