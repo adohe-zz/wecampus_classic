@@ -104,6 +104,12 @@ public class FriendsListFragment extends BaseFragment implements OnRefreshListen
         return view;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        WeCampusApi.cancelRequest(this);
+    }
+
     private void requestUsers() {
         if (!mPullToRefreshAttacher.isRefreshing()) {
             mPullToRefreshAttacher.setRefreshing(true);
@@ -136,6 +142,7 @@ public class FriendsListFragment extends BaseFragment implements OnRefreshListen
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        mPullToRefreshAttacher.setRefreshComplete();
     }
 
     @Override

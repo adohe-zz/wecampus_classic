@@ -9,16 +9,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.util.ContentUtil;
 
 /**
  * Created by nankonami on 13-12-3.
  */
-public class AboutUsActivity extends SherlockFragmentActivity {
+public class AboutUsActivity extends BaseGestureActivity {
 
     private RelativeLayout rlLike;
     private RelativeLayout rlWeibo;
@@ -76,17 +76,6 @@ public class AboutUsActivity extends SherlockFragmentActivity {
             }
         }
     };
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            finish();
-            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
