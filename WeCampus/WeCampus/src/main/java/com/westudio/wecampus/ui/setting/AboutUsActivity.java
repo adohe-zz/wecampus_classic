@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.util.ContentUtil;
 
 /**
@@ -47,6 +48,7 @@ public class AboutUsActivity extends SherlockFragmentActivity {
         rlWeibo = (RelativeLayout)findViewById(R.id.about_rl_weibo);
         rlWeibo.setOnClickListener(clickListener);
         tvWeb = (TextView)findViewById(R.id.about_web);
+        findViewById(R.id.about_terms_of_use).setOnClickListener(clickListener);
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -68,7 +70,9 @@ public class AboutUsActivity extends SherlockFragmentActivity {
                 case R.id.about_rl_web:
                     ContentUtil.addLinks(tvWeb, "http://wecampus.net");
                     break;
-
+                case R.id.about_terms_of_use:
+                    startActivity(new Intent(AboutUsActivity.this, TermsOfUseActivity.class));
+                    break;
             }
         }
     };
