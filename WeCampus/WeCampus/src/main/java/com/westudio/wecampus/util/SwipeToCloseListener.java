@@ -16,6 +16,9 @@ public class SwipeToCloseListener extends GestureDetector.SimpleOnGestureListene
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (e1 == null || e2 == null) {
+            return false;
+        }
         if (e2.getX() - e1.getX() > Constants.SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Constants.SWIPE_MIN_VELOCITY) {
             mActivity.finish();
             return true;

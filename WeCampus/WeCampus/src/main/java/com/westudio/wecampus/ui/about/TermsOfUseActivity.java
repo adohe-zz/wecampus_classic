@@ -3,13 +3,13 @@ package com.westudio.wecampus.ui.about;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 
 /**
  * Created by nankonami on 13-10-4.
  * Terms of Use Activity
  */
-public class TermsOfUseActivity extends SherlockFragmentActivity {
+public class TermsOfUseActivity extends BaseGestureActivity {
 
     private static final String URL = "http://wecampus.net/terms.html";
 
@@ -23,5 +23,7 @@ public class TermsOfUseActivity extends SherlockFragmentActivity {
         WebView webView = new WebView(this);
         webView.loadUrl(URL);
         setContentView(webView);
+
+        registerSwipeToCloseListener(webView);
     }
 }

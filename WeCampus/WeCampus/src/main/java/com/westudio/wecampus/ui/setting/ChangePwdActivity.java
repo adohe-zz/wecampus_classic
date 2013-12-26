@@ -6,16 +6,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 
 /**
  * Created by nankonami on 13-12-4.
  */
-public class ChangePwdActivity extends SherlockFragmentActivity {
+public class ChangePwdActivity extends BaseGestureActivity {
 
     private EditText edtOldPwd;
     private EditText edtNewPwd;

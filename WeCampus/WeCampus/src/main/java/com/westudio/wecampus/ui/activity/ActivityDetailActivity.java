@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -32,6 +31,7 @@ import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
 import com.westudio.wecampus.ui.base.WebBrowserActivity;
@@ -52,7 +52,7 @@ import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
  * Created by nankonami on 13-10-4.
  * Activity that display the detail of activity
  */
-public class ActivityDetailActivity extends SherlockFragmentActivity implements OnRefreshListener {
+public class ActivityDetailActivity extends BaseGestureActivity implements OnRefreshListener {
     public static final int REQUEST_MENU = 99;
 
     //Widgets
@@ -163,6 +163,9 @@ public class ActivityDetailActivity extends SherlockFragmentActivity implements 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
         PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)findViewById(R.id.ptr_detail_layout);
         pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
+
+        registerSwipeToCloseListener(contentContainer);
+        registerSwipeToCloseListener(noContentContainer);
     }
 
     private void updateActionBar() {
