@@ -13,6 +13,9 @@ import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
+import com.westudio.wecampus.ui.login.AuthActivity;
+import com.westudio.wecampus.ui.login.PickGenderActivity;
+import com.westudio.wecampus.ui.login.PickSchoolActivity;
 import com.westudio.wecampus.util.Utility;
 
 /**
@@ -24,6 +27,9 @@ public class MyProfileActivity extends BaseDetailActivity {
     public static final String REAL_NAME = "real_name";
     public static final String PHONE = "phone";
     public static final String EMAIL = "email";
+    public static final String WORDS = "words";
+    public static final String PICK_EMOTION = "emotion";
+    public static final String PICK_STAGE = "stage";
     public static final int UPDATE_NICK_REQUEST = 1;
     public static final int UPDATE_NICK_RESULT = 2;
     public static final int UPDATE_NAME_REQUEST = 3;
@@ -32,6 +38,12 @@ public class MyProfileActivity extends BaseDetailActivity {
     public static final int UPDATE_PHONE_RESULT = 6;
     public static final int UPDATE_EMAIL_REQUEST = 7;
     public static final int UPDATE_EMAIL_RESULT = 8;
+    public static final int UPDATE_WORDS_REQUEST = 9;
+    public static final int UPDATE_WORDS_RESULT = 10;
+    public static final int PICK_EMOTION_REQUEST = 11;
+    public static final int PICK_EMOTION_RESULT = 12;
+    public static final int PICK_STAGE_REQUEST = 13;
+    public static final int PICK_STAGE_RESULT = 14;
 
     private TextView tvNickName;
     private TextView tvGender;
@@ -47,6 +59,8 @@ public class MyProfileActivity extends BaseDetailActivity {
     private UserDataHelper mDataHelper;
     private User mUser;
     private int id;
+
+    private int schoolId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,9 +164,29 @@ public class MyProfileActivity extends BaseDetailActivity {
                     break;
                 }
                 case R.id.school: {
+                    Intent intent = new Intent(MyProfileActivity.this, PickSchoolActivity.class);
+                    startActivityForResult(intent, AuthActivity.PICK_SCHOOL_REQUEST);
                     break;
                 }
                 case R.id.gender: {
+                    Intent intent = new Intent(MyProfileActivity.this, PickGenderActivity.class);
+                    startActivityForResult(intent, AuthActivity.PICK_GENDER_REQUEST);
+                    break;
+                }
+                case R.id.words: {
+                    Intent intent = new Intent(MyProfileActivity.this, UpdateWordsActivity.class);
+                    intent.putExtra(WORDS, mUser.words);
+                    startActivityForResult(intent, UPDATE_WORDS_REQUEST);
+                    break;
+                }
+                case R.id.relationship: {
+                    Intent intent = new Intent(MyProfileActivity.this, PickEmotionActivity.class);
+                    startActivityForResult(intent, PICK_EMOTION_REQUEST);
+                    break;
+                }
+                case R.id.role: {
+                    Intent intent = new Intent(MyProfileActivity.this, PickStageActivity.class);
+                    startActivityForResult(intent, PICK_STAGE_REQUEST);
                     break;
                 }
             }
@@ -171,5 +205,30 @@ public class MyProfileActivity extends BaseDetailActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == UPDATE_NICK_REQUEST && resultCode == UPDATE_NICK_RESULT) {
+            tvNickName.setText(data.getStringExtra(NICK_NAME));
+        } else if(resultCode == AuthActivity.PICK_GENDER_RESULT) {
+            int type = data.getIntExtra(AuthActivity.PICK_GENDER, 2);
+            String strGender = (type == 0 ? getString(R.string.gender_male) :
+                    (type == 1 ? getString(R.string.gender_female) : getString(R.string.gender_secret)));
+            tvGender.setText(strGender);
+        } else if(resultCode == AuthActivity.PICK_SCHOOL_RESULT) {
+            tvSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
+            schoolId = data.getIntExtra(AuthActivity.PICK_SCHOOL_ID, -1);
+        } else if(requestCode == UPDATE_WORDS_REQUEST && resultCode == UPDATE_WORDS_RESULT) {
+            tvWord.setText(data.getStringExtra(WORDS));
+        } else if(requestCode == UPDATE_NAME_REQUEST && resultCode == UPDATE_NAME_RESULT) {
+            tvName.setText(data.getStringExtra(REAL_NAME));
+        } else if(requestCode == UPDATE_PHONE_REQUEST && resultCode == UPDATE_PHONE_RESULT) {
+            tvPhone.setText(data.getStringExtra(PHONE));
+        } else if(requestCode == UPDATE_EMAIL_REQUEST && resultCode == UPDATE_EMAIL_RESULT) {
+            tvEmail.setText(data.getStringExtra(EMAIL));
+        } else if(requestCode == PICK_EMOTION_REQUEST && resultCode == PICK_EMOTION_RESULT) {
+            int type = data.getIntExtra(PICK_EMOTION, -1);
+            tvLove.setText(Utility.getEmotionByType(this, type));
+        } else if(requestCode == PICK_STAGE_REQUEST && resultCode == PICK_STAGE_RESULT) {
+            int type = data.getIntExtra(PICK_STAGE, -1);
+            tvRole.setText(Utility.getStageByType(this, type));
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -16,11 +17,12 @@ import com.westudio.wecampus.R;
  */
 public class UpdateWordsActivity extends SherlockFragmentActivity {
     private EditText etNickName;
+    private String words;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_phone);
+        setContentView(R.layout.activity_update_words);
 
         initWidget();
         updateActionBar();
@@ -42,8 +44,8 @@ public class UpdateWordsActivity extends SherlockFragmentActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.putExtra(MyProfileActivity.NICK_NAME, etNickName.getText().toString());
-                        setResult(MyProfileActivity.UPDATE_NICK_RESULT, intent);
+                        intent.putExtra(MyProfileActivity.WORDS, etNickName.getText().toString());
+                        setResult(MyProfileActivity.UPDATE_WORDS_RESULT, intent);
                         finish();
                     }
                 };
@@ -52,28 +54,44 @@ public class UpdateWordsActivity extends SherlockFragmentActivity {
 
             }
             return true;
+        } else if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.WORDS, words);
+            setResult(MyProfileActivity.UPDATE_WORDS_RESULT, intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.WORDS, words);
+            setResult(MyProfileActivity.UPDATE_WORDS_RESULT, intent);
+            finish();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        etNickName.setText(getIntent().getStringExtra(MyProfileActivity.NICK_NAME));
+        words = getIntent().getStringExtra(MyProfileActivity.WORDS);
+        etNickName.setText(words);
     }
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.rege_nickname);
+        getSupportActionBar().setTitle(R.string.rege_step_two_description);
     }
 
     private boolean isValidate() {
         boolean result = true;
 
         if(etNickName.getText().toString().length() == 0) {
-            result = false;
-        } else if(etNickName.getText().toString().length() > 8) {
             result = false;
         }
 

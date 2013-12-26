@@ -10,6 +10,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 
+import com.westudio.wecampus.R;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -138,27 +140,6 @@ public class Utility {
     }
 
     /**
-     * get activity category according to the channel id
-     * @param channel_id
-     * @return
-     */
-    public static String getCatByChannelId(int channel_id) {
-        String category = "";
-
-        if(channel_id == 1) {
-            category = "category1";
-        } else if(channel_id == 2) {
-            category = "category2";
-        } else if(channel_id == 3) {
-            category = "category3";
-        } else {
-            category = "category4";
-        }
-
-        return category;
-    }
-
-    /**
      * Get The Screen Width
      * @param activity
      * @return
@@ -202,5 +183,65 @@ public class Utility {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * Get the emotion by type
+     * @param context
+     * @param type
+     * @return
+     */
+    public static String getEmotionByType(Context context, int type) {
+        String emotion = null;
+
+        switch (type) {
+            case 1:
+                emotion = context.getResources().getString(R.string.love_sercert);
+                break;
+            case 2:
+                emotion = context.getResources().getString(R.string.love_first);
+                break;
+            case 3:
+                emotion = context.getResources().getString(R.string.love_single);
+                break;
+            case 4:
+                emotion = context.getResources().getString(R.string.love_fuck);
+                break;
+            case 5:
+                emotion = context.getResources().getString(R.string.love_going);
+                break;
+            case 6:
+                emotion = context.getResources().getString(R.string.love_break);
+                break;
+        }
+
+        return emotion;
+    }
+
+    /**
+     * Get stage by type
+     * @param context
+     * @param type
+     * @return
+     */
+    public static String getStageByType(Context context, int type) {
+        String stage = null;
+
+        switch (type) {
+            case 1:
+                stage = context.getResources().getString(R.string.small_sister);
+                break;
+            case 2:
+                stage = context.getResources().getString(R.string.small_brother);
+                break;
+            case 3:
+                stage = context.getResources().getString(R.string.big_brother);
+                break;
+            case 4:
+                stage = context.getResources().getString(R.string.big_sister);
+                break;
+        }
+
+        return stage;
     }
 }

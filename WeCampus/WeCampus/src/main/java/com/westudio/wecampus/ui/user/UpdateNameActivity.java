@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -17,6 +18,7 @@ import com.westudio.wecampus.R;
 public class UpdateNameActivity extends SherlockFragmentActivity {
 
     private EditText etNickName;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class UpdateNameActivity extends SherlockFragmentActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.putExtra(MyProfileActivity.NICK_NAME, etNickName.getText().toString());
-                        setResult(MyProfileActivity.UPDATE_NICK_RESULT, intent);
+                        intent.putExtra(MyProfileActivity.REAL_NAME, etNickName.getText().toString());
+                        setResult(MyProfileActivity.UPDATE_NAME_RESULT, intent);
                         finish();
                     }
                 };
@@ -53,28 +55,44 @@ public class UpdateNameActivity extends SherlockFragmentActivity {
 
             }
             return true;
+        } else if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.REAL_NAME, name);
+            setResult(MyProfileActivity.UPDATE_NAME_RESULT, intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.REAL_NAME, name);
+            setResult(MyProfileActivity.UPDATE_NAME_RESULT, intent);
+            finish();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        etNickName.setText(getIntent().getStringExtra(MyProfileActivity.NICK_NAME));
+        name = getIntent().getStringExtra(MyProfileActivity.REAL_NAME);
+        etNickName.setText(name);
     }
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.rege_nickname);
+        getSupportActionBar().setTitle(R.string.rege_step_two_true_name);
     }
 
     private boolean isValidate() {
         boolean result = true;
 
         if(etNickName.getText().toString().length() == 0) {
-            result = false;
-        } else if(etNickName.getText().toString().length() > 8) {
             result = false;
         }
 
