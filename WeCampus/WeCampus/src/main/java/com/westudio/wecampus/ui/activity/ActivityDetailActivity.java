@@ -1,11 +1,13 @@
 package com.westudio.wecampus.ui.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -28,6 +30,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.ActivityDetail;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -327,7 +330,14 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
 
             switch (view.getId()) {
                 case R.id.detail_tv_location: {
-
+                    Uri uri = Uri.parse("geo:0,0?q=" + activity.location);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(ActivityDetailActivity.this, R.string.msg_no_map_app,
+                                Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 }
                 case R.id.detail_img_poster: {

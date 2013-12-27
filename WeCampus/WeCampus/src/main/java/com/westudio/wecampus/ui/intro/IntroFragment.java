@@ -107,6 +107,7 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.intro_login_sign:
                 startActivity(new Intent(activity, AuthActivity.class));
+                activity.finish();
                 break;
         }
     }

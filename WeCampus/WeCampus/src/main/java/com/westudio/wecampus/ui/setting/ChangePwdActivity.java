@@ -51,12 +51,14 @@ public class ChangePwdActivity extends BaseGestureActivity {
                         edtNewPwd.getText().toString(), new Response.Listener() {
                     @Override
                     public void onResponse(Object o) {
-
+                        Toast.makeText(ChangePwdActivity.this, R.string.change_success,
+                                Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
-
+                                Toast.makeText(ChangePwdActivity.this, R.string.change_fail,
+                                        Toast.LENGTH_SHORT).show();
                             }
                         });
             }

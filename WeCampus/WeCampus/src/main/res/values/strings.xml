@@ -239,6 +239,9 @@
     <string name="user_list_title_participates">参加的人</string>
     <string name="user_list_title_fans">粉丝</string>
     <string name="user_list_title_followers">关注</string>
+    <string name="msg_no_map_app">无法打开地图应用</string>
+    <string name="change_success">修改成功</string>
+    <string name="change_fail">修改失败</string>
 
 
 </resources>
