@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -18,6 +19,7 @@ import com.westudio.wecampus.R;
 public class UpdatePhoneActivity extends SherlockFragmentActivity {
 
     private EditText etNickName;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.putExtra(MyProfileActivity.NICK_NAME, etNickName.getText().toString());
-                        setResult(MyProfileActivity.UPDATE_NICK_RESULT, intent);
+                        intent.putExtra(MyProfileActivity.PHONE, etNickName.getText().toString());
+                        setResult(MyProfileActivity.UPDATE_PHONE_RESULT, intent);
                         finish();
                     }
                 };
@@ -54,14 +56,32 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
 
             }
             return true;
+        } else if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.PHONE, phone);
+            setResult(MyProfileActivity.UPDATE_PHONE_RESULT, intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.PHONE, phone);
+            setResult(MyProfileActivity.UPDATE_PHONE_RESULT, intent);
+            finish();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        etNickName.setText(getIntent().getStringExtra(MyProfileActivity.NICK_NAME));
+        phone = getIntent().getStringExtra(MyProfileActivity.PHONE);
+        etNickName.setText(phone);
     }
 
     private void updateActionBar() {
@@ -74,8 +94,6 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
         boolean result = true;
 
         if(etNickName.getText().toString().length() == 0) {
-            result = false;
-        } else if(etNickName.getText().toString().length() > 8) {
             result = false;
         }
 

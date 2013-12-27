@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -17,6 +18,7 @@ import com.westudio.wecampus.R;
 public class UpdateEmailActivity extends SherlockFragmentActivity {
 
     private EditText etNickName;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class UpdateEmailActivity extends SherlockFragmentActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.putExtra(MyProfileActivity.NICK_NAME, etNickName.getText().toString());
-                        setResult(MyProfileActivity.UPDATE_NICK_RESULT, intent);
+                        intent.putExtra(MyProfileActivity.EMAIL, etNickName.getText().toString());
+                        setResult(MyProfileActivity.UPDATE_EMAIL_RESULT, intent);
                         finish();
                     }
                 };
@@ -53,14 +55,32 @@ public class UpdateEmailActivity extends SherlockFragmentActivity {
 
             }
             return true;
+        } else if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.EMAIL, email);
+            setResult(MyProfileActivity.UPDATE_EMAIL_RESULT, intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra(MyProfileActivity.EMAIL, email);
+            setResult(MyProfileActivity.UPDATE_EMAIL_RESULT, intent);
+            finish();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        etNickName.setText(getIntent().getStringExtra(MyProfileActivity.NICK_NAME));
+        email = getIntent().getStringExtra(MyProfileActivity.PHONE);
+        etNickName.setText(email);
     }
 
     private void updateActionBar() {

@@ -195,8 +195,13 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
             tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
                     null, null);
         } else {
-            tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
-                    null, null);
+            if(BaseApplication.getInstance().hasAccount) {
+                tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
+                        null, null);
+            } else {
+                tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
+                        null, null);
+            }
         }
     }
 
