@@ -46,8 +46,13 @@ public class UserDataHelper extends BaseDataHelper {
         values.put(UserDBInfo.NAME, user.name);
         values.put(UserDBInfo.NICKNAME, user.nickname);
         values.put(UserDBInfo.PHONE, user.phone);
-        values.put(UserDBInfo.SCHOOL_ID, user.school.getId());
-        values.put(UserDBInfo.SCHOOL_NAME, user.school.getName());
+        if(user.school != null) {
+            values.put(UserDBInfo.SCHOOL_ID, user.school.getId());
+            values.put(UserDBInfo.SCHOOL_NAME, user.school.getName());
+        } else {
+            values.put(UserDBInfo.SCHOOL_ID, 0);
+            values.put(UserDBInfo.SCHOOL_NAME, "");
+        }
         values.put(UserDBInfo.STAGE, user.stage);
         values.put(UserDBInfo.WORDS, user.words);
         values.put(UserDBInfo.CAN_FOLLOW, user.can_follow);
