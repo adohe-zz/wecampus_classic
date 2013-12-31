@@ -112,12 +112,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mView = inflater.inflate(R.layout.fragment_user_homepage, container, false);
 
         mPullToRefreshAttacher = ((UserHomepageActivity)mActivity).getPullToRefreshAttacher();
-        PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
-        pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
         initWidget(mView);
 
-        //refreshUserFromDb();
         setupUI();
         mInfoHandler.fetchUserInfo();
 
@@ -186,7 +183,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
             @Override
             public void onUnFollowListener() {
-
+                followUserHandler.follow(false);
             }
         });
 
@@ -195,8 +192,20 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mOrganizationHandler = new UserOrganizationHandler(mView);
     }
 
-    private void setupUI() {
+    private void setupHeader() {
         tvUserName.setText(mUser.nickname);
+        tvUserWords.setText(mUser.words);
+        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
+        tvUserFans.setText(String.valueOf(mUser.count_of_fans));
+        if(mUser.can_follow) {
+            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+        } else {
+            if(BaseApplication.getInstance().hasAccount) {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+            } else {
+                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            }
+        }
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
                 ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
@@ -223,9 +232,15 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 }
             });
         }
+    }
+
+    private void setupUI() {
+        setupHeader();
 
         if(mUser.attend_activity != null) {
             mJActivityHandler.setupUI(gson.fromJson(mUser.attend_activity, ActivityList.class));
+        } else {
+            mJActivityHandler.refreshUI();
         }
         if(mUser.like_organization != null) {
             mOrganizationHandler.setupUI(gson.fromJson(mUser.like_organization, Organization.class));
@@ -245,7 +260,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
      */
     private void updateUI() {
         tvUserName.setText(mUser.nickname);
-        tvUserWords.setText("他没有words");
+        tvUserWords.setText(mUser.words);
         tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
         if(mUser.can_follow) {
@@ -392,6 +407,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             rlActivityListItem.setVisibility(View.VISIBLE);
             tvAttendActivity.setVisibility(View.VISIBLE);
             tvMoreActivity.setVisibility(View.VISIBLE);
+            String attend = getResources().getString(R.string.attend_activity_num);
+            tvAttendActivity.setText(String.format(attend, mUser.count_of_join_activities));
             tvTitle.setText(ac.title);
             tvTime.setText(DateUtil.getActivityTime(mActivity, ac.begin, ac.end));
             tvLocation.setText(ac.location);
