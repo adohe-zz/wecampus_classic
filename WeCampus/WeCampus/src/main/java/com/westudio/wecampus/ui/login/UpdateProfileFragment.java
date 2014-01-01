@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -65,7 +66,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         updateActionBar();
     }
 
@@ -150,7 +150,10 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         public void uploadProfile() {
             String realName = etRealName.getText().toString();
             String words = etWords.getText().toString();
-            if (realName.length() != 0 || words.length() != 0) {
+            if (realName.length() == 0 && words.length() == 0) {
+                Toast.makeText(getActivity(), R.string.msg_please_input_info,
+                        Toast.LENGTH_SHORT).show();
+            } else {
                 User user = new User();
                 user.id = ((BaseApplication) _activity.getApplication()).getAccountMgr().getUserId();
                 user.name = realName;
@@ -158,9 +161,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 progressDialog = new ProgressDialog(_activity);
                 progressDialog.show();
                 WeCampusApi.postUpdateProfile(_activity, user, this, this);
-            } else {
-                Toast.makeText(getActivity(), R.string.msg_please_input_info,
-                        Toast.LENGTH_SHORT).show();
             }
         }
 

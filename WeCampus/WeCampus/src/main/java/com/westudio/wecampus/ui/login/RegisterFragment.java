@@ -57,7 +57,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private ProgressDialog progressDialog;
 
     private int schoolId = -1;
-    private Gender gender;
+    private Gender gender = null;
 
     public enum Gender {
         MALE("男"), FEMALE("女"), SECRET("保密");
@@ -166,7 +166,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             Toast.makeText(getActivity(), R.string.msg_please_input_nickname, Toast.LENGTH_SHORT).show();
             return result;
         } else if (gender == null) {
-            result = true;
+            Toast.makeText(getActivity(), R.string.msg_please_input_gender, Toast.LENGTH_SHORT).show();
+            return result;
+        } else if (edtPwd.getText().length() < 6) {
+            Toast.makeText(getActivity(), R.string.msg__pwd_format_err, Toast.LENGTH_SHORT).show();
             return result;
         }
 

@@ -51,8 +51,7 @@
         <!-- Auth Activity -->
         <activity
             android:name=".ui.login.AuthActivity"
-            android:label="@string/btn_login"
-            android:windowSoftInputMode="adjustResize">
+            android:label="@string/btn_login">
         </activity>
 
         <!-- Terms of Use Activity -->

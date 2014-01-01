@@ -125,7 +125,8 @@
     <string name="msg_school_not_selected">学校未选择</string>
     <string name="msg_error_email_format">邮箱格式错误</string>
     <string name="msg_please_input_nickname">请输入昵称</string>
-    <string name="msg_please_input_gender">请输入性别</string><string name="gender_male">男</string>
+    <string name="msg_please_input_gender">请输入性别</string>
+    <string name="gender_male">男</string>
     <string name="msg_please_input_pwd">请输入密码</string>
     <string name="choose_gender">选择性别</string>
     <string name="gender_female">女</string>
@@ -242,6 +243,7 @@
     <string name="msg_no_map_app">无法打开地图应用</string>
     <string name="change_success">修改成功</string>
     <string name="change_fail">修改失败</string>
+    <string name="msg__pwd_format_err">密码应至少为6位</string>
 
 
 </resources>
