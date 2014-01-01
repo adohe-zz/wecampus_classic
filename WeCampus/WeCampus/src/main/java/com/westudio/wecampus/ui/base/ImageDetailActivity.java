@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ResponseDiskCache;
 
 import java.io.BufferedInputStream;
@@ -36,12 +37,14 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
 
     public static final String KEY_IMAGE_URL = "image_url";
     public static final String KEY_EXTRA_INFO = "extra_info";
+    public static final String KEY_EXTRA_SEX = "extra_sex";
 
     private ImageView image;
     private PhotoViewAttacher attacher;
 
     private String url;
     private String extraInfo;
+    private String extraSex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
 
         url = getIntent().getStringExtra(KEY_IMAGE_URL);
         extraInfo = getIntent().getStringExtra(KEY_EXTRA_INFO);
+        extraSex = getIntent().getStringExtra(KEY_EXTRA_SEX);
 
         updateActionBar();
 
@@ -57,22 +61,34 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
         attacher = new PhotoViewAttacher(image);
 
         final Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
+        final Drawable defaultMaleDrawable = getResources().getDrawable(R.drawable.ic_default_male);
+        final Drawable defaultFeMaleDrawable = getResources().getDrawable(R.drawable.ic_default_female);
 
-        WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                if (imageContainer.getBitmap() != null) {
-                    image.setImageBitmap(imageContainer.getBitmap());
-                    attacher.update();
-                }
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                image.setImageDrawable(defaultDrawable);
+        if(Constants.IMAGE_NOT_FOUND.equals(url)) {
+            if(extraSex != null && Constants.MALE.equals(extraSex)) {
+                image.setImageDrawable(defaultMaleDrawable);
+                attacher.update();
+            } else if(extraSex != null & Constants.FEMALE.equals(extraSex)) {
+                image.setImageDrawable(defaultFeMaleDrawable);
                 attacher.update();
             }
-        });
+        } else {
+            WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    if (imageContainer.getBitmap() != null) {
+                        image.setImageBitmap(imageContainer.getBitmap());
+                        attacher.update();
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    image.setImageDrawable(defaultDrawable);
+                    attacher.update();
+                }
+            });
+        }
     }
 
     private void updateActionBar() {

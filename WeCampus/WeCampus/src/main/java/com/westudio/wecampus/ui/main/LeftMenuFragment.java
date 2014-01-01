@@ -134,7 +134,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     }
 
     private void updateUI() {
-        tvName.setText(mUser.name);
+        tvName.setText(mUser.nickname);
         tvWord.setVisibility(View.VISIBLE);
         tvWord.setText(mUser.words);
         mUserSection.setVisibility(View.VISIBLE);

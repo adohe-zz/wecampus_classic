@@ -14,7 +14,7 @@ public class Organization {
     //Organization id
     public int id;
     //Organization admin email
-    public String admin_url;
+    public String admin_email;
     //Organization admin name
     public String admin_name;
     //Organization avatar
@@ -27,10 +27,10 @@ public class Organization {
     public String name;
     public boolean can_follow;
 
-    public Organization(int id, String admin_url, String admin_name,
+    public Organization(int id, String admin_email, String admin_name,
        String avatar, String description, int count_of_fans, String name, boolean can_follow) {
         this.id = id;
-        this.admin_url = admin_url;
+        this.admin_email = admin_email;
         this.admin_name = admin_name;
         this.avatar = avatar;
         this.description = description;
@@ -43,7 +43,7 @@ public class Organization {
         Organization org = new Organization();
         org.id = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ID));
         org.admin_name = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ADMIN_NAME));
-        org.admin_url = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ADMIN_URL));
+        org.admin_email = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.ADMIN_EMAIL));
         org.avatar = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.AVATAR));
         org.count_of_fans = cursor.getInt(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.COUNT_OF_FANS));
         org.description = cursor.getString(cursor.getColumnIndex(OrgDataHelper.OrganiztionDBInfo.DESCRIPTION));

@@ -3,6 +3,8 @@
 
     <!-- Activity List -->
     <item name="activity_list_item_no_activity" type="id">false</item>
+    <item name="activity_list_item_no_organization" type="id">false</item>
+    <item name="activity_list_item_no_like_activity" type="id">false</item>
     <item type="id" name="activity_list_item">false</item>
     <item type="id" name="activity_list_item_tag">false</item>
     <item type="id" name="activity_list_item_title">false</item>

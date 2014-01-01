@@ -32,7 +32,7 @@ public class OrgDataHelper extends BaseDataHelper {
         ContentValues values = new ContentValues();
         values.put(OrganiztionDBInfo.ID, org.id);
         values.put(OrganiztionDBInfo.ADMIN_NAME, org.admin_name);
-        values.put(OrganiztionDBInfo.ADMIN_URL, org.admin_url);
+        values.put(OrganiztionDBInfo.ADMIN_EMAIL, org.admin_email);
         values.put(OrganiztionDBInfo.AVATAR, org.avatar);
         values.put(OrganiztionDBInfo.COUNT_OF_FANS, org.count_of_fans);
         values.put(OrganiztionDBInfo.DESCRIPTION, org.description);
@@ -92,7 +92,7 @@ public class OrgDataHelper extends BaseDataHelper {
         public static final String TABLE_NAME = "organization";
 
         public static final String ID = "id";
-        public static final String ADMIN_URL = "admin_url";
+        public static final String ADMIN_EMAIL = "admin_email";
         public static final String ADMIN_NAME = "admin_name";
         public static final String AVATAR = "avatar";
         public static final String COUNT_OF_FANS = "count_of_fans";
@@ -102,7 +102,7 @@ public class OrgDataHelper extends BaseDataHelper {
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(ID, Column.Constraint.UNIQUE, Column.DataType.INTEGER)
-                .addColumn(ADMIN_URL, Column.DataType.TEXT)
+                .addColumn(ADMIN_EMAIL, Column.DataType.TEXT)
                 .addColumn(ADMIN_NAME, Column.DataType.TEXT)
                 .addColumn(AVATAR, Column.DataType.TEXT)
                 .addColumn(COUNT_OF_FANS, Column.DataType.INTEGER)

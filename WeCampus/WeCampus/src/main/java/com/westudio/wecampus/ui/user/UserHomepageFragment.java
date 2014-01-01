@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -34,16 +30,14 @@ import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
-import com.westudio.wecampus.util.Utility;
 
-import couk.jenxsol.parallaxscrollview.views.ParallaxScrollView;
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
 
 
@@ -112,55 +106,13 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mView = inflater.inflate(R.layout.fragment_user_homepage, container, false);
 
         mPullToRefreshAttacher = ((UserHomepageActivity)mActivity).getPullToRefreshAttacher();
-        PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
-        pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
         initWidget(mView);
 
-        //refreshUserFromDb();
         setupUI();
         mInfoHandler.fetchUserInfo();
 
         return mView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_refresh:
-                mInfoHandler.fetchUserInfo();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Get the user info from database
-     */
-    private void refreshUserFromDb() {
-        if(uid != 0) {
-            Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-                @Override
-                protected Object doInBackground(Object... params) {
-                    mUser = mDataHelper.query(uid);
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Object o) {
-                    if(mUser != null) {
-                        updateUI();
-                    }
-                }
-            });
-        }
     }
 
     /**
@@ -186,7 +138,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
             @Override
             public void onUnFollowListener() {
-
+                followUserHandler.follow(false);
             }
         });
 
@@ -195,8 +147,22 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         mOrganizationHandler = new UserOrganizationHandler(mView);
     }
 
-    private void setupUI() {
+    private void setupHeader() {
         tvUserName.setText(mUser.nickname);
+        tvUserWords.setText(mUser.words);
+        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
+        tvUserFans.setText(String.valueOf(mUser.count_of_fans));
+        if(BaseApplication.getInstance().hasAccount) {
+            if(from_user_list) {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+            } else if(mUser.can_follow) {
+                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            } else {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+            }
+        } else {
+            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+        }
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
                 ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
@@ -223,6 +189,10 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 }
             });
         }
+    }
+
+    private void setupUI() {
+        setupHeader();
 
         if(mUser.attend_activity != null) {
             mJActivityHandler.setupUI(gson.fromJson(mUser.attend_activity, ActivityList.class));
@@ -244,57 +214,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
      * Update the ui
      */
     private void updateUI() {
-        tvUserName.setText(mUser.nickname);
-        tvUserWords.setText("他没有words");
-        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
-        tvUserFans.setText(String.valueOf(mUser.count_of_fans));
-        if(mUser.can_follow) {
-            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
-        } else {
-            if(BaseApplication.getInstance().hasAccount) {
-                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
-            } else {
-                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
-            }
-        }
-        if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
-            if(Constants.MALE.equals(mUser.gender)) {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
-            } else {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female)));
-            }
-        } else {
-            WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
-                @Override
-                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                    Bitmap data = imageContainer.getBitmap();
-                    if(data != null) {
-                        ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
-                    }
-                }
-
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    if(Constants.MALE.equals(mUser.gender)) {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male));
-                    } else {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female));
-                    }
-                }
-            });
-        }
-    }
-
-    private void updateUserToDb() {
-        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object... params) {
-                if(mUser != null) {
-                    mDataHelper.update(mUser);
-                }
-                return null;
-            }
-        });
+        setupHeader();
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -314,7 +234,11 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     startActivity(intent);
                 }
             } else if(v.getId() == R.id.img_avatar) {
-
+                Intent intent = new Intent(mActivity, ImageDetailActivity.class);
+                intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, mUser.avatar);
+                intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, mUser.nickname);
+                intent.putExtra(ImageDetailActivity.KEY_EXTRA_SEX, mUser.gender);
+                startActivity(intent);
             }
         }
     };
@@ -391,7 +315,12 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         public void setupUI(ActivityList ac) {
             rlActivityListItem.setVisibility(View.VISIBLE);
             tvAttendActivity.setVisibility(View.VISIBLE);
-            tvMoreActivity.setVisibility(View.VISIBLE);
+            if(mUser.count_of_join_activities > 1) {
+                tvMoreActivity.setVisibility(View.VISIBLE);
+                tvMoreActivity.setText(getResources().getString(R.string.view_more_activities));
+            }
+            String attend = getResources().getString(R.string.attend_activity_num);
+            tvAttendActivity.setText(String.format(attend, mUser.count_of_join_activities));
             tvTitle.setText(ac.title);
             tvTime.setText(DateUtil.getActivityTime(mActivity, ac.begin, ac.end));
             tvLocation.setText(ac.location);
@@ -589,6 +518,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            //Toast notification
+            Toast.makeText(mActivity, getString(R.string.get_info_error), Toast.LENGTH_SHORT).show();
             mPullToRefreshAttacher.setRefreshComplete();
         }
 

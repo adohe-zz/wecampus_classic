@@ -230,6 +230,17 @@
                             android:drawablePadding="5dp"
                             style="@style/ActivityListTextView"/>
 
+                        <TextView
+                            android:id="@id/activity_list_item_summary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_below="@id/activity_list_item_location"
+                            android:layout_alignLeft="@id/activity_list_item_title"
+                            android:ellipsize="end"
+                            style="@style/ActivityListSummary"/>
+
                     </RelativeLayout>
 
                     <TextView
@@ -240,7 +251,6 @@
                         android:gravity="center"
                         android:background="@android:color/white"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
                         android:visibility="gone"
                         style="@style/HomePageTextSecondary"/>
 
@@ -250,7 +260,7 @@
                         android:layout_height="93.3dp"
                         android:layout_width="match_parent"
                         android:background="@android:color/white"
-                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="10dp"
                         android:visibility="gone">
 
                         <TextView
@@ -305,7 +315,8 @@
                         android:layout_height="93.3dp"
                         android:layout_width="match_parent"
                         android:background="@android:color/white"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:visibility="gone">
 
                         <TextView

@@ -71,7 +71,6 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
                 intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
-                intent.putExtra(UserHomepageActivity.USER_LIST, true);
                 startActivity(intent);
             }
         });
