@@ -189,7 +189,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mListView.setName(mOrganization.name);
         mListView.setAvatar(mOrganization.avatar);
         mIntroAdapter.setData(mOrganization.admin_name, mOrganization.description,
-                mOrganization.admin_url);
+                mOrganization.admin_email);
         tvLike.setText(String.valueOf(mOrganization.count_of_fans));
         if(mOrganization.can_follow) {
             tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,

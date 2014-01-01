@@ -108,6 +108,8 @@
     </string-array>
     <string name="attend_activity_num">参加的活动(%d)</string>
     <string name="no_attend_activity">还未参加活动噢~</string>
+    <string name="no_follow_organization">还没有关注的组织噢~</string>
+    <string name="no_like_activity">还没有喜欢的活动噢~</string>
 
     <!-- Pick School Part -->
     <string name="choose_school">选择学校</string>

@@ -17,9 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -33,6 +30,7 @@ import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.util.Constants;
@@ -42,7 +40,6 @@ import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 
 
 /**
@@ -95,8 +92,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         mView = inflater.inflate(R.layout.fragment_my_homepage, container, false);
 
         mPullToRefreshAttacher = ((MainActivity)mActivity).getPullToRefreshAttacher();
-        PullToRefreshLayout pullToRefreshLayout = (PullToRefreshLayout)mView.findViewById(R.id.ptr_layout);
-        pullToRefreshLayout.setPullToRefreshAttacher(mPullToRefreshAttacher, this);
 
         initWidget(mView);
 
@@ -104,23 +99,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         mInfoHandler.fetchUserInfo();
 
         return mView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_refresh:
-                mInfoHandler.fetchUserInfo();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     /**
@@ -175,7 +153,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
      * Update the ui
      */
     private void updateUI() {
-        tvUserName.setText(mUser.name);
+        tvUserName.setText(mUser.nickname);
         tvUserWords.setText(mUser.words);
         tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
@@ -236,7 +214,11 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     startActivity(intent);
                 }
             } else if(v.getId() == R.id.img_avatar) {
-
+                Intent intent = new Intent(mActivity, ImageDetailActivity.class);
+                intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, mUser.avatar);
+                intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, mUser.nickname);
+                intent.putExtra(ImageDetailActivity.KEY_EXTRA_SEX, mUser.gender);
+                startActivity(intent);
             } else if (v.getId() == R.id.clickable_follow) {
                 Intent intent = new Intent(getActivity(), UserListActivity.class);
                 intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
@@ -300,7 +282,9 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
             ac = activityRequestData.getObjects().get(0);
             rlActivityListItem.setVisibility(View.VISIBLE);
             tvAttendActivity.setVisibility(View.VISIBLE);
-            tvMoreActivity.setVisibility(View.VISIBLE);
+            if(mUser.count_of_join_activities > 1) {
+                tvMoreActivity.setVisibility(View.VISIBLE);
+            }
             tvTitle.setText(ac.title);
             tvTime.setText(DateUtil.getActivityTime(mActivity, ac.begin, ac.end));
             tvLocation.setText(ac.location);
@@ -359,6 +343,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         private TextView tvNumOrg;
         private TextView tvOrgName;
         private TextView tvLikeOrg;
+        private TextView tvNoOrg;
         private ImageView ivIcon;
 
         public UserOrganizationHandler(View view) {
@@ -367,6 +352,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
             tvNumOrg = (TextView)mView.findViewById(R.id.num_like_org);
             tvOrgName = (TextView)mView.findViewById(R.id.text_like_org_name);
             tvLikeOrg = (TextView)mView.findViewById(R.id.num_org_like_count);
+            tvNoOrg = (TextView)mView.findViewById(R.id.activity_list_item_no_organization);
             ivIcon = (ImageView)mView.findViewById(R.id.icon_like_org);
             rlLikeOrganization.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -414,17 +400,14 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         public void refreshUI() {
             if(mUser.count_of_follow_organizations == 0) {
                 rlLikeOrganization.setVisibility(View.GONE);
+                tvNoOrg.setVisibility(View.VISIBLE);
             } else {
                 rlLikeOrganization.setVisibility(View.VISIBLE);
                 String orgNum = getResources().getString(R.string.homepage_like_org);
                 tvNumOrg.setText(String.format(orgNum, mUser.count_of_follow_organizations));
                 WeCampusApi.getUserFOrganization(MyHomepageFragment.this, uid, this, this);
             }
-            if(mUser.count_of_follow_organizations != 0) {
-                WeCampusApi.getUserFOrganization(MyHomepageFragment.this, uid, this, this);
-            }
         }
-
     }
 
     private class UserFActivityHandler implements Response.Listener<ActivityList.RequestData>, Response.ErrorListener {
@@ -434,6 +417,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         private TextView tvNumActivity;
         private TextView tvActivityName;
         private TextView tvActivitySummary;
+        private TextView tvNoActivity;
         private ImageView ivActivityIcon;
 
         public UserFActivityHandler(View view) {
@@ -442,6 +426,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
             tvNumActivity = (TextView)view.findViewById(R.id.num_like_activity);
             tvActivityName = (TextView)view.findViewById(R.id.text_like_activity_name);
             tvActivitySummary = (TextView)view.findViewById(R.id.text_like_activity_summary);
+            tvNoActivity = (TextView)view.findViewById(R.id.activity_list_item_no_like_activity);
             ivActivityIcon = (ImageView)view.findViewById(R.id.icon_like_activity);
             rlFavoriteActivity.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -488,13 +473,11 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         public void refreshUI() {
             if(mUser.count_of_follow_activities == 0) {
                 rlFavoriteActivity.setVisibility(View.GONE);
+                tvNoActivity.setVisibility(View.VISIBLE);
             } else {
                 rlFavoriteActivity.setVisibility(View.VISIBLE);
                 String activityNum = getResources().getString(R.string.homepage_like_activity);
                 tvNumActivity.setText(String.format(activityNum, mUser.count_of_follow_activities));
-                WeCampusApi.getUserFActivity(MyHomepageFragment.this, uid, this, this);
-            }
-            if(mUser.count_of_follow_activities != 0) {
                 WeCampusApi.getUserFActivity(MyHomepageFragment.this, uid, this, this);
             }
         }

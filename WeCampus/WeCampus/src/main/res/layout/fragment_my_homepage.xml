@@ -22,7 +22,8 @@
 
         </LinearLayout>
 
-        <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/ptr_layout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
@@ -336,6 +337,18 @@
 
                         </RelativeLayout>
 
+                        <TextView
+                            android:id="@id/activity_list_item_no_organization"
+                            android:layout_height="40dp"
+                            android:layout_width="match_parent"
+                            android:text="@string/no_follow_organization"
+                            android:gravity="center"
+                            android:background="@android:color/white"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            style="@style/HomePageTextSecondary" />
+
                         <!-- Like Activity Part -->
                         <RelativeLayout
                             android:id="@id/user_like_activity"
@@ -394,6 +407,18 @@
                                 android:layout_alignParentRight="true" />
 
                         </RelativeLayout>
+
+                        <TextView
+                            android:id="@id/activity_list_item_no_like_activity"
+                            android:layout_height="40dp"
+                            android:layout_width="match_parent"
+                            android:text="@string/no_like_activity"
+                            android:gravity="center"
+                            android:background="@android:color/white"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            style="@style/HomePageTextSecondary" />
 
                     </LinearLayout>
 
