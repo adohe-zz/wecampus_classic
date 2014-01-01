@@ -243,5 +243,6 @@
     <string name="change_success">修改成功</string>
     <string name="change_fail">修改失败</string>
 
+    <string name="get_info_error">获取新鲜事失败</string>
 
 </resources>

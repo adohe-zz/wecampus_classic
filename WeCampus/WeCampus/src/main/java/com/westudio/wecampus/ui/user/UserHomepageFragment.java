@@ -197,14 +197,16 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvUserWords.setText(mUser.words);
         tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
-        if(mUser.can_follow) {
-            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
-        } else {
-            if(BaseApplication.getInstance().hasAccount) {
+        if(BaseApplication.getInstance().hasAccount) {
+            if(from_user_list) {
                 btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
-            } else {
+            } else if(mUser.can_follow) {
                 btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            } else {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
             }
+        } else {
+            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
         }
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
@@ -239,8 +241,6 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         if(mUser.attend_activity != null) {
             mJActivityHandler.setupUI(gson.fromJson(mUser.attend_activity, ActivityList.class));
-        } else {
-            mJActivityHandler.refreshUI();
         }
         if(mUser.like_organization != null) {
             mOrganizationHandler.setupUI(gson.fromJson(mUser.like_organization, Organization.class));
@@ -259,57 +259,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
      * Update the ui
      */
     private void updateUI() {
-        tvUserName.setText(mUser.nickname);
-        tvUserWords.setText(mUser.words);
-        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
-        tvUserFans.setText(String.valueOf(mUser.count_of_fans));
-        if(mUser.can_follow) {
-            btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
-        } else {
-            if(BaseApplication.getInstance().hasAccount) {
-                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
-            } else {
-                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
-            }
-        }
-        if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
-            if(Constants.MALE.equals(mUser.gender)) {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
-            } else {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female)));
-            }
-        } else {
-            WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
-                @Override
-                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                    Bitmap data = imageContainer.getBitmap();
-                    if(data != null) {
-                        ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
-                    }
-                }
-
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    if(Constants.MALE.equals(mUser.gender)) {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male));
-                    } else {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female));
-                    }
-                }
-            });
-        }
-    }
-
-    private void updateUserToDb() {
-        Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object... params) {
-                if(mUser != null) {
-                    mDataHelper.update(mUser);
-                }
-                return null;
-            }
-        });
+        setupHeader();
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -407,6 +357,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             rlActivityListItem.setVisibility(View.VISIBLE);
             tvAttendActivity.setVisibility(View.VISIBLE);
             tvMoreActivity.setVisibility(View.VISIBLE);
+            tvMoreActivity.setText(getResources().getString(R.string.view_more_activities));
             String attend = getResources().getString(R.string.attend_activity_num);
             tvAttendActivity.setText(String.format(attend, mUser.count_of_join_activities));
             tvTitle.setText(ac.title);
@@ -606,6 +557,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            //Toast notification
+            Toast.makeText(mActivity, getString(R.string.get_info_error), Toast.LENGTH_SHORT).show();
             mPullToRefreshAttacher.setRefreshComplete();
         }
 

@@ -33,7 +33,7 @@ public class User implements Serializable {
     public String password;
     public String token;
     public School school;
-    public boolean can_follow;
+    public boolean can_follow = true;
     public String like_activity;
     public String attend_activity;
     public String like_organization;
