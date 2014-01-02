@@ -1,7 +1,9 @@
 package com.westudio.wecampus.ui.organiztion;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,9 +71,15 @@ public class IntroAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (mAdminUrl != null) {
                     Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setData(Uri.parse("mailto:"));
+                    intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mAdminUrl});
-                    intent.setType("message/rfc822");
-                    mContext.startActivity(Intent.createChooser(intent, "please choose"));
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "WeCampus Feedback");
+                    try {
+                        mContext.startActivity(Intent.createChooser(intent, "please choose..."));
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.no_email_client), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(mContext, R.string.org_no_email, Toast.LENGTH_SHORT).show();
                 }

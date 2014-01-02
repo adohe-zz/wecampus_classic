@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.view;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.Utility;
 
 
 /**
@@ -108,29 +110,24 @@ public class FollowButton extends Button {
                 if (mOnStateChangeListener != null) {
                     mOnStateChangeListener.onUnFollowListener();
                 }
-                setFollowState(FollowState.UNFOLLOWED);
                 break;
             }
             case FOLLOW_EACH_OTHER: {
                 if (mOnStateChangeListener != null) {
                     mOnStateChangeListener.onUnFollowListener();
                 }
-                setFollowState(FollowState.UNFOLLOWED);
                 break;
             }
             case UNFOLLOWED: {
                 if (mOnStateChangeListener != null) {
                     mOnStateChangeListener.onFollowListener();
                 }
-                setFollowState(FollowState.FOLLOWING);
-
                 break;
             }
             case BE_FOLLOWED: {
                 if (mOnStateChangeListener != null) {
                     mOnStateChangeListener.onFollowListener();
                 }
-                setFollowState(FollowState.FOLLOW_EACH_OTHER);
                 break;
             }
         }

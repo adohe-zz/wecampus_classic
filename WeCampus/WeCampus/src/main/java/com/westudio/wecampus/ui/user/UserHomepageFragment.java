@@ -541,15 +541,24 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-
+            if(mUser.can_follow) {
+                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            } else {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+            }
         }
 
         @Override
         public void onResponse(User user) {
+            mUser = user;
             if(user.can_follow) {
                 btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+                tvUserFans.setText(String.valueOf(user.count_of_fans));
+                Toast.makeText(mActivity, getResources().getString(R.string.unfollow_user_success), Toast.LENGTH_SHORT).show();
             } else {
                 btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+                tvUserFans.setText(String.valueOf(user.count_of_fans));
+                Toast.makeText(mActivity, getResources().getString(R.string.follow_user_success), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -557,7 +566,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             if(can_follow) {
                 WeCampusApi.followUser(UserHomepageFragment.this, uid, this, this);
             } else {
-                WeCampusApi.unfollowOrganization(UserHomepageFragment.this, uid, this, this);
+                WeCampusApi.unFollowUser(UserHomepageFragment.this, uid, this, this);
             }
         }
     }

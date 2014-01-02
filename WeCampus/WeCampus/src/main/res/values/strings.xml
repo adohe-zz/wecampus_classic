@@ -248,5 +248,9 @@
     <string name="msg__pwd_format_err">密码应至少为6位</string>
 
     <string name="get_info_error">获取新鲜事失败</string>
+    <string name="follow_user_success">成功关注一枚小伙伴~</string>
+    <string name="unfollow_user_success">取消关注</string>
+
+    <string name="no_email_client">你还没有安装邮件客户端噢~</string>
 
 </resources>
