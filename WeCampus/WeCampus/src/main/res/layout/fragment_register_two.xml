@@ -24,7 +24,7 @@
         android:layout_gravity="center_horizontal"
         style="@style/RegisterTitleTwo" />
 
-    <ImageView
+    <com.westudio.wecampus.ui.view.CircleImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@id/rege_step_two_avatar"

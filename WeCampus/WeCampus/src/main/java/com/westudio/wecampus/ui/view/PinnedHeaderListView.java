@@ -201,7 +201,7 @@ public class PinnedHeaderListView extends ListView {
             public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                 Bitmap data = imageContainer.getBitmap();
                 if (data != null) {
-                    mAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                    mAvatar.setImageBitmap(data);
                 }
             }
 

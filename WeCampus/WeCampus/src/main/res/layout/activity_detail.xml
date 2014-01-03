@@ -204,7 +204,7 @@
                             style="@style/DetailTextPartTitle">
                         </TextView>
 
-                        <ImageView
+                        <com.westudio.wecampus.ui.view.CircleImageView
                             android:id="@+id/detail_org_avatar"
                             android:layout_width="40dp"
                             android:layout_height="40dp"

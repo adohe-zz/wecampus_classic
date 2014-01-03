@@ -23,7 +23,7 @@ public class ImageUtil {
      * @param bitmap
      * @return
      */
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+    /*public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
         int x = bitmap.getWidth();
         Bitmap output = Bitmap.createBitmap(x,
                 x, Bitmap.Config.ARGB_8888);
@@ -43,7 +43,7 @@ public class ImageUtil {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
-    }
+    }*/
 
     /**
      * Get the size of a bitmap

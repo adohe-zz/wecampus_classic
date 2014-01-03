@@ -207,13 +207,13 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     Bitmap data = imageContainer.getBitmap();
                     if (data != null) {
-                        ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                        ivOrgAvatar.setImageBitmap(data);
                     }
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(defaultBitmap));
+                    ivOrgAvatar.setImageBitmap(defaultBitmap);
                 }
             });
         }
@@ -255,13 +255,13 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     Bitmap data = imageContainer.getBitmap();
                     if (data != null) {
-                        ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                        ivOrgAvatar.setImageBitmap(data);
                     }
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    ivOrgAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(defaultBitmap));
+                    ivOrgAvatar.setImageBitmap(defaultBitmap);
                 }
             });
         }

@@ -165,9 +165,11 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         }
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male)));
+                ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                        R.drawable.ic_default_male));
             } else {
-                ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female)));
+                ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                        R.drawable.ic_default_female));
             }
         } else {
             WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
@@ -175,16 +177,18 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     Bitmap data = imageContainer.getBitmap();
                     if(data != null) {
-                        ivUserAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                        ivUserAvatar.setImageBitmap(data);
                     }
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     if(Constants.MALE.equals(mUser.gender)) {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_male));
+                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                                R.drawable.ic_default_male));
                     } else {
-                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female));
+                        ivUserAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                                R.drawable.ic_default_female));
                     }
                 }
             });

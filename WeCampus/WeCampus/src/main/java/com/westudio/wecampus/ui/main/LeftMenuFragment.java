@@ -73,7 +73,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         //avatar
         ivAvatar = (ImageView) view.findViewById(R.id.img_avatar);
         Bitmap bm = ((BitmapDrawable)ivAvatar.getDrawable()).getBitmap();
-        bm = ImageUtil.getRoundedCornerBitmap(bm);
+
         ivAvatar.setImageBitmap(bm);
         ivAvatar.setOnClickListener(this);
         mBtnEdit = (ImageButton) view.findViewById(R.id.edit_button);
@@ -143,13 +143,13 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         mBtnEdit.setVisibility(View.VISIBLE);
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
-                ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(
+                ivAvatar.setImageBitmap(BitmapFactory.decodeResource(
                         getResources(), R.drawable.ic_default_male
-                )));
+                ));
             } else {
-                ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(
+                ivAvatar.setImageBitmap(BitmapFactory.decodeResource(
                         getResources(), R.drawable.ic_default_female
-                )));
+                ));
             }
         } else {
             WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
@@ -157,7 +157,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     Bitmap data = imageContainer.getBitmap();
                     if(data != null) {
-                        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(data));
+                        ivAvatar.setImageBitmap(data);
                     }
                 }
 
@@ -173,8 +173,8 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         tvName.setText(getResources().getString(R.string.menu_no_login));
         tvWord.setVisibility(View.GONE);
         mUserSection.setVisibility(View.GONE);
-        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(),
-                R.drawable.ic_default_avatar)));
+        ivAvatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_default_avatar));
     }
 
     @Override

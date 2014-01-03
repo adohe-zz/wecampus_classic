@@ -36,7 +36,7 @@
             style="@style/UserlikeTextView"
             android:visibility="gone"/>
 
-        <ImageView
+        <com.westudio.wecampus.ui.view.CircleImageView
             android:id="@+id/img_avatar"
             android:layout_width="70dp"
             android:layout_height="70dp"

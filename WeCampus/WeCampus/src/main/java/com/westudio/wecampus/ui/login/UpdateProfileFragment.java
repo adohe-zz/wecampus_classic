@@ -113,7 +113,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     public void setCropedAvatarImage(Bundle bundle) {
         Bitmap bmAvatar = bundle.getParcelable("cropedImage");
         mStrImgLocalPath = bundle.getString("imagePath");
-        ivAvatar.setImageBitmap(ImageUtil.getRoundedCornerBitmap(bmAvatar));
+        ivAvatar.setImageBitmap(bmAvatar);
 
         // fire an upload image request
         WeCampusApi.postUpdateAvatar(getActivity(), mStrImgLocalPath, avatarHandler, avatarHandler);
