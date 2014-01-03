@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -277,6 +278,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
 
     private class LogoutHandler implements Response.Listener, Response.ErrorListener {
         ProgressDialog progressDialog;
+        ActivityDataHelper activityDataHelper = new ActivityDataHelper(getActivity());
 
         public void logout() {
             BaseApplication app = BaseApplication.getInstance();
@@ -298,10 +300,22 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
 
         @Override
         public void onResponse(Object o) {
-            progressDialog.dismiss();
             refreshUI();
             mBtnSignOut.setVisibility(View.GONE);
             mBtnSignIn.setVisibility(View.VISIBLE);
+            Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                @Override
+                protected Object doInBackground(Object... objects) {
+                    mDataHelper.deleteAll();
+                    activityDataHelper.deleteAll();
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    progressDialog.dismiss();
+                }
+            });
         }
     }
 }
