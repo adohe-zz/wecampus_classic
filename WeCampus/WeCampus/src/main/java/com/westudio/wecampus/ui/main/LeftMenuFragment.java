@@ -1,7 +1,9 @@
 package com.westudio.wecampus.ui.main;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -212,7 +214,17 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                 break;
             }
             case R.id.btn_sign_out: {
-                mLogoutHandler.logout();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.ensure_logout);
+                builder.setCancelable(true);
+                builder.setNegativeButton(R.string.text_cancel, null);
+                builder.setPositiveButton(R.string.text_ensure, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mLogoutHandler.logout();
+                    }
+                });
+                builder.show();
                 break;
             }
         }

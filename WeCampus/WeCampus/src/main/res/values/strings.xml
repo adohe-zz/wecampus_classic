@@ -141,6 +141,7 @@
     <string name="text_pick_photo">相册</string>
     <string name="text_set_avatar">设置头像</string>
     <string name="text_no_sdcard">未发现SD卡</string>
+    <string name="text_ensure">确定</string>
     <string name="text_cancel">取消</string>
     <string name="text_no_camera">未发现相机应用</string>
     <string name="upload_success">头像上传成功</string>
@@ -252,5 +253,6 @@
     <string name="unfollow_user_success">取消关注</string>
 
     <string name="no_email_client">你还没有安装邮件客户端噢~</string>
+    <string name="ensure_logout">确定要登出吗？</string>
 
 </resources>
