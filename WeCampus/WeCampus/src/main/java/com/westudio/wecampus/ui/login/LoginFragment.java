@@ -42,6 +42,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private TextView tvPwd;
     private TextView tvEmail;
     private ProgressDialog progressDialog;
+    private int toastStringId = R.string.login_error;
 
     public static LoginFragment newInstance(Bundle bundle) {
         LoginFragment loginFragment = new LoginFragment();
@@ -102,6 +103,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             String pwd = edtPwd.getText().toString();
             if(checkValidation(email, pwd)) {
                 handleLogin(email, pwd);
+            } else {
+                Toast.makeText(getActivity(), toastStringId, Toast.LENGTH_SHORT).show();
             }
         } else if(v.getId() == R.id.login_forget_pwd) {
             Intent intent = new Intent(getActivity(), ForgetPwdActivity.class);
@@ -120,10 +123,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         if(TextUtils.isEmpty(email)) {
             result = false;
+            toastStringId = R.string.msg_error_email_format;
         } else if (!email.matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")) {
             result = false;
+            toastStringId = R.string.msg_error_email_format;
         } else if(TextUtils.isEmpty(pwd)) {
             result = false;
+            toastStringId = R.string.msg_please_input_pwd;
         }
 
         return result;
