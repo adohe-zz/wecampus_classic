@@ -288,13 +288,13 @@ public class HttpUtil {
                 sb.append(id).append(SLASH).append("friends");
                 break;
             case JACTIVITY:
-                sb.append(id).append(SLASH).append("joined_activities");
+                sb.append(id).append(SLASH).append("joined_activities?page=").append(page);
                 break;
             case FACTIVITY:
-                sb.append(id).append(SLASH).append("favorite_activities");
+                sb.append(id).append(SLASH).append("favorite_activities?page=").append(page);
                 break;
             case FORGANIZATION:
-                sb.append(id).append(SLASH).append("favorite_organizations");
+                sb.append(id).append(SLASH).append("favorite_organizations?page=").append(page);
                 break;
             case SEARCH:
                 try {

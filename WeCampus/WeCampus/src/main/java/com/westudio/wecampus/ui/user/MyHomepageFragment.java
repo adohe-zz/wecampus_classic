@@ -83,6 +83,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         uid = BaseApplication.getInstance().getAccountMgr().getUserId();
+        Utility.log("id", uid);
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
     }
@@ -155,7 +156,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
     private void updateUI() {
         tvUserName.setText(mUser.nickname);
         tvUserWords.setText(mUser.words);
-        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
+        tvUserFollow.setText(String.valueOf(mUser.count_of_followings));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {

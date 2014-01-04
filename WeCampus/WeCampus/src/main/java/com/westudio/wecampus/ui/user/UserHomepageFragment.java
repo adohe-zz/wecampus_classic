@@ -150,7 +150,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     private void setupHeader() {
         tvUserName.setText(mUser.nickname);
         tvUserWords.setText(mUser.words);
-        tvUserFollow.setText(String.valueOf(mUser.count_of_followers));
+        tvUserFollow.setText(String.valueOf(mUser.count_of_followings));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
         if(BaseApplication.getInstance().hasAccount) {
             if(from_user_list) {

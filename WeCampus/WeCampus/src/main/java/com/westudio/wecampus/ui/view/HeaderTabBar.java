@@ -63,6 +63,9 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
         view.setSelected(true);
         switch (view.getId()) {
             case R.id.tab1: {
+                mTab1.setTextColor(getResources().getColor(R.color.intro_right_btn_bg));
+                mTab2.setTextColor(getResources().getColor(R.color.text_color_primary));
+                mTab3.setTextColor(getResources().getColor(R.color.text_color_primary));
                 mTab2.setSelected(false);
                 mTab3.setSelected(false);
                 mOnTabSelectedListener.onFirstTabSelected();
@@ -70,6 +73,9 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
                 break;
             }
             case R.id.tab2: {
+                mTab2.setTextColor(getResources().getColor(R.color.intro_right_btn_bg));
+                mTab1.setTextColor(getResources().getColor(R.color.text_color_primary));
+                mTab3.setTextColor(getResources().getColor(R.color.text_color_primary));
                 mTab1.setSelected(false);
                 mTab3.setSelected(false);
                 mOnTabSelectedListener.onSecondTabSelected();
@@ -77,6 +83,9 @@ public class HeaderTabBar extends LinearLayout implements View.OnClickListener {
                 break;
             }
             case R.id.tab3: {
+                mTab3.setTextColor(getResources().getColor(R.color.intro_right_btn_bg));
+                mTab2.setTextColor(getResources().getColor(R.color.text_color_primary));
+                mTab1.setTextColor(getResources().getColor(R.color.text_color_primary));
                 mTab2.setSelected(false);
                 mTab1.setSelected(false);
                 mOnTabSelectedListener.onThirdTabSelected();

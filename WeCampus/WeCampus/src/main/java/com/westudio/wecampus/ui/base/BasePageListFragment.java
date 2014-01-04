@@ -45,6 +45,8 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
 
     protected Activity mActivity;
 
+    protected int page_count;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -83,6 +85,10 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(page_count <= 20) {
+                    loadingFooter.setState(LoadingFooter.State.TheEnd);
+                    return;
+                }
                 if(loadingFooter.getState() == LoadingFooter.State.Loading
                         || loadingFooter.getState() == LoadingFooter.State.TheEnd) {
                     return;
@@ -90,7 +96,7 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
                 if(firstVisibleItem + visibleItemCount >= totalItemCount
                         && totalItemCount != 0
                         && totalItemCount != listView.getFooterViewsCount() +
-                        listView.getFooterViewsCount() && listView.getCount() > 0) {
+                        listView.getFooterViewsCount() && baseAdapter.getCount() > 0) {
                     loadNextPage();
                 }
             }

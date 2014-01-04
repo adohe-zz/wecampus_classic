@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
+import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -98,6 +99,10 @@ public class FollowActivityFragment extends BasePageListFragment<ActivityList.Re
 
     @Override
     protected void processResponseData(ActivityList.RequestData data) {
+        page_count = data.getObjects().size();
+        if(data.getObjects().size() == 0) {
+            loadingFooter.setState(LoadingFooter.State.TheEnd);
+        }
     }
 
     @Override
