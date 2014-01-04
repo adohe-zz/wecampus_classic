@@ -9,23 +9,32 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.login.AuthActivity;
+import com.westudio.wecampus.util.Constants;
 
 /**
  * Created by nankonami on 13-12-15.
  */
 public class PickStageActivity extends SherlockFragmentActivity implements View.OnClickListener {
 
+    private String stage;
+    private int lastClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_stage);
 
+        stage = getIntent().getStringExtra(MyProfileActivity.PICK_STAGE);
         updateActionBar();
         initWidget();
     }
 
     @Override
     public void onClick(View v) {
+        if(lastClick != 0) {
+            findViewById(lastClick).findViewById(R.id.imageView).setVisibility(View.GONE);
+        }
+        lastClick = v.getId();
         v.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
 
         int stage = 0;
@@ -70,6 +79,7 @@ public class PickStageActivity extends SherlockFragmentActivity implements View.
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.role);
     }
 
     private void initWidget() {
@@ -81,5 +91,20 @@ public class PickStageActivity extends SherlockFragmentActivity implements View.
         bigBrother.setOnClickListener(this);
         View bigSister = findViewById(R.id.item_big_sister);
         bigSister.setOnClickListener(this);
+        if(Constants.SMALL_SISTER.equals(stage)) {
+            smallSister.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_small_sister;
+        } else if(Constants.SMALL_BROTHER.equals(stage)) {
+            smallBrother.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_small_brother;
+        } else if(Constants.BIG_BROTHER.equals(stage)) {
+            bigBrother.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_big_brother;
+        } else if(Constants.BIG_SISTER.equals(stage)) {
+            bigSister.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_big_sister;
+        } else {
+            lastClick = 0;
+        }
     }
 }

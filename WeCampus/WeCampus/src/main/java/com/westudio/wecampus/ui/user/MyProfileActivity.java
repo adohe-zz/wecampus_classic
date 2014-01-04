@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem;
@@ -181,11 +180,13 @@ public class MyProfileActivity extends BaseDetailActivity {
                 }
                 case R.id.relationship: {
                     Intent intent = new Intent(MyProfileActivity.this, PickEmotionActivity.class);
+                    intent.putExtra(PICK_EMOTION, tvLove.getText().toString());
                     startActivityForResult(intent, PICK_EMOTION_REQUEST);
                     break;
                 }
                 case R.id.role: {
                     Intent intent = new Intent(MyProfileActivity.this, PickStageActivity.class);
+                    intent.putExtra(PICK_STAGE, tvRole.getText().toString());
                     startActivityForResult(intent, PICK_STAGE_REQUEST);
                     break;
                 }
