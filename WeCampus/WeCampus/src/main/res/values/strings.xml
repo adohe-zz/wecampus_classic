@@ -126,8 +126,13 @@
     <string name="net_work_err">网络貌似有问题</string>
     <string name="msg_school_not_selected">学校未选择</string>
     <string name="msg_error_email_format">邮箱格式错误</string>
+    <string name="msg_error_phone_format">电话格式错误</string>
     <string name="msg_please_input_nickname">请输入昵称</string>
     <string name="msg_please_input_gender">请输入性别</string>
+    <string name="msg_please_input_email">请输入邮箱</string>
+    <string name="msg_please_input_phone">请输入电话</string>
+    <string name="msg_please_input_name">请输入姓名</string>
+    <string name="msg_please_input_words">请输入你的个性签名</string>
     <string name="gender_male">男</string>
     <string name="msg_please_input_pwd">请输入密码</string>
     <string name="choose_gender">选择性别</string>
@@ -254,5 +259,7 @@
 
     <string name="no_email_client">你还没有安装邮件客户端噢~</string>
     <string name="ensure_logout">确定要登出吗？</string>
+
+    <string name="words_input_hint">添加个性签名，让别人更懂你</string>
 
 </resources>

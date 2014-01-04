@@ -29,6 +29,7 @@ public class MyProfileActivity extends BaseDetailActivity {
     public static final String WORDS = "words";
     public static final String PICK_EMOTION = "emotion";
     public static final String PICK_STAGE = "stage";
+    public static final String GENDER = "gender";
     public static final int UPDATE_NICK_REQUEST = 1;
     public static final int UPDATE_NICK_RESULT = 2;
     public static final int UPDATE_NAME_REQUEST = 3;
@@ -140,41 +141,37 @@ public class MyProfileActivity extends BaseDetailActivity {
             switch (v.getId()) {
                 case R.id.nickname: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNickActivity.class);
-                    intent.putExtra(NICK_NAME, mUser.nickname);
+                    intent.putExtra(NICK_NAME, tvNickName.getText().toString());
                     startActivityForResult(intent, UPDATE_NICK_REQUEST);
                     break;
                 }
                 case R.id.real_name: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNameActivity.class);
-                    intent.putExtra(REAL_NAME, mUser.name);
+                    intent.putExtra(REAL_NAME, tvName.getText().toString());
                     startActivityForResult(intent, UPDATE_NAME_REQUEST);
                     break;
                 }
                 case R.id.telephone: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdatePhoneActivity.class);
-                    intent.putExtra(PHONE, mUser.phone);
+                    intent.putExtra(PHONE, tvPhone.getText().toString());
                     startActivityForResult(intent, UPDATE_PHONE_REQUEST);
                     break;
                 }
                 case R.id.email: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateEmailActivity.class);
-                    intent.putExtra(EMAIL, mUser.nickname);
+                    intent.putExtra(EMAIL, tvEmail.getText().toString());
                     startActivityForResult(intent, UPDATE_EMAIL_REQUEST);
-                    break;
-                }
-                case R.id.school: {
-                    Intent intent = new Intent(MyProfileActivity.this, PickSchoolActivity.class);
-                    startActivityForResult(intent, AuthActivity.PICK_SCHOOL_REQUEST);
                     break;
                 }
                 case R.id.gender: {
                     Intent intent = new Intent(MyProfileActivity.this, PickGenderActivity.class);
+                    intent.putExtra(GENDER, tvGender.getText().toString());
                     startActivityForResult(intent, AuthActivity.PICK_GENDER_REQUEST);
                     break;
                 }
                 case R.id.words: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateWordsActivity.class);
-                    intent.putExtra(WORDS, mUser.words);
+                    intent.putExtra(WORDS, tvWord.getText().toString());
                     startActivityForResult(intent, UPDATE_WORDS_REQUEST);
                     break;
                 }

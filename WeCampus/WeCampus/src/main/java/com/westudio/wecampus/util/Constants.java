@@ -14,6 +14,7 @@ public class Constants {
     public static final int SWIPE_MIN_VELOCITY = 300;
     public static final String MALE = "男";
     public static final String FEMALE = "女";
+    public static final String SECRET = "保密";
     public static final String IMAGE_NOT_FOUND = "http://wecampus.net/img/image_not_found.png";
     public static final String LOVE_SECRET = "保密";
     public static final String LOVE_SINGLE = "单身";

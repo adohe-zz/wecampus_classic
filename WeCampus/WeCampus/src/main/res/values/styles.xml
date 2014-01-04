@@ -200,4 +200,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="ProfileUpdateHint">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/rege_title_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

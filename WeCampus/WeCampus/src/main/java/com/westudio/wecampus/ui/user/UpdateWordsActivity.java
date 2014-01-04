@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -24,6 +25,7 @@ public class UpdateWordsActivity extends SherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_words);
 
+        words = getIntent().getStringExtra(MyProfileActivity.WORDS);
         initWidget();
         updateActionBar();
     }
@@ -51,7 +53,7 @@ public class UpdateWordsActivity extends SherlockFragmentActivity {
                 };
                 handler.postDelayed(runnable, 400);
             } else {
-
+                Toast.makeText(this, R.string.msg_please_input_words, Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if(item.getItemId() == android.R.id.home) {
@@ -78,7 +80,6 @@ public class UpdateWordsActivity extends SherlockFragmentActivity {
 
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        words = getIntent().getStringExtra(MyProfileActivity.WORDS);
         etNickName.setText(words);
     }
 

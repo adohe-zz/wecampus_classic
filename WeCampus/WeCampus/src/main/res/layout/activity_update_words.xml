@@ -8,15 +8,26 @@
     android:layout_marginRight="7dp">
 
     <EditText
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/update_nick_name" />
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:maxLength="200"
+        android:gravity="top"
+        android:id="@+id/update_nick_name"
+        android:background="@drawable/shape_edittext_profile"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/rege_nickname_tips" />
+        android:text="@string/words_input_hint"
+        style="@style/ProfileUpdateHint"/>
 
 </LinearLayout>

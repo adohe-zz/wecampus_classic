@@ -3,8 +3,10 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -19,12 +21,14 @@ public class UpdateEmailActivity extends SherlockFragmentActivity {
 
     private EditText etNickName;
     private String email;
+    private int toastStringId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_nick);
+        setContentView(R.layout.activity_update_email);
 
+        email = getIntent().getStringExtra(MyProfileActivity.EMAIL);
         initWidget();
         updateActionBar();
     }
@@ -52,7 +56,7 @@ public class UpdateEmailActivity extends SherlockFragmentActivity {
                 };
                 handler.postDelayed(runnable, 400);
             } else {
-
+                Toast.makeText(this, toastStringId, Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if(item.getItemId() == android.R.id.home) {
@@ -79,23 +83,24 @@ public class UpdateEmailActivity extends SherlockFragmentActivity {
 
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        email = getIntent().getStringExtra(MyProfileActivity.PHONE);
         etNickName.setText(email);
     }
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.rege_nickname);
+        getSupportActionBar().setTitle(R.string.email);
     }
 
     private boolean isValidate() {
         boolean result = true;
 
-        if(etNickName.getText().toString().length() == 0) {
+        if(TextUtils.isEmpty(etNickName.getText().toString())) {
             result = false;
-        } else if(etNickName.getText().toString().length() > 8) {
+            toastStringId = R.string.msg_please_input_email;
+        } else if(etNickName.getText().toString().matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")) {
             result = false;
+            toastStringId = R.string.msg_error_email_format;
         }
 
         return result;

@@ -3,8 +3,10 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
@@ -20,12 +22,14 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
 
     private EditText etNickName;
     private String phone;
+    private int toastStringId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_phone);
 
+        phone = getIntent().getStringExtra(MyProfileActivity.PHONE);
         initWidget();
         updateActionBar();
     }
@@ -53,7 +57,7 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
                 };
                 handler.postDelayed(runnable, 400);
             } else {
-
+                Toast.makeText(this, toastStringId, Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if(item.getItemId() == android.R.id.home) {
@@ -80,21 +84,24 @@ public class UpdatePhoneActivity extends SherlockFragmentActivity {
 
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        phone = getIntent().getStringExtra(MyProfileActivity.PHONE);
         etNickName.setText(phone);
     }
 
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.rege_nickname);
+        getSupportActionBar().setTitle(R.string.telephone);
     }
 
     private boolean isValidate() {
         boolean result = true;
 
-        if(etNickName.getText().toString().length() == 0) {
+        if(TextUtils.isEmpty(etNickName.getText().toString())) {
             result = false;
+            toastStringId = R.string.msg_please_input_phone;
+        } else if(!etNickName.getText().toString().matches("\\d{3}[-]?\\d{8}")) {
+            result = false;
+            toastStringId = R.string.msg_error_phone_format;
         }
 
         return result;

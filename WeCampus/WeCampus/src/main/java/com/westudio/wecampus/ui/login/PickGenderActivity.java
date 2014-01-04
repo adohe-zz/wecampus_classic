@@ -9,22 +9,25 @@ import android.widget.RelativeLayout;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.ui.user.MyProfileActivity;
+import com.westudio.wecampus.util.Constants;
 
 /**
  * Created by jam on 13-11-5.
  */
 public class PickGenderActivity extends SherlockFragmentActivity implements View.OnClickListener{
 
+    private String gender;
+    private int lastClick;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActionBar();
         setContentView(R.layout.activity_pick_gender);
 
-        View male = findViewById(R.id.item_male);
-        male.setOnClickListener(this);
-        View female = findViewById(R.id.item_female);
-        female.setOnClickListener(this);
+        gender = getIntent().getStringExtra(MyProfileActivity.GENDER);
+        setupActionBar();
+        initWidget();
     }
 
     /**
@@ -33,6 +36,22 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
     private void setupActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    private void initWidget() {
+        View male = findViewById(R.id.item_male);
+        male.setOnClickListener(this);
+        View female = findViewById(R.id.item_female);
+        female.setOnClickListener(this);
+        if(Constants.MALE.equals(gender)) {
+            male.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_male;
+        } else if(Constants.FEMALE.equals(gender)) {
+            female.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            lastClick = R.id.item_female;
+        } else {
+            lastClick = 0;
+        }
     }
 
     @Override
@@ -45,6 +64,10 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
 
     @Override
     public void onClick(View view) {
+        if(lastClick != 0) {
+            findViewById(lastClick).findViewById(R.id.imageView).setVisibility(View.GONE);
+        }
+        lastClick = view.getId();
         //show the selected icon
         view.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
 

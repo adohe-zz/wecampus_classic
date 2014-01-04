@@ -3,8 +3,10 @@ package com.westudio.wecampus.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -25,6 +27,7 @@ public class UpdateNickActivity extends SherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_nick);
 
+        nickname = getIntent().getStringExtra(MyProfileActivity.NICK_NAME);
         initWidget();
         updateActionBar();
     }
@@ -52,7 +55,7 @@ public class UpdateNickActivity extends SherlockFragmentActivity {
                 };
                 handler.postDelayed(runnable, 400);
             } else {
-
+                Toast.makeText(this, R.string.msg_please_input_nickname, Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if(item.getItemId() == android.R.id.home) {
@@ -80,7 +83,6 @@ public class UpdateNickActivity extends SherlockFragmentActivity {
 
     private void initWidget() {
         etNickName = (EditText)findViewById(R.id.update_nick_name);
-        nickname = getIntent().getStringExtra(MyProfileActivity.NICK_NAME);
         etNickName.setText(nickname);
     }
 
@@ -93,9 +95,7 @@ public class UpdateNickActivity extends SherlockFragmentActivity {
     private boolean isValidate() {
         boolean result = true;
 
-        if(etNickName.getText().toString().length() == 0) {
-            result = false;
-        } else if(etNickName.getText().toString().length() > 8) {
+        if(TextUtils.isEmpty(etNickName.getText().toString())) {
             result = false;
         }
 

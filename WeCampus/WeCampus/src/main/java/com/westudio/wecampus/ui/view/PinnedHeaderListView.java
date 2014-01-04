@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.ImageDetailActivity;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -41,6 +43,9 @@ public class PinnedHeaderListView extends ListView {
     private ImageView mAvatar;
     private TextView mName;
     private TextView mLike;
+
+    private String avatarUrl;
+    private String name;
 
     private Context mContext;
 
@@ -102,6 +107,15 @@ public class PinnedHeaderListView extends ListView {
         mLike = (TextView)header.findViewById(R.id.user_like);
         mLike.setVisibility(VISIBLE);
         mAvatar = (ImageView) header.findViewById(R.id.img_avatar);
+        mAvatar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ImageDetailActivity.class);
+                intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, avatarUrl);
+                intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, name);
+                mContext.startActivity(intent);
+            }
+        });
         mName = (TextView) header.findViewById(R.id.text_user_name);
 
         headerFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -190,10 +204,12 @@ public class PinnedHeaderListView extends ListView {
     }
 
     public void setName(String name) {
+        this.name = name;
         mName.setText(name);
     }
 
     public void setAvatar(String url) {
+        avatarUrl = url;
         WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
             Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(),
                     R.drawable.detail_organization);

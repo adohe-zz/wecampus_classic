@@ -123,7 +123,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         if(TextUtils.isEmpty(email)) {
             result = false;
-            toastStringId = R.string.msg_error_email_format;
+            toastStringId = R.string.msg_please_input_email;
         } else if (!email.matches("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")) {
             result = false;
             toastStringId = R.string.msg_error_email_format;
