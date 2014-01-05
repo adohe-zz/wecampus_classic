@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.Utility;
 
 import java.util.List;
@@ -68,11 +69,15 @@ public class PickSchoolActivity extends SherlockFragmentActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 School school = (School)adapter.getItem(position);
-                Intent intent = new Intent();
-                intent.putExtra(AuthActivity.PICK_SCHOOL_NAME, school.getName());
-                intent.putExtra(AuthActivity.PICK_SCHOOL_ID, school.getId());
-                setResult(AuthActivity.PICK_SCHOOL_RESULT, intent);
-                finish();
+                if(Constants.SCHOOL_UNKNOW.equals(school.getName())) {
+                    Toast.makeText(PickSchoolActivity.this, R.string.wait_a_moment, Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra(AuthActivity.PICK_SCHOOL_NAME, school.getName());
+                    intent.putExtra(AuthActivity.PICK_SCHOOL_ID, school.getId());
+                    setResult(AuthActivity.PICK_SCHOOL_RESULT, intent);
+                    finish();
+                }
             }
         });
     }

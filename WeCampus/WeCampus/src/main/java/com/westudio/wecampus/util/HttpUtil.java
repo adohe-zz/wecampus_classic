@@ -66,42 +66,6 @@ public class HttpUtil {
     }
 
     /**
-     * Build the url query string according to the param bundle
-     * @param params
-     * @return
-     */
-    private static String encodeUrl(Bundle params)
-    {
-        if(params == null)
-            return "";
-
-        StringBuilder sb = new StringBuilder();
-        boolean bFirst = true;
-
-        Set<String> setKeys = new HashSet<String>(params.keySet());
-
-        for(String strKey : setKeys)
-        {
-            if(bFirst)
-                bFirst = false;
-            else
-                sb.append("&");
-
-            try
-            {
-                sb.append(URLEncoder.encode(strKey, "UTF-8"))
-                        .append("=")
-                        .append(URLEncoder.encode(params.getString(strKey), "UTF-8"));
-            } catch (UnsupportedEncodingException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        return sb.toString();
-    }
-
-    /**
      * GET REQUEST URL OF ACTIVITY BY ID AND OPERATION
      * @param id
      * @param activityOp

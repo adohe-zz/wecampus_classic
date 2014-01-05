@@ -26,4 +26,5 @@ public class Constants {
     public static final String BIG_SISTER = "成熟学姐";
     public static final String SMALL_BROTHER = "正太学弟";
     public static final String BIG_BROTHER = "阳光学长";
+    public static final String SCHOOL_UNKNOW = "SCHOOL_UNKNOW";
 }
