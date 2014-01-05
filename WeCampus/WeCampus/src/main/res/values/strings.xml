@@ -265,4 +265,6 @@
     <string name="give_up">放弃</string>
     <string name="go_on_modify">继续编辑</string>
 
+    <string name="come_soon">即将加入&#8230;</string>
+    <string name="wait_a_moment">亲，再等等哦~</string>
 </resources>

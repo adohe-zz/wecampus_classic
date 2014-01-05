@@ -15,6 +15,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,16 +76,29 @@ public class PickSchoolAdapter extends BaseAdapter {
         }
 
         School school = (School)getItem(position);
-        viewHolder.imageRequest = WeCampusApi.requestImage(school.getIcon(), WeCampusApi.getImageListener(viewHolder.imageView,
-                defaultDrawable, defaultDrawable));
-        viewHolder.textView.setText(school.getName());
+        if(Constants.SCHOOL_UNKNOW.equals(school.getName())) {
+            viewHolder.textView.setText(context.getResources().getString(R.string.come_soon));
+            viewHolder.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.shcool_unknow));
+        } else {
+            viewHolder.imageRequest = WeCampusApi.requestImage(school.getIcon(), WeCampusApi.getImageListener(viewHolder.imageView,
+                    defaultDrawable, defaultDrawable));
+            viewHolder.textView.setText(school.getName());
+        }
 
         return convertView;
     }
 
     public void setSchoolList(List<School> schoolList) {
         this.schoolList = schoolList;
+        addExtraOne();
         notifyDataSetChanged();
+    }
+
+    private void addExtraOne() {
+        School school = new School();
+        school.setId(0);
+        school.setName(Constants.SCHOOL_UNKNOW);
+        this.schoolList.add(school);
     }
 
     private static class ViewHolder {

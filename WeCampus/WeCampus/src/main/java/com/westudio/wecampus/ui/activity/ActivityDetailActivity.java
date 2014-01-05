@@ -369,7 +369,11 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                 }
                 case R.id.detail_rl_sponsor: {
                     Intent intent = new Intent(ActivityDetailActivity.this, WebBrowserActivity.class);
-                    intent.putExtra(WebBrowserActivity.EXTRA_URL, activity.sponsor_url);
+                    String url = activity.sponsor_url;
+                    if(url != null && !url.matches("^(http|https)://.*")) {
+                        url = "http://" + url;
+                    }
+                    intent.putExtra(WebBrowserActivity.EXTRA_URL, url);
                     startActivity(intent);
                     break;
                 }
