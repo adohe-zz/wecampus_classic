@@ -70,6 +70,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     private TextView tvCompany;
     private TextView tvContent;
     private ImageView ivCat;
+    private View divider;
 
     private ProgressBar progressBar;
     private ProgressBar pbContent;
@@ -96,6 +97,9 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     //Default male/female drawable
     private Bitmap defaulMaleDrawable;
     private Bitmap defaultFemaleDrawable;
+
+    private boolean showTicket = false;
+    private boolean showSposor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +152,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         ivPoster.setOnClickListener(clickListener);
         ivCat = (ImageView)findViewById(R.id.detail_no_content_img);
         ivCat.setOnClickListener(clickListener);
+        divider = (View)findViewById(R.id.detail_view_divider);
         noContentContainer = (LinearLayout)findViewById(R.id.detail_no_content);
         progressBar = (ProgressBar)findViewById(R.id.detail_no_content_pb);
         lyContent = (LinearLayout)findViewById(R.id.detail_content);
@@ -221,6 +226,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         if (activity.have_ticket && activity.ticket_service != null) {
             tvTicket.setVisibility(View.VISIBLE);
             tvTicket.setText(activity.ticket_service);
+            showTicket = true;
         } else {
             findViewById(R.id.detail_rl_ticket).setVisibility(View.GONE);
         }
@@ -228,10 +234,14 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         if (activity.have_sponsor && activity.sponsor_name != null && activity.sponsor_url != null) {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.VISIBLE);
             tvCompany.setText(activity.sponsor_name);
+            showSposor = true;
         } else {
             findViewById(R.id.detail_rl_sponsor).setVisibility(View.GONE);
         }
 
+        if(showTicket && showSposor) {
+            divider.setVisibility(View.VISIBLE);
+        }
 
         tvContent.setText(activity.description);
         ContentUtil.addLinks(tvContent);

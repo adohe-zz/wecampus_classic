@@ -15,7 +15,9 @@ import android.widget.BaseAdapter;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
+import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.HttpUtil;
 import com.westudio.wecampus.util.Utility;
 
@@ -38,6 +40,7 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
     private void parseArgument() {
         Bundle bundle = getArguments();
         mCategory = bundle.getString(ActivityListActivity.EXTRA_CATEGORY);
+        Utility.log("category", mCategory);
     }
 
     @Override
@@ -106,7 +109,13 @@ public class ListFragment extends BasePageListFragment<Activity.ActivityRequestD
 
     @Override
     protected void processResponseData(Activity.ActivityRequestData data) {
-        mDataHelper.bulkInsert(data.getObjects());
+        Utility.log("size", data.getObjects().size());
+        page_count = data.getObjects().size();
+        if(data.getObjects().size() == 0) {
+            loadingFooter.setState(LoadingFooter.State.TheEnd);
+        } else {
+            mDataHelper.bulkInsert(data.getObjects());
+        }
     }
 
     @Override
