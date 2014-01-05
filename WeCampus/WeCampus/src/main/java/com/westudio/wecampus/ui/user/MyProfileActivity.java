@@ -1,20 +1,30 @@
 package com.westudio.wecampus.ui.user;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
+import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.login.PickGenderActivity;
 import com.westudio.wecampus.ui.login.PickSchoolActivity;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.Utility;
 
 /**
@@ -55,6 +65,7 @@ public class MyProfileActivity extends BaseDetailActivity {
     private TextView tvBirthday;
     private TextView tvLove;
     private TextView tvRole;
+    private ImageView ivAvatar;
 
     private UserDataHelper mDataHelper;
     private User mUser;
@@ -102,6 +113,8 @@ public class MyProfileActivity extends BaseDetailActivity {
         tvLove.setOnClickListener(clickListener);
         tvRole = (TextView)findViewById(R.id.role);
         tvRole.setOnClickListener(clickListener);
+        ivAvatar = (ImageView)findViewById(R.id.profile_avatar);
+        ivAvatar.setOnClickListener(clickListener);
     }
 
     private void updateUI() {
@@ -114,6 +127,32 @@ public class MyProfileActivity extends BaseDetailActivity {
         tvEmail.setText(mUser.email);
         tvLove.setText(mUser.emotion);
         tvRole.setText(mUser.stage);
+        if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
+            if(Constants.MALE.equals(mUser.gender)) {
+                ivAvatar.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.ic_default_male
+                ));
+            } else {
+                ivAvatar.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.ic_default_female
+                ));
+            }
+        } else {
+            WeCampusApi.requestImage(mUser.avatar, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    Bitmap data = imageContainer.getBitmap();
+                    if (data != null) {
+                        ivAvatar.setImageBitmap(data);
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            });
+        }
     }
 
     private void refreshUserFromDb() {
@@ -194,10 +233,41 @@ public class MyProfileActivity extends BaseDetailActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)  {
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getResources().getString(R.string.give_up_modify));
+            builder.setCancelable(true);
+            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
+            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.show();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getResources().getString(R.string.give_up_modify));
+            builder.setCancelable(true);
+            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
+            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.show();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

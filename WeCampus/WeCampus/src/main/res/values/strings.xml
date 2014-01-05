@@ -261,5 +261,8 @@
     <string name="ensure_logout">确定要登出吗？</string>
 
     <string name="words_input_hint">添加个性签名，让别人更懂你</string>
+    <string name="give_up_modify">放弃对个人资料的修改？</string>
+    <string name="give_up">放弃</string>
+    <string name="go_on_modify">继续编辑</string>
 
 </resources>
