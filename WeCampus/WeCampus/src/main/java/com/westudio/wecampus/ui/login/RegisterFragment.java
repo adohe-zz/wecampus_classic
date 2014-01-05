@@ -24,6 +24,8 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
+import com.westudio.wecampus.ui.user.MyProfileActivity;
+import com.westudio.wecampus.util.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +62,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private Gender gender = null;
 
     public enum Gender {
-        MALE("男"), FEMALE("女"), SECRET("保密");
+        MALE(Constants.MALE), FEMALE(Constants.FEMALE), SECRET(Constants.SECRET);
 
         public String genderMark;
         private Gender(String gender) {
@@ -128,7 +130,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         } else if(v.getId() == R.id.rege_edt_school) {
             startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
         } else if(v.getId() == R.id.rege_edt_sex) {
-            startActivityForResult(new Intent(activity, PickGenderActivity.class), AuthActivity.PICK_GENDER_REQUEST);
+            Intent genderIntent = new Intent(activity, PickGenderActivity.class);
+            if (gender != null) {
+                genderIntent.putExtra(MyProfileActivity.GENDER, gender.genderMark);
+            }
+            startActivityForResult(genderIntent, AuthActivity.PICK_GENDER_REQUEST);
         }
     }
 
