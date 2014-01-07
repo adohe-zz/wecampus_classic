@@ -23,18 +23,29 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/ic_menu_edit"/>
 
-        <TextView
-            android:id="@+id/user_like"
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/user_like_shape"
-            android:drawableLeft="@drawable/ic_list_activity_like_un"
-            android:drawablePadding="5dp"
-            style="@style/UserlikeTextView"
-            android:visibility="gone"/>
+            android:paddingLeft="1dp"
+            android:background="#ef5757"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/user_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:drawableLeft="@drawable/ic_list_activity_like_un"
+                android:drawablePadding="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                style="@style/UserlikeTextView"
+                android:visibility="gone"/>
+
+        </LinearLayout>
 
         <com.westudio.wecampus.ui.view.CircleImageView
             android:id="@+id/img_avatar"

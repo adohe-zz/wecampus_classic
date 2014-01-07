@@ -166,7 +166,7 @@
 
     <style name="UserlikeTextView">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
