@@ -60,6 +60,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
     private FollowOrganizationHandler followOrganizationHandler;
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
+    private boolean bNetworkFinished = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +144,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         mOrgQueryTask = new OrgQueryTask();
         Utility.executeAsyncTask(mOrgQueryTask);
+        mRequestOrgHandler.requestOrg();
         getOrgActivity(1);
     }
 
@@ -191,17 +194,17 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mIntroAdapter.setData(mOrganization.admin_name, mOrganization.description,
                 mOrganization.admin_email);
         tvLike.setText(String.valueOf(mOrganization.count_of_fans));
-        if(mOrganization.can_follow) {
-            tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
-                    null, null);
-        } else {
-            if(BaseApplication.getInstance().hasAccount) {
-                tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
-                        null, null);
-            } else {
+        if(BaseApplication.getInstance().hasAccount) {
+            if(mOrganization.can_follow) {
                 tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
                         null, null);
+            } else {
+                tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_sl), null,
+                        null, null);
             }
+        } else {
+            tvLike.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_list_activity_like_un), null,
+                    null, null);
         }
     }
 
@@ -230,10 +233,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         @Override
         protected void onPostExecute(Object o) {
-            if(mOrganization != null) {
+            if(mOrganization != null && !bNetworkFinished) {
                 updateUI();
-            } else {
-                mRequestOrgHandler.requestOrg();
             }
         }
     }
@@ -250,12 +251,14 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            bNetworkFinished = true;
             mPullToRefreshAttacher.setRefreshComplete();
         }
 
         @Override
         public void onResponse(final Organization organization) {
             mPullToRefreshAttacher.setRefreshComplete();
+            bNetworkFinished = true;
             if (organization != null) {
                 mOrganization = organization;
                 updateUI();
