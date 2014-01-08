@@ -4,9 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +27,6 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.data.model.ActivityDetail;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -44,7 +40,6 @@ import com.westudio.wecampus.ui.user.UserListFragment;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ContentUtil;
 import com.westudio.wecampus.util.DateUtil;
-import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -106,6 +101,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
+        Utility.log("id", activityId);
         acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
         //refreshActivityFromDb();
@@ -197,9 +193,23 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         tvLocation.setText(activity.location);
         tvTag.setText(activity.category);
 
-        Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
+        /*Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
         WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
-                defaultDrawable, defaultDrawable));
+                defaultDrawable, defaultDrawable));*/
+        WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+            @Override
+            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                Bitmap data = imageContainer.getBitmap();
+                if(data != null) {
+                    ivPoster.setImageBitmap(data);
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                ivPoster.setVisibility(View.GONE);
+            }
+        });
         ivPoster.setOnClickListener(clickListener);
 
         //If the organization is not null
