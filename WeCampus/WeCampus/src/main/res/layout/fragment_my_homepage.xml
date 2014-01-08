@@ -286,7 +286,7 @@
                             android:layout_height="99.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
-                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="15dp"
                             android:visibility="gone">
 
                             <TextView
@@ -337,17 +337,34 @@
 
                         </RelativeLayout>
 
-                        <TextView
-                            android:id="@id/activity_list_item_no_organization"
-                            android:layout_height="40dp"
+                        <!-- No Like Organizations Part -->
+                        <LinearLayout
+                            android:id="@+id/user_like_no_organization"
+                            android:layout_height="99.3dp"
                             android:layout_width="match_parent"
-                            android:text="@string/no_follow_organization"
-                            android:gravity="center"
+                            android:layout_marginTop="15dp"
                             android:background="@android:color/white"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
                             android:visibility="gone"
-                            style="@style/HomePageTextSecondary" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/num_like_no_org"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="9dp"
+                                style="@style/HomePageTextSecondary" />
+
+                            <TextView
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:text="@string/find_organizations"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_marginBottom="10dp"
+                                style="@style/HomePageTextSecondary" />
+
+                        </LinearLayout>
 
                         <!-- Like Activity Part -->
                         <RelativeLayout
@@ -355,7 +372,8 @@
                             android:layout_height="102.3dp"
                             android:layout_width="match_parent"
                             android:background="@android:color/white"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="10dp"
                             android:visibility="gone">
 
                             <TextView
@@ -408,24 +426,44 @@
 
                         </RelativeLayout>
 
-                        <TextView
-                            android:id="@id/activity_list_item_no_like_activity"
-                            android:layout_height="40dp"
+                        <!-- No Like Activity Part -->
+                        <LinearLayout
+                            android:id="@+id/user_like_no_activity"
+                            android:layout_height="99.3dp"
                             android:layout_width="match_parent"
-                            android:text="@string/no_like_activity"
-                            android:gravity="center"
-                            android:background="@android:color/white"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="1dp"
                             android:layout_marginBottom="10dp"
+                            android:background="@android:color/white"
                             android:visibility="gone"
-                            style="@style/HomePageTextSecondary" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="@string/num_like_no_activity"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginLeft="9dp"
+                                style="@style/HomePageTextSecondary" />
+
+                            <TextView
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:text="@string/find_activities"
+                                android:layout_marginLeft="9dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_marginBottom="10dp"
+                                style="@style/HomePageTextSecondary" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
             </ScrollView>
+
         </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
+
     </FrameLayout>
 
 

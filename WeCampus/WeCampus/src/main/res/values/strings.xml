@@ -267,4 +267,9 @@
 
     <string name="come_soon">即将加入&#8230;</string>
     <string name="wait_a_moment">亲，再等等哦~</string>
+    <string name="num_like_no_org">喜欢的公共组织(0)</string>
+    <string name="num_like_no_activity">喜欢的活动(0)</string>
+    
+    <string name="find_organizations">快去看看都有哪些热门组织~</string>
+    <string name="find_activities">快点让小伙伴们了解你都喜欢什么活动吧~</string>
 </resources>

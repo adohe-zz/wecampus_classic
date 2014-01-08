@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,6 @@ import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
-import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -83,7 +83,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         uid = BaseApplication.getInstance().getAccountMgr().getUserId();
-        Utility.log("id", uid);
         mDataHelper = new UserDataHelper(mActivity);
         mInfoHandler = new UserInfoHandler();
     }
@@ -341,19 +340,19 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
 
         private View mView;
         private RelativeLayout rlLikeOrganization;
+        private LinearLayout lyNoLikeOrganization;
         private TextView tvNumOrg;
         private TextView tvOrgName;
         private TextView tvLikeOrg;
-        private TextView tvNoOrg;
         private ImageView ivIcon;
 
         public UserOrganizationHandler(View view) {
             this.mView = view;
             rlLikeOrganization = (RelativeLayout)mView.findViewById(R.id.user_like_organization);
+            lyNoLikeOrganization = (LinearLayout)mView.findViewById(R.id.user_like_no_organization);
             tvNumOrg = (TextView)mView.findViewById(R.id.num_like_org);
             tvOrgName = (TextView)mView.findViewById(R.id.text_like_org_name);
             tvLikeOrg = (TextView)mView.findViewById(R.id.num_org_like_count);
-            tvNoOrg = (TextView)mView.findViewById(R.id.activity_list_item_no_organization);
             ivIcon = (ImageView)mView.findViewById(R.id.icon_like_org);
             rlLikeOrganization.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -401,7 +400,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         public void refreshUI() {
             if(mUser.count_of_follow_organizations == 0) {
                 rlLikeOrganization.setVisibility(View.GONE);
-                tvNoOrg.setVisibility(View.VISIBLE);
+                lyNoLikeOrganization.setVisibility(View.VISIBLE);
             } else {
                 rlLikeOrganization.setVisibility(View.VISIBLE);
                 String orgNum = getResources().getString(R.string.homepage_like_org);
@@ -415,19 +414,19 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
 
         private View view;
         private RelativeLayout rlFavoriteActivity;
+        private LinearLayout lyNoFavoriteActivity;
         private TextView tvNumActivity;
         private TextView tvActivityName;
         private TextView tvActivitySummary;
-        private TextView tvNoActivity;
         private ImageView ivActivityIcon;
 
         public UserFActivityHandler(View view) {
             this.view = view;
             rlFavoriteActivity = (RelativeLayout)view.findViewById(R.id.user_like_activity);
+            lyNoFavoriteActivity = (LinearLayout)view.findViewById(R.id.user_like_no_activity);
             tvNumActivity = (TextView)view.findViewById(R.id.num_like_activity);
             tvActivityName = (TextView)view.findViewById(R.id.text_like_activity_name);
             tvActivitySummary = (TextView)view.findViewById(R.id.text_like_activity_summary);
-            tvNoActivity = (TextView)view.findViewById(R.id.activity_list_item_no_like_activity);
             ivActivityIcon = (ImageView)view.findViewById(R.id.icon_like_activity);
             rlFavoriteActivity.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -474,7 +473,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         public void refreshUI() {
             if(mUser.count_of_follow_activities == 0) {
                 rlFavoriteActivity.setVisibility(View.GONE);
-                tvNoActivity.setVisibility(View.VISIBLE);
+                lyNoFavoriteActivity.setVisibility(View.VISIBLE);
             } else {
                 rlFavoriteActivity.setVisibility(View.VISIBLE);
                 String activityNum = getResources().getString(R.string.homepage_like_activity);

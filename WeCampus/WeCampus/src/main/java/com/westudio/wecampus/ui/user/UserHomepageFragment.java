@@ -142,6 +142,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             }
         });
 
+        view.findViewById(R.id.clickable_follow).setOnClickListener(clickListener);
+        view.findViewById(R.id.clickable_fans).setOnClickListener(clickListener);
+
         mJActivityHandler = new UserActivityHandler(mView);
         mFActivityHandler = new UserFActivityHandler(mView);
         mOrganizationHandler = new UserOrganizationHandler(mView);
@@ -242,6 +245,16 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, mUser.avatar);
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, mUser.nickname);
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_SEX, mUser.gender);
+                startActivity(intent);
+            } else if(v.getId() == R.id.clickable_follow) {
+                Intent intent = new Intent(mActivity, UserListActivity.class);
+                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
+                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
+                startActivity(intent);
+            } else if(v.getId() == R.id.clickable_fans) {
+                Intent intent = new Intent(mActivity, UserListActivity.class);
+                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
+                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
                 startActivity(intent);
             }
         }

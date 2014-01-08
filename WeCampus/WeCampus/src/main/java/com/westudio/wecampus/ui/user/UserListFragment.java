@@ -145,6 +145,7 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
             }
             mAdapter.addAll(userListData.objects);
             mPullToRefreshAttacher.setRefreshComplete();
+            mLoadingFooter.setState(LoadingFooter.State.TheEnd);
             mPage++;
         }
     }
