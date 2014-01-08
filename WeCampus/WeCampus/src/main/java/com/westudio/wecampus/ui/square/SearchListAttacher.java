@@ -42,7 +42,7 @@ public class SearchListAttacher {
         } else if (status == Status.LOADING_MORE) {
             loadingFooter.setState(LoadingFooter.State.Loading);
         } else if (status == Status.LOADING_END) {
-            loadingFooter.setState(LoadingFooter.State.Idle);
+            loadingFooter.setState(LoadingFooter.State.TheEnd);
         }
     }
 }

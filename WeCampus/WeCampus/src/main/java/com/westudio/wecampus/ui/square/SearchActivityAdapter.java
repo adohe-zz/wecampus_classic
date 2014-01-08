@@ -52,7 +52,7 @@ public class SearchActivityAdapter extends OrganizationActivityAdapter implement
         onRefreshListener.onRefreshFinished();
         isLastPage = data.getObjects().isEmpty();
         addAll(data.getObjects());
-        if (activityLists.isEmpty() && isLastPage) {
+        if (activityLists.isEmpty() && isLastPage) { // 没有结果
             attacher.setStatus(SearchListAttacher.Status.NO_RESULT);
         } else {
             attacher.page++;
