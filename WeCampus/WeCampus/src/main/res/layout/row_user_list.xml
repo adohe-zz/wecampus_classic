@@ -14,7 +14,8 @@
         android:layout_width="41.6dp"
         android:layout_height="41.6dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/user_name"

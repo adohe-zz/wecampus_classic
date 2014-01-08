@@ -1,10 +1,12 @@
 package com.westudio.wecampus.ui.square;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -105,12 +107,18 @@ public class SearchActivity extends BaseDetailActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEtKeywords.getWindowToken(), 0);
+    }
+
     private class OnSearchActionListener implements TextView.OnEditorActionListener {
 
         @Override
         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
             if (i == EditorInfo.IME_ACTION_SEARCH && textView.getText().length() > 0) {
                 mKeywords = textView.getText().toString();
+                hideKeyboard();
                 switch (mHeaderTab.getCurrentPosition()) {
                     case 0: {
                         // 如果当前显示的是活动标签
