@@ -58,6 +58,7 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
     }
 
     public void requestData(String keywords, boolean searchNew) {
+        onRefreshListener.onRefreshStarted();
         if (searchNew) {
             mAttacher.page = 1;
         }
@@ -71,6 +72,7 @@ public class SearchOrgAdapter extends BaseSearchAdapter<Organization> implements
 
     @Override
     public void onResponse(Organization.OrganizationRequestData data) {
+        onRefreshListener.onRefreshFinished();
         isLastPage = data.getObjects().isEmpty();
         if (isLastPage && mList.isEmpty()) {
             mAttacher.setStatus(SearchListAttacher.Status.NO_RESULT);

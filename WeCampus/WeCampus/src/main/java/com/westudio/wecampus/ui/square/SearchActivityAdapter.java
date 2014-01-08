@@ -17,11 +17,18 @@ public class SearchActivityAdapter extends OrganizationActivityAdapter implement
     private boolean isLastPage;
 
     private SearchListAttacher attacher;
+
+    private OnRefreshListener onRefreshListener;
     public SearchActivityAdapter(Context context) {
         super(context);
     }
 
+    public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+        this.onRefreshListener = onRefreshListener;
+    }
+
     public void requestData(String keywords, boolean searchNew) {
+        onRefreshListener.onRefreshStarted();
         if (searchNew) {
             attacher.page = 1;
         }
@@ -35,11 +42,14 @@ public class SearchActivityAdapter extends OrganizationActivityAdapter implement
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        onRefreshListener.onRefreshFinished();
         attacher.setStatus(SearchListAttacher.Status.NO_RESULT);
+        onRefreshListener.onRefreshFinished();
     }
 
     @Override
     public void onResponse(ActivityList.RequestData data) {
+        onRefreshListener.onRefreshFinished();
         isLastPage = data.getObjects().isEmpty();
         addAll(data.getObjects());
         if (activityLists.isEmpty() && isLastPage) {

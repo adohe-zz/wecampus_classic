@@ -22,10 +22,24 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter implements Respon
     protected LayoutInflater mLayoutInflater;
     protected SearchListAttacher mAttacher;
 
+    protected OnRefreshListener onRefreshListener = new OnRefreshListener() {
+        @Override
+        public void onRefreshFinished() {
+        }
+
+        @Override
+        public void onRefreshStarted() {
+        }
+    };
+
     public BaseSearchAdapter(Context context) {
         mLayoutInflater = LayoutInflater.from(context);
         mContext = context;
         mList = new ArrayList<T>();
+    }
+
+    public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+        this.onRefreshListener = onRefreshListener;
     }
 
     @Override
@@ -56,6 +70,7 @@ public abstract class BaseSearchAdapter<T> extends BaseAdapter implements Respon
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         mAttacher.setStatus(SearchListAttacher.Status.NO_RESULT);
+        onRefreshListener.onRefreshFinished();
     }
 
     public static class ViewHolder {

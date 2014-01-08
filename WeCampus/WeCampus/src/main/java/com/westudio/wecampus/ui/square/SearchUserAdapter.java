@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -67,6 +66,7 @@ public class SearchUserAdapter extends BaseSearchAdapter<User> implements
     }
 
     public void requestData(String keywords, boolean searchNew) {
+        onRefreshListener.onRefreshStarted();
         if (searchNew) {
             mAttacher.page = 1;
         }
@@ -80,6 +80,7 @@ public class SearchUserAdapter extends BaseSearchAdapter<User> implements
 
     @Override
     public void onResponse(User.UserListData data) {
+        onRefreshListener.onRefreshFinished();
         isLastPage = data.objects.isEmpty();
         if (isLastPage && mList.isEmpty()) {
             mAttacher.setStatus(SearchListAttacher.Status.NO_RESULT);

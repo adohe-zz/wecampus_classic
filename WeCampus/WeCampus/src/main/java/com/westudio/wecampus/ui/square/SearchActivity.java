@@ -45,6 +45,9 @@ public class SearchActivity extends BaseDetailActivity{
     private SearchOrgAdapter mOrgAdapter;
     private SearchUserAdapter mSearchUserAdapter;
 
+    // 是否在做网络请求的标志位
+    private boolean isLoadingData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,21 @@ public class SearchActivity extends BaseDetailActivity{
         mOrgAdapter.setAttacher(mAttacher);
         mSearchUserAdapter = new SearchUserAdapter(this);
         mSearchUserAdapter.setAttacher(mAttacher);
+
+        OnRefreshListener onRefreshFinishedListener = new OnRefreshListener() {
+            @Override
+            public void onRefreshFinished() {
+                isLoadingData = false;
+            }
+
+            @Override
+            public void onRefreshStarted() {
+                isLoadingData = true;
+            }
+        };
+        mSearchUserAdapter.setOnRefreshListener(onRefreshFinishedListener);
+        mOrgAdapter.setOnRefreshListener(onRefreshFinishedListener);
+        mActivityAdapter.setOnRefreshListener(onRefreshFinishedListener);
 
     }
 
@@ -172,7 +190,7 @@ public class SearchActivity extends BaseDetailActivity{
         @Override
         public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             if(mAttacher.loadingFooter.getState() == LoadingFooter.State.Loading ||
-                    mAttacher.loadingFooter.getState() == LoadingFooter.State.TheEnd ) {
+                    mAttacher.loadingFooter.getState() == LoadingFooter.State.TheEnd || isLoadingData) {
                 return;
             }
 
