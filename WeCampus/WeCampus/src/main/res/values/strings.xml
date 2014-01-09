@@ -81,6 +81,7 @@
     <string name="search_hint">搜索活动、用户、公共组织</string>
 
     <!-- My Profile -->
+    <string name="avatar">头像</string>
     <string name="nickname">昵称</string>
     <string name="gender">性别</string>
     <string name="school">学校</string>

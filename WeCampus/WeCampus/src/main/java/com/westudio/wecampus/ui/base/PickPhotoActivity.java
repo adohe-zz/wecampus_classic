@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Created by martian on 13-11-14.
  */
-public class PickPhotoActivity extends SherlockFragmentActivity {
+public class PickPhotoActivity extends BaseGestureActivity {
 
     protected static File PHOTO_DIR;
     protected static File UPLOAD_AVATAR;

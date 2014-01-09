@@ -5,14 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
@@ -21,6 +24,7 @@ import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
+import com.westudio.wecampus.ui.base.PickPhotoActivity;
 import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.login.PickGenderActivity;
 import com.westudio.wecampus.ui.login.PickSchoolActivity;
@@ -30,7 +34,7 @@ import com.westudio.wecampus.util.Utility;
 /**
  * Created by Martian on 13-10-20.
  */
-public class MyProfileActivity extends BaseDetailActivity {
+public class MyProfileActivity extends PickPhotoActivity {
 
     public static final String NICK_NAME = "nick_name";
     public static final String REAL_NAME = "real_name";
@@ -88,6 +92,12 @@ public class MyProfileActivity extends BaseDetailActivity {
         refreshUserFromDb();
     }
 
+    @Override
+    protected void onPause() {
+        WeCampusApi.cancelRequest(this);
+        super.onPause();
+    }
+
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -114,7 +124,7 @@ public class MyProfileActivity extends BaseDetailActivity {
         tvRole = (TextView)findViewById(R.id.role);
         tvRole.setOnClickListener(clickListener);
         ivAvatar = (ImageView)findViewById(R.id.profile_avatar);
-        ivAvatar.setOnClickListener(clickListener);
+        findViewById(R.id.change_avatar).setOnClickListener(clickListener);
     }
 
     private void updateUI() {
@@ -226,6 +236,10 @@ public class MyProfileActivity extends BaseDetailActivity {
                     startActivityForResult(intent, PICK_STAGE_REQUEST);
                     break;
                 }
+                case R.id.change_avatar: {
+                    doPickPhotoAction();
+                    break;
+                }
             }
         }
     };
@@ -297,6 +311,27 @@ public class MyProfileActivity extends BaseDetailActivity {
         } else if(requestCode == PICK_STAGE_REQUEST && resultCode == PICK_STAGE_RESULT) {
             int type = data.getIntExtra(PICK_STAGE, -1);
             tvRole.setText(Utility.getStageByType(this, type));
+        } else if (requestCode == PHOTO_PICKED_WITH_DATA) {
+            Uri selectedImage = data.getData();
+            doCropPhoto(selectedImage, mUriTemp);
+        } else if (requestCode == CAMERA_WITH_DATA) {
+            doCropPhoto(mUriTemp, mUriTemp);
+        } else if (requestCode == PHOTO_CROPED_WITH_DATA) {
+            WeCampusApi.postUpdateAvatar(this, mUriTemp.getPath(),
+                    new Response.Listener() {
+                        @Override
+                        public void onResponse(Object o) {
+                            ivAvatar.setImageBitmap(decodeUriAsBitmap(mUriTemp));
+                            Toast.makeText(MyProfileActivity.this, R.string.upload_success, Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Toast.makeText(MyProfileActivity.this, R.string.upload_fail, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
         }
     }
 }
