@@ -14,7 +14,9 @@
         android:layout_width="41.6dp"
         android:layout_height="41.6dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/imageDescription"/>
 
     <TextView
         android:id="@id/org_list_name"

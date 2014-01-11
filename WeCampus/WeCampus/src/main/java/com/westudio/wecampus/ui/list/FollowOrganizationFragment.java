@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
+import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
 import com.westudio.wecampus.util.HttpUtil;
 
 /**
@@ -50,7 +52,10 @@ public class FollowOrganizationFragment extends BasePageListFragment<Organizatio
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(mActivity, OrganizationHomepageActivity.class);
+                Organization org = (Organization)getAdapter().getItem(position - 1);
+                intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.id);
+                startActivity(intent);
             }
         });
 
@@ -72,7 +77,7 @@ public class FollowOrganizationFragment extends BasePageListFragment<Organizatio
 
     @Override
     protected int getContentViewResId() {
-        return R.layout.fragment_list_object;
+        return R.layout.fragment_list_organizations;
     }
 
     @Override

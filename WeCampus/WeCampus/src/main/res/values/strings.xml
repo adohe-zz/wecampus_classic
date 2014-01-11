@@ -66,7 +66,7 @@
     <string name="detail_attend">参加的人(%d)</string>
     <string name="detail_content_tips">活动简介</string>
     <string name="want_to_attend">想参加</string>
-    <string name="detail_like">喜欢</string>
+    <string name="detail_like">喜欢(%d)</string>
     <string name="detail_no_participants">暂时还没有参加的人哦~</string>
     <string name="attend_success">已参加</string>
     <string name="quit_success">已退出活动</string>

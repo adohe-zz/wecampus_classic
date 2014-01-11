@@ -80,9 +80,9 @@ public class ActivityAdapter extends CursorAdapter {
             holder.text_title.setPadding(0, 0, 108, 0);
         } else {
             holder.imageView.setVisibility(View.VISIBLE);
+            holder.text_summary.setVisibility(View.GONE);
             holder.imageRequest = WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(holder.imageView,
                 defaultDrawable, defaultDrawable));
-            holder.text_summary.setVisibility(View.GONE);
             holder.text_title.setPadding(0, 0, 0, 0);
         }
         holder.text_title.setText(activity.title);

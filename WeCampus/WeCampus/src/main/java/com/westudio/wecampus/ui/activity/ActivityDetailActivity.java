@@ -64,6 +64,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     private TextView tvTicket;
     private TextView tvCompany;
     private TextView tvContent;
+    private TextView tvLikeNum;
     private ImageView ivCat;
     private View divider;
 
@@ -101,7 +102,6 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         activityId = getIntent().getIntExtra(ActivityListFragment.ACTIVITY_ID, -1);
-        Utility.log("id", activityId);
         acDataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
         //refreshActivityFromDb();
@@ -144,6 +144,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         tvTicket = (TextView)findViewById(R.id.detail_tv_ticket);
         tvCompany = (TextView)findViewById(R.id.detail_tv_company);
         tvContent = (TextView)findViewById(R.id.detail_tv_content);
+        tvLikeNum = (TextView)findViewById(R.id.activity_like_num);
         ivPoster = (ImageView)findViewById(R.id.detail_img_poster);
         ivPoster.setOnClickListener(clickListener);
         ivCat = (ImageView)findViewById(R.id.detail_no_content_img);
@@ -192,15 +193,15 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         tvTime.setText(DateUtil.getActivityTime(this, activity.begin, activity.end));
         tvLocation.setText(activity.location);
         tvTag.setText(activity.category);
+        String num = getResources().getString(R.string.detail_like);
+        tvLikeNum.setText(String.format(num, activity.count_of_fans));
 
-        /*Drawable defaultDrawable = new ColorDrawable(Color.rgb(229, 255, 255));
-        WeCampusApi.requestImage(activity.image, WeCampusApi.getImageListener(ivPoster,
-                defaultDrawable, defaultDrawable));*/
         WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
             @Override
             public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                 Bitmap data = imageContainer.getBitmap();
                 if(data != null) {
+                    ivPoster.setVisibility(View.VISIBLE);
                     ivPoster.setImageBitmap(data);
                 }
             }
@@ -564,6 +565,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
 
         public void refreshUi(boolean canLike) {
             like = canLike;
+            String num = getResources().getString(R.string.detail_like);
+            tvLikeNum.setText(String.format(num, activity.count_of_fans));
             if(canLike) {
                 icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_activity_like_un));
             } else {

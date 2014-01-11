@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.BaseAdapter;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
+import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
+import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.util.HttpUtil;
@@ -52,7 +55,10 @@ public class FollowActivityFragment extends BasePageListFragment<ActivityList.Re
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
+                ActivityList ac = (ActivityList)getAdapter().getItem(position);
+                intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
+                startActivity(intent);
             }
         });
 

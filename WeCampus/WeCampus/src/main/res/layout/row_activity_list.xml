@@ -13,7 +13,8 @@
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:background="#c9c9c9" />
+        android:background="#c9c9c9"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@id/activity_list_item_tag"
@@ -56,12 +57,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginRight="50dp"
         android:layout_below="@id/activity_list_item_time"
         android:drawableLeft="@drawable/ic_list_activity_location"
         android:drawablePadding="5dp"
-        android:singleLine="true"
         android:ellipsize="end"
+        android:singleLine="true"
         android:layout_alignLeft="@id/activity_list_item_title"
         style="@style/ActivityListTextView"/>
 
@@ -86,6 +87,7 @@
         android:layout_below="@id/activity_list_item_location"
         android:layout_alignLeft="@id/activity_list_item_title"
         android:ellipsize="end"
+        android:visibility="gone"
         style="@style/ActivityListSummary"/>
 
 </RelativeLayout>

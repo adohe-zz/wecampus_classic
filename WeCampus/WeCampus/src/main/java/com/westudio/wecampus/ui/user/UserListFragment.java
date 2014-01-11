@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
 
@@ -69,9 +70,21 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
         mUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
-                intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
-                startActivity(intent);
+                User user = (User)mAdapter.getItem(i);
+                if(BaseApplication.getInstance().hasAccount) {
+                    if(BaseApplication.getInstance().getAccountMgr().getUserId() == user.id) {
+                        Intent intent = new Intent(getActivity(), MyHomepageActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
+                        intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
+                        startActivity(intent);
+                    }
+                } else {
+                    Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
+                    intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
+                    startActivity(intent);
+                }
             }
         });
 

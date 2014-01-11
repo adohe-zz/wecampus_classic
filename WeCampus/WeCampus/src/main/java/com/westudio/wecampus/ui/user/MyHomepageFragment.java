@@ -91,7 +91,11 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_my_homepage, container, false);
 
-        mPullToRefreshAttacher = ((MainActivity)mActivity).getPullToRefreshAttacher();
+        if(mActivity instanceof MyHomepageActivity) {
+            mPullToRefreshAttacher = ((MyHomepageActivity)mActivity).getmPullToRefreshAttacher();
+        } else {
+            mPullToRefreshAttacher = ((MainActivity)mActivity).getPullToRefreshAttacher();
+        }
 
         initWidget(mView);
 
@@ -134,6 +138,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         tvUserFollow = (TextView)view.findViewById(R.id.user_profile_follow);
         tvUserFans = (TextView)view.findViewById(R.id.user_profile_fans);
         tvMoreActivity = (TextView)view.findViewById(R.id.activity_list_item_no_activity);
+        tvMoreActivity.setOnClickListener(clickListener);
         tvAttendActivity = (TextView)view.findViewById(R.id.user_profile_attend_activity);
 
         view.findViewById(R.id.clickable_follow).setOnClickListener(clickListener);

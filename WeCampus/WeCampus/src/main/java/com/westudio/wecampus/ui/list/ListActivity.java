@@ -16,15 +16,17 @@ public class ListActivity extends BaseListActivity {
     public static String USER_ID = "user_id";
     public static String TYPE = "type";
 
+    private Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        bundle = getIntent().getExtras();
 
         updateActionBar();
 
         Fragment fragment;
-        Bundle bundle = getIntent().getExtras();
         if(bundle.getInt(TYPE, -1) == 1) {
             fragment = JoinActivityFragment.newInstance(bundle);
         } else if(bundle.getInt(TYPE, -1) == 2) {
@@ -40,6 +42,13 @@ public class ListActivity extends BaseListActivity {
     private void updateActionBar() {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(bundle.getInt(TYPE, -1) == 1) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.activity_join));
+        } else if(bundle.getInt(TYPE, -1) == 2) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.activity_like));
+        } else {
+            getSupportActionBar().setTitle(getResources().getString(R.string.org_like));
+        }
     }
 
     @Override

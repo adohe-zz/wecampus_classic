@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.BaseAdapter;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
+import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
+import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BasePageListFragment;
 import com.westudio.wecampus.util.HttpUtil;
 
@@ -50,7 +53,10 @@ public class JoinActivityFragment extends BasePageListFragment<ActivityList.Requ
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
+                ActivityList activityList = (ActivityList)getAdapter().getItem(position - 1);
+                intent.putExtra(ActivityListFragment.ACTIVITY_ID, activityList.id);
+                startActivity(intent);
             }
         });
 

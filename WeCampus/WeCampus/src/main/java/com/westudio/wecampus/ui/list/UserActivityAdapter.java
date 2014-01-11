@@ -16,6 +16,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
+import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 
@@ -79,15 +80,17 @@ public class UserActivityAdapter extends BaseAdapter {
             viewHolder.imageRequest.cancelRequest();
         }
         ActivityList activityList = (ActivityList)getItem(position);
-        if(activityList.image.equals(ImageUtil.IMAGE_NOT_FOUND)) {
+        if(Constants.IMAGE_NOT_FOUND.equals(activityList.image)) {
             viewHolder.imageView.setVisibility(View.GONE);
             viewHolder.text_summary.setVisibility(View.VISIBLE);
             viewHolder.text_summary.setText(activityList.summary);
+            viewHolder.text_title.setPadding(0, 0, 108, 0);
         } else {
             viewHolder.imageView.setVisibility(View.VISIBLE);
             viewHolder.imageRequest = WeCampusApi.requestImage(activityList.image, WeCampusApi.getImageListener(viewHolder.imageView,
                     defaultDrawable, defaultDrawable));
             viewHolder.text_summary.setVisibility(View.GONE);
+            viewHolder.text_title.setPadding(0, 0, 0, 0);
         }
         viewHolder.text_title.setText(activityList.title);
         viewHolder.text_time.setText(DateUtil.getActivityTime(mContext, activityList.begin, activityList.end));

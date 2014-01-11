@@ -22,8 +22,11 @@ import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
+import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.organiztion.OrganizationHomepageActivity;
+import com.westudio.wecampus.ui.user.MyHomepageActivity;
+import com.westudio.wecampus.ui.user.MyProfileActivity;
 import com.westudio.wecampus.ui.user.UserHomepageActivity;
 import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
@@ -235,11 +238,23 @@ public class SearchActivity extends BaseDetailActivity{
                 case 1:
                     //别人的主页
                     User user = (User) adapterView.getAdapter().getItem(i);
-                    intent = new Intent(SearchActivity.this, UserHomepageActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(UserHomepageActivity.USER, user);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    if(BaseApplication.getInstance().hasAccount) {
+                        if(BaseApplication.getInstance().getAccountMgr().getUserId() == user.id) {
+                            intent = new Intent(SearchActivity.this, MyHomepageActivity.class);
+                            startActivity(intent);
+                        } else {
+                            intent = new Intent(SearchActivity.this, UserHomepageActivity.class);
+                            bundle.putSerializable(UserHomepageActivity.USER, user);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    } else {
+                        intent = new Intent(SearchActivity.this, UserHomepageActivity.class);
+                        bundle.putSerializable(UserHomepageActivity.USER, user);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                     break;
                 case 2:
                     //组织详情

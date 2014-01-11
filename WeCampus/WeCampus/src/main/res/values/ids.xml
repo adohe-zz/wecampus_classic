@@ -169,5 +169,6 @@
 
     <!-- User List Part -->
     <item name="user_list_frame" type="id">false</item>
+    <item name="my_home_page" type="id">false</item>
 
 </resources>

@@ -63,8 +63,7 @@
 
         <!-- My Homepage activity -->
         <activity
-            android:name=".ui.user.MyHomepageActivity"
-            android:label="@string/hello_world" >
+            android:name=".ui.user.MyHomepageActivity">
         </activity>
 
         <!-- Detail Activity -->
