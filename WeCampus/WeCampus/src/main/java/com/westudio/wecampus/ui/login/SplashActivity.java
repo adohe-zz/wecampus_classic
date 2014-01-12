@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -56,9 +57,14 @@ public class SplashActivity extends Activity {
     private void completeSplash() {
         SplashActivity.this.finish();
         Intent intent = null;
-        if (BaseApplication.getInstance().hasAccount) {
+        SharedPreferences sp = getSharedPreferences("user_account_config", MODE_PRIVATE);
+        boolean isFirstOpen = sp.getBoolean("isFirstUse", true);
+        if (!isFirstOpen) {
             intent = new Intent(SplashActivity.this, MainActivity.class);
         } else {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("isFirstUse", false);
+            editor.apply();
             intent = new Intent(SplashActivity.this, IntroActivity.class);
         }
         startActivity(intent);

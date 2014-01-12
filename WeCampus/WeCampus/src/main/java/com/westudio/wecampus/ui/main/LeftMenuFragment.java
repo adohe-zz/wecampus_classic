@@ -75,9 +75,6 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
 
         //avatar
         ivAvatar = (ImageView) view.findViewById(R.id.img_avatar);
-        Bitmap bm = ((BitmapDrawable)ivAvatar.getDrawable()).getBitmap();
-
-        ivAvatar.setImageBitmap(bm);
         ivAvatar.setOnClickListener(this);
         mBtnEdit = (ImageButton) view.findViewById(R.id.edit_button);
         mBtnEdit.setOnClickListener(this);

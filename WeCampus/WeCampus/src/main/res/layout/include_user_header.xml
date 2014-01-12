@@ -51,9 +51,8 @@
             android:id="@+id/img_avatar"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_default_avatar"
-            android:padding="2dp"
-            android:background="@drawable/menu_avatar_bg"
+            android:padding="1dp"
+            android:background="@drawable/ic_default_avatar"
             android:layout_marginTop="35dp"
             android:layout_marginBottom="15dp"
             android:layout_centerHorizontal="true"/>
