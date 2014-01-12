@@ -54,7 +54,7 @@
                     <com.makeramen.RoundedImageView
                         android:id="@+id/banner1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="84dp"
                         android:layout_marginBottom="12dp"
                         android:src="@color/default_ad_color"
                         app:corner_radius="8dip"
@@ -65,7 +65,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="84dp"
                         android:orientation="horizontal"
                         android:layout_weight="1">
 
