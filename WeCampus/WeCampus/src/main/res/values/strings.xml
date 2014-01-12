@@ -274,4 +274,6 @@
     <string name="find_organizations">快去看看都有哪些热门组织~</string>
     <string name="find_activities">快点让小伙伴们了解你都喜欢什么活动吧~</string>
     <string name="copy_right_msg">Copyright ©2012-2013 Wecampus. All Rights Reserved</string>
+    <string name="fragment_title_activities">全部活动</string>
+    <string name="fragment_title_homepage">个人主页</string>
 </resources>

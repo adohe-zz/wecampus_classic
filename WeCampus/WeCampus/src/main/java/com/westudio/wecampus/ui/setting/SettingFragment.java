@@ -49,7 +49,6 @@ public class SettingFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        updateActionBar();
         initWidget(view);
 
         return view;
@@ -58,11 +57,6 @@ public class SettingFragment extends SherlockFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    private void updateActionBar() {
-        ActionBar actionBar = ((MainActivity) mActivity).getSupportActionBar();
-        actionBar.setTitle(R.string.menu_settings);
     }
 
     private void initWidget(final View view) {

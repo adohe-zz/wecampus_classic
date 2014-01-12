@@ -123,21 +123,28 @@ public class MainActivity extends SherlockFragmentActivity {
         if (mCurrentContent != type) {
             mCurrentContent = type;
 
+            int titleRes = 0;
             Class<?> clazz = null;
             if (type == ContentType.ACTIVITY) {
                 clazz = ActivityListFragment.class;
+                titleRes = R.string.fragment_title_activities;
             } else if (type == ContentType.USERS) {
                 clazz = FriendsListFragment.class;
+                titleRes = R.string.follow_earch_other;
             } else if (type == ContentType.SQUARE) {
                 clazz = SquareFragment.class;
+                titleRes = R.string.menu_square;
             } else if (type == ContentType.HOMEPAGE) {
                 clazz = MyHomepageFragment.class;
+                titleRes = R.string.fragment_title_homepage;
             } else if(type == ContentType.SETTINGS) {
                 clazz = SettingFragment.class;
+                titleRes = R.string.menu_settings;
             }
 
             Fragment f = Fragment.instantiate(this, clazz.getName());
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+            getSupportActionBar().setTitle(titleRes);
         }
 
         mDrawerLayout.closeDrawers();

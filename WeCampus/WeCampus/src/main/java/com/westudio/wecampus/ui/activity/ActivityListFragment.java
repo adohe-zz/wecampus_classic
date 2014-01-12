@@ -91,6 +91,7 @@ public class ActivityListFragment extends BaseFragment implements OnRefreshListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.fragment_title_activities);
     }
 
     @Override
