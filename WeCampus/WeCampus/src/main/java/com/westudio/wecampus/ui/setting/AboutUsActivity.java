@@ -13,6 +13,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
+import com.westudio.wecampus.ui.base.WebBrowserActivity;
 import com.westudio.wecampus.util.ContentUtil;
 
 /**
@@ -68,7 +69,9 @@ public class AboutUsActivity extends BaseGestureActivity {
                 case R.id.about_rl_weibo:
                     break;
                 case R.id.about_rl_web:
-                    ContentUtil.addLinks(tvWeb, "http://wecampus.net");
+                    Intent webIntent = new Intent(AboutUsActivity.this, WebBrowserActivity.class);
+                    webIntent.putExtra(WebBrowserActivity.EXTRA_URL, "http://www.wecampus.net");
+                    startActivity(webIntent);
                     break;
                 case R.id.about_terms_of_use:
                     startActivity(new Intent(AboutUsActivity.this, TermsOfUseActivity.class));
