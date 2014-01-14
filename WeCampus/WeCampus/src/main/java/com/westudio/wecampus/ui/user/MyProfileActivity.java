@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -103,26 +104,66 @@ public class MyProfileActivity extends PickPhotoActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.save_profile, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        if(item.getItemId() == R.id.save_profile) {
+            updateProfile();
+            return true;
+        }
+
+        return super.onMenuItemSelected(featureId, item);
+    }
+
+    private void updateProfile() {
+        User user = new User();
+        user.gender = tvGender.getText().toString();
+        user.birthday = "";
+        user.email = tvEmail.getText().toString();
+        user.emotion = tvLove.getText().toString();
+        user.name = tvName.getText().toString();
+        user.nickname = tvNickName.getText().toString();
+        user.phone = tvPhone.getText().toString();
+        user.stage = tvRole.getText().toString();
+        user.words = tvWord.getText().toString();
+        WeCampusApi.postUpdateProfile(this, user, new Response.Listener() {
+            @Override
+            public void onResponse(Object o) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+    }
+
     private void initWidget() {
         tvNickName = (TextView)findViewById(R.id.nickname);
-        tvNickName.setOnClickListener(clickListener);
+        findViewById(R.id.change_name).setOnClickListener(clickListener);
         tvGender = (TextView)findViewById(R.id.gender);
-        tvGender.setOnClickListener(clickListener);
+        findViewById(R.id.change_gender).setOnClickListener(clickListener);
         tvSchool = (TextView)findViewById(R.id.school);
         tvWord = (TextView)findViewById(R.id.words);
-        tvWord.setOnClickListener(clickListener);
+        findViewById(R.id.change_words).setOnClickListener(clickListener);
         tvName = (TextView)findViewById(R.id.real_name);
-        tvName.setOnClickListener(clickListener);
+        findViewById(R.id.change_real_name).setOnClickListener(clickListener);
         tvPhone = (TextView)findViewById(R.id.telephone);
-        tvPhone.setOnClickListener(clickListener);
+        findViewById(R.id.change_telephone).setOnClickListener(clickListener);
         tvEmail = (TextView)findViewById(R.id.email);
-        tvEmail.setOnClickListener(clickListener);
+        findViewById(R.id.change_email).setOnClickListener(clickListener);
         tvBirthday = (TextView)findViewById(R.id.birthday);
-        tvBirthday.setOnClickListener(clickListener);
+        findViewById(R.id.change_birthday).setOnClickListener(clickListener);
         tvLove = (TextView)findViewById(R.id.relationship);
-        tvLove.setOnClickListener(clickListener);
+        findViewById(R.id.change_relationship).setOnClickListener(clickListener);
         tvRole = (TextView)findViewById(R.id.role);
-        tvRole.setOnClickListener(clickListener);
+        findViewById(R.id.change_role).setOnClickListener(clickListener);
         ivAvatar = (ImageView)findViewById(R.id.profile_avatar);
         findViewById(R.id.change_avatar).setOnClickListener(clickListener);
     }
@@ -188,49 +229,49 @@ public class MyProfileActivity extends PickPhotoActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.nickname: {
+                case R.id.change_name: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNickActivity.class);
                     intent.putExtra(NICK_NAME, tvNickName.getText().toString());
                     startActivityForResult(intent, UPDATE_NICK_REQUEST);
                     break;
                 }
-                case R.id.real_name: {
+                case R.id.change_real_name: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNameActivity.class);
                     intent.putExtra(REAL_NAME, tvName.getText().toString());
                     startActivityForResult(intent, UPDATE_NAME_REQUEST);
                     break;
                 }
-                case R.id.telephone: {
+                case R.id.change_telephone: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdatePhoneActivity.class);
                     intent.putExtra(PHONE, tvPhone.getText().toString());
                     startActivityForResult(intent, UPDATE_PHONE_REQUEST);
                     break;
                 }
-                case R.id.email: {
+                case R.id.change_email: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateEmailActivity.class);
                     intent.putExtra(EMAIL, tvEmail.getText().toString());
                     startActivityForResult(intent, UPDATE_EMAIL_REQUEST);
                     break;
                 }
-                case R.id.gender: {
+                case R.id.change_gender: {
                     Intent intent = new Intent(MyProfileActivity.this, PickGenderActivity.class);
                     intent.putExtra(GENDER, tvGender.getText().toString());
                     startActivityForResult(intent, AuthActivity.PICK_GENDER_REQUEST);
                     break;
                 }
-                case R.id.words: {
+                case R.id.change_words: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateWordsActivity.class);
                     intent.putExtra(WORDS, tvWord.getText().toString());
                     startActivityForResult(intent, UPDATE_WORDS_REQUEST);
                     break;
                 }
-                case R.id.relationship: {
+                case R.id.change_relationship: {
                     Intent intent = new Intent(MyProfileActivity.this, PickEmotionActivity.class);
                     intent.putExtra(PICK_EMOTION, tvLove.getText().toString());
                     startActivityForResult(intent, PICK_EMOTION_REQUEST);
                     break;
                 }
-                case R.id.role: {
+                case R.id.change_role: {
                     Intent intent = new Intent(MyProfileActivity.this, PickStageActivity.class);
                     intent.putExtra(PICK_STAGE, tvRole.getText().toString());
                     startActivityForResult(intent, PICK_STAGE_REQUEST);

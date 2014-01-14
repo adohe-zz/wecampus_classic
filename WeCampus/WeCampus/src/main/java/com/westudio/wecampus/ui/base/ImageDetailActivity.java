@@ -98,7 +98,6 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
         String title = "<font color=\"#999999\">" + extraInfo + "</font>";
         getSupportActionBar().setTitle(Html.fromHtml(title));
         getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.image_detail_icon));
-        //getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.image_detail_ab));
     }
 
     @Override
@@ -117,6 +116,8 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
                 break;
             case R.id.detail_image_save: {
                 ResponseDiskCache cache = (ResponseDiskCache)WeCampusApi.imageRequestQueue.getCache();
+                ImageLoader imageLoader = WeCampusApi.getImageLoader();
+
                 File file = cache.getFileForKey(url);
                 if(file != null) {
                     File ext = Environment.getExternalStorageDirectory();
