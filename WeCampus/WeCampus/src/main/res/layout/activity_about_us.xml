@@ -152,12 +152,22 @@
         style="@style/AboutUsUser"/>
 
     <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/about_policy"
+        android:layout_marginBottom="4dp"
+        android:textSize="9sp"
+        android:text="@string/copy_right_msg"/>
+
+    <TextView
         android:id="@id/about_policy"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="9sp"
         android:text="@string/about_name"/>
 
 </RelativeLayout>

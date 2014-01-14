@@ -209,7 +209,7 @@
     <string name="input_new_pwd">请输入新密码</string>
 
     <!-- About Us Part -->
-    <string name="about_name">WeCampus</string>
+    <string name="about_name">WeCampus 版权所有</string>
     <string name="about_version">1.0.0</string>
     <string name="about_like_us">喜欢我们? 给个好评把!</string>
     <string name="about_weibo">去微博看看我们在干嘛</string>
@@ -275,5 +275,9 @@
     <string name="find_activities">快点让小伙伴们了解你都喜欢什么活动吧~</string>
 
     <string name="save_profile">保存</string>
+
+    <string name="copy_right_msg">Copyright ©2012-2013 Wecampus. All Rights Reserved</string>
+    <string name="fragment_title_activities">全部活动</string>
+    <string name="fragment_title_homepage">个人主页</string>
 
 </resources>
