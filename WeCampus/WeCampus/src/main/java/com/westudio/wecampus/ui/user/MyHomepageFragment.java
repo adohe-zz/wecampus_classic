@@ -459,20 +459,24 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
             tvNumActivity.setText(String.format(activityNum, mUser.count_of_follow_activities));
             tvActivityName.setText(ac.title);
             tvActivitySummary.setText(ac.summary);
-            WeCampusApi.requestImage(ac.image, new ImageLoader.ImageListener() {
-                @Override
-                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                    Bitmap data = imageContainer.getBitmap();
-                    if(data != null) {
-                        ivActivityIcon.setImageBitmap(data);
+            if(Constants.IMAGE_NOT_FOUND.equals(ac.image)) {
+                ivActivityIcon.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_liked_activity_default_icon));
+            } else {
+                WeCampusApi.requestImage(ac.image, new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                        Bitmap data = imageContainer.getBitmap();
+                        if(data != null) {
+                            ivActivityIcon.setImageBitmap(data);
+                        }
                     }
-                }
 
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        ivActivityIcon.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_liked_activity_default_icon));
+                    }
+                });
+            }
         }
 
         public void refreshUI() {

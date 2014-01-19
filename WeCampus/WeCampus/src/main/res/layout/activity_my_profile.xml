@@ -68,6 +68,7 @@
 
             <!-- Name -->
             <LinearLayout
+                android:id="@+id/change_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -105,6 +106,7 @@
 
             <!-- Gender -->
             <LinearLayout
+                android:id="@+id/change_gender"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -173,6 +175,7 @@
 
             <!-- Words -->
             <LinearLayout
+                android:id="@+id/change_words"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -217,6 +220,7 @@
 
             <!-- Real Name -->
             <LinearLayout
+                android:id="@+id/change_real_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -254,6 +258,7 @@
 
             <!-- Telephone -->
             <LinearLayout
+                android:id="@+id/change_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -291,6 +296,7 @@
 
             <!-- Email -->
             <LinearLayout
+                android:id="@+id/change_email"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -328,6 +334,7 @@
 
             <!-- Birthday -->
             <LinearLayout
+                android:id="@+id/change_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -365,6 +372,7 @@
 
             <!-- Relationship -->
             <LinearLayout
+                android:id="@+id/change_relationship"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -402,6 +410,7 @@
 
             <!-- Role -->
             <LinearLayout
+                android:id="@+id/change_role"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/square_section_height">
 
@@ -437,6 +446,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/my_profile_tip" />
 
     </LinearLayout>
