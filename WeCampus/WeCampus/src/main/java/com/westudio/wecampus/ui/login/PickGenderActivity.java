@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -43,17 +42,12 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
         male.setOnClickListener(this);
         View female = findViewById(R.id.item_female);
         female.setOnClickListener(this);
-        View secret = findViewById(R.id.item_secret);
-        secret.setOnClickListener(this);
         if(Constants.MALE.equals(gender)) {
             male.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
             lastClick = R.id.item_male;
         } else if(Constants.FEMALE.equals(gender)) {
             female.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
             lastClick = R.id.item_female;
-        } else if (Constants.SECRET.equals(gender)) {
-            secret.findViewById(R.id.imageView).setVisibility(View.VISIBLE);
-            lastClick = R.id.item_secret;
         } else {
             lastClick = 0;
         }
@@ -84,10 +78,6 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
             }
             case R.id.item_female: {
                 type = 1;
-                break;
-            }
-            case R.id.item_secret: {
-                type = 2;
                 break;
             }
         }

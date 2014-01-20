@@ -279,5 +279,6 @@
     <string name="copy_right_msg">Copyright ©2012-2013 Wecampus. All Rights Reserved</string>
     <string name="fragment_title_activities">全部活动</string>
     <string name="fragment_title_homepage">个人主页</string>
+    <string name="share_weibo">新浪微博</string>
 
 </resources>

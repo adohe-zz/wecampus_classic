@@ -10,10 +10,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.sina.weibo.sdk.api.share.BaseResponse;
+import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.sina.weibo.sdk.constant.WBConstants;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
@@ -23,6 +27,7 @@ import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
+import com.westudio.wecampus.util.WbShareTool;
 import com.westudio.wecampus.util.WxShareTool;
 
 import java.io.File;
@@ -32,13 +37,14 @@ import java.io.IOException;
 /**
  * Created by martian on 13-11-28.
  */
-public class ShareMenuActivity extends SherlockFragmentActivity implements View.OnClickListener {
+public class ShareMenuActivity extends SherlockFragmentActivity implements View.OnClickListener,
+        IWeiboHandler.Response {
     public static final String ACTIVITY_ID = "activity_id";
     public static final String CAN_JOIN = "can_join";
 
     private View btnShareToWx;
     private View btnShareToMoment;
-    private View btnShareToSms;
+    private View btnShareToWeibo;
     private View btnShareToMail;
     private View btnQuit;
     private ProgressDialog progressDialog;
@@ -48,6 +54,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
     private AsyncTask queryTask;
 
     private Activity activity;
+
+    private WbShareTool tool;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +81,11 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         initWidgets();
 
         btnQuit.setVisibility(getIntent().getBooleanExtra(CAN_JOIN, true) ? View.GONE : View.VISIBLE);
+
+        tool  = new WbShareTool(this);
+        if (savedInstanceState != null) {
+            tool.getmWeiboShareAPI().handleWeiboResponse(getIntent(), this);
+        }
     }
 
     @Override
@@ -88,8 +101,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         btnShareToMoment.setOnClickListener(this);
         btnShareToWx = findViewById(R.id.share_to_wx);
         btnShareToWx.setOnClickListener(this);
-        btnShareToSms = findViewById(R.id.share_to_sms);
-        btnShareToSms.setOnClickListener(this);
+        btnShareToWeibo = findViewById(R.id.share_to_weibo);
+        btnShareToWeibo.setOnClickListener(this);
         btnShareToMail = findViewById(R.id.share_to_mail);
         btnShareToMail.setOnClickListener(this);
         btnQuit = findViewById(R.id.item_quit);
@@ -110,8 +123,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
             case R.id.share_to_wx:
                 shareToWx(WxShareTool.ShareType.FRIENDS);
                 break;
-            case R.id.share_to_sms:
-
+            case R.id.share_to_weibo:
+                shareToWeibo();
                 break;
             case R.id.share_to_mail:
                 sendToEmail();
@@ -190,13 +203,32 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
     }
 
     private WxShareTool initWxShareTool(WxShareTool tool, Bitmap bm) {
+        tool.buildMessage(activity.title, getShareSubtitle(), activity.url, bm);
+        return tool;
+    }
+
+    private String getShareSubtitle() {
         StringBuilder subTitle = new StringBuilder();
         subTitle.append("时间：");
         subTitle.append(DateUtil.getActivityTime(this, activity.begin, activity.end));
         subTitle.append("\n地点：").append(activity.location);
-        tool.buildMessage(activity.title, subTitle.toString(), activity.url, bm);
+        return subTitle.toString();
+    }
 
-        return tool;
+    private void shareToWeibo() {
+        WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+
+            @Override
+            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                tool.sendShareMessage(activity.title, getShareSubtitle(), activity.url,
+                        imageContainer.getBitmap());
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                tool.sendShareMessage(activity.title, getShareSubtitle(), activity.url, null);
+            }
+        });
     }
 
     private void queryActivity(final int id) {
@@ -223,5 +255,21 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         };
 
         Utility.executeAsyncTask(queryTask);
+    }
+
+    @Override
+    public void onResponse(BaseResponse baseResponse) {
+        switch (baseResponse.errCode) {
+            case WBConstants.ErrorCode.ERR_OK:
+                Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
+                break;
+            case WBConstants.ErrorCode.ERR_CANCEL:
+                Toast.makeText(this, "cancel", Toast.LENGTH_LONG).show();
+                break;
+            case WBConstants.ErrorCode.ERR_FAIL:
+                Toast.makeText(this, "fail" + "Error Message: " + baseResponse.errMsg,
+                        Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }

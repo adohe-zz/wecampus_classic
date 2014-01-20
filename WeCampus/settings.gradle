@@ -1,1 +1,1 @@
-include ':WeCampus', ':extras:ListViewAnimationLib', ':extras:IndexableListView', ':extras:ViewPagerIndicator', ':extras:ParallaxScrollView', ':extras:PhotoView'
+include ':WeCampus', ':extras:ListViewAnimationLib', ':extras:IndexableListView', ':extras:ViewPagerIndicator', ':extras:ParallaxScrollView', ':extras:PhotoView', ':extras:WeiboSDK'

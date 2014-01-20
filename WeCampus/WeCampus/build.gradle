@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.1'
+        classpath 'com.android.tools.build:gradle:0.7.1'
     }
 }
 apply plugin: 'android'
@@ -20,6 +20,13 @@ android {
         minSdkVersion 9
         targetSdkVersion 18
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
 }
 
 dependencies {
@@ -37,6 +44,7 @@ dependencies {
     compile project(':extras:ViewPagerIndicator')
     compile project(':extras:ParallaxScrollView')
     compile project(':extras:PhotoView')
+    compile project(':extras:WeiboSDK')
 }
 
 tasks.withType(Compile) {
