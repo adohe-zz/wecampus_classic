@@ -10,6 +10,7 @@ import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
 import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
 import com.sina.weibo.sdk.api.share.WeiboShareSDK;
 import com.sina.weibo.sdk.exception.WeiboShareException;
+import com.westudio.wecampus.R;
 
 /**
  * Created by martian on 14-1-19.
@@ -18,9 +19,11 @@ public class WbShareTool  {
     public static String APP_KEY = "3126350995";
 
     private IWeiboShareAPI mWeiboShareAPI;
+    private Context mContext;
 
     public WbShareTool(Context context) {
         mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(context, APP_KEY);
+        mContext = context;
     }
 
     public void sendShareMessage(String title, String text, String url, Bitmap bitmap) {
@@ -58,6 +61,14 @@ public class WbShareTool  {
         mediaObject.actionUrl = url;
         mediaObject.defaultText = text;
         return mediaObject;
+    }
+
+    public void sendShareAppMsg() {
+        String text = "精彩校园生活，从缤纷活动开始！这里只有你想不到，没有做不到，快来一起试试吧" +
+                ">>>www.wecmapus.net";
+        String url = "http://www.wecmapus.net";
+        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_launcher);
+        sendShareMessage(mContext.getString(R.string.app_name), text, url, icon);
     }
 
     public IWeiboShareAPI getmWeiboShareAPI() {

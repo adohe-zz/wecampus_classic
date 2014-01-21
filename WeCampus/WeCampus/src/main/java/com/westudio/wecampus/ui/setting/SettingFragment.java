@@ -112,6 +112,7 @@ public class SettingFragment extends SherlockFragment {
                 }
                 case R.id.ly_setting_share_wecampus: {
                     Intent intent = new Intent(mActivity, ShareMenuActivity.class);
+                    intent.putExtra(ShareMenuActivity.IS_SHARE_APP, true);
                     startActivity(intent);
                     break;
                 }

@@ -41,6 +41,7 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         IWeiboHandler.Response {
     public static final String ACTIVITY_ID = "activity_id";
     public static final String CAN_JOIN = "can_join";
+    public static final String IS_SHARE_APP = "is_share_app";
 
     private View btnShareToWx;
     private View btnShareToMoment;
@@ -56,6 +57,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
     private Activity activity;
 
     private WbShareTool tool;
+
+    private boolean isShareApp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +76,17 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         dataHelper = new ActivityDataHelper(this);
         orgDataHelper = new OrgDataHelper(this);
 
-        int id = getIntent().getIntExtra(ACTIVITY_ID, -1);
-        if (id >= 0) {
-            queryActivity(id);
+        isShareApp = getIntent().getBooleanExtra(IS_SHARE_APP, false);
+        if (!isShareApp){
+            int id = getIntent().getIntExtra(ACTIVITY_ID, -1);
+            if (id >= 0) {
+                queryActivity(id);
+            }
         }
-
         initWidgets();
 
-        btnQuit.setVisibility(getIntent().getBooleanExtra(CAN_JOIN, true) ? View.GONE : View.VISIBLE);
+        btnQuit.setVisibility(getIntent().getBooleanExtra(CAN_JOIN, true) || isShareApp ?
+                View.GONE : View.VISIBLE);
 
         tool  = new WbShareTool(this);
         if (savedInstanceState != null) {
@@ -111,77 +117,111 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
 
     @Override
     public void onClick(View view) {
-
-        if (activity == null) {
+        // 分享活动且活动未加载
+        if (!isShareApp && activity == null) {
             return;
         }
 
-        switch (view.getId()) {
-            case R.id.share_to_moment:
-                shareToWx(WxShareTool.ShareType.MOMENT);
-                break;
-            case R.id.share_to_wx:
-                shareToWx(WxShareTool.ShareType.FRIENDS);
-                break;
-            case R.id.share_to_weibo:
-                shareToWeibo();
-                break;
-            case R.id.share_to_mail:
-                sendToEmail();
-                break;
-            case R.id.item_quit:
-                setResult(RESULT_OK, new Intent());
-                finish();
-                break;
+        // 分享应用
+        if (isShareApp) {
+            switch (view.getId()) {
+                case R.id.share_to_moment:
+                    shareAppToWx(WxShareTool.ShareType.MOMENT);
+                    break;
+                case R.id.share_to_wx:
+                    shareAppToWx(WxShareTool.ShareType.FRIENDS);
+                    break;
+                case R.id.share_to_weibo:
+                    shareToWeibo(true);
+                    break;
+                case R.id.share_to_mail:
+                    sendToEmail(true);
+                    break;
+                case R.id.item_quit:
+                    setResult(RESULT_OK, new Intent());
+                    finish();
+                    break;
+            }
+        } else { // 分享活动
+            switch (view.getId()) {
+                case R.id.share_to_moment:
+                    shareToWx(WxShareTool.ShareType.MOMENT);
+                    break;
+                case R.id.share_to_wx:
+                    shareToWx(WxShareTool.ShareType.FRIENDS);
+                    break;
+                case R.id.share_to_weibo:
+                    shareToWeibo(false);
+                    break;
+                case R.id.share_to_mail:
+                    sendToEmail(false);
+                    break;
+                case R.id.item_quit:
+                    setResult(RESULT_OK, new Intent());
+                    finish();
+                    break;
+            }
         }
+
     }
 
-    private void sendToEmail() {
+    private void sendToEmail(boolean isShareApp) {
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "我在“" + getString(R.string.app_name) + "”发现了一个活动");
-        StringBuilder sbText = new StringBuilder();
-        sbText.append(activity.title);
-
-        // 添加正文
-        if (activity.organization != null) {
-            sbText.append("【").append(activity.organization.name).append("】");
-        }
-        sbText.append("，快来一起参加吧\n>>>").append(activity.url);
-
-        intent.putExtra(Intent.EXTRA_TEXT, sbText.toString());
-
-        if (ImageUtil.IMAGE_NOT_FOUND.equals(activity.image)) {
+        if (isShareApp) {
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+            intent.putExtra(Intent.EXTRA_TEXT,
+                    "精彩校园生活，从缤纷活动开始！这里只有你想不到，没有做不到，快来一起试试吧>>>www.wecmapus.net");
+            intent.putExtra(Intent.EXTRA_STREAM,
+                    Uri.parse("android.resource://" + getApplication().getPackageName() +
+                            "/drawable/ic_launcher"));
             startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
         } else {
-            WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+            intent.putExtra(Intent.EXTRA_SUBJECT, "我在“" + getString(R.string.app_name) + "”发现了一个活动");
+            StringBuilder sbText = new StringBuilder();
+            sbText.append(activity.title);
 
-                @Override
-                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                    File temp = new File(CacheUtil.getExternalCacheDir(ShareMenuActivity.this), "temp.jpeg");
-                    Bitmap bm = imageContainer.getBitmap();
-                    if (bm != null) {
-                        try {
-                            FileOutputStream fos = new FileOutputStream(temp.getPath());
-                            bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+            // 添加正文
+            if (activity.organization != null) {
+                sbText.append("【").append(activity.organization.name).append("】");
+            }
+            sbText.append("，快来一起参加吧>>>").append(activity.url);
+
+            intent.putExtra(Intent.EXTRA_TEXT, sbText.toString());
+
+            if (ImageUtil.IMAGE_NOT_FOUND.equals(activity.image)) {
+                startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
+            } else {
+                WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                        File temp = new File(CacheUtil.getExternalCacheDir(ShareMenuActivity.this), "temp.jpeg");
+                        Bitmap bm = imageContainer.getBitmap();
+                        if (bm != null) {
+                            try {
+                                FileOutputStream fos = new FileOutputStream(temp.getPath());
+                                bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            //intent.setType("image/jpeg");
+                            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(temp));
                         }
-                        //intent.setType("image/jpeg");
-                        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(temp));
+
+                        startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
                     }
 
-                    startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
-                }
-
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
-                }
-            });
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
+                    }
+                });
+            }
         }
+
     }
 
     private void shareToWx(final WxShareTool.ShareType type) {
@@ -215,20 +255,33 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         return subTitle.toString();
     }
 
-    private void shareToWeibo() {
-        WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
+    private void shareToWeibo(boolean isShareApp) {
+        if (isShareApp) {
+            tool.sendShareAppMsg();
+        } else {
+            final String title = "我在“" + getString(R.string.app_name) + "”发现了一个活动";
+            final String text = activity.title + "【" + activity.organization + "】";
+            WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
 
-            @Override
-            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                tool.sendShareMessage(activity.title, getShareSubtitle(), activity.url,
-                        imageContainer.getBitmap());
-            }
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    tool.sendShareMessage(title, text, activity.url,
+                            imageContainer.getBitmap());
+                }
 
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                tool.sendShareMessage(activity.title, getShareSubtitle(), activity.url, null);
-            }
-        });
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    tool.sendShareMessage(title, text, activity.url, null);
+                }
+            });
+        }
+    }
+
+    private void shareAppToWx(final WxShareTool.ShareType type) {
+        WxShareTool wxShareTool = null;
+        wxShareTool = new WxShareTool(this);
+        wxShareTool.buildAppMessage();
+        wxShareTool.fireShareToWx(type);
     }
 
     private void queryActivity(final int id) {
