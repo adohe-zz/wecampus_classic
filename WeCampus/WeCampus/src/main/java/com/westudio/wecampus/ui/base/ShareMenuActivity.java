@@ -172,7 +172,7 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         if (isShareApp) {
             intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
             intent.putExtra(Intent.EXTRA_TEXT,
-                    "精彩校园生活，从缤纷活动开始！这里只有你想不到，没有做不到，快来一起试试吧>>>www.wecmapus.net");
+                    "精彩校园生活，从缤纷活动开始！这里只有你想不到，没有做不到，快来一起试试吧>>>www.wecamapus.net");
             intent.putExtra(Intent.EXTRA_STREAM,
                     Uri.parse("android.resource://" + getApplication().getPackageName() +
                             "/drawable/ic_launcher"));
