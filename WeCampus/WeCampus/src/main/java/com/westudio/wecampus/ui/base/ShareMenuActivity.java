@@ -260,7 +260,7 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
             tool.sendShareAppMsg();
         } else {
             final String title = "我在“" + getString(R.string.app_name) + "”发现了一个活动";
-            final String text = activity.title + "【" + activity.organization + "】";
+            final String text = activity.title + "【" + activity.organization.name + "】";
             WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
 
                 @Override
