@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.update.UmengUpdateAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.setting.SettingFragment;
@@ -70,6 +71,9 @@ public class MainActivity extends SherlockFragmentActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, activityFragment).commit();
         Fragment menuFragment = LeftMenuFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.left_drawer, menuFragment).commit();
+
+        //检查更新
+        UmengUpdateAgent.update(this);
     }
 
     @Override

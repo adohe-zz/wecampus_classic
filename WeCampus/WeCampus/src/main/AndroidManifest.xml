@@ -159,6 +159,17 @@
             <grant-uri-permission android:pathPattern=".*"/>
         </provider>
 
+        <!-- 友盟 -->
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <meta-data android:value="52d156f956240b7a260bf0a8" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>
