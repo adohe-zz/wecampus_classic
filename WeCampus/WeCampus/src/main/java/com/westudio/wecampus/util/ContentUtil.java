@@ -38,7 +38,15 @@ public class ContentUtil {
         }
 
         SpannableString value = SpannableString.valueOf(txt);
-        Linkify.addLinks(value, ContentLinkPatterns.WEB_URL, ContentLinkPatterns.WEB_SCHEME);
+        Linkify.addLinks(value, ContentLinkPatterns.WEB_URL, ContentLinkPatterns.WEB_SCHEME, new Linkify.MatchFilter() {
+            @Override
+            public boolean acceptMatch(CharSequence charSequence, int i, int i2) {
+                if (charSequence.toString().contains("@")) {
+                    return false;
+                }
+                return true;
+            }
+        }, null);
 
         URLSpan[] urlSpans = value.getSpans(0, value.length(), URLSpan.class);
         ContentURLSpan contentURLSpan = null;
