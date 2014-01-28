@@ -30,6 +30,7 @@ public class CacheUtil {
      * @return
      */
     private static boolean hasExternalCacheDir() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO
+                && Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 }
