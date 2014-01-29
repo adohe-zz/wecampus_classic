@@ -32,6 +32,7 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.user.MyProfileActivity;
+import com.westudio.wecampus.ui.view.CircleImageView;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
@@ -47,7 +48,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     private ImageButton mBtnEdit;
     private Button mBtnSignOut;
     private Button mBtnSignIn;
-    private ImageView ivAvatar;
+    private CircleImageView ivAvatar;
     private TextView tvName;
     private TextView tvWord;
     private LogoutHandler mLogoutHandler;
@@ -74,8 +75,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_leftmenu, container, false);
 
         //avatar
-        ivAvatar = (ImageView) view.findViewById(R.id.img_avatar);
+        ivAvatar = (CircleImageView) view.findViewById(R.id.img_avatar);
         ivAvatar.setOnClickListener(this);
+        ivAvatar.setBorderWidth(Utility.dip2px(getActivity(), 2f));
         mBtnEdit = (ImageButton) view.findViewById(R.id.edit_button);
         mBtnEdit.setOnClickListener(this);
         mBtnSignOut = (Button) view.findViewById(R.id.btn_sign_out);
