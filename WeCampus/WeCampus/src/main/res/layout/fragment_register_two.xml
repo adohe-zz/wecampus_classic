@@ -1,159 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:paddingTop="15dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rege_step_two_title"
-        android:id="@id/rege_step_two_title"
-        android:layout_gravity="center_horizontal"
-        style="@style/RegisterTitleTwo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rege_step_two_title_two"
-        android:id="@id/rege_step_two_title_two"
-        android:layout_gravity="center_horizontal"
-        style="@style/RegisterTitleTwo" />
-
-    <com.westudio.wecampus.ui.view.CircleImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@id/rege_step_two_avatar"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/register_avatar"
-        android:contentDescription="@string/imageDescription" />
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/base_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/white"
-        android:id="@id/rege_step_two_ly">
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rege_step_two_title"
+            android:id="@id/rege_step_two_title"
+            android:layout_gravity="center_horizontal"
+            style="@style/RegisterTitleTwo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rege_step_two_title_two"
+            android:id="@id/rege_step_two_title_two"
+            android:layout_gravity="center_horizontal"
+            style="@style/RegisterTitleTwo" />
+
+        <com.westudio.wecampus.ui.view.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/rege_step_two_avatar"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/register_avatar"
+            android:contentDescription="@string/imageDescription" />
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/white"
+            android:id="@id/rege_step_two_ly">
 
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="@string/rege_step_two_true_name"
-                android:layout_marginLeft="18dp"
-                android:maxLength="8"
-                style="@style/RegisterTextView" />
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@id/rege_step_two_true_name"
-                android:background="#00000000"
-                android:hint="@string/input_tips"
-                android:singleLine="true"
-                android:layout_marginRight="10dp"
-                android:maxLength="50"
-                android:textSize="15sp" />
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rege_step_two_true_name"
+                    android:layout_marginLeft="18dp"
+                    android:maxLength="8"
+                    style="@style/RegisterTextView" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@id/rege_step_two_true_name"
+                    android:background="#00000000"
+                    android:hint="@string/input_tips"
+                    android:singleLine="true"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="50"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rege_step_two_birthday"
+                    android:layout_marginLeft="18dp"
+                    style="@style/RegisterTextView" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@id/rege_step_two_birthday"
+                    android:background="#00000000"
+                    android:hint="@string/input_tips"
+                    android:singleLine="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rege_step_two_description"
+                    android:layout_marginLeft="18dp"
+                    style="@style/RegisterTextView" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@id/rege_step_two_description"
+                    android:background="#00000000"
+                    android:hint="@string/rege_description"
+                    android:singleLine="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <View
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
-            android:background="@color/divider_bg" />
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/rege_finish"
+            android:id="@id/rege_step_two_submit"
+            android:layout_marginTop="10dp"
+            android:background="@color/login_btn_bg"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="@string/rege_step_two_birthday"
-                android:layout_marginLeft="18dp"
-                style="@style/RegisterTextView" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@id/rege_step_two_birthday"
-                android:background="#00000000"
-                android:hint="@string/input_tips"
-                android:singleLine="true"
-                android:layout_marginRight="10dp"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
-            android:background="@color/divider_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:text="@string/rege_step_two_description"
-                android:layout_marginLeft="18dp"
-                style="@style/RegisterTextView" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@id/rege_step_two_description"
-                android:background="#00000000"
-                android:hint="@string/rege_description"
-                android:singleLine="true"
-                android:layout_marginRight="10dp"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/rege_skip"
+            android:id="@id/rege_step_two_skip"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            style="@style/ForgetPwdTextView" />
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/rege_finish"
-        android:id="@id/rege_step_two_submit"
-        android:layout_marginTop="10dp"
-        android:background="@color/login_btn_bg"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/rege_skip"
-        android:id="@id/rege_step_two_skip"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        style="@style/ForgetPwdTextView" />
-
-</LinearLayout>
+</ScrollView>

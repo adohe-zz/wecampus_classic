@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     private ProgressDialog progressDialog;
     private String mStrImgLocalPath;
     private Button btnSubmit;
+    private ScrollView baseFrame;
+    private EditText etTrueName;
 
     private AvatarUpdateHandler avatarHandler = new AvatarUpdateHandler();
     private ProfileUpdateHandler profileUpdateHandler;
@@ -79,6 +83,10 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         ivAvatar.setOnClickListener(this);
         btnSubmit = (Button) view.findViewById(R.id.rege_step_two_submit);
         btnSubmit.setOnClickListener(this);
+        baseFrame = (ScrollView) view.findViewById(R.id.base_frame);
+        etTrueName = (EditText) view.findViewById(R.id.rege_step_two_true_name);
+        etTrueName.setOnFocusChangeListener(onFocusChangeListener);
+        view.findViewById(R.id.rege_step_two_description).setOnFocusChangeListener(onFocusChangeListener);
 
         profileUpdateHandler = new ProfileUpdateHandler(getActivity(), view);
         return view;
@@ -176,6 +184,34 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             startActivity(new Intent(activity, MainActivity.class));
             activity.finish();
         }
+    }
+
+    private View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            final int index = view.getId() == R.id.rege_step_two_true_name ?
+                    0 : baseFrame.getChildCount() - 1;
+            if (b) {
+                if (view.getId() != R.id.rege_step_two_true_name) {
+                    scrollToBottom(baseFrame);
+                }
+            }
+        }
+    };
+
+    private void scrollToBottom(final View scroll) {
+
+        Handler mHandler = new Handler();
+
+        mHandler.post(new Runnable() {
+            public void run() {
+                if (scroll == null) {
+                    return;
+                }
+
+                scroll.scrollTo(0, scroll.getBottom());
+            }
+        });
     }
 
 }
