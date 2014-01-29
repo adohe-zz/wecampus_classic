@@ -1,6 +1,7 @@
 package com.westudio.wecampus.ui.user;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +73,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     private TextView tvLove;
     private TextView tvRole;
     private ImageView ivAvatar;
+    private ProgressDialog progressDialog;
 
     private UserDataHelper mDataHelper;
     private User mUser;
@@ -354,23 +357,28 @@ public class MyProfileActivity extends PickPhotoActivity {
             tvRole.setText(Utility.getStageByType(this, type));
         } else if (requestCode == PHOTO_PICKED_WITH_DATA) {
             Uri selectedImage = data.getData();
-            doCropPhoto(selectedImage, mUriTemp);
+            doCropPhoto(selectedImage, mCropedTemp);
         } else if (requestCode == CAMERA_WITH_DATA) {
-            doCropPhoto(mUriTemp, mUriTemp);
+            doCropPhoto(mUriTemp, mCropedTemp);
         } else if (requestCode == PHOTO_CROPED_WITH_DATA) {
-            WeCampusApi.postUpdateAvatar(this, mUriTemp.getPath(),
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.please_wait));
+            progressDialog.show();
+            WeCampusApi.postUpdateAvatar(this, mCropedTemp.getPath(),
                     new Response.Listener() {
                         @Override
                         public void onResponse(Object o) {
-                            ivAvatar.setImageBitmap(decodeUriAsBitmap(mUriTemp));
+                            ivAvatar.setImageBitmap(decodeUriAsBitmap(mCropedTemp));
+                            progressDialog.dismiss();
                             Toast.makeText(MyProfileActivity.this, R.string.upload_success, Toast.LENGTH_SHORT).show();
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(MyProfileActivity.this, R.string.upload_fail, Toast.LENGTH_SHORT).show();
-                        }
+                            progressDialog.dismiss();
+                            Toast.makeText(MyProfileActivity.this, R.string.upload_fail,
+                                    Toast.LENGTH_SHORT).show();                        }
                     }
             );
         }

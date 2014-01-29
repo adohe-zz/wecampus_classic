@@ -32,7 +32,7 @@ public class PickImageIntentWrapper {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         intent.putExtra("scale", true);
-        intent.putExtra("noFaceDetection", true);
+        intent.putExtra("noFaceDetection", false);
         intent.putExtra("outputX", 200);
         intent.putExtra("outputY", 200);
         intent.putExtra("return-data", false);

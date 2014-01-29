@@ -67,19 +67,19 @@ public class AuthActivity extends PickPhotoActivity {
         switch (requestCode) {
             case PHOTO_PICKED_WITH_DATA: {
                 Uri selectedImage = data.getData();
-                doCropPhoto(selectedImage, mUriTemp);
+                doCropPhoto(selectedImage, mCropedTemp);
                 break;
             }
             case CAMERA_WITH_DATA: {
-                doCropPhoto(mUriTemp, mUriTemp);
+                doCropPhoto(mUriTemp, mCropedTemp);
                 break;
             }
             case PHOTO_CROPED_WITH_DATA: {
                 UpdateProfileFragment fragment = (UpdateProfileFragment) getSupportFragmentManager().findFragmentByTag(UPDATE_PROFILE_TAG);
                 Bundle bundle = new Bundle();
-                Bitmap bm = decodeUriAsBitmap(mUriTemp);
+                Bitmap bm = decodeUriAsBitmap(mCropedTemp);
                 bundle.putParcelable("cropedImage", bm);
-                bundle.putString("imagePath", mUriTemp.getPath());
+                bundle.putString("imagePath", mCropedTemp.getPath());
                 fragment.setCropedAvatarImage(bundle);
                 break;
             }

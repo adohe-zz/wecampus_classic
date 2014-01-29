@@ -31,7 +31,9 @@ public class PickPhotoActivity extends BaseGestureActivity {
 
     protected static File PHOTO_DIR;
     protected static File UPLOAD_AVATAR;
+    protected static File CROPED_AVATAR;
     protected Uri mUriTemp;
+    protected Uri mCropedTemp;
     protected static final int CAMERA_WITH_DATA = 3023;
     protected static final int PHOTO_PICKED_WITH_DATA = 3021;
     protected static final int PHOTO_CROPED_WITH_DATA = 3024;
@@ -42,9 +44,15 @@ public class PickPhotoActivity extends BaseGestureActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
 
-        PHOTO_DIR = this.getExternalFilesDir("temp");
-        UPLOAD_AVATAR = new File(PHOTO_DIR, "upload_avatar.jpg");
-        mUriTemp = Uri.parse("file://" + UPLOAD_AVATAR.getPath());
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            PHOTO_DIR = this.getExternalFilesDir("temp");
+            UPLOAD_AVATAR = new File(PHOTO_DIR, "upload_avatar.jpg");
+            CROPED_AVATAR = new File(PHOTO_DIR, "croped_avatar.jpg");
+            mUriTemp =  Uri.fromFile(UPLOAD_AVATAR);
+            mCropedTemp = Uri.fromFile(CROPED_AVATAR);
+        } else {
+            Toast.makeText(this, R.string.text_no_sdcard, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void doPickPhotoAction() {
