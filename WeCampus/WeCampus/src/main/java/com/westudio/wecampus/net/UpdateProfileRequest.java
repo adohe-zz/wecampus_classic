@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * Created by martian on 13-11-15.
@@ -21,6 +22,13 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
     public UpdateProfileRequest(User user, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(Method.POST, HttpUtil.getProfileWithOp(HttpUtil.ProfileOp.DETAIL), User.class, successListener, errorListener);
         this.mUser = user;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = super.getHeaders();
+        headers.put("X-HTTP-Method-Override", "PATCH");
+        return headers;
     }
 
     @Override
