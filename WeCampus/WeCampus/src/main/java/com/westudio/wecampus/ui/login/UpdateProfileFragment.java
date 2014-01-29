@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.view.CircleImageView;
 import com.westudio.wecampus.util.ImageUtil;
 
 /**
@@ -36,7 +38,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     private Activity activity;
 
     private TextView tvSkip;
-    private ImageView ivAvatar;
+    private CircleImageView ivAvatar;
     private ProgressDialog progressDialog;
     private String mStrImgLocalPath;
     private Button btnSubmit;
@@ -79,8 +81,9 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
         tvSkip = (TextView)view.findViewById(R.id.rege_step_two_skip);
         tvSkip.setOnClickListener(this);
-        ivAvatar = (ImageView) view.findViewById(R.id.rege_step_two_avatar);
+        ivAvatar = (CircleImageView) view.findViewById(R.id.rege_step_two_avatar);
         ivAvatar.setOnClickListener(this);
+
         btnSubmit = (Button) view.findViewById(R.id.rege_step_two_submit);
         btnSubmit.setOnClickListener(this);
         baseFrame = (ScrollView) view.findViewById(R.id.base_frame);
