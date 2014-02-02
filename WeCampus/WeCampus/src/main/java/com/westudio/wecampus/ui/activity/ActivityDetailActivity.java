@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
@@ -112,6 +113,20 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         defaultFemaleDrawable = BitmapFactory.decodeResource(getResources(), R.drawable.ic_default_female);
         updater = new ActivityDetailUpdater();
         updater.fetchActivityDetail();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ActivityDetail");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart("ActivityDetail");
+        MobclickAgent.onPause(this);
     }
 
     private void refreshActivityFromDb() {

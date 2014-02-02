@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
@@ -28,6 +29,20 @@ public class ChangePwdActivity extends BaseGestureActivity {
 
         updateActionBar();
         initWidget();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ChangePwdActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("ChangePwdActivity");
+        MobclickAgent.onPause(this);
     }
 
     private void updateActionBar() {

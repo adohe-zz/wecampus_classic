@@ -11,6 +11,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -41,6 +42,15 @@ public class PickSchoolActivity extends SherlockFragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("PickSchoolActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PickSchoolActivity");
+        MobclickAgent.onPause(this);
     }
 
     /**

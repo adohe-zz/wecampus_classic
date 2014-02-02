@@ -2,6 +2,7 @@ package com.westudio.wecampus.ui.user;
 
 import android.os.Bundle;
 
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 
@@ -29,6 +30,20 @@ public class MyHomepageActivity extends BaseDetailActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.my_home_page,
                 new MyHomepageFragment(), FRAGMENT).commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MyHomepageActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MyHomepageActivity");
+        MobclickAgent.onPause(this);
     }
 
     public PullToRefreshAttacher getmPullToRefreshAttacher() {

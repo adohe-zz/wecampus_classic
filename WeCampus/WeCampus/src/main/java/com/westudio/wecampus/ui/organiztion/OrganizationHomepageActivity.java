@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
@@ -146,6 +147,20 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         Utility.executeAsyncTask(mOrgQueryTask);
         mRequestOrgHandler.requestOrg();
         getOrgActivity(1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("OrganizationHomePageActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("OrganizationHomePageActivity");
+        MobclickAgent.onPause(this);
     }
 
     private void updateActionBar() {

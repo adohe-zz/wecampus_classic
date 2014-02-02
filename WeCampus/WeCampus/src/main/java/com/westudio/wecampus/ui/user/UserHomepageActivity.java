@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseDetailActivity;
 
@@ -32,6 +33,20 @@ public class UserHomepageActivity extends BaseDetailActivity {
         updateActionBar();
         getSupportFragmentManager().beginTransaction().replace(R.id.user_home_page,
                 UserHomepageFragment.newInstance(getIntent().getExtras()), FRAGMENT).commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("UserHomepageActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("UserHomepageActivity");
+        MobclickAgent.onPause(this);
     }
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {

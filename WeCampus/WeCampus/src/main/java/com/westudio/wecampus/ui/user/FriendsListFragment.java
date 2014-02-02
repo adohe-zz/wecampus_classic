@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
@@ -102,6 +103,18 @@ public class FriendsListFragment extends BaseFragment implements OnRefreshListen
         requestUsers();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("FriendsListFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("FriendsListFragment");
     }
 
     @Override

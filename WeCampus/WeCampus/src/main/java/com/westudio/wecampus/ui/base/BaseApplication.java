@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.util.AccountManager;
 
 import java.util.HashMap;
@@ -50,6 +51,10 @@ public class BaseApplication extends Application {
 
         accountMgr = new AccountManager(mContext);
         hasAccount = accountMgr.getUserId() != 0;
+
+        // 关闭友盟Activity默认统计方式
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.updateOnlineConfig(mContext);
     }
 
     @Override

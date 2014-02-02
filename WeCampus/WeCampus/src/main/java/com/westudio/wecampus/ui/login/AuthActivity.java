@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.PickPhotoActivity;
 
@@ -51,6 +52,20 @@ public class AuthActivity extends PickPhotoActivity {
         fragmentTransaction.commit();
         /**************************************************************************************/
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("AuthActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("AuthActivity");
+        MobclickAgent.onPause(this);
     }
 
     @Override

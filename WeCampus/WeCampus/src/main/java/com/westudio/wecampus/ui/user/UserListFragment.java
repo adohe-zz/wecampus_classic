@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
@@ -94,6 +95,18 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
 
         mUserList.setOnScrollListener(onScrollListener);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("UserListFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("UserListFragment");
     }
 
     private AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener() {

@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.makeramen.RoundedImageView;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.data.model.Advertisement;
@@ -73,6 +74,18 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
         banner3 = (RoundedImageView) view.findViewById(R.id.banner3);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("SquareFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("SquareFragment");
     }
 
     @Override

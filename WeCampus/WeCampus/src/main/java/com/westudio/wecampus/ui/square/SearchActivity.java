@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Organization;
@@ -100,6 +101,20 @@ public class SearchActivity extends BaseDetailActivity{
         mOrgAdapter.setOnRefreshListener(onRefreshFinishedListener);
         mActivityAdapter.setOnRefreshListener(onRefreshFinishedListener);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("SearchActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("SearchActivity");
+        MobclickAgent.onPause(this);
     }
 
     @Override

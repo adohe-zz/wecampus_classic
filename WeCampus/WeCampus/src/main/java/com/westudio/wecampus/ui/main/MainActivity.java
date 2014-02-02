@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
@@ -117,6 +118,20 @@ public class MainActivity extends SherlockFragmentActivity {
         }
 
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MainActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainActivity");
+        MobclickAgent.onPause(this);
     }
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {

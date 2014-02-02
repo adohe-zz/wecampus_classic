@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.about.TermsOfUseActivity;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
@@ -33,6 +34,20 @@ public class AboutUsActivity extends BaseGestureActivity {
 
         updateActionBar();
         initWidget();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("AboutUsActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("AboutUsActivity");
+        MobclickAgent.onPause(this);
     }
 
     private void updateActionBar() {

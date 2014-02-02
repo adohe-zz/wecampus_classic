@@ -21,6 +21,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
@@ -100,6 +101,15 @@ public class MyProfileActivity extends PickPhotoActivity {
     protected void onPause() {
         WeCampusApi.cancelRequest(this);
         super.onPause();
+        MobclickAgent.onPageEnd("MyProfileActivityActivity");
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MyProfileActivityActivity");
+        MobclickAgent.onResume(this);
     }
 
     private void updateActionBar() {

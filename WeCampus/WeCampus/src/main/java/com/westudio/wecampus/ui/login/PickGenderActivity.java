@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.user.MyProfileActivity;
 import com.westudio.wecampus.util.Constants;
@@ -27,6 +28,20 @@ public class PickGenderActivity extends SherlockFragmentActivity implements View
         gender = getIntent().getStringExtra(MyProfileActivity.GENDER);
         setupActionBar();
         initWidget();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PickGenderActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PickGenderActivity");
+        MobclickAgent.onPause(this);
     }
 
     /**

@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
 
@@ -21,6 +22,7 @@ import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefresh
 public class UserListActivity extends BaseGestureActivity {
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
+    private int titleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,36 @@ public class UserListActivity extends BaseGestureActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(getPageName());
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(getPageName());
+        MobclickAgent.onPause(this);
+    }
+
+    private String getPageName() {
+        String pageName = "";
+        switch (getIntent().getIntExtra(UserListFragment.USER_LIST_TYPE, 0)) {
+            case UserListFragment.PARTICIPATES:
+                pageName = "UserListActivity-Participates";
+                break;
+            case UserListFragment.FOLLOWERS:
+                pageName = "UserListActivity-Followers";
+                break;
+            case UserListFragment.FANS:
+                pageName = "UserListActivity-Fans";
+                break;
+        }
+        return pageName;
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);
     }
@@ -44,7 +76,7 @@ public class UserListActivity extends BaseGestureActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // 设置标题
-        int titleId = 0;
+        titleId = 0;
         switch (getIntent().getIntExtra(UserListFragment.USER_LIST_TYPE, 0)) {
             case UserListFragment.PARTICIPATES:
                 titleId = R.string.user_list_title_participates;

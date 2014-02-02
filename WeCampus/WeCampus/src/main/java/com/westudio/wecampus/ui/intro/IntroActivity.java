@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 
 /**
@@ -30,5 +31,19 @@ public class IntroActivity extends SherlockFragmentActivity {
     private void setUpActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("IntroActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("IntroActivity");
+        MobclickAgent.onPause(this);
     }
 }

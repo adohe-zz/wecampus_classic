@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.UserDataHelper;
@@ -125,11 +126,14 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd("LeftMentFragment");
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("LeftMentFragment");
+
         if(Utility.isConnect(mActivity) && BaseApplication.getInstance().hasAccount) {
             WeCampusApi.getProfile(mActivity, this, this);
         }

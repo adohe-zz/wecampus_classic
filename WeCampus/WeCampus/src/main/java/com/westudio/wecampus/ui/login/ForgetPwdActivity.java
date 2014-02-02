@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 
 /**
@@ -23,6 +24,20 @@ public class ForgetPwdActivity extends SherlockFragmentActivity {
 
         updateActionBar();
         initWidget();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ForgetPwdActivity");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("ForgetPwdActivity");
+        MobclickAgent.onPause(this);
     }
 
     private void updateActionBar() {
