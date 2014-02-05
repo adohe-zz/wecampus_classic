@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.util.Utility;
 
@@ -83,6 +84,7 @@ public class IntroAdapter extends BaseAdapter {
                 } else {
                     Toast.makeText(mContext, R.string.org_no_email, Toast.LENGTH_SHORT).show();
                 }
+                MobclickAgent.onEvent(mContext, "orgpage_more_email");
             }
         });
 

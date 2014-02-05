@@ -111,6 +111,7 @@ public class AuthActivity extends PickPhotoActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            MobclickAgent.onEvent(this, "register_back_btn");
         }
         return super.onOptionsItemSelected(item);
     }

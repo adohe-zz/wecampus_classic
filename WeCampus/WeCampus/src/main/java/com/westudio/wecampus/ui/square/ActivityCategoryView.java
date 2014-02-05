@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.ActivityCategory;
 import com.westudio.wecampus.ui.activity.ActivityListActivity;
@@ -56,5 +57,7 @@ public class ActivityCategoryView extends LinearLayout implements View.OnClickLi
         Intent intent = new Intent(getContext(), ActivityListActivity.class);
         intent.putExtra(ActivityListActivity.EXTRA_CATEGORY, category.name);
         getContext().startActivity(intent);
+
+        MobclickAgent.onEvent(getContext(), "explore_categories");
     }
 }

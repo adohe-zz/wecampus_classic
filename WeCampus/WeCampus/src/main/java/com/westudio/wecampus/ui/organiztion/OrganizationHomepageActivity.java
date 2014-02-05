@@ -128,6 +128,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
                 ActivityList ac = (ActivityList)activityAdapter.getItem(position - 1);
                 intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
                 startActivity(intent);
+                MobclickAgent.onEvent(getApplicationContext(), "orgpage_act_click");
             }
         });
 
@@ -140,6 +141,7 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
                 } else {
                     Toast.makeText(OrganizationHomepageActivity.this, R.string.please_login, Toast.LENGTH_SHORT).show();
                 }
+                MobclickAgent.onEvent(getApplicationContext(), "orgpage_like");
             }
         });
 

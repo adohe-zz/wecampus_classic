@@ -1,4 +1,4 @@
-package com.westudio.wecampus.ui.user;
+package com.westudio.wecampus.ui.friends;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -28,6 +28,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
+import com.westudio.wecampus.data.model.ActivityDetail;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -336,6 +337,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                     startActivityForResult(i, REQUEST_MENU);
                     return true;
                 }
+                MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_more_btn");
             }
             case android.R.id.home: {
                 finish();
@@ -352,6 +354,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_MENU && resultCode == RESULT_OK) {
             joinHandler.quit();
+            MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_more_unjoin_btn");
         }
     }
 
@@ -374,6 +377,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                         Toast.makeText(ActivityDetailActivity.this, R.string.msg_no_map_app,
                                 Toast.LENGTH_SHORT).show();
                     }
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_address");
                     break;
                 }
                 case R.id.detail_img_poster: {
@@ -382,6 +387,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                     intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, activity.image);
                     intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, activity.title);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_poster");
                     break;
                 }
                 case R.id.detail_part_three: {
@@ -390,6 +397,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, activity.organization_id);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_publisher");
                     break;
                 }
                 case R.id.detail_no_content_img: {
@@ -424,6 +433,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                     bundle.putInt(UserListFragment.USER_OR_ACTIVITY_ID, activityId);
                     intent.putExtras(bundle);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_participants");
                     break;
                 }
             }
@@ -473,6 +484,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                         Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.please_login),
                                 Toast.LENGTH_SHORT).show();
                     }
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_join_btn");
                 }
             });
             divider = ac.findViewById(R.id.divider);
@@ -550,6 +563,8 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                         Toast.makeText(ActivityDetailActivity.this, getResources().getString(R.string.please_login),
                                 Toast.LENGTH_SHORT).show();
                     }
+
+                    MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_like_btn");
                 }
             });
         }

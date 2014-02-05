@@ -138,8 +138,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         if(v.getId() == R.id.rege_btn_register && checkValidation()) {
             startRegister();
+            MobclickAgent.onEvent(getActivity(), "register_submit1_btn");
         } else if(v.getId() == R.id.rege_tips_two) {
             startActivity(new Intent(activity, TermsOfUseActivity.class));
+            MobclickAgent.onEvent(getActivity(), "register_terms");
         } else if(v.getId() == R.id.rege_edt_school) {
             startActivityForResult(new Intent(activity, PickSchoolActivity.class), AuthActivity.PICK_SCHOOL_REQUEST);
         } else if(v.getId() == R.id.rege_edt_sex) {

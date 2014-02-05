@@ -103,15 +103,19 @@ public class SettingFragment extends SherlockFragment {
                     } else {
                         Toast.makeText(mActivity, R.string.please_login, Toast.LENGTH_SHORT).show();
                     }
+                    MobclickAgent.onEvent(getActivity(), "settings_changepsd");
                     break;
                 }
                 case R.id.ly_setting_about_us: {
                     Intent intent = new Intent(mActivity, AboutUsActivity.class);
                     startActivity(intent);
                     mActivity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+                    MobclickAgent.onEvent(getActivity(), "settings_about");
                     break;
                 }
                 case R.id.ly_setting_clear_cache:
+
+                    MobclickAgent.onEvent(getActivity(), "settings_cache");
                     break;
                 case R.id.ly_setting_feedback: {
                     Uri emailUri = Uri.parse("mailto:wetongji2012@gmail.com");
@@ -122,12 +126,14 @@ public class SettingFragment extends SherlockFragment {
                     } catch (ActivityNotFoundException e) {
                         e.printStackTrace();
                     }
+                    MobclickAgent.onEvent(getActivity(), "settings_feedback");
                     break;
                 }
                 case R.id.ly_setting_share_wecampus: {
                     Intent intent = new Intent(mActivity, ShareMenuActivity.class);
                     intent.putExtra(ShareMenuActivity.IS_SHARE_APP, true);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "settings_share");
                     break;
                 }
             }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
@@ -217,6 +218,8 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     bundle.putInt(ListActivity.TYPE, 1);
                     intent.putExtras(bundle);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(getActivity(), "mypage_more_activity");
                 }
             } else if(v.getId() == R.id.img_avatar) {
                 Intent intent = new Intent(mActivity, ImageDetailActivity.class);
@@ -224,16 +227,19 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, mUser.nickname);
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_SEX, mUser.gender);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "mypage_avatar");
             } else if (v.getId() == R.id.clickable_follow) {
                 Intent intent = new Intent(getActivity(), UserListActivity.class);
                 intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
                 intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "mypage_following_number");
             } else if (v.getId() == R.id.clickable_fans) {
                 Intent intent = new Intent(getActivity(), UserListActivity.class);
                 intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
                 intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "mypage_follower_number");
             }
         }
     };
@@ -273,6 +279,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
                     intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "mypage_latest_activity");
                 }
             });
         }
@@ -368,6 +375,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     bundle.putInt(ListActivity.TYPE, 3);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "mypage_liked_org");
                 }
             });
         }
@@ -442,6 +450,8 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     bundle.putInt(ListActivity.TYPE, 2);
                     intent.putExtras(bundle);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(getActivity(), "mypage_liked_act");
                 }
             });
         }

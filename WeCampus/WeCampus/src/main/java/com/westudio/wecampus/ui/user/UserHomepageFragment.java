@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.google.gson.Gson;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
@@ -35,7 +36,6 @@ import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
-import com.westudio.wecampus.util.ImageUtil;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
@@ -134,11 +134,13 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
             @Override
             public void onFollowListener() {
                 followUserHandler.follow(true);
+                MobclickAgent.onEvent(getActivity(), "userpage_follow");
             }
 
             @Override
             public void onUnFollowListener() {
                 followUserHandler.follow(false);
+                MobclickAgent.onEvent(getActivity(), "userpage_follow");
             }
         });
 
@@ -239,6 +241,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     bundle.putInt(ListActivity.TYPE, 1);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_more_activity");
                 }
             } else if(v.getId() == R.id.img_avatar) {
                 Intent intent = new Intent(mActivity, ImageDetailActivity.class);
@@ -246,16 +249,19 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, mUser.nickname);
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_SEX, mUser.gender);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "userpage_avatar");
             } else if(v.getId() == R.id.clickable_follow) {
                 Intent intent = new Intent(mActivity, UserListActivity.class);
                 intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
                 intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "userpage_following_number");
             } else if(v.getId() == R.id.clickable_fans) {
                 Intent intent = new Intent(mActivity, UserListActivity.class);
                 intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
                 intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
                 startActivity(intent);
+                MobclickAgent.onEvent(getActivity(), "userpage_follower_number");
             }
         }
     };
@@ -295,6 +301,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
                     intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_latest_activity");
                 }
             });
         }
@@ -399,6 +406,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     bundle.putInt(ListActivity.TYPE, 3);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_liked_org");
                 }
             });
         }
@@ -473,6 +481,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                     bundle.putInt(ListActivity.TYPE, 2);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_liked_act");
                 }
             });
         }

@@ -111,6 +111,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             fragmentTransaction.replace(R.id.auth_container, RegisterFragment.newInstance(null), AuthActivity.REGISTER_FRAGMENT_TAG);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+
+            MobclickAgent.onEvent(getActivity(), "account_register");
         } else if(v.getId() == R.id.btn_login) {
             String email = edtEmail.getText().toString();
             String pwd = edtPwd.getText().toString();
@@ -119,9 +121,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             } else {
                 Toast.makeText(getActivity(), toastStringId, Toast.LENGTH_SHORT).show();
             }
+
+            MobclickAgent.onEvent(getActivity(), "account_login");
         } else if(v.getId() == R.id.login_forget_pwd) {
             Intent intent = new Intent(getActivity(), ForgetPwdActivity.class);
             startActivity(intent);
+
+            MobclickAgent.onEvent(getActivity(), "account_forgetpsd");
         }
     }
 

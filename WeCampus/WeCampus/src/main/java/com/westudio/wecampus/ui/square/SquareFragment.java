@@ -99,6 +99,7 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.search_bar: {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
+                MobclickAgent.onEvent(getActivity(), "explore_search");
                 break;
             }
         }
@@ -139,10 +140,13 @@ public class SquareFragment extends BaseFragment implements View.OnClickListener
             String url = "";
             if (view.getId() == R.id.banner1 && advertisementList.size() > 0) {
                 url = advertisementList.get(2).getUrl();
+                MobclickAgent.onEvent(getActivity(), "explore_ad1");
             } else if (view.getId() == R.id.banner2 && advertisementList.size() > 1) {
                 url = advertisementList.get(1).getUrl();
+                MobclickAgent.onEvent(getActivity(), "explore_ad2");
             } else if (view.getId() == R.id.banner3 && advertisementList.size() > 2) {
                 url = advertisementList.get(0).getUrl();
+                MobclickAgent.onEvent(getActivity(), "explore_ad3");
             }
             Intent intent = new Intent(getActivity(), WebBrowserActivity.class);
             intent.putExtra(WebBrowserActivity.EXTRA_URL, url);

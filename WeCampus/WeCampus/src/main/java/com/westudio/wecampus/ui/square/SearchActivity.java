@@ -181,6 +181,8 @@ public class SearchActivity extends BaseDetailActivity{
             mLvResult.setAdapter(mActivityAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 13f));
             mAttacher.page = 1;
+
+            MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_act");
         }
 
         @Override
@@ -192,6 +194,8 @@ public class SearchActivity extends BaseDetailActivity{
             mLvResult.setAdapter(mSearchUserAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
             mAttacher.page = 1;
+
+            MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_user");
         }
 
         @Override
@@ -203,6 +207,8 @@ public class SearchActivity extends BaseDetailActivity{
             mLvResult.setAdapter(mOrgAdapter);
             mLvResult.setDividerHeight(Utility.dip2px(SearchActivity.this, 1f));
             mAttacher.page = 1;
+
+            MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_org");
         }
     };
 
@@ -249,6 +255,8 @@ public class SearchActivity extends BaseDetailActivity{
                     intent = new Intent(SearchActivity.this, ActivityDetailActivity.class);
                     intent.putExtra(ActivityListFragment.ACTIVITY_ID, activity.id);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_act_itemClick");
                     break;
                 case 1:
                     //别人的主页
@@ -270,6 +278,8 @@ public class SearchActivity extends BaseDetailActivity{
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
+
+                    MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_user_itemClick");
                     break;
                 case 2:
                     //组织详情
@@ -277,6 +287,8 @@ public class SearchActivity extends BaseDetailActivity{
                     intent = new Intent(SearchActivity.this, OrganizationHomepageActivity.class);
                     intent.putExtra(OrganizationHomepageActivity.ORG_ID, org.id);
                     startActivity(intent);
+
+                    MobclickAgent.onEvent(SearchActivity.this, "explore_search_tab_org_itemClick");
                     break;
 
             }

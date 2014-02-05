@@ -1,4 +1,4 @@
-package com.westudio.wecampus.ui.user;
+package com.westudio.wecampus.ui.friends;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,6 +22,7 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.square.SearchActivity;
+import com.westudio.wecampus.ui.user.UserHomepageActivity;
 import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.WxShareTool;
 import com.woozzu.android.widget.IndexableListView;
@@ -85,10 +86,12 @@ public class FriendsListFragment extends BaseFragment implements OnRefreshListen
                 if (position == 0) {
                     WxShareTool tool = new WxShareTool(getActivity());
                     tool.buildAppMessage().fireShareToWx(WxShareTool.ShareType.FRIENDS);
+                    MobclickAgent.onEvent(getActivity(), "friend_invite_wechat");
                 } else if(position == 1) {
                     Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
                     searchIntent.putExtra(SearchActivity.SELECTED_POSITION, 1);
                     startActivity(searchIntent);
+                    MobclickAgent.onEvent(getActivity(), "friend_search");
                 } else {
                     Intent intent = new Intent(getActivity(), UserHomepageActivity.class);
                     Bundle bundle = new Bundle();
@@ -96,6 +99,7 @@ public class FriendsListFragment extends BaseFragment implements OnRefreshListen
                     bundle.putBoolean(UserHomepageActivity.USER_LIST, true);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "friend_click");
                 }
             }
         });

@@ -18,7 +18,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.setting.SettingFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
-import com.westudio.wecampus.ui.user.FriendsListFragment;
+import com.westudio.wecampus.ui.friends.FriendsListFragment;
 import com.westudio.wecampus.ui.user.MyHomepageFragment;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
@@ -99,6 +99,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        MobclickAgent.onEvent(this, "nav_menu_btn");
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
@@ -114,6 +115,7 @@ public class PinnedHeaderListView extends ListView {
                 intent.putExtra(ImageDetailActivity.KEY_IMAGE_URL, avatarUrl);
                 intent.putExtra(ImageDetailActivity.KEY_EXTRA_INFO, name);
                 mContext.startActivity(intent);
+                MobclickAgent.onEvent(mContext, "orgpage_avatar");
             }
         });
         mName = (TextView) header.findViewById(R.id.text_user_name);

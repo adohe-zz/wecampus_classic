@@ -80,16 +80,20 @@ public class AboutUsActivity extends BaseGestureActivity {
                     } else {
                         Toast.makeText(AboutUsActivity.this, R.string.no_market, Toast.LENGTH_SHORT).show();
                     }
+                    MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_rate");
                     break;
                 case R.id.about_rl_weibo:
+                    MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_weibo");
                     break;
                 case R.id.about_rl_web:
                     Intent webIntent = new Intent(AboutUsActivity.this, WebBrowserActivity.class);
                     webIntent.putExtra(WebBrowserActivity.EXTRA_URL, "http://www.wecampus.net");
                     startActivity(webIntent);
+                    MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_website");
                     break;
                 case R.id.about_terms_of_use:
                     startActivity(new Intent(AboutUsActivity.this, TermsOfUseActivity.class));
+                    MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_terms");
                     break;
             }
         }

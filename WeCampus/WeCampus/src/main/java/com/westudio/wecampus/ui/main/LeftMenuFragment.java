@@ -189,32 +189,41 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         switch (view.getId()) {
             case R.id.activity_section: {
                 mainActivity.changeContent(MainActivity.ContentType.ACTIVITY);
+                MobclickAgent.onEvent(getActivity(), "menu_activity");
                 break;
             }
             case R.id.user_section: {
                 mainActivity.changeContent(MainActivity.ContentType.USERS);
+                MobclickAgent.onEvent(getActivity(), "menu_friends");
                 break;
             }
             case R.id.square_section: {
                 mainActivity.changeContent(MainActivity.ContentType.SQUARE);
+                MobclickAgent.onEvent(getActivity(), "menu_explore");
                 break;
             }
             case R.id.settings_section: {
                 mainActivity.changeContent(MainActivity.ContentType.SETTINGS);
+                MobclickAgent.onEvent(getActivity(), "menu_settings");
                 break;
             }
             case R.id.img_avatar: {
                 if(BaseApplication.getInstance().hasAccount) {
                     mainActivity.changeContent(MainActivity.ContentType.HOMEPAGE);
+                    MobclickAgent.onEvent(getActivity(), "menu_avatar");
                 }
                 break;
             }
             case R.id.edit_button: {
-                startActivity(new Intent(getActivity(), MyProfileActivity.class));
+                if(BaseApplication.getInstance().hasAccount) {
+                    startActivity(new Intent(getActivity(), MyProfileActivity.class));
+                    MobclickAgent.onEvent(getActivity(), "menu_edit");
+                }
                 break;
             }
             case R.id.btn_sign_in: {
                 startActivity(new Intent(getActivity(), AuthActivity.class));
+                MobclickAgent.onEvent(getActivity(), "menu_login");
                 break;
             }
             case R.id.btn_sign_out: {
@@ -226,6 +235,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mLogoutHandler.logout();
+                        MobclickAgent.onEvent(getActivity(), "menu_logout");
                     }
                 });
                 builder.show();

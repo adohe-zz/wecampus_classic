@@ -4,16 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +26,6 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.ui.view.CircleImageView;
-import com.westudio.wecampus.util.ImageUtil;
 
 /**
  * Created by nankonami on 13-9-20.
@@ -122,14 +118,17 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             case R.id.rege_step_two_skip: {
                 startActivity(new Intent(activity, MainActivity.class));
                 activity.finish();
+                MobclickAgent.onEvent(getActivity(), "register_skip");
                 break;
             }
             case R.id.rege_step_two_avatar: {
                 ((AuthActivity)getActivity()).doPickPhotoAction();
+                MobclickAgent.onEvent(getActivity(), "register_avatar_upload");
                 break;
             }
             case R.id.rege_step_two_submit: {
                 profileUpdateHandler.uploadProfile();
+                MobclickAgent.onEvent(getActivity(), "register_submit2_btn");
             }
         }
     }

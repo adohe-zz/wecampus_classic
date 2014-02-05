@@ -86,6 +86,16 @@ public class UserListFragment extends SherlockFragment implements OnRefreshListe
                     intent.putExtra(UserHomepageActivity.USER, (User)mAdapter.getItem(i));
                     startActivity(intent);
                 }
+
+                switch(mType) {
+                    case PARTICIPATES:
+                        MobclickAgent.onEvent(getActivity(), "participants_item");
+                        break;
+                    case FANS:
+                        break;
+                    case FOLLOWERS:
+                        break;
+                }
             }
         });
 

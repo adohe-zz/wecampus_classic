@@ -18,6 +18,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
+import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
@@ -127,15 +128,19 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
             switch (view.getId()) {
                 case R.id.share_to_moment:
                     shareAppToWx(WxShareTool.ShareType.MOMENT);
+                    MobclickAgent.onEvent(this, "settings_share_wechatcircle");
                     break;
                 case R.id.share_to_wx:
                     shareAppToWx(WxShareTool.ShareType.FRIENDS);
+                    MobclickAgent.onEvent(this, "settings_share_wechat");
                     break;
                 case R.id.share_to_weibo:
+                    MobclickAgent.onEvent(this, "settings_share_weibo");
                     shareToWeibo(true);
                     break;
                 case R.id.share_to_mail:
                     sendToEmail(true);
+                    MobclickAgent.onEvent(this, "settings_share_email");
                     break;
                 case R.id.item_quit:
                     setResult(RESULT_OK, new Intent());
@@ -146,15 +151,19 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
             switch (view.getId()) {
                 case R.id.share_to_moment:
                     shareToWx(WxShareTool.ShareType.MOMENT);
+                    MobclickAgent.onEvent(this, "activity_detail_more_wechatcircle");
                     break;
                 case R.id.share_to_wx:
                     shareToWx(WxShareTool.ShareType.FRIENDS);
+                    MobclickAgent.onEvent(this, "activity_detail_more_wechat");
                     break;
                 case R.id.share_to_weibo:
                     shareToWeibo(false);
+                    MobclickAgent.onEvent(this, "activity_detail_more_weibo");
                     break;
                 case R.id.share_to_mail:
                     sendToEmail(false);
+                    MobclickAgent.onEvent(this, "activity_detail_more_email");
                     break;
                 case R.id.item_quit:
                     setResult(RESULT_OK, new Intent());
