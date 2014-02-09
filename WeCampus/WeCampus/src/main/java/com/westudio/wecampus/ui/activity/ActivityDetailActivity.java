@@ -78,6 +78,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     private RelativeLayout rlOrganization;
     private RelativeLayout rlParticipants;
     private RelativeLayout rlCompany;
+    private Menu mMenu;
 
     ActivityDataHelper acDataHelper;
     private OrgDataHelper orgDataHelper;
@@ -196,6 +197,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        mMenu = menu;
         if (BaseApplication.getInstance().hasAccount) {
             MenuInflater inflater = getSupportMenuInflater();
             inflater.inflate(R.menu.detail_menu, menu);
@@ -278,6 +280,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
             joinHandler.refreshUi(activity.can_join);
             likeHandler.refreshUi(activity.can_like);
         }
+
     }
 
     private void updateExtraUi() {
@@ -526,9 +529,11 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
             if (canJoin) {
                 container.setVisibility(View.VISIBLE);
                 divider.setVisibility(View.VISIBLE);
+                mMenu.findItem(R.id.detail_menu_share).setVisible(false);
             } else {
                 container.setVisibility(View.GONE);
                 divider.setVisibility(View.GONE);
+                mMenu.findItem(R.id.detail_menu_share).setVisible(true);
             }
         }
     }
