@@ -246,7 +246,7 @@ public class HttpUtil {
                 sb.append(id).append(SLASH).append("fans?page=").append(page);
                 break;
             case FOLLOWERS:
-                sb.append(id).append(SLASH).append("followers?page=").append(page);
+                sb.append(id).append(SLASH).append("followings?page=").append(page);
                 break;
             case FRIENDS:
                 sb.append(id).append(SLASH).append("friends");
