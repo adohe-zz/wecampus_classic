@@ -106,6 +106,22 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         return mView;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mInfoHandler.fetchUserInfo();
+    }
+
     /**
      * Get the user info from database
      */
@@ -425,7 +441,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
 
     private class UserFActivityHandler implements Response.Listener<ActivityList.RequestData>, Response.ErrorListener {
 
-        private View view;
         private RelativeLayout rlFavoriteActivity;
         private LinearLayout lyNoFavoriteActivity;
         private TextView tvNumActivity;
@@ -434,7 +449,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
         private ImageView ivActivityIcon;
 
         public UserFActivityHandler(View view) {
-            this.view = view;
             rlFavoriteActivity = (RelativeLayout)view.findViewById(R.id.user_like_activity);
             lyNoFavoriteActivity = (LinearLayout)view.findViewById(R.id.user_like_no_activity);
             tvNumActivity = (TextView)view.findViewById(R.id.num_like_activity);

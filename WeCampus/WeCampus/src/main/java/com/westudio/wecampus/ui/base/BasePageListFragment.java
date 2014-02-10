@@ -109,7 +109,6 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
      * Load the first page data
      */
     protected void loadFirstPage() {
-        Utility.log("load", "first page");
         loadData(1);
     }
 
@@ -135,7 +134,6 @@ public abstract class BasePageListFragment<T> extends BaseFragment implements
             mPullToRefreshAttacher.setRefreshing(true);
         }
 
-        Utility.log("request url", getRequestUrl());
         WeCampusApi.requestPageData(mActivity, getRequestUrl(), getResponseDataClass(), new Response.Listener<T>() {
             @Override
             public void onResponse(final T t) {

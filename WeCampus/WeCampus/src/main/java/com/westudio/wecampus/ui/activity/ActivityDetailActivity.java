@@ -28,7 +28,6 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.ActivityDataHelper;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
-import com.westudio.wecampus.data.model.ActivityDetail;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;

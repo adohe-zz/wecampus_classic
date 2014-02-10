@@ -20,10 +20,10 @@ import com.westudio.wecampus.ui.setting.SettingFragment;
 import com.westudio.wecampus.ui.square.SquareFragment;
 import com.westudio.wecampus.ui.friends.FriendsListFragment;
 import com.westudio.wecampus.ui.user.MyHomepageFragment;
-
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 
 public class MainActivity extends SherlockFragmentActivity {
+
     public static final int MSG_SWITCH_CONTENT = 9009;
 
     private DrawerLayout mDrawerLayout;
@@ -133,6 +133,11 @@ public class MainActivity extends SherlockFragmentActivity {
         super.onPause();
         MobclickAgent.onPageEnd("MainActivity");
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {

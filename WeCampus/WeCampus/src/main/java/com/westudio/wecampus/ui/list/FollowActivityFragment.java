@@ -56,7 +56,7 @@ public class FollowActivityFragment extends BasePageListFragment<ActivityList.Re
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mActivity, ActivityDetailActivity.class);
-                ActivityList ac = (ActivityList)getAdapter().getItem(position);
+                ActivityList ac = (ActivityList)getAdapter().getItem(position - listView.getHeaderViewsCount());
                 intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
                 startActivity(intent);
             }
@@ -113,7 +113,6 @@ public class FollowActivityFragment extends BasePageListFragment<ActivityList.Re
 
     @Override
     protected void updateUI(ActivityList.RequestData data) {
-        Utility.log("size", data.getObjects().size());
         getAdapter().addAll(data.getObjects());
     }
 }
