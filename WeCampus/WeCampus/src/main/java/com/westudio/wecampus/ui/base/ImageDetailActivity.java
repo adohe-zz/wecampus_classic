@@ -92,12 +92,13 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
     }
 
     private void updateActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_image_bg));
         String title = "<font color=\"#999999\">" + extraInfo + "</font>";
         getSupportActionBar().setTitle(Html.fromHtml(title));
-        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.image_detail_icon));
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
     @Override

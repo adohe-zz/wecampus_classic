@@ -103,7 +103,8 @@
 
         <!-- ImageDetailActivity -->
         <activity
-            android:name=".ui.base.ImageDetailActivity" />
+            android:name=".ui.base.ImageDetailActivity"
+            android:logo="@drawable/image_detail_icon"/>
 
         <activity
             android:name=".ui.organiztion.OrganizationHomepageActivity" />

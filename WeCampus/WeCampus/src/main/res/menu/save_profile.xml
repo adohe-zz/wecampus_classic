@@ -2,9 +2,6 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:icon="@drawable/ic_tick"
-        android:showAsAction="always"/>
-    <item
         android:title="@string/save_profile"
         android:id="@+id/save_profile"
         android:showAsAction="always"/>

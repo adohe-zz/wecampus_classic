@@ -2,14 +2,21 @@ package com.westudio.wecampus.ui.user;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -120,6 +127,28 @@ public class MyProfileActivity extends PickPhotoActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.save_profile, menu);
+        getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+            @Override
+            public View onCreateView(String name, Context context, AttributeSet attrs) {
+                if(name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")) {
+                    try {
+                        LayoutInflater f = getLayoutInflater();
+                        final View view = f.createView(name, null, attrs);
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((TextView)view).setTextColor(Color.parseColor("#0CC2CB"));
+                            }
+                        });
+                        return view;
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                return null;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
