@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.base;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,7 +20,6 @@ import com.android.volley.toolbox.ImageLoader;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.Constants;
-import com.westudio.wecampus.util.ResponseDiskCache;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -116,24 +116,22 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
                 overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
                 break;
             case R.id.detail_image_save: {
-                ResponseDiskCache cache = (ResponseDiskCache)WeCampusApi.imageRequestQueue.getCache();
-                ImageLoader imageLoader = WeCampusApi.getImageLoader();
+                WeCampusApi.requestImage(url, new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                        Bitmap bm = imageContainer.getBitmap();
+                        if (bm != null) {
+                            saveBmToFile(bm);
+                        }
+                    }
 
-                File file = cache.getFileForKey(url);
-                if(file != null) {
-                    File ext = Environment.getExternalStorageDirectory();
-                    File downloadFileDir = new File(ext, "wecampus");
-                    if(!downloadFileDir.exists()) {
-                        downloadFileDir.mkdir();
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(getApplicationContext(), R.string.msg_img_save_fail, Toast.LENGTH_SHORT).show();
                     }
-                    File dstFile = new File(ext, "wecampus/" + file.getName() + ".png");
-                    try {
-                        copyFile(file, dstFile);
-                        Toast.makeText(this, R.string.save_success, Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                });
+
+
                 break;
             }
         }
@@ -171,5 +169,27 @@ public class ImageDetailActivity extends SherlockFragmentActivity {
         outBuff.close();
         output.close();
         input.close();
+    }
+
+    private void saveBmToFile(Bitmap bitmap) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File ext = Environment.getExternalStorageDirectory();
+            File downloadFileDir = new File(ext, "wecampus");
+            if(!downloadFileDir.exists()) {
+                downloadFileDir.mkdir();
+            }
+            File dstFile = new File(downloadFileDir, "p" + System.currentTimeMillis() + ".jpg");
+            try {
+                FileOutputStream fos = new FileOutputStream(dstFile);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+                fos.close();
+                Toast.makeText(getApplicationContext(), R.string.msg_img_save_success, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), R.string.msg_img_save_fail, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.text_no_sdcard, Toast.LENGTH_SHORT).show();
+        }
     }
 }
