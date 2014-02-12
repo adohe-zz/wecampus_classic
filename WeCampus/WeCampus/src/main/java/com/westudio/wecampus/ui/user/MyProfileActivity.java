@@ -122,34 +122,15 @@ public class MyProfileActivity extends PickPhotoActivity {
     private void updateActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.save_profile, menu);
-        getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.menu_save_profile);
+        getSupportActionBar().getCustomView().findViewById(R.id.save_profile).setOnClickListener(
+                new View.OnClickListener() {
             @Override
-            public View onCreateView(String name, Context context, AttributeSet attrs) {
-                if(name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")) {
-                    try {
-                        LayoutInflater f = getLayoutInflater();
-                        final View view = f.createView(name, null, attrs);
-                        new Handler().post(new Runnable() {
-                            @Override
-                            public void run() {
-                                ((TextView)view).setTextColor(Color.parseColor("#0CC2CB"));
-                            }
-                        });
-                        return view;
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return null;
+            public void onClick(View v) {
+                updateProfile();
             }
         });
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

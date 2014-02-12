@@ -23,6 +23,7 @@ import java.util.HashMap;
  * Created by nankonami on 13-9-11.
  */
 public class SplashActivity extends Activity {
+
     private static final long SPLASH_TIME_OUT = 2700;
 
     private AsyncTask task;

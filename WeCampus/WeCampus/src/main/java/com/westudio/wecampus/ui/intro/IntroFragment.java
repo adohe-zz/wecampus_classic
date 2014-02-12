@@ -27,7 +27,7 @@ import java.util.List;
 public class IntroFragment extends BaseFragment implements View.OnClickListener{
 
     private static final int[] BG_IMAGE_IDS = {
-            R.drawable.photo1, R.drawable.photo2, R.drawable.photo3, R.drawable.photo4
+            R.drawable.guide1, R.drawable.guide2, R.drawable.guide3, R.drawable.guide4
     };
     private static final int[] WORD_IMAGE_IDS = {
             R.drawable.text1, R.drawable.text2, R.drawable.text3, R.drawable.text4
@@ -74,8 +74,8 @@ public class IntroFragment extends BaseFragment implements View.OnClickListener{
             LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.page_intro, null);
             ImageView imageView = (ImageView) linearLayout.findViewById(R.id.picture);
             imageView.setImageResource(BG_IMAGE_IDS[i]);
-            ImageView ivWord = (ImageView) linearLayout.findViewById(R.id.words);
-            ivWord.setImageResource(WORD_IMAGE_IDS[i]);
+            /*ImageView ivWord = (ImageView) linearLayout.findViewById(R.id.words);
+            ivWord.setImageResource(WORD_IMAGE_IDS[i]);*/
             viewList.add(linearLayout);
         }
 
