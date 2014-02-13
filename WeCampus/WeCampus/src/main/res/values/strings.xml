@@ -282,5 +282,9 @@
     <string name="fragment_title_activities">全部活动</string>
     <string name="fragment_title_homepage">个人主页</string>
     <string name="share_weibo">新浪微博</string>
+    <string name="age">年龄</string>
+    <string name="age_num">%d岁</string>
+    <string name="birthday_date">出生日期</string>
 
+    <string name="input_validate_age">请输入有效的年龄</string>
 </resources>

@@ -2,28 +2,19 @@ package com.westudio.wecampus.ui.user;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -34,11 +25,9 @@ import com.westudio.wecampus.data.UserDataHelper;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
-import com.westudio.wecampus.ui.base.BaseDetailActivity;
 import com.westudio.wecampus.ui.base.PickPhotoActivity;
 import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.login.PickGenderActivity;
-import com.westudio.wecampus.ui.login.PickSchoolActivity;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.Utility;
 
@@ -55,6 +44,8 @@ public class MyProfileActivity extends PickPhotoActivity {
     public static final String PICK_EMOTION = "emotion";
     public static final String PICK_STAGE = "stage";
     public static final String GENDER = "gender";
+    public static final String AGE = "age";
+
     public static final int UPDATE_NICK_REQUEST = 1;
     public static final int UPDATE_NICK_RESULT = 2;
     public static final int UPDATE_NAME_REQUEST = 3;
@@ -69,6 +60,8 @@ public class MyProfileActivity extends PickPhotoActivity {
     public static final int PICK_EMOTION_RESULT = 12;
     public static final int PICK_STAGE_REQUEST = 13;
     public static final int PICK_STAGE_RESULT = 14;
+    public static final int PICK_AGE_REQUEST = 15;
+    public static final int PICK_AGE_RESULT = 16;
 
     private TextView tvNickName;
     private TextView tvGender;
@@ -304,6 +297,12 @@ public class MyProfileActivity extends PickPhotoActivity {
                     doPickPhotoAction();
                     break;
                 }
+                case R.id.change_birthday: {
+                    Intent intent = new Intent(MyProfileActivity.this, PickBirthdayActivity.class);
+                    intent.putExtra(AGE, tvBirthday.getText().toString());
+                    startActivityForResult(intent, PICK_AGE_REQUEST);
+                    break;
+                }
             }
         }
     };
@@ -365,6 +364,8 @@ public class MyProfileActivity extends PickPhotoActivity {
             tvWord.setText(data.getStringExtra(WORDS));
         } else if(requestCode == UPDATE_NAME_REQUEST && resultCode == UPDATE_NAME_RESULT) {
             tvName.setText(data.getStringExtra(REAL_NAME));
+        } else if(requestCode == PICK_AGE_REQUEST && resultCode == PICK_AGE_RESULT) {
+            tvBirthday.setText(data.getStringExtra(AGE));
         } else if(requestCode == UPDATE_PHONE_REQUEST && resultCode == UPDATE_PHONE_RESULT) {
             tvPhone.setText(data.getStringExtra(PHONE));
         } else if(requestCode == UPDATE_EMAIL_REQUEST && resultCode == UPDATE_EMAIL_RESULT) {
