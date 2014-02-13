@@ -153,6 +153,8 @@
 
         <activity android:name=".ui.user.UpdateWordsActivity" />
 
+        <activity android:name=".ui.user.PickBirthdayActivity" />
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"
