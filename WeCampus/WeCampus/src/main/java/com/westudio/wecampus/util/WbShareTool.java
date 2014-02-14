@@ -16,7 +16,7 @@ import com.westudio.wecampus.R;
  * Created by martian on 14-1-19.
  */
 public class WbShareTool  {
-    public static String APP_KEY = "3126350995";
+    public static String APP_KEY = Config.WB_APP_ID;
 
     private IWeiboShareAPI mWeiboShareAPI;
     private Context mContext;
