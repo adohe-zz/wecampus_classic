@@ -6,16 +6,22 @@ package com.westudio.wecampus.util;
  */
 public class Config {
     public static final boolean IS_TEST = false;
-    public static String WX_APP_ID;
     public static String WB_APP_ID;
 
-    {
+    public static String WX_APP_ID() {
         if (IS_TEST){
-            WX_APP_ID = "wx849ec04575e33109";
-            WB_APP_ID = "3126350995";
+            return "wx849ec04575e33109";
         } else {
-            WX_APP_ID = "wxe8c36962ae11e4eb";
-            WB_APP_ID = "2393509052";
+            return "wxe8c36962ae11e4eb";
         }
     }
+
+    public static String WB_APP_KEY() {
+        if (IS_TEST){
+            return "3126350995";
+        } else {
+            return "2393509052";
+        }
+    }
+
 }

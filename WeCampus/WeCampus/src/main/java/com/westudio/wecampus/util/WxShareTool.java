@@ -14,7 +14,7 @@ import com.tencent.mm.sdk.openapi.WXWebpageObject;
  */
 public class WxShareTool {
 
-    public static String APP_ID = Config.WX_APP_ID;
+    public static String APP_ID = Config.WX_APP_ID();
 
     public static final String WEBSITE_URL = "http://www.wecampus.net";
 
