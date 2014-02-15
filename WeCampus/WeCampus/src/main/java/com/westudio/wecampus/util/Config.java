@@ -5,8 +5,10 @@ package com.westudio.wecampus.util;
  * 定义一些环境相关的常量
  */
 public class Config {
-    public static final boolean IS_TEST = false;
-    public static String WB_APP_ID;
+
+    // 注意每次打包之前需要吧这个变量改成false
+    public static final boolean IS_TEST = true;
+
 
     public static String WX_APP_ID() {
         if (IS_TEST){

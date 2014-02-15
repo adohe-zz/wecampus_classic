@@ -53,9 +53,9 @@ public class WbShareTool  {
 
         // 设置 Bitmap 类型的图片到视频对象里
         if (bitmap != null) {
-            byte[] data = ImageUtil.cropBitmap(bitmap);
-            Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
-            mediaObject.setThumbImage(bm);
+            byte[] data = ImageUtil.cropBitmapToSize(bitmap, 32 * 1024);
+            //Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+            mediaObject.thumbData = data;
         }
 
         mediaObject.actionUrl = url;

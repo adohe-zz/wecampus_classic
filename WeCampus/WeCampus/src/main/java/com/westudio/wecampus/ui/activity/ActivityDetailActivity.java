@@ -709,7 +709,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (activity != null && BaseApplication.getInstance().hasAccount) {
+            if (activity != null && BaseApplication.getInstance().hasAccount && !activity.can_join) {
                 Intent i = new Intent(this, ShareMenuActivity.class);
                 i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
                 i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);

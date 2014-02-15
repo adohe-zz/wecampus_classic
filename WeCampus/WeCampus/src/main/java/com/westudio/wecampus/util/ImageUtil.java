@@ -106,4 +106,28 @@ public class ImageUtil {
         } while (size >= 32 * 1024);
         return baos.toByteArray();
     }
+
+    public static byte[] cropBitmapToSize(Bitmap bitmap, int size) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        int wh = w > h ? h : w;
+
+        int retX = w > h ? (w - h) / 2 : 0;
+        int retY = w > h ? 0 : (h - w) / 2;
+
+        Bitmap bm = Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int quality = 100;
+        float factor = 0.8f;
+        int _size;
+        do {
+            baos.reset();
+            quality = (int)(quality * factor);
+            bm.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+            _size = baos.toByteArray().length;
+        } while (_size >= size);
+        return baos.toByteArray();
+    }
 }
