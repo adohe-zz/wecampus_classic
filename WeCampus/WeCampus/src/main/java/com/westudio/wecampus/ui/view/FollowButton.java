@@ -77,7 +77,7 @@ public class FollowButton extends Button {
             }
             case BE_FOLLOWED: {
                 setBackgroundResource(R.drawable.selector_unfollowed);
-                setText(R.string.follow);
+                setText(R.string.be_followed);
                 drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
                 break;
             }

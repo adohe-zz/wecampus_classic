@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/intro_activity_bg">
@@ -21,6 +22,7 @@
         android:layout_alignParentBottom="true"
         app:radius="8dp"
         app:pageColor="@color/intro_page_color"
-        app:fillColor="@android:color/white"/>
+        app:fillColor="@android:color/white"
+        app:strokeWidth="0dp"/>
 
 </RelativeLayout>

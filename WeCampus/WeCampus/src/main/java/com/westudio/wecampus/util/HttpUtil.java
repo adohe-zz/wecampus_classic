@@ -1,12 +1,9 @@
 package com.westudio.wecampus.util;
 
-import android.os.Bundle;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by nankonami on 13-9-14.

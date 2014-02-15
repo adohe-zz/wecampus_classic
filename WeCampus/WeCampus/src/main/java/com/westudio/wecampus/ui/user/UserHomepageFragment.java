@@ -73,6 +73,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     private FollowButton btnFollow;
 
     private boolean from_user_list = false;
+    private boolean follow_each_other = false;
 
     private Gson gson = new Gson();
 
@@ -109,10 +110,32 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         initWidget(mView);
 
-        setupUI();
+        getFriendsOfUser();
         mInfoHandler.fetchUserInfo();
 
         return mView;
+    }
+
+    private void getFriendsOfUser() {
+        WeCampusApi.getFollowers(this, uid, 1, new Response.Listener() {
+                    @Override
+                    public void onResponse(Object o) {
+                        User.UserListData userListData = (User.UserListData) o;
+                        for (int i = 0; i < userListData.getObjects().size(); i++) {
+                            if (userListData.getObjects().get(i).id == BaseApplication.getInstance().getAccountMgr().getUserId()) {
+                                follow_each_other = true;
+                                break;
+                            }
+                        }
+                        setupUI();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
     }
 
     /**
@@ -159,9 +182,13 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
         if(BaseApplication.getInstance().hasAccount) {
             if(from_user_list) {
-                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
-            } else if(mUser.can_follow) {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOW_EACH_OTHER);
+            } else if(mUser.can_follow && follow_each_other) {
+                btnFollow.setFollowState(FollowButton.FollowState.BE_FOLLOWED);
+            } else if(mUser.can_follow && !follow_each_other) {
                 btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+            } else if(!mUser.can_follow && follow_each_other) {
+                btnFollow.setFollowState(FollowButton.FollowState.FOLLOW_EACH_OTHER);
             } else {
                 btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
             }
@@ -578,11 +605,19 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
         public void onResponse(User user) {
             mUser = user;
             if(user.can_follow) {
-                btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+                if(follow_each_other) {
+                    btnFollow.setFollowState(FollowButton.FollowState.BE_FOLLOWED);
+                } else {
+                    btnFollow.setFollowState(FollowButton.FollowState.UNFOLLOWED);
+                }
                 tvUserFans.setText(String.valueOf(user.count_of_fans));
                 Toast.makeText(mActivity, getResources().getString(R.string.unfollow_user_success), Toast.LENGTH_SHORT).show();
             } else {
-                btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+                if(follow_each_other) {
+                    btnFollow.setFollowState(FollowButton.FollowState.FOLLOW_EACH_OTHER);
+                } else {
+                    btnFollow.setFollowState(FollowButton.FollowState.FOLLOWING);
+                }
                 tvUserFans.setText(String.valueOf(user.count_of_fans));
                 Toast.makeText(mActivity, getResources().getString(R.string.follow_user_success), Toast.LENGTH_SHORT).show();
             }
