@@ -3,6 +3,7 @@ package com.westudio.wecampus.ui.user;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
@@ -68,7 +69,24 @@ public class UserListActivity extends BaseGestureActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+            return true;
+        }
+
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void updateActionBar() {

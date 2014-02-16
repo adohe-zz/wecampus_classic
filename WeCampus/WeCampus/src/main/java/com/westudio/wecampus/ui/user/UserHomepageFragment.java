@@ -278,17 +278,25 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
                 startActivity(intent);
                 MobclickAgent.onEvent(getActivity(), "userpage_avatar");
             } else if(v.getId() == R.id.clickable_follow) {
-                Intent intent = new Intent(mActivity, UserListActivity.class);
-                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
-                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
-                startActivity(intent);
-                MobclickAgent.onEvent(getActivity(), "userpage_following_number");
+                if(mUser.count_of_followings == 0) {
+                    Toast.makeText(mActivity, getString(R.string.no_followings), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(mActivity, UserListActivity.class);
+                    intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FOLLOWERS);
+                    intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
+                    startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_following_number");
+                }
             } else if(v.getId() == R.id.clickable_fans) {
-                Intent intent = new Intent(mActivity, UserListActivity.class);
-                intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
-                intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
-                startActivity(intent);
-                MobclickAgent.onEvent(getActivity(), "userpage_follower_number");
+                if(mUser.count_of_fans == 0) {
+                    Toast.makeText(mActivity, getString(R.string.no_fans), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(mActivity, UserListActivity.class);
+                    intent.putExtra(UserListFragment.USER_LIST_TYPE, UserListFragment.FANS);
+                    intent.putExtra(UserListFragment.USER_OR_ACTIVITY_ID, mUser.id);
+                    startActivity(intent);
+                    MobclickAgent.onEvent(getActivity(), "userpage_follower_number");
+                }
             }
         }
     };

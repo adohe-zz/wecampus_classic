@@ -435,6 +435,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
                     bundle.putInt(UserListFragment.USER_OR_ACTIVITY_ID, activityId);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
 
                     MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_participants");
                     break;

@@ -1,6 +1,8 @@
 package com.westudio.wecampus.ui.user;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -28,6 +30,9 @@ public class UserListAdapter extends BaseAdapter {
     private ArrayList<User> data;
 
     protected Drawable defaultDrawable = new ColorDrawable(Color.argb(255, 201, 201, 201));
+
+    private Bitmap defaultMaleDrawable;
+    private Bitmap defaultFemaleDrawable;
 
     public UserListAdapter(Context context) {
         this.mContext = context;
@@ -69,7 +74,15 @@ public class UserListAdapter extends BaseAdapter {
             viewHolder.imageRequest.cancelRequest();
         }
         if(Constants.IMAGE_NOT_FOUND.equals(user.avatar)) {
-
+            if(Constants.MALE.equals(user.gender)) {
+                if(defaultMaleDrawable == null)
+                    defaultMaleDrawable = BitmapFactory.decodeResource(this.mContext.getResources(), R.drawable.ic_default_male);
+                viewHolder.avatar.setImageBitmap(defaultMaleDrawable);
+            } else if(Constants.FEMALE.equals(user.gender)) {
+                if(defaultFemaleDrawable == null)
+                    defaultFemaleDrawable = BitmapFactory.decodeResource(this.mContext.getResources(), R.drawable.ic_default_female);
+                viewHolder.avatar.setImageBitmap(defaultFemaleDrawable);
+            }
         } else {
             viewHolder.imageRequest = WeCampusApi.requestImage(user.avatar, WeCampusApi.getImageListener(viewHolder.avatar,
                     defaultDrawable, defaultDrawable));
