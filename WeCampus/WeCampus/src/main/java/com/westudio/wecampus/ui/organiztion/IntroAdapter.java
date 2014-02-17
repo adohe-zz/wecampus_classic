@@ -71,13 +71,12 @@ public class IntroAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (mAdminUrl != null) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setData(Uri.parse("mailto:"));
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mAdminUrl});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "WeCampus Feedback");
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setType("message/rfc822");
+                    intent.setData(Uri.parse("mailto:" + mAdminUrl));
+                    intent.putExtra(Intent.EXTRA_SUBJECT, mContext.getResources().getString(R.string.user_letter));
                     try {
-                        mContext.startActivity(Intent.createChooser(intent, "please choose..."));
+                        mContext.startActivity(intent);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.no_email_client), Toast.LENGTH_SHORT).show();
                     }

@@ -291,4 +291,7 @@
 
     <string name="no_fans">亲，你还没有粉丝噢~</string>
     <string name="no_followings">亲，你还没有关注他人噢~</string>
+
+    <string name="user_letter">用户来信</string>
+
 </resources>

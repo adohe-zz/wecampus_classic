@@ -63,6 +63,8 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
 
     private boolean bNetworkFinished = false;
 
+    private int tab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,11 +111,13 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
             @Override
             public void onTabOneSelected() {
                 mListView.setAdapter(activityAdapter);
+                tab = 1;
             }
 
             @Override
             public void onTabTwoSelected() {
                 mListView.setAdapter(mIntroAdapter);
+                tab = 2;
             }
 
             @Override
@@ -124,11 +128,14 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(OrganizationHomepageActivity.this, ActivityDetailActivity.class);
-                ActivityList ac = (ActivityList)activityAdapter.getItem(position - 1);
-                intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
-                startActivity(intent);
-                MobclickAgent.onEvent(getApplicationContext(), "orgpage_act_click");
+                if(tab == 2) {
+                } else {
+                    Intent intent = new Intent(OrganizationHomepageActivity.this, ActivityDetailActivity.class);
+                    ActivityList ac = (ActivityList)activityAdapter.getItem(position - 1);
+                    intent.putExtra(ActivityListFragment.ACTIVITY_ID, ac.id);
+                    startActivity(intent);
+                    MobclickAgent.onEvent(getApplicationContext(), "orgpage_act_click");
+                }
             }
         });
 
