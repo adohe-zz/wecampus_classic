@@ -80,6 +80,9 @@ public class SettingFragment extends SherlockFragment {
         }
         rlLogin.setOnClickListener(clickListener);
         rlChangePwd = (RelativeLayout)view.findViewById(R.id.ly_setting_change_pwd);
+        if(!BaseApplication.getInstance().hasAccount) {
+            rlChangePwd.setVisibility(View.GONE);
+        }
         rlChangePwd.setOnClickListener(clickListener);
         rlClearCache = (RelativeLayout)view.findViewById(R.id.ly_setting_clear_cache);
         rlClearCache.setOnClickListener(clickListener);
