@@ -279,7 +279,7 @@
     <string name="msg_img_save_fail">保存失败</string>
     <string name="msg_img_save_success">已保存</string>
 
-    <string name="copy_right_msg">Copyright ©2012-2013 Wecampus. All Rights Reserved</string>
+    <string name="copy_right_msg">Copyright ©2012–2013 Wecampus. All Rights Reserved</string>
     <string name="fragment_title_activities">全部活动</string>
     <string name="fragment_title_homepage">个人主页</string>
     <string name="share_weibo">新浪微博</string>
@@ -289,8 +289,8 @@
 
     <string name="input_validate_age">请输入有效的年龄</string>
 
-    <string name="no_fans">亲，你还没有粉丝噢~</string>
-    <string name="no_followings">亲，你还没有关注他人噢~</string>
+    <string name="no_fans">还没有粉丝噢~</string>
+    <string name="no_followings">还没有关注的人噢~</string>
 
     <string name="user_letter">用户来信</string>
 
