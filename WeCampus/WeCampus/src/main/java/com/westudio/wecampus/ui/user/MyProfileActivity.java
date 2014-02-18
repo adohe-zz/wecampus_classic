@@ -45,6 +45,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     public static final String PICK_STAGE = "stage";
     public static final String GENDER = "gender";
     public static final String AGE = "age";
+    public static final String BIRTHDAY = "birthday";
 
     public static final int UPDATE_NICK_REQUEST = 1;
     public static final int UPDATE_NICK_RESULT = 2;
@@ -80,7 +81,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     private User mUser;
     private int id;
 
-    private int schoolId;
+    private String birthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +140,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     private void updateProfile() {
         User user = new User();
         user.gender = tvGender.getText().toString();
-        user.birthday = "";
+        user.birthday = (birthday == null)? "" : birthday;
         user.email = tvEmail.getText().toString();
         user.emotion = tvLove.getText().toString();
         user.name = tvName.getText().toString();
@@ -150,12 +151,12 @@ public class MyProfileActivity extends PickPhotoActivity {
         WeCampusApi.postUpdateProfile(this, user, new Response.Listener() {
             @Override
             public void onResponse(Object o) {
-
+                Toast.makeText(MyProfileActivity.this, R.string.update_profile_success, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+                Toast.makeText(MyProfileActivity.this, R.string.update_profile_error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -359,13 +360,13 @@ public class MyProfileActivity extends PickPhotoActivity {
             tvGender.setText(strGender);
         } else if(resultCode == AuthActivity.PICK_SCHOOL_RESULT) {
             tvSchool.setText(data.getStringExtra(AuthActivity.PICK_SCHOOL_NAME));
-            schoolId = data.getIntExtra(AuthActivity.PICK_SCHOOL_ID, -1);
         } else if(requestCode == UPDATE_WORDS_REQUEST && resultCode == UPDATE_WORDS_RESULT) {
             tvWord.setText(data.getStringExtra(WORDS));
         } else if(requestCode == UPDATE_NAME_REQUEST && resultCode == UPDATE_NAME_RESULT) {
             tvName.setText(data.getStringExtra(REAL_NAME));
         } else if(requestCode == PICK_AGE_REQUEST && resultCode == PICK_AGE_RESULT) {
             tvBirthday.setText(data.getStringExtra(AGE));
+            birthday = data.getStringExtra(BIRTHDAY);
         } else if(requestCode == UPDATE_PHONE_REQUEST && resultCode == UPDATE_PHONE_RESULT) {
             tvPhone.setText(data.getStringExtra(PHONE));
         } else if(requestCode == UPDATE_EMAIL_REQUEST && resultCode == UPDATE_EMAIL_RESULT) {

@@ -314,6 +314,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         @Override
         public void onResponse(Object o) {
             refreshUI();
+            mBtnEdit.setVisibility(View.GONE);
             mBtnSignOut.setVisibility(View.GONE);
             mBtnSignIn.setVisibility(View.VISIBLE);
             Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {

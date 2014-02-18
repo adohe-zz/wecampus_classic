@@ -92,7 +92,7 @@
     <string name="relationship">恋爱状态</string>
     <string name="birthday">生日</string>
     <string name="role">角色</string>
-    <string name="my_profile_tip">以上信息会对所有人开放</string>
+    <string name="my_profile_tip">互相关注才可以查看对方的详细信息噢</string>
     <string name="nickname_hint">昵称最多8个字哟</string>
     <string name="gender_hint">点击选择</string>
     <string name="words_hint">简单描述下自己</string>
@@ -293,5 +293,8 @@
     <string name="no_followings">亲，你还没有关注他人噢~</string>
 
     <string name="user_letter">用户来信</string>
+
+    <string name="update_profile_success">更新资料成功</string>
+    <string name="update_profile_error">更新资料失败</string>
 
 </resources>

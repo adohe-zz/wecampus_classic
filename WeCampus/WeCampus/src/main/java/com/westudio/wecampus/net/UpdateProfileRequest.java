@@ -5,6 +5,7 @@ import com.android.volley.Response;
 import com.google.gson.Gson;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.util.HttpUtil;
+import com.westudio.wecampus.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
             e.printStackTrace();
         }
         String body = "data=" + json.toString();
-
+        Utility.log("body", body);
         try {
             return body.getBytes(getParamsEncoding());
         } catch (UnsupportedEncodingException e) {

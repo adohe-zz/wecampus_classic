@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -25,6 +27,7 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
     private String age;
     private DatePicker datePicker;
 
+    private String birthday;
     private int year;
     private int month;
     private int day;
@@ -45,6 +48,7 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
                     public void run() {
                         Intent intent = new Intent();
                         intent.putExtra(MyProfileActivity.AGE, tvAge.getText().toString());
+                        intent.putExtra(MyProfileActivity.BIRTHDAY, birthday);
                         setResult(MyProfileActivity.PICK_AGE_RESULT, intent);
                         finish();
                     }
@@ -104,6 +108,12 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
     private void updateDate(int year, int month, int day) {
         String num = getResources().getString(R.string.age_num);
         tvAge.setText(String.format(num, Calendar.getInstance().get(Calendar.YEAR) - year));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        birthday = sdf.format(calendar.getTime());
     }
 
     private boolean isValidate() {
