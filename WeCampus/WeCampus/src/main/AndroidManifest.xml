@@ -26,7 +26,8 @@
         <activity
             android:name=".ui.login.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,79 +39,94 @@
         <!-- Intro Activity -->
         <activity
             android:name=".ui.intro.IntroActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Main Activity -->
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Auth Activity -->
         <activity
             android:name=".ui.login.AuthActivity"
             android:label="@string/btn_login"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
 
         <!-- Terms of Use Activity -->
         <activity
             android:name=".ui.about.TermsOfUseActivity"
-            android:label="@string/terms_of_use">
+            android:label="@string/terms_of_use"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- My Homepage activity -->
         <activity
-            android:name=".ui.user.MyHomepageActivity">
+            android:name=".ui.user.MyHomepageActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Detail Activity -->
         <activity
             android:name=".ui.activity.ActivityDetailActivity"
-            android:label="@string/detail_label">
+            android:label="@string/detail_label"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- User Homepage Activity -->
         <activity
             android:name=".ui.user.UserHomepageActivity"
-            android:label="@null">
+            android:label="@null"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- My Profile Activity -->
         <activity
             android:name=".ui.user.MyProfileActivity"
-            android:label="@string/user_profile">
+            android:label="@string/user_profile"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Choose School Activity -->
         <activity
             android:name=".ui.login.PickSchoolActivity"
-            android:label="@string/choose_school">
+            android:label="@string/choose_school"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Choose Gender Activity -->
         <activity
             android:name=".ui.login.PickGenderActivity"
-            android:label="@string/choose_gender">
+            android:label="@string/choose_gender"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- SearchActivity -->
         <activity
             android:name=".ui.square.SearchActivity"
-            android:label="@string/search">
+            android:label="@string/search"
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- ImageDetailActivity -->
         <activity
             android:name=".ui.base.ImageDetailActivity"
-            android:logo="@drawable/image_detail_icon"/>
+            android:logo="@drawable/image_detail_icon"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.organiztion.OrganizationHomepageActivity" />
+            android:name=".ui.organiztion.OrganizationHomepageActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.base.ShareMenuActivity"
-            android:theme="@style/ShareDialogStyle">
+            android:theme="@style/ShareDialogStyle"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -119,41 +135,58 @@
 
         <!-- ActivityListActivity -->
         <activity
-            android:name=".ui.activity.ActivityListActivity"/>
+            android:name=".ui.activity.ActivityListActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- Browser Activity -->
         <activity
             android:name=".ui.base.WebBrowserActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".ui.setting.AboutUsActivity"/>
+        <activity android:name=".ui.setting.AboutUsActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.setting.ChangePwdActivity"/>
+        <activity android:name=".ui.setting.ChangePwdActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.login.ForgetPwdActivity"/>
+        <activity android:name=".ui.login.ForgetPwdActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.list.ListActivity"/>
+        <activity android:name=".ui.list.ListActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UserListActivity"/>
+        <activity android:name=".ui.user.UserListActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.PickEmotionActivity" />
+        <activity android:name=".ui.user.PickEmotionActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.PickStageActivity"/>
+        <activity android:name=".ui.user.PickStageActivity"
+            android:screenOrientation="portrait"/>
         
-        <activity android:name=".ui.user.UserSearchActivity"></activity>
+        <activity android:name=".ui.user.UserSearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
-        <activity android:name=".ui.user.UpdateNickActivity" />
+        <activity android:name=".ui.user.UpdateNickActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UpdateNameActivity" />
+        <activity android:name=".ui.user.UpdateNameActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UpdatePhoneActivity" />
+        <activity android:name=".ui.user.UpdatePhoneActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UpdateEmailActivity" />
+        <activity android:name=".ui.user.UpdateEmailActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UpdateWordsActivity" />
+        <activity android:name=".ui.user.UpdateWordsActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.PickBirthdayActivity" />
+        <activity android:name=".ui.user.PickBirthdayActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".data.DataProvider"
@@ -165,11 +198,13 @@
         <!-- 友盟 -->
         <service
             android:name="com.umeng.common.net.DownloadingService"
-            android:process=":DownloadingService" >
+            android:process=":DownloadingService"
+            android:screenOrientation="portrait">
         </service>
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:screenOrientation="portrait">
         </activity>
         <meta-data android:value="52d156f956240b7a260bf0a8" android:name="UMENG_APPKEY"/>
         <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
