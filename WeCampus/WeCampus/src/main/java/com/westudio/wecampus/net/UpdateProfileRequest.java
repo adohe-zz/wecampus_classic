@@ -57,6 +57,6 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
 
     @Override
     public String getBodyContentType() {
-        return "multipart/form-data";
+        return "application/json";
     }
 }
