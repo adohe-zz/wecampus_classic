@@ -27,6 +27,22 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
 
+
+    signingConfigs {
+        release {
+            storeFile file(System.console().readLine("\n\$ Enter keystore path: "))
+            storePassword "wetongji"
+            keyAlias "wecampus"
+            keyPassword "wecampus"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
 }
 
 dependencies {
