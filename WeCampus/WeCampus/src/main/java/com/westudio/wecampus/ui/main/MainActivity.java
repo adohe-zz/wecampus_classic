@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -32,6 +33,8 @@ public class MainActivity extends SherlockFragmentActivity {
     private PullToRefreshAttacher mPullToRefreshAttacher;
     private ContentType mCurrentContent = ContentType.ACTIVITY;
     private MenuItem mHomeItem;
+
+    private long exitTime;
 
     public enum ContentType {
         ACTIVITY, USERS, SQUARE, SETTINGS, HOMEPAGE;
@@ -112,12 +115,14 @@ public class MainActivity extends SherlockFragmentActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
             return true;
-        } else if (event.getKeyCode() == KeyEvent.KEYCODE_BACK &&
-            mCurrentContent != ContentType.ACTIVITY) {
-            changeContent(ContentType.ACTIVITY);
-            return true;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (mCurrentContent != ContentType.ACTIVITY) {
+                changeContent(ContentType.ACTIVITY);
+            } else {
+                exit();
+            }
+            return false;
         }
-
         return super.onKeyUp(keyCode, event);
     }
 
@@ -138,6 +143,17 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), R.string.msg_press_again_exit,
+                    Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 
     public PullToRefreshAttacher getPullToRefreshAttacher() {

@@ -297,4 +297,5 @@
     <string name="update_profile_success">更新资料成功</string>
     <string name="update_profile_error">更新资料失败</string>
 
+    <string name="msg_press_again_exit">再点击一次离开应用</string>
 </resources>
