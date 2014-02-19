@@ -30,7 +30,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.console().readLine("\n\$ Enter keystore path: "))
+            storeFile file("/Users/nankonami/Dropbox/WeTongji Android/wetongji_publish_key.keystore")
             storePassword "wetongji"
             keyAlias "wecampus"
             keyPassword "wecampus"

@@ -22,10 +22,10 @@ public class AuthActivity extends PickPhotoActivity {
     public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
     public static final String UPDATE_PROFILE_TAG = "UPDATE_PROFILE";
 
-    public static final int PICK_SCHOOL_REQUEST = 1;
-    public static final int PICK_GENDER_REQUEST = 2;
-    public static final int PICK_SCHOOL_RESULT = 3;
-    public static final int PICK_GENDER_RESULT = 4;
+    public static final int PICK_SCHOOL_REQUEST = 17;
+    public static final int PICK_GENDER_REQUEST = 18;
+    public static final int PICK_SCHOOL_RESULT = 19;
+    public static final int PICK_GENDER_RESULT = 20;
     public static final String PICK_SCHOOL_NAME = "school_name";
     public static final String PICK_SCHOOL_ID = "school_id";
     public static final String PICK_GENDER = "gender";

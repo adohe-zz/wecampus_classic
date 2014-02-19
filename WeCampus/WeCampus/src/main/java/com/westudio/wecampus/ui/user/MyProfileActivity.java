@@ -169,7 +169,7 @@ public class MyProfileActivity extends PickPhotoActivity {
         tvSchool = (TextView)findViewById(R.id.school);
         tvWord = (TextView)findViewById(R.id.words);
         findViewById(R.id.change_words).setOnClickListener(clickListener);
-        tvName = (TextView)findViewById(R.id.real_name);
+        tvName = (TextView)findViewById(R.id.really_name);
         findViewById(R.id.change_real_name).setOnClickListener(clickListener);
         tvPhone = (TextView)findViewById(R.id.telephone);
         findViewById(R.id.change_telephone).setOnClickListener(clickListener);
