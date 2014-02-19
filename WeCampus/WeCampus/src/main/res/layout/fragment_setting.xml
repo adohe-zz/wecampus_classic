@@ -6,77 +6,57 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:paddingLeft="3.3dp"
-    android:paddingRight="3.3dp">
+    android:paddingRight="3.3dp"
+    android:paddingTop="8dp">
 
-    <!-- Login -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="25dp"
-        android:paddingTop="13dp"
-        android:paddingBottom="13dp"
-        android:id="@id/ly_setting_login"
-        android:clickable="true"
-        android:background="@drawable/setting_item_selector">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/setting_login"
-            style="@style/SettingTextStyle"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_right_arrow" />
-
-    </RelativeLayout>
 
     <!-- Change Password -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="25dp"
-        android:paddingTop="13dp"
-        android:paddingBottom="13dp"
-        android:id="@id/ly_setting_change_pwd"
-        android:clickable="true"
-        android:background="@drawable/setting_item_selector">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/setting_change_pwd"
-            style="@style/SettingTextStyle"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_right_arrow" />
-
-    </RelativeLayout>
-
     <LinearLayout
+        android:id="@+id/change_pwd_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="@android:color/white">
-
-        <View
+        android:orientation="vertical">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
-            android:background="@color/divider_bg" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="25dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:id="@id/ly_setting_change_pwd"
+            android:clickable="true"
+            android:background="@drawable/setting_item_selector">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/setting_change_pwd"
+                style="@style/SettingTextStyle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_right_arrow" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@android:color/white">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+        </LinearLayout>
     </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

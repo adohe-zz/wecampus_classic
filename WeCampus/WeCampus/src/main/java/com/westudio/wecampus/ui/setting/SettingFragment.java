@@ -27,7 +27,6 @@ public class SettingFragment extends SherlockFragment {
     private Activity mActivity;
 
     //Widgets
-    private RelativeLayout rlLogin;
     private RelativeLayout rlChangePwd;
     private RelativeLayout rlClearCache;
     private RelativeLayout rlShare;
@@ -74,14 +73,9 @@ public class SettingFragment extends SherlockFragment {
     }
 
     private void initWidget(final View view) {
-        rlLogin = (RelativeLayout)view.findViewById(R.id.ly_setting_login);
-        if(BaseApplication.getInstance().hasAccount) {
-            rlLogin.setVisibility(View.GONE);
-        }
-        rlLogin.setOnClickListener(clickListener);
         rlChangePwd = (RelativeLayout)view.findViewById(R.id.ly_setting_change_pwd);
         if(!BaseApplication.getInstance().hasAccount) {
-            rlChangePwd.setVisibility(View.GONE);
+            view.findViewById(R.id.change_pwd_container).setVisibility(View.GONE);
         }
         rlChangePwd.setOnClickListener(clickListener);
         rlClearCache = (RelativeLayout)view.findViewById(R.id.ly_setting_clear_cache);
