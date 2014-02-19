@@ -298,4 +298,5 @@
     <string name="update_profile_error">更新资料失败</string>
 
     <string name="msg_press_again_exit">再点击一次离开应用</string>
+    <string name="msg_change_pwd_fail">哎呀，你可能记错密码了哟~</string>
 </resources>

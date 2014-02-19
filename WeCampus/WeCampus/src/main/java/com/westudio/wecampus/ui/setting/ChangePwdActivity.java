@@ -79,6 +79,7 @@ public class ChangePwdActivity extends BaseGestureActivity {
                         progressDailog.dismiss();
                         Toast.makeText(ChangePwdActivity.this, R.string.change_success,
                                 Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                             @Override
@@ -89,8 +90,9 @@ public class ChangePwdActivity extends BaseGestureActivity {
                                 if (volleyError.networkResponse == null) {
                                     Toast.makeText(ChangePwdActivity.this, R.string.change_success,
                                             Toast.LENGTH_SHORT).show();
+                                    finish();
                                 } else {
-                                    Toast.makeText(ChangePwdActivity.this, R.string.change_fail,
+                                    Toast.makeText(ChangePwdActivity.this, R.string.msg_change_pwd_fail,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
