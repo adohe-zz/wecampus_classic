@@ -1,5 +1,6 @@
 package com.westudio.wecampus.ui.setting;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ public class ChangePwdActivity extends BaseGestureActivity {
     private EditText edtOldPwd;
     private EditText edtNewPwd;
     private Button btnSubmit;
+    private ProgressDialog progressDailog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +60,39 @@ public class ChangePwdActivity extends BaseGestureActivity {
         btnSubmit.setOnClickListener(clickListener);
     }
 
+
+
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if(checkValidation()) {
+                if (progressDailog == null) {
+                    progressDailog = new ProgressDialog(ChangePwdActivity.this);
+                    progressDailog.setMessage(getString(R.string.please_wait));
+                }
+                progressDailog.show();
+
                 WeCampusApi.updatePwd(ChangePwdActivity.this, edtOldPwd.getText().toString(),
                         edtNewPwd.getText().toString(), new Response.Listener() {
                     @Override
                     public void onResponse(Object o) {
+                        progressDailog.dismiss();
                         Toast.makeText(ChangePwdActivity.this, R.string.change_success,
                                 Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
-                                Toast.makeText(ChangePwdActivity.this, R.string.change_fail,
-                                        Toast.LENGTH_SHORT).show();
+                                progressDailog.dismiss();
+
+                                //如果为networkResponse为空,默认为成功
+                                if (volleyError.networkResponse == null) {
+                                    Toast.makeText(ChangePwdActivity.this, R.string.change_success,
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ChangePwdActivity.this, R.string.change_fail,
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
             }
