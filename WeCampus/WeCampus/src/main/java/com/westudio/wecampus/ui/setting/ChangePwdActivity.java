@@ -15,7 +15,7 @@ import com.westudio.wecampus.R;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
-import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.ui.login.AuthActivity;
 
 /**
  * Created by nankonami on 13-12-4.
@@ -125,6 +125,6 @@ public class ChangePwdActivity extends BaseGestureActivity {
         BaseApplication app = BaseApplication.getInstance();
         app.hasAccount = false;
         app.getAccountMgr().clearAccountInfo();
-        startActivity(new Intent(ChangePwdActivity.this, MainActivity.class));
+        startActivity(new Intent(ChangePwdActivity.this, AuthActivity.class));
     }
 }
