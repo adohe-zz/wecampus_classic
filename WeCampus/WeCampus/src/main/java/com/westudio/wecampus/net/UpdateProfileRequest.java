@@ -1,5 +1,7 @@
 package com.westudio.wecampus.net;
 
+import android.text.TextUtils;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.google.gson.Gson;
@@ -36,18 +38,28 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
     public byte[] getBody() throws AuthFailureError {
         JSONObject json = new JSONObject();
         try {
-            json.put("nickname", mUser.nickname);
-            json.put("words", mUser.words);
-            json.put("gender", mUser.gender);
-            json.put("name", mUser.name);
-            json.put("email", mUser.email);
-            json.put("phone", mUser.phone);
-            json.put("birthday", mUser.birthday);
+            if(!TextUtils.isEmpty(mUser.nickname))
+                json.put("nickname", mUser.nickname);
+            if(!TextUtils.isEmpty(mUser.words))
+                json.put("words", mUser.words);
+            if(!TextUtils.isEmpty(mUser.gender))
+                json.put("gender", mUser.gender);
+            if(!TextUtils.isEmpty(mUser.name))
+                json.put("name", mUser.name);
+            if(!TextUtils.isEmpty(mUser.contact_email))
+                json.put("contact_email", mUser.contact_email);
+            if(!TextUtils.isEmpty(mUser.phone))
+                json.put("phone", mUser.phone);
+            if(!TextUtils.isEmpty(mUser.birthday))
+                json.put("birthday", mUser.birthday);
+            if(!TextUtils.isEmpty(mUser.emotion))
+                json.put("emotion", mUser.emotion);
+            if(!TextUtils.isEmpty(mUser.stage))
+                json.put("stage", mUser.stage);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String body = "data=" + json.toString();
-        Utility.log("body", body);
         try {
             return body.getBytes(getParamsEncoding());
         } catch (UnsupportedEncodingException e) {
@@ -57,6 +69,6 @@ public class UpdateProfileRequest extends AuthedGsonRequest<User>{
 
     @Override
     public String getBodyContentType() {
-        return "application/json";
+        return "multipart/form-data";
     }
 }

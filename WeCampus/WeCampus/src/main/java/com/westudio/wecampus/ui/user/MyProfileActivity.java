@@ -28,8 +28,14 @@ import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.PickPhotoActivity;
 import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.login.PickGenderActivity;
+import com.westudio.wecampus.ui.main.MainActivity;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.Utility;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Martian on 13-10-20.
@@ -141,7 +147,7 @@ public class MyProfileActivity extends PickPhotoActivity {
         User user = new User();
         user.gender = tvGender.getText().toString();
         user.birthday = (birthday == null)? "" : birthday;
-        user.email = tvEmail.getText().toString();
+        user.contact_email = tvEmail.getText().toString();
         user.emotion = tvLove.getText().toString();
         user.name = tvName.getText().toString();
         user.nickname = tvNickName.getText().toString();
@@ -151,7 +157,12 @@ public class MyProfileActivity extends PickPhotoActivity {
         WeCampusApi.postUpdateProfile(this, user, new Response.Listener() {
             @Override
             public void onResponse(Object o) {
+                User u = (User)o;
+                mDataHelper.update(u);
                 Toast.makeText(MyProfileActivity.this, R.string.update_profile_success, Toast.LENGTH_SHORT).show();
+                MyProfileActivity.this.finish();
+                Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -195,6 +206,18 @@ public class MyProfileActivity extends PickPhotoActivity {
         tvEmail.setText(mUser.email);
         tvLove.setText(mUser.emotion);
         tvRole.setText(mUser.stage);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(mUser.birthday);
+            Calendar calendar = Calendar.getInstance();
+            Calendar now = Calendar.getInstance();
+            calendar.setTime(date);
+            String num = getResources().getString(R.string.age_num);
+            tvBirthday.setText(String.format(num, now.get(Calendar.YEAR) - calendar.get(Calendar.YEAR)));
+        } catch (ParseException e) {
+            tvBirthday.setText("");
+        }
+
         if(Constants.IMAGE_NOT_FOUND.equals(mUser.avatar)) {
             if(Constants.MALE.equals(mUser.gender)) {
                 ivAvatar.setImageBitmap(BitmapFactory.decodeResource(
