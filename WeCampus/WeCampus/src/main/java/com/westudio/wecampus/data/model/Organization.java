@@ -4,12 +4,13 @@ import android.database.Cursor;
 
 import com.westudio.wecampus.data.OrgDataHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by nankonami on 13-11-15.
  */
-public class Organization {
+public class Organization implements Serializable{
 
     //Organization id
     public int id;

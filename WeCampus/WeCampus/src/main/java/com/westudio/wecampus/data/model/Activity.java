@@ -2,16 +2,16 @@ package com.westudio.wecampus.data.model;
 
 import android.database.Cursor;
 
-import com.google.gson.Gson;
 import com.westudio.wecampus.data.ActivityDataHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by martian on 13-9-13.
  */
-public class Activity {
+public class Activity implements Serializable {
 
     private static final HashMap<Integer, Activity> CACHE = new HashMap<Integer, Activity>();
 

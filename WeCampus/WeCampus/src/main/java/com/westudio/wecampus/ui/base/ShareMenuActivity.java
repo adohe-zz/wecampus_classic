@@ -40,25 +40,19 @@ import java.io.IOException;
  */
 public class ShareMenuActivity extends SherlockFragmentActivity implements View.OnClickListener,
         IWeiboHandler.Response {
-    public static final String ACTIVITY_ID = "activity_id";
+    public static final String ACTIVITY = "activity";
     public static final String CAN_JOIN = "can_join";
     public static final String IS_SHARE_APP = "is_share_app";
+    public static final String ORG_NAME = "org_name";
 
     private View btnShareToWx;
     private View btnShareToMoment;
     private View btnShareToWeibo;
     private View btnShareToMail;
     private View btnQuit;
-    private ProgressDialog progressDialog;
-    private ActivityDataHelper dataHelper;
-    private OrgDataHelper orgDataHelper;
-
-    private AsyncTask queryTask;
 
     private Activity activity;
-
     private WbShareTool tool;
-
     private boolean isShareApp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +68,9 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(wlp);
 
-        dataHelper = new ActivityDataHelper(this);
-        orgDataHelper = new OrgDataHelper(this);
-
         isShareApp = getIntent().getBooleanExtra(IS_SHARE_APP, false);
         if (!isShareApp){
-            int id = getIntent().getIntExtra(ACTIVITY_ID, -1);
-            if (id >= 0) {
-                queryActivity(id);
-            }
+            activity = (Activity) getIntent().getSerializableExtra(ACTIVITY);
         }
         initWidgets();
 
@@ -93,14 +81,6 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         if (savedInstanceState != null) {
             tool.getmWeiboShareAPI().handleWeiboResponse(getIntent(), this);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (queryTask != null) {
-            queryTask.cancel(true);
-        }
-        super.onDestroy();
     }
 
     private void initWidgets() {
@@ -119,7 +99,7 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
     @Override
     public void onClick(View view) {
         // 分享活动且活动未加载
-        if (!isShareApp && activity == null) {
+        if (!isShareApp && (activity == null || activity.organization == null)) {
             return;
         }
 
@@ -274,13 +254,16 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
 
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                    tool.sendShareMessage(title, text, activity.url,
-                            imageContainer.getBitmap());
+                    try {
+                        tool.sendShareMessage(title, text, activity.url, imageContainer.getBitmap());
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    tool.sendShareMessage(title, text, activity.url, null);
+                    //tool.sendShareMessage(title, text, activity.url, null);
                 }
             });
         }
@@ -291,32 +274,6 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
         wxShareTool = new WxShareTool(this);
         wxShareTool.buildAppMessage();
         wxShareTool.fireShareToWx(type);
-    }
-
-    private void queryActivity(final int id) {
-        queryTask = new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object... objects) {
-                activity = dataHelper.query(id);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                if (activity.organization_id != 0) {
-                    queryTask = new AsyncTask() {
-                        @Override
-                        protected Object doInBackground(Object[] objects) {
-                            activity.organization = orgDataHelper.query(activity.organization_id);
-                            return null;
-                        }
-                    };
-                    Utility.executeAsyncTask(queryTask);
-                }
-            }
-        };
-
-        Utility.executeAsyncTask(queryTask);
     }
 
     @Override

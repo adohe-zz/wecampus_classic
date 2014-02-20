@@ -332,14 +332,9 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.detail_menu_share: {
-                if (activity != null) {
-                    Intent i = new Intent(this, ShareMenuActivity.class);
-                    i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
-                    i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
-                    startActivityForResult(i, REQUEST_MENU);
-                    return true;
-                }
+                openShareMenu();
                 MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_more_btn");
+                return true;
             }
             case android.R.id.home: {
                 finish();
@@ -357,6 +352,18 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
         if (requestCode == REQUEST_MENU && resultCode == RESULT_OK) {
             joinHandler.quit();
             MobclickAgent.onEvent(ActivityDetailActivity.this, "activity_detail_more_unjoin_btn");
+        }
+    }
+
+    private void openShareMenu() {
+        if (activity != null &&
+                activity.organization != null &&
+                !activity.can_join &&
+                BaseApplication.getInstance().hasAccount) {
+            Intent intent = new Intent(this, ShareMenuActivity.class);
+            intent.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
+            intent.putExtra(ShareMenuActivity.ACTIVITY, activity);
+            startActivityForResult(intent, REQUEST_MENU);
         }
     }
 
@@ -710,13 +717,7 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (activity != null && BaseApplication.getInstance().hasAccount && !activity.can_join) {
-                Intent i = new Intent(this, ShareMenuActivity.class);
-                i.putExtra(ShareMenuActivity.ACTIVITY_ID, activityId);
-                i.putExtra(ShareMenuActivity.CAN_JOIN, activity.can_join);
-                startActivityForResult(i, REQUEST_MENU);
-                return true;
-            }
+            openShareMenu();
         }
         return super.onKeyDown(keyCode, event);
     }
