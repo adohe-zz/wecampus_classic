@@ -334,17 +334,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)  {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.give_up_modify));
-            builder.setCancelable(true);
-            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
-            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.show();
+            showDialog();
             return true;
         }
 
@@ -354,17 +344,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.give_up_modify));
-            builder.setCancelable(true);
-            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
-            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.show();
+            showDialog();
             return true;
         }
 
@@ -427,5 +407,20 @@ public class MyProfileActivity extends PickPhotoActivity {
                     }
             );
         }
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage(getString(R.string.msg_leave_profile));
+        builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
+        builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(new Intent(MyProfileActivity.this, MainActivity.class));
+            }
+        });
+        builder.show();
     }
 }
