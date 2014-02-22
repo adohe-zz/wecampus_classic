@@ -144,6 +144,9 @@ public class MyProfileActivity extends PickPhotoActivity {
     }
 
     private void updateProfile() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
         User user = new User();
         user.gender = tvGender.getText().toString();
         user.birthday = (birthday == null)? "" : birthday;
@@ -157,6 +160,9 @@ public class MyProfileActivity extends PickPhotoActivity {
         WeCampusApi.postUpdateProfile(this, user, new Response.Listener() {
             @Override
             public void onResponse(Object o) {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
                 User u = (User)o;
                 mDataHelper.update(u);
                 Toast.makeText(MyProfileActivity.this, R.string.update_profile_success, Toast.LENGTH_SHORT).show();
@@ -167,6 +173,9 @@ public class MyProfileActivity extends PickPhotoActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
                 Toast.makeText(MyProfileActivity.this, R.string.update_profile_error, Toast.LENGTH_SHORT).show();
             }
         });
