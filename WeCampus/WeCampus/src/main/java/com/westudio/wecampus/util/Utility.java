@@ -25,7 +25,7 @@ import java.io.OutputStream;
  */
 public class Utility {
 
-    private static boolean IS_DEBUG = true;
+    private static boolean IS_DEBUG = Config.IS_TEST;
 
     /**
      * Use this method to output log messages
