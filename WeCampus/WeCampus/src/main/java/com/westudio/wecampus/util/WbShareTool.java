@@ -52,12 +52,12 @@ public class WbShareTool  {
         mediaObject.description = text;
 
         // 设置 Bitmap 类型的图片到视频对象里
-        if (bitmap != null) {
-            byte[] data = ImageUtil.cropBitmapToSize(bitmap, 32 * 1024);
-            //Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
-            mediaObject.thumbData = data;
+        if (bitmap == null) {
+            bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_launcher);
         }
-
+        byte[] data = ImageUtil.cropBitmapToSize(bitmap, 32 * 1024);
+        //Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+        mediaObject.thumbData = data;
         mediaObject.actionUrl = url;
         mediaObject.defaultText = text;
         return mediaObject;

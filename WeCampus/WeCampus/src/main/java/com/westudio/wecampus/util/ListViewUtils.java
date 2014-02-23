@@ -38,7 +38,7 @@ public class ListViewUtils {
      * @param position
      */
     public static void smoothScrollListView(ListView listView, int position) {
-        if (Build.VERSION.SDK_INT > 7) {
+        if (Build.VERSION.SDK_INT > 10) {
             listView.smoothScrollToPositionFromTop(0, 0);
         } else {
             listView.setSelection(position);
