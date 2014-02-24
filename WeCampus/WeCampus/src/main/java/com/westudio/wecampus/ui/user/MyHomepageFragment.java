@@ -264,7 +264,6 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                     startActivity(intent);
                     MobclickAgent.onEvent(getActivity(), "mypage_follower_number");
                 }
-
             }
         }
     };
