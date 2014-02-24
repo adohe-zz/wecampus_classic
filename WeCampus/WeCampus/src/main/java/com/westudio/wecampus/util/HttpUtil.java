@@ -196,7 +196,12 @@ public class HttpUtil {
     public static String getProfileWithOp(ProfileOp op) {
         StringBuilder sb = new StringBuilder(HTTP_PROTOCOL);
         sb.append(HOST_NAME).append(SLASH).append(API_VERSION)
-                .append(SLASH).append(BASE_PROFILE_PATH).append(SLASH);
+                .append(SLASH);
+        if(op == ProfileOp.FPASSWORD) {
+            sb.append("users").append(SLASH);
+        } else {
+            sb.append(BASE_PROFILE_PATH).append(SLASH);
+        }
         switch (op) {
             case DETAIL:
                 break;

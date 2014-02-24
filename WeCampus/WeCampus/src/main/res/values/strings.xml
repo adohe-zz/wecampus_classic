@@ -299,4 +299,8 @@
 
     <string name="msg_press_again_exit">再点击一次离开应用</string>
     <string name="msg_change_pwd_fail">哎呀，你可能记错密码了哟~</string>
+
+    <string name="forget_pwd_rec">您好，我们会尽快处理您的请求～</string>
+
+    <string name="please_input_email_reg">请输入您的注册邮箱!</string>
 </resources>

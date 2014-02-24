@@ -598,6 +598,19 @@ public class WeCampusApi {
         addToRequestQueue(tag, request);
     }
 
+    /**
+     * Forget password
+     * @param tag
+     * @param email
+     * @param listener
+     * @param errorListener
+     */
+    public static void forgetPwd(Object tag, String email, Response.Listener listener,
+                Response.ErrorListener errorListener) {
+        Request request = new ForgetPwdRequest(email, User.class, listener, errorListener);
+
+        addToRequestQueue(tag, request);
+    }
     //搜索API-START#############################################################################
 
     public static void searchActivity(Object tag, int page, String keywords, Response.Listener listener,
