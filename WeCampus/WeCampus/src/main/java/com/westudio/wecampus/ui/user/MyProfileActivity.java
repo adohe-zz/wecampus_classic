@@ -144,6 +144,9 @@ public class MyProfileActivity extends PickPhotoActivity {
     }
 
     private void updateProfile() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
         User user = new User();
         user.gender = tvGender.getText().toString();
         user.birthday = (birthday == null)? "" : birthday;
@@ -157,6 +160,9 @@ public class MyProfileActivity extends PickPhotoActivity {
         WeCampusApi.postUpdateProfile(this, user, new Response.Listener() {
             @Override
             public void onResponse(Object o) {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
                 User u = (User)o;
                 mDataHelper.update(u);
                 Toast.makeText(MyProfileActivity.this, R.string.update_profile_success, Toast.LENGTH_SHORT).show();
@@ -167,6 +173,9 @@ public class MyProfileActivity extends PickPhotoActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
                 Toast.makeText(MyProfileActivity.this, R.string.update_profile_error, Toast.LENGTH_SHORT).show();
             }
         });
@@ -334,17 +343,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)  {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.give_up_modify));
-            builder.setCancelable(true);
-            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
-            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.show();
+            showDialog();
             return true;
         }
 
@@ -354,17 +353,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.give_up_modify));
-            builder.setCancelable(true);
-            builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
-            builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.show();
+            showDialog();
             return true;
         }
 
@@ -427,5 +416,20 @@ public class MyProfileActivity extends PickPhotoActivity {
                     }
             );
         }
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage(getString(R.string.msg_leave_profile));
+        builder.setNegativeButton(getResources().getString(R.string.go_on_modify), null);
+        builder.setPositiveButton(R.string.give_up, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(new Intent(MyProfileActivity.this, MainActivity.class));
+            }
+        });
+        builder.show();
     }
 }

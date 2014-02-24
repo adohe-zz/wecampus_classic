@@ -1,5 +1,8 @@
 package com.westudio.wecampus.net;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
@@ -22,7 +25,8 @@ import java.io.UnsupportedEncodingException;
 public class UploadAvatarRequest extends AuthedGsonRequest<User>{
 
     private String mImagePath;
-    private MultipartEntity mEntity = new MultipartEntity();
+
+    private static final String BOUNDARY = "0D9F3kdjfiefejnksdflkejrejj123";
 
     public UploadAvatarRequest(String imagePath, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(Method.POST, HttpUtil.URL_POST_PROFILE_AVATAR, User.class, successListener, errorListener);
@@ -31,18 +35,27 @@ public class UploadAvatarRequest extends AuthedGsonRequest<User>{
 
     @Override
     public String getBodyContentType() {
-        return mEntity.getContentType().getValue();
+        return "multipart/form-data; boundary=" + BOUNDARY;
     }
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        mEntity.addPart("image", new FileBody(new File(mImagePath)));
-
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {
-            mEntity.writeTo(bos);
-        } catch (IOException e) {
-            e.printStackTrace();
+            ByteArrayOutputStream imageBos = new ByteArrayOutputStream();
+            Bitmap bitmap = BitmapFactory.decodeFile(mImagePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageBos);
+
+            bos.write(("--" + BOUNDARY + "\r\n").getBytes());
+            bos.write( ("Content-Disposition: form-data; name=\"image\"; filename=\"avatar.jpeg\"\r\n"  ).getBytes());
+            bos.write( ("Content-Type: image/jpeg\r\n"  ).getBytes());
+            bos.write( ("Content-Transfer-Encoding: binary\r\n"  ).getBytes());
+            bos.write("\r\n".getBytes());
+            bos.write(imageBos.toByteArray());
+            bos.write("\r\n".getBytes());
+            bos.write(("--" + BOUNDARY + "--").getBytes());
+        } catch (IOException ioe) {
+
         }
         return bos.toByteArray();
     }

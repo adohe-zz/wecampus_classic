@@ -46,8 +46,8 @@ public class PickPhotoActivity extends BaseGestureActivity {
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             PHOTO_DIR = this.getExternalFilesDir("temp");
-            UPLOAD_AVATAR = new File(PHOTO_DIR, "upload_avatar.jpg");
-            CROPED_AVATAR = new File(PHOTO_DIR, "croped_avatar.jpg");
+            UPLOAD_AVATAR = new File(PHOTO_DIR, "upload_avatar.jpeg");
+            CROPED_AVATAR = new File(PHOTO_DIR, "croped_avatar.jpeg");
             mUriTemp =  Uri.fromFile(UPLOAD_AVATAR);
             mCropedTemp = Uri.fromFile(CROPED_AVATAR);
         } else {

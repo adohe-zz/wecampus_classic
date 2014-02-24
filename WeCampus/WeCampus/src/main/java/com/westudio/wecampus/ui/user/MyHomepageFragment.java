@@ -245,7 +245,7 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
                 startActivity(intent);
                 MobclickAgent.onEvent(getActivity(), "mypage_avatar");
             } else if (v.getId() == R.id.clickable_follow) {
-                if(mUser.count_of_followings == 0) {
+                if (mUser.count_of_followings == 0) {
                     Toast.makeText(mActivity, getString(R.string.no_followings), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(getActivity(), UserListActivity.class);
