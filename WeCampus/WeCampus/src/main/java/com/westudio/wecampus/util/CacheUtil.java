@@ -33,4 +33,11 @@ public class CacheUtil {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO
                 && Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
+
+    public static void clearCache(Context context) {
+        File cacheFolder = getExternalCacheDir(context);
+        for (File file : cacheFolder.listFiles()) {
+            file.delete();
+        }
+    }
 }

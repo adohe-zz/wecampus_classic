@@ -303,4 +303,5 @@
     <string name="forget_pwd_rec">您好，我们会尽快处理您的请求～</string>
 
     <string name="please_input_email_reg">请输入您的注册邮箱!</string>
+    <string name="msg_clear_img_cache_complete">图片缓存已清除</string>
 </resources>

@@ -1,23 +1,25 @@
 package com.westudio.wecampus.ui.setting;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
-import com.westudio.wecampus.ui.main.MainActivity;
+import com.westudio.wecampus.util.CacheUtil;
 
 /**
  * Created by nankonami on 13-12-2.
@@ -32,6 +34,7 @@ public class SettingFragment extends SherlockFragment {
     private RelativeLayout rlShare;
     private RelativeLayout rlFeedback;
     private RelativeLayout rlAbout;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onAttach(Activity activity) {
@@ -111,7 +114,7 @@ public class SettingFragment extends SherlockFragment {
                     break;
                 }
                 case R.id.ly_setting_clear_cache:
-
+                    clearImageCache();
                     MobclickAgent.onEvent(getActivity(), "settings_cache");
                     break;
                 case R.id.ly_setting_feedback: {
@@ -136,4 +139,35 @@ public class SettingFragment extends SherlockFragment {
             }
         }
     };
+
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 333) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), R.string.msg_clear_img_cache_complete, Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    private void clearImageCache() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(getActivity());
+        }
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    CacheUtil.clearCache(getActivity());
+                } catch (Exception e) {
+                } finally {
+                    handler.sendEmptyMessage(333);
+                }
+            }
+        }).start();
+    }
+
 }
