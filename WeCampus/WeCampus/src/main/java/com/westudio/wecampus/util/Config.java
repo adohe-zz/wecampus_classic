@@ -14,7 +14,8 @@ public class Config {
         if (IS_TEST){
             return "wx849ec04575e33109";
         } else {
-            return "wxe8c36962ae11e4eb";
+            //return "wxe8c36962ae11e4eb";
+            return "wx73163b1353fb6349";
         }
     }
 
