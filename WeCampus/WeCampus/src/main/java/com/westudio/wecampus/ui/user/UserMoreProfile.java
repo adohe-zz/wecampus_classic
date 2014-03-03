@@ -1,49 +1,92 @@
-package com.westudio.wecampus.ui.base;
+package com.westudio.wecampus.ui.user;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
-import com.westudio.wecampus.ui.user.UserMoreProfile;
+import com.westudio.wecampus.ui.base.BaseGestureActivity;
 
 /**
  * Created by martian on 14-3-3.
  */
-public class UserMoreMenuActivity extends BaseMenuActivity implements View.OnClickListener {
+public class UserMoreProfile extends BaseGestureActivity {
     public static final String EXTRA_USER = "extra_user";
 
     private User mUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_detail_menu);
-        setWindowStyle();
+        setContentView(R.layout.user_more_profile);
+        setTitle(R.string.more_profile_info);
 
         mUser = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
-        findViewById(R.id.save_as_contact).setOnClickListener(this);
-        findViewById(R.id.more_profile_info).setOnClickListener(this);
+        setUpUI();
+
+        registerSwipeToCloseListener(findViewById(R.id.content_frame));
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.save_as_contact) {
-            saveAsContact(mUser);
-        } else if (view.getId() == R.id.more_profile_info) {
-            Intent intent = new Intent(this, UserMoreProfile.class);
-            intent.putExtra(UserMoreProfile.EXTRA_USER, mUser);
-            startActivity(intent);
-            finish();
+    private void setUpUI() {
+        TextView nickname = (TextView) findViewById(R.id.nickname);
+        nickname.setText(mUser.nickname);
+
+        TextView gender = (TextView) findViewById(R.id.gender);
+        gender.setText(mUser.gender);
+
+        TextView school = (TextView) findViewById(R.id.school);
+        school.setText(mUser.school.getName());
+
+        TextView words = (TextView) findViewById(R.id.words);
+        if (!TextUtils.isEmpty(mUser.words)) {
+            words.setText(mUser.words);
         }
 
+        TextView realname = (TextView) findViewById(R.id.really_name);
+        if (!TextUtils.isEmpty(mUser.name)) {
+            realname.setText(mUser.name);
+        }
+
+        TextView telephone = (TextView) findViewById(R.id.telephone);
+        if (!TextUtils.isEmpty(mUser.phone)) {
+            telephone.setText(mUser.phone);
+        }
+
+        TextView email = (TextView) findViewById(R.id.email);
+        if (!TextUtils.isEmpty(mUser.contact_email)) {
+            email.setText(mUser.email);
+        } else {
+            email.setText(mUser.contact_email);
+        }
+
+        TextView birthday = (TextView) findViewById(R.id.birthday);
+        if (!TextUtils.isEmpty(mUser.birthday)) {
+            birthday.setText(mUser.birthday);
+        }
+
+        TextView relationship = (TextView) findViewById(R.id.relationship);
+        if (!TextUtils.isEmpty(mUser.emotion)) {
+            relationship.setText(mUser.emotion);
+        }
+
+        TextView role = (TextView) findViewById(R.id.role);
+        if (!TextUtils.isEmpty(mUser.stage)) {
+            role.setText(mUser.stage);
+        }
+
+        findViewById(R.id.save_as_contact).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveAsContact(mUser);
+            }
+        });
     }
 
     public void saveAsContact(User user) {

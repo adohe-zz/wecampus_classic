@@ -195,6 +195,9 @@
         <activity android:name=".ui.user.PickBirthdayActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.user.UserMoreProfile"
+            android:screenOrientation="portrait"/>
+
         <provider
             android:name=".data.DataProvider"
             android:authorities="com.westudio.provider"

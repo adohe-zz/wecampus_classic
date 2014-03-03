@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:id="@+id/content_frame">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@android:color/white">
+
+            <!-- Name -->
+            <LinearLayout
+                android:id="@+id/change_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/nickname"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/nickname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Gender -->
+            <LinearLayout
+                android:id="@+id/change_gender"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/gender"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- School -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/school"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/school"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:clickable="false"
+                    android:textColor="@color/profile_school_color"
+                    android:background="#00000000"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Words -->
+            <LinearLayout
+                android:id="@+id/change_words"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/words"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/words"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@android:color/white">
+
+            <!-- Real Name -->
+            <LinearLayout
+                android:id="@+id/change_real_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/real_name"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/really_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Telephone -->
+            <LinearLayout
+                android:id="@+id/change_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/telephone"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/telephone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Email -->
+            <LinearLayout
+                android:id="@+id/change_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/email"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Birthday -->
+            <LinearLayout
+                android:id="@+id/change_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/age"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Relationship -->
+            <LinearLayout
+                android:id="@+id/change_relationship"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/relationship"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/relationship"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <!-- Role -->
+            <LinearLayout
+                android:id="@+id/change_role"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/square_section_height">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/role"
+                    style="@style/RegisterTextView"/>
+
+                <TextView
+                    android:id="@+id/role"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:hint="@string/not_filed"/>
+
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/detail_pointer"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save_as_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_selectable_background_we"
+            android:text="@string/save_as_contact"
+            android:textColor="@color/text_color_white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -307,4 +307,6 @@
     <string name="save_as_contact">保存为本地联系人</string>
     <string name="look_more_profile_info">查看更多个人资料</string>
     <string name="save_contact_complete">已保存为联系人</string>
+    <string name="more_profile_info">更多资料</string>
+    <string name="not_filed">未填写</string>
 </resources>
