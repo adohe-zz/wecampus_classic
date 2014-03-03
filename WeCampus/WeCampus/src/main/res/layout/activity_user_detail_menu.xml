@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/save_as_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_as_contact"
+        android:clickable="true"
+        android:paddingTop="17dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="17dp"
+        android:background="@drawable/selectable_background_we"
+        style="@style/ShareTitle"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_bg"/>
+
+    <TextView
+        android:id="@+id/more_profile_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/look_more_profile_info"
+        android:clickable="true"
+        android:paddingTop="17dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="17dp"
+        android:background="@drawable/selectable_background_we"
+        style="@style/ShareTitle"/>
+</LinearLayout>

@@ -1,18 +1,12 @@
 package com.westudio.wecampus.ui.base;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.sina.weibo.sdk.api.share.BaseResponse;
@@ -20,14 +14,11 @@ import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
-import com.westudio.wecampus.data.ActivityDataHelper;
-import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.Activity;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.DateUtil;
 import com.westudio.wecampus.util.ImageUtil;
-import com.westudio.wecampus.util.Utility;
 import com.westudio.wecampus.util.WbShareTool;
 import com.westudio.wecampus.util.WxShareTool;
 
@@ -38,7 +29,7 @@ import java.io.IOException;
 /**
  * Created by martian on 13-11-28.
  */
-public class ShareMenuActivity extends SherlockFragmentActivity implements View.OnClickListener,
+public class ShareMenuActivity extends BaseMenuActivity implements View.OnClickListener,
         IWeiboHandler.Response {
     public static final String ACTIVITY = "activity";
     public static final String CAN_JOIN = "can_join";
@@ -57,16 +48,8 @@ public class ShareMenuActivity extends SherlockFragmentActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_share_dialog);
-
-        Window window = getWindow();
-        WindowManager.LayoutParams wlp = new WindowManager.LayoutParams();;
-        wlp.copyFrom(window.getAttributes());
-        wlp.gravity = Gravity.BOTTOM;
-        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(wlp);
+        setWindowStyle();
 
         isShareApp = getIntent().getBooleanExtra(IS_SHARE_APP, false);
         if (!isShareApp){

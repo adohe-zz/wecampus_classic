@@ -1,6 +1,5 @@
 package com.westudio.wecampus.ui.view;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
-import com.westudio.wecampus.util.Utility;
 
 
 /**

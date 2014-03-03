@@ -304,4 +304,7 @@
 
     <string name="please_input_email_reg">请输入您的注册邮箱!</string>
     <string name="msg_clear_img_cache_complete">图片缓存已清除</string>
+    <string name="save_as_contact">保存为本地联系人</string>
+    <string name="look_more_profile_info">查看更多个人资料</string>
+    <string name="save_contact_complete">已保存为联系人</string>
 </resources>

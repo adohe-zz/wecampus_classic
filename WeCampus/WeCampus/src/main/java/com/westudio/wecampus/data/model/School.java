@@ -1,12 +1,13 @@
 package com.westudio.wecampus.data.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by nankonami on 13-10-19.
  *
  */
-public class School {
+public class School implements Serializable {
 
     private int id;
     private String name;

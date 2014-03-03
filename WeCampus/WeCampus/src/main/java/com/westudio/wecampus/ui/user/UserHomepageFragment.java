@@ -16,6 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -32,6 +35,7 @@ import com.westudio.wecampus.ui.activity.ActivityListFragment;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.BaseFragment;
 import com.westudio.wecampus.ui.base.ImageDetailActivity;
+import com.westudio.wecampus.ui.base.UserMoreMenuActivity;
 import com.westudio.wecampus.ui.list.ListActivity;
 import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
@@ -69,6 +73,7 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     private ImageView ivUserAvatar;
     private TextView tvMoreActivity;
     private TextView tvAttendActivity;
+    private Menu mMenu;
 
     private FollowButton btnFollow;
 
@@ -176,6 +181,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     }
 
     private void setupHeader() {
+        if (mUser == null) {
+            return;
+        }
         getSherlockActivity().getSupportActionBar().setTitle(mUser.nickname);
 
         tvUserName.setText(mUser.nickname);
@@ -230,6 +238,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     }
 
     private void setupUI() {
+        mMenu.findItem(R.id.detail_menu_share).setVisible(follow_each_other);
+
         setupHeader();
 
         if(mUser.attend_activity != null) {
@@ -306,6 +316,23 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     @Override
     public void onRefreshStarted(View view) {
         mPullToRefreshAttacher.setRefreshComplete();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        mMenu = menu;
+        inflater.inflate(R.menu.detail_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.detail_menu_share) {
+            Intent intent = new Intent(getActivity(), UserMoreMenuActivity.class);
+            intent.putExtra(UserMoreMenuActivity.EXTRA_USER, mUser);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class UserActivityHandler implements Response.Listener<ActivityList.RequestData>,
