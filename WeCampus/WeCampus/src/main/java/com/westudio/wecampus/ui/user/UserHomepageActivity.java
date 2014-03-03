@@ -74,6 +74,7 @@ public class UserHomepageActivity extends BaseDetailActivity {
     }
 
     private void updateActionBar() {
+        setTitle(R.string.fragment_title_homepage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

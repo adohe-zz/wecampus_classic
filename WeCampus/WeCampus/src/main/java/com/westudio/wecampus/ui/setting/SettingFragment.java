@@ -118,7 +118,7 @@ public class SettingFragment extends SherlockFragment {
                     MobclickAgent.onEvent(getActivity(), "settings_cache");
                     break;
                 case R.id.ly_setting_feedback: {
-                    Uri emailUri = Uri.parse("mailto:wetongji2012@gmail.com");
+                    Uri emailUri = Uri.parse("mailto:feedback@wecampus.net");
                     Intent intent = new Intent(Intent.ACTION_SENDTO, emailUri);
                     intent.putExtra(Intent.EXTRA_SUBJECT, "WeCampus Android Feedback");
                     try {

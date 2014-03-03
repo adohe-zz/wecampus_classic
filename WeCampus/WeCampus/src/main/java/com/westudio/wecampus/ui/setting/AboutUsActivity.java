@@ -83,6 +83,9 @@ public class AboutUsActivity extends BaseGestureActivity {
                     MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_rate");
                     break;
                 case R.id.about_rl_weibo:
+                    Intent weiboIntent = new Intent(AboutUsActivity.this, WebBrowserActivity.class);
+                    weiboIntent.putExtra(WebBrowserActivity.EXTRA_URL, "http://weibo.com/u/3648920267");
+                    startActivity(weiboIntent);
                     MobclickAgent.onEvent(AboutUsActivity.this, "settings_about_weibo");
                     break;
                 case R.id.about_rl_web:

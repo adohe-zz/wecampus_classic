@@ -1,173 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@id/about_icon"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:src="@drawable/ic_setting_logo"
-        android:contentDescription="@string/imageDescription" />
-
-    <TextView
-        android:id="@id/about_name"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/about_icon"
-        android:text="@string/about_name"
-        style="@style/AboutUsName"/>
-
-    <TextView
-        android:id="@id/about_version"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/about_name"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/about_version"
-        style="@style/AboutUsVersion"/>
-
-
     <LinearLayout
-        android:id="@id/about_ly"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_below="@id/about_version"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="3.3dp"
-        android:layout_marginRight="3.3dp"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@id/about_icon"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="25dp"
-            android:paddingTop="13dp"
-            android:paddingBottom="13dp"
-            android:id="@id/about_rl_like"
-            android:clickable="true"
-            android:background="@drawable/setting_item_selector">
+            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/ic_setting_logo"
+            android:contentDescription="@string/imageDescription" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/about_like_us"
-                style="@style/SettingTextStyle"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_right_arrow" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
-            android:background="@color/divider_bg" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@id/about_name"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="25dp"
-            android:paddingTop="13dp"
-            android:paddingBottom="13dp"
-            android:id="@id/about_rl_weibo"
-            android:clickable="true"
-            android:background="@drawable/setting_item_selector">
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/about_name"
+            style="@style/AboutUsName" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/about_weibo"
-                style="@style/SettingTextStyle"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_right_arrow" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1.3dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginRight="11dp"
-            android:background="@color/divider_bg" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@id/about_version"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="25dp"
-            android:paddingTop="13dp"
-            android:paddingBottom="13dp"
-            android:id="@id/about_rl_web"
-            android:clickable="true"
-            android:background="@drawable/setting_item_selector">
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/about_version"
+            style="@style/AboutUsVersion" />
 
-            <TextView
-                android:id="@id/about_web"
-                android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@id/about_ly"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="3.3dp"
+            android:layout_marginRight="3.3dp"
+            android:background="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/about_web"
-                style="@style/SettingTextStyle"/>
+                android:paddingLeft="20dp"
+                android:paddingRight="25dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:id="@id/about_rl_like"
+                android:clickable="true"
+                android:background="@drawable/setting_item_selector">
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/about_like_us"
+                    style="@style/SettingTextStyle" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_right_arrow" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_right_arrow" />
+                android:paddingLeft="20dp"
+                android:paddingRight="25dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:id="@id/about_rl_weibo"
+                android:clickable="true"
+                android:background="@drawable/setting_item_selector">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/about_weibo"
+                    style="@style/SettingTextStyle" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_right_arrow" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.3dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@color/divider_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="25dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:id="@id/about_rl_web"
+                android:clickable="true"
+                android:background="@drawable/setting_item_selector">
+
+                <TextView
+                    android:id="@id/about_web"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/about_web"
+                    style="@style/SettingTextStyle" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_right_arrow" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/about_terms_of_use"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/copy_right"
+            android:layout_marginTop="90dp"
+            android:text="@string/user_assignment"
+            style="@style/AboutUsUser" />
+
+        <TextView
+            android:id="@id/copy_right"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textSize="9sp"
+            android:text="@string/copy_right_msg" />
+
+        <TextView
+            android:id="@id/about_policy"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="3dp"
+            android:textSize="9sp"
+            android:text="@string/about_name" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@id/about_terms_of_use"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/about_ly"
-        android:layout_marginTop="90dp"
-        android:text="@string/user_assignment"
-        style="@style/AboutUsUser"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/about_policy"
-        android:layout_marginBottom="4dp"
-        android:textSize="9sp"
-        android:text="@string/copy_right_msg"/>
-
-    <TextView
-        android:id="@id/about_policy"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:textSize="9sp"
-        android:text="@string/about_name"/>
-
-</RelativeLayout>
+</ScrollView>

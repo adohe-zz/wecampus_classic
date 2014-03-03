@@ -176,6 +176,8 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
     }
 
     private void setupHeader() {
+        getSherlockActivity().getSupportActionBar().setTitle(mUser.nickname);
+
         tvUserName.setText(mUser.nickname);
         tvUserWords.setText(mUser.words);
         tvUserFollow.setText(String.valueOf(mUser.count_of_followings));
