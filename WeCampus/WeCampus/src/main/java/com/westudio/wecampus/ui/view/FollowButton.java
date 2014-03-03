@@ -58,7 +58,7 @@ public class FollowButton extends Button {
             case FOLLOWING: {
                 setBackgroundResource(R.drawable.selector_followed);
                 setText(R.string.followed);
-                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow);
                 break;
             }
             case FOLLOW_EACH_OTHER: {
@@ -70,13 +70,13 @@ public class FollowButton extends Button {
             case UNFOLLOWED: {
                 setBackgroundResource(R.drawable.selector_unfollowed);
                 setText(R.string.follow);
-                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_unfollowed);
                 break;
             }
             case BE_FOLLOWED: {
                 setBackgroundResource(R.drawable.selector_unfollowed);
-                setText(R.string.be_followed);
-                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow_eachother);
+                setText(R.string.follow);
+                drawable = getContext().getResources().getDrawable(R.drawable.icon_follow);
                 break;
             }
         }
