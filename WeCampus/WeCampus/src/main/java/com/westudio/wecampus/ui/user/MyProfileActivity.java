@@ -51,6 +51,7 @@ public class MyProfileActivity extends PickPhotoActivity {
     public static final String PICK_STAGE = "stage";
     public static final String GENDER = "gender";
     public static final String AGE = "age";
+    public static final String DATE_BIRTHDAY = "date_birthday";
     public static final String BIRTHDAY = "birthday";
 
     public static final int UPDATE_NICK_REQUEST = 1;
@@ -88,6 +89,8 @@ public class MyProfileActivity extends PickPhotoActivity {
     private int id;
 
     private String birthday;
+
+    private Date dateBirthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +221,7 @@ public class MyProfileActivity extends PickPhotoActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = sdf.parse(mUser.birthday);
+            dateBirthday = date;
             Calendar calendar = Calendar.getInstance();
             Calendar now = Calendar.getInstance();
             calendar.setTime(date);
@@ -333,6 +337,7 @@ public class MyProfileActivity extends PickPhotoActivity {
                 case R.id.change_birthday: {
                     Intent intent = new Intent(MyProfileActivity.this, PickBirthdayActivity.class);
                     intent.putExtra(AGE, tvBirthday.getText().toString());
+                    intent.putExtra(DATE_BIRTHDAY, dateBirthday);
                     startActivityForResult(intent, PICK_AGE_REQUEST);
                     break;
                 }

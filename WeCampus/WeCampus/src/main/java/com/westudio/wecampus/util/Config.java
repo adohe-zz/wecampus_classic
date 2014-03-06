@@ -7,21 +7,21 @@ package com.westudio.wecampus.util;
 public class Config {
 
     // 注意每次打包之前需要吧这个变量改成false
-    public static final boolean IS_TEST = true;
+    public static final boolean IS_TEST = false;
 
 
     public static String WX_APP_ID() {
         if (IS_TEST){
-            return "wx849ec04575e33109";
+            return "wx849ec04575e33109"; //测试
         } else {
-            //return "wxe8c36962ae11e4eb";
-            return "wx73163b1353fb6349";
+            return "wxe8c36962ae11e4eb"; //wecampus
+            //return "wx73163b1353fb6349"; //wecampus-android
         }
     }
 
     public static String WB_APP_KEY() {
         if (IS_TEST){
-            return "3126350995";
+            return "2393509052";
         } else {
             return "2393509052";
         }

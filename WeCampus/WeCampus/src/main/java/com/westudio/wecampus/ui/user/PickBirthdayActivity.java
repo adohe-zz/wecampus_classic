@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import com.westudio.wecampus.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by nankonami on 14-2-13.
@@ -28,6 +28,7 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
     private DatePicker datePicker;
 
     private String birthday;
+    private Date dateBirthday;
     private int year;
     private int month;
     private int day;
@@ -73,6 +74,7 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
         setContentView(R.layout.activity_update_birthday);
 
         age = getIntent().getStringExtra(MyProfileActivity.AGE);
+        dateBirthday = (Date) getIntent().getSerializableExtra(MyProfileActivity.DATE_BIRTHDAY);
         initWidget();
         updateActionBar();
     }
@@ -86,8 +88,17 @@ public class PickBirthdayActivity extends SherlockFragmentActivity {
         tvAge = (TextView)findViewById(R.id.age);
         tvAge.setText(age);
         datePicker = (DatePicker)findViewById(R.id.datepicker);
+
+        int intAge = 18;
         Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
+        if (!TextUtils.isEmpty(age)) {
+            age = age.substring(0, age.length() - 1);
+            intAge = Integer.parseInt(age);
+            year = calendar.get(Calendar.YEAR) - intAge;
+            calendar.setTime(dateBirthday);
+        } else {
+            year = calendar.get(Calendar.YEAR) - intAge;
+        }
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
