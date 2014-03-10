@@ -286,52 +286,61 @@ public class MyProfileActivity extends PickPhotoActivity {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNickActivity.class);
                     intent.putExtra(NICK_NAME, tvNickName.getText().toString());
                     startActivityForResult(intent, UPDATE_NICK_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_nickname");
                     break;
                 }
                 case R.id.change_real_name: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateNameActivity.class);
                     intent.putExtra(REAL_NAME, tvName.getText().toString());
                     startActivityForResult(intent, UPDATE_NAME_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_name");
                     break;
                 }
                 case R.id.change_telephone: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdatePhoneActivity.class);
                     intent.putExtra(PHONE, tvPhone.getText().toString());
                     startActivityForResult(intent, UPDATE_PHONE_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_phone");
                     break;
                 }
                 case R.id.change_email: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateEmailActivity.class);
                     intent.putExtra(EMAIL, tvEmail.getText().toString());
                     startActivityForResult(intent, UPDATE_EMAIL_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_email");
                     break;
                 }
                 case R.id.change_gender: {
                     Intent intent = new Intent(MyProfileActivity.this, PickGenderActivity.class);
                     intent.putExtra(GENDER, tvGender.getText().toString());
                     startActivityForResult(intent, AuthActivity.PICK_GENDER_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_gender");
                     break;
                 }
                 case R.id.change_words: {
                     Intent intent = new Intent(MyProfileActivity.this, UpdateWordsActivity.class);
                     intent.putExtra(WORDS, tvWord.getText().toString());
                     startActivityForResult(intent, UPDATE_WORDS_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_motto");
                     break;
                 }
                 case R.id.change_relationship: {
                     Intent intent = new Intent(MyProfileActivity.this, PickEmotionActivity.class);
                     intent.putExtra(PICK_EMOTION, tvLove.getText().toString());
                     startActivityForResult(intent, PICK_EMOTION_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_lovestatus");
                     break;
                 }
                 case R.id.change_role: {
                     Intent intent = new Intent(MyProfileActivity.this, PickStageActivity.class);
                     intent.putExtra(PICK_STAGE, tvRole.getText().toString());
                     startActivityForResult(intent, PICK_STAGE_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_grade");
                     break;
                 }
                 case R.id.change_avatar: {
                     doPickPhotoAction();
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_avatar");
                     break;
                 }
                 case R.id.change_birthday: {
@@ -339,6 +348,7 @@ public class MyProfileActivity extends PickPhotoActivity {
                     intent.putExtra(AGE, tvBirthday.getText().toString());
                     intent.putExtra(DATE_BIRTHDAY, dateBirthday);
                     startActivityForResult(intent, PICK_AGE_REQUEST);
+                    MobclickAgent.onEvent(MyProfileActivity.this, "profile_birth");
                     break;
                 }
             }
