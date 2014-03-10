@@ -125,6 +125,8 @@ public class ChangePwdActivity extends BaseGestureActivity {
         BaseApplication app = BaseApplication.getInstance();
         app.hasAccount = false;
         app.getAccountMgr().clearAccountInfo();
-        startActivity(new Intent(ChangePwdActivity.this, AuthActivity.class));
+        Intent intent = new Intent(ChangePwdActivity.this, AuthActivity.class);
+        intent.putExtra(AuthActivity.FLAG_CHANGE_PWD, true);
+        startActivity(intent);
     }
 }

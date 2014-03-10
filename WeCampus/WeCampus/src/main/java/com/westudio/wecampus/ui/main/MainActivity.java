@@ -27,6 +27,8 @@ public class MainActivity extends SherlockFragmentActivity {
 
     public static final int MSG_SWITCH_CONTENT = 9009;
 
+    private static MainActivity instance;
+
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggleCompat mDrawerToggle;
@@ -43,6 +45,7 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.activity_main);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -190,5 +193,9 @@ public class MainActivity extends SherlockFragmentActivity {
 
         mDrawerLayout.closeDrawers();
 
+    }
+
+    public static MainActivity getInstance() {
+        return instance;
     }
 }

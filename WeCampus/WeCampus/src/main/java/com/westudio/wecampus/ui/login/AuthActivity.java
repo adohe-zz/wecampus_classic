@@ -5,18 +5,21 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuItem;
 import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.PickPhotoActivity;
+import com.westudio.wecampus.ui.main.MainActivity;
 
 /**
  * Created by nankonami on 13-9-18.
  * The login/register activity
  */
 public class AuthActivity extends PickPhotoActivity {
+    public static final String FLAG_CHANGE_PWD = "flag_change_password";
 
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT";
     public static final String REGISTER_FRAGMENT_TAG = "REG_FRAGMENT";
@@ -110,9 +113,26 @@ public class AuthActivity extends PickPhotoActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
-            MobclickAgent.onEvent(this, "register_back_btn");
+            cancelAuth();
         }
+        MobclickAgent.onEvent(this, "register_back_btn");
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            cancelAuth();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void cancelAuth() {
+        if (getIntent().getBooleanExtra(FLAG_CHANGE_PWD, false)) {
+            MainActivity.getInstance().finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        finish();
     }
 }
