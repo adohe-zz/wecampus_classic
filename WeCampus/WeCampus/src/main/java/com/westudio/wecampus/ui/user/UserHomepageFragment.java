@@ -41,6 +41,8 @@ import com.westudio.wecampus.ui.view.FollowButton;
 import com.westudio.wecampus.util.Constants;
 import com.westudio.wecampus.util.DateUtil;
 
+import java.util.List;
+
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
 
@@ -563,7 +565,11 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onResponse(ActivityList.RequestData requestData) {
-            ActivityList ac = requestData.getObjects().get(0);
+            List<ActivityList> activityList = requestData.getObjects();
+            if (activityList.isEmpty()) {
+                return;
+            }
+            ActivityList ac = activityList.get(0);
             setupUI(ac);
             if(from_user_list) {
                 mUser.like_activity = gson.toJson(ac);
