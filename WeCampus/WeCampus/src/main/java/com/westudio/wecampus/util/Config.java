@@ -7,7 +7,7 @@ package com.westudio.wecampus.util;
 public class Config {
 
     // 注意每次打包之前需要吧这个变量改成false
-    public static final boolean IS_TEST = false;
+    public static final boolean IS_TEST = true;
 
 
     public static String WX_APP_ID() {

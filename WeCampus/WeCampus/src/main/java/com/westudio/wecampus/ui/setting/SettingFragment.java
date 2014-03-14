@@ -19,7 +19,9 @@ import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
+import com.westudio.wecampus.ui.dev_tool.DevelopInfoPage;
 import com.westudio.wecampus.util.CacheUtil;
+import com.westudio.wecampus.util.Config;
 
 /**
  * Created by nankonami on 13-12-2.
@@ -89,6 +91,18 @@ public class SettingFragment extends SherlockFragment {
         rlFeedback.setOnClickListener(clickListener);
         rlAbout = (RelativeLayout)view.findViewById(R.id.ly_setting_about_us);
         rlAbout.setOnClickListener(clickListener);
+
+
+        // 开发模式下长按
+        if (Config.IS_TEST) {
+            rlAbout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    startActivity(new Intent(getActivity(), DevelopInfoPage.class));
+                    return true;
+                }
+            });
+        }
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
