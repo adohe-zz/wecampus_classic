@@ -228,6 +228,10 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (mUser == null) {
+                return;
+            }
+            
             if(v.getId() == R.id.activity_list_item_no_activity) {
                 if(mUser.count_of_join_activities == 0) {
                     Toast.makeText(mActivity, R.string.no_attend_activity, Toast.LENGTH_SHORT).show();

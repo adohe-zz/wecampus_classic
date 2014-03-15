@@ -536,11 +536,13 @@ public class ActivityDetailActivity extends BaseGestureActivity implements OnRef
             if (canJoin) {
                 container.setVisibility(View.VISIBLE);
                 divider.setVisibility(View.VISIBLE);
-                mMenu.findItem(R.id.detail_menu_share).setVisible(false);
             } else {
                 container.setVisibility(View.GONE);
                 divider.setVisibility(View.GONE);
-                mMenu.findItem(R.id.detail_menu_share).setVisible(true);
+            }
+
+            if (mMenu != null) {
+                mMenu.findItem(R.id.detail_menu_share).setVisible(!canJoin);
             }
         }
     }
