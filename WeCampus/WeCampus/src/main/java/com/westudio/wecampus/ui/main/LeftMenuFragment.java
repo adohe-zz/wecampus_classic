@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +33,6 @@ import com.westudio.wecampus.ui.login.AuthActivity;
 import com.westudio.wecampus.ui.user.MyProfileActivity;
 import com.westudio.wecampus.ui.view.CircleImageView;
 import com.westudio.wecampus.util.Constants;
-import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.Utility;
 
 /**
@@ -308,11 +305,15 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
         }
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            progressDialog.dismiss();
+            setUiAsLogout();
         }
 
         @Override
         public void onResponse(Object o) {
+            setUiAsLogout();
+        }
+
+        private void setUiAsLogout() {
             refreshUI();
             mBtnEdit.setVisibility(View.GONE);
             mBtnSignOut.setVisibility(View.GONE);

@@ -1,13 +1,16 @@
 package com.westudio.wecampus.ui.base;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.ContextThemeWrapper;
@@ -15,9 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.westudio.wecampus.R;
+import com.westudio.wecampus.util.ImageUtil;
 import com.westudio.wecampus.util.PickImageIntentWrapper;
+import com.westudio.wecampus.util.Utility;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +42,8 @@ public class PickPhotoActivity extends BaseGestureActivity {
     protected static final int PHOTO_PICKED_WITH_DATA = 3021;
     protected static final int PHOTO_CROPED_WITH_DATA = 3024;
 
+
+    protected ProgressDialog progressDialog;
 
 
     @Override
@@ -156,6 +162,46 @@ public class PickPhotoActivity extends BaseGestureActivity {
             return null;
         }
         return bitmap;
+    }
+
+    protected void processPhotoByCamera(final Uri uri) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+        try {
+            ExifInterface ei = new ExifInterface(uri.getPath());
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch(orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    Utility.executeAsyncTask(new AsyncTask<Object, Object, Object>() {
+                        @Override
+                        protected Object doInBackground(Object... objects) {
+                            try {
+                                ImageUtil.rotateImage(uri, 90f);
+                            } catch (IOException e) {
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            progressDialog.dismiss();
+                            doCropPhoto(uri, mCropedTemp);
+                        }
+                    });
+
+                    break;
+                default:
+                    progressDialog.dismiss();
+                    doCropPhoto(uri, mCropedTemp);
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            progressDialog.dismiss();
+        }
+
     }
 
 }

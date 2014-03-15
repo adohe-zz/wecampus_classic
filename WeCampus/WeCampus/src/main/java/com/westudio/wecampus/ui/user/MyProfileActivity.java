@@ -405,31 +405,38 @@ public class MyProfileActivity extends PickPhotoActivity {
             int type = data.getIntExtra(PICK_STAGE, -1);
             tvRole.setText(Utility.getStageByType(this, type));
         } else if (requestCode == PHOTO_PICKED_WITH_DATA) {
-            Uri selectedImage = data.getData();
-            doCropPhoto(selectedImage, mCropedTemp);
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                doCropPhoto(selectedImage, mCropedTemp);
+            }
         } else if (requestCode == CAMERA_WITH_DATA) {
-            doCropPhoto(mUriTemp, mCropedTemp);
+            if (resultCode == RESULT_OK) {
+                processPhotoByCamera(mUriTemp);
+            }
         } else if (requestCode == PHOTO_CROPED_WITH_DATA) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage(getString(R.string.please_wait));
-            progressDialog.show();
-            WeCampusApi.postUpdateAvatar(this, mCropedTemp.getPath(),
-                    new Response.Listener() {
-                        @Override
-                        public void onResponse(Object o) {
-                            ivAvatar.setImageBitmap(decodeUriAsBitmap(mCropedTemp));
-                            progressDialog.dismiss();
-                            Toast.makeText(MyProfileActivity.this, R.string.upload_success, Toast.LENGTH_SHORT).show();
+            if (resultCode == RESULT_OK) {
+                progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage(getString(R.string.please_wait));
+                progressDialog.show();
+                WeCampusApi.postUpdateAvatar(this, mCropedTemp.getPath(),
+                        new Response.Listener() {
+                            @Override
+                            public void onResponse(Object o) {
+                                ivAvatar.setImageBitmap(decodeUriAsBitmap(mCropedTemp));
+                                progressDialog.dismiss();
+                                Toast.makeText(MyProfileActivity.this, R.string.upload_success, Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                progressDialog.dismiss();
+                                Toast.makeText(MyProfileActivity.this, R.string.upload_fail,
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            progressDialog.dismiss();
-                            Toast.makeText(MyProfileActivity.this, R.string.upload_fail,
-                                    Toast.LENGTH_SHORT).show();                        }
-                    }
-            );
+                );
+            }
         }
     }
 

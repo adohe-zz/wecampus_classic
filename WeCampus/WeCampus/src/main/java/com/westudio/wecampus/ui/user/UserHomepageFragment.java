@@ -385,6 +385,9 @@ public class UserHomepageFragment extends BaseFragment implements OnRefreshListe
 
         @Override
         public void onResponse(ActivityList.RequestData activityRequestData) {
+            if (activityRequestData == null || activityRequestData.getObjects().isEmpty()) {
+                return;
+            }
             ac = activityRequestData.getObjects().get(0);
             setupUI(ac);
             if(from_user_list) {

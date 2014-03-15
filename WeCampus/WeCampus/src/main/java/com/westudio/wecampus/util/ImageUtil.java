@@ -1,15 +1,17 @@
 package com.westudio.wecampus.util;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Build;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by martian on 13-9-15.
@@ -129,5 +131,22 @@ public class ImageUtil {
             _size = baos.toByteArray().length;
         } while (_size >= size);
         return baos.toByteArray();
+    }
+
+    /**
+     * 旋转目标图片并保存
+     * @param uri 图片uri
+     * @param rotation 旋转角度
+     */
+    public static void rotateImage(Uri uri, float rotation) throws IOException {
+        Bitmap source = BitmapFactory.decodeFile(uri.getPath());
+        Bitmap target = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(target);
+        Matrix matrix = new Matrix();
+        matrix.setRotate(rotation, source.getWidth() / 2 ,source.getHeight() / 2);
+        canvas.drawBitmap(source, matrix, new Paint());
+        FileOutputStream fos = new FileOutputStream(new File(uri.getPath()));
+        target.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+        fos.close();
     }
 }

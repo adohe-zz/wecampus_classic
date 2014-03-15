@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -84,12 +83,14 @@ public class AuthActivity extends PickPhotoActivity {
         }
         switch (requestCode) {
             case PHOTO_PICKED_WITH_DATA: {
-                Uri selectedImage = data.getData();
-                doCropPhoto(selectedImage, mCropedTemp);
+                if (data != null) {
+                    Uri selectedImage = data.getData();
+                    doCropPhoto(selectedImage, mCropedTemp);
+                }
                 break;
             }
             case CAMERA_WITH_DATA: {
-                doCropPhoto(mUriTemp, mCropedTemp);
+                processPhotoByCamera(mUriTemp);
                 break;
             }
             case PHOTO_CROPED_WITH_DATA: {

@@ -17,7 +17,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.OrgDataHelper;
 import com.westudio.wecampus.data.model.ActivityList;
-import com.westudio.wecampus.data.model.OrgFans;
 import com.westudio.wecampus.data.model.Organization;
 import com.westudio.wecampus.net.WeCampusApi;
 import com.westudio.wecampus.ui.activity.ActivityDetailActivity;
@@ -29,9 +28,6 @@ import com.westudio.wecampus.ui.view.HeaderTabBar;
 import com.westudio.wecampus.ui.view.LoadingFooter;
 import com.westudio.wecampus.ui.view.PinnedHeaderListView;
 import com.westudio.wecampus.util.Utility;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarsherlock.PullToRefreshAttacher;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher.OnRefreshListener;
@@ -143,6 +139,9 @@ public class OrganizationHomepageActivity extends BaseGestureActivity implements
         tvLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mOrganization == null) {
+                    return;
+                }
                 if(BaseApplication.getInstance().hasAccount) {
                     followOrganizationHandler.followOrganization(mOrganization.can_follow);
                 } else {
