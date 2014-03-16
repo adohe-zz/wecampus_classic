@@ -85,51 +85,52 @@ public class ImageUtil {
      * @param bitmap
      * @return
      */
-    public static byte[] cropBitmap(Bitmap bitmap) {
+    public static Bitmap cropCenterSquare(Bitmap bitmap) {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
 
+        //截取正方形
         int wh = w > h ? h : w;
-
         int retX = w > h ? (w - h) / 2 : 0;
         int retY = w > h ? 0 : (h - w) / 2;
-
-        Bitmap bm = Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int quality = 100;
-        float factor = 0.8f;
-        int size;
-        do {
-            baos.reset();
-            quality = (int)(quality * factor);
-            bm.compress(Bitmap.CompressFormat.JPEG, quality, baos);
-            size = baos.toByteArray().length;
-        } while (size >= 32 * 1024);
-        return baos.toByteArray();
+        return Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
     }
 
-    public static byte[] cropBitmapToSize(Bitmap bitmap, int size) {
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
+    public static byte[] cropBitmap(Bitmap bitmap) {
+        return cropBitmapToSize(bitmap, 32 * 1024);
+    }
 
-        int wh = w > h ? h : w;
-
-        int retX = w > h ? (w - h) / 2 : 0;
-        int retY = w > h ? 0 : (h - w) / 2;
-
-        Bitmap bm = Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
+    /**
+     * 截取缩略图到指定大小
+     * @param source
+     * @param maxSize
+     * @return
+     */
+    public static byte[] cropBitmapToSize(Bitmap source, int maxSize) {
+        Bitmap bm = cropCenterSquare(source);
+        int w = bm.getWidth();
+        int h = bm.getHeight();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int quality = 100;
-        float factor = 0.8f;
-        int _size;
-        do {
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+
+        // 额外多减去1K，防止超出范围
+        if (b.length > (maxSize)) {
+            double i = b.length / (maxSize - 1024);
+
+            double newWidth = w / Math.sqrt(i);
+            double newHeight = h / Math.sqrt(i);
+            Matrix matrix = new Matrix();
+            float scaleWidth = ((float) newWidth) / w;
+            float scaleHeight = ((float) newHeight) / h;
+            matrix.postScale(scaleWidth, scaleHeight);
+            Bitmap newBm = Bitmap.createBitmap(bm, 0, 0, w,
+                    h, matrix, true);
             baos.reset();
-            quality = (int)(quality * factor);
-            bm.compress(Bitmap.CompressFormat.JPEG, quality, baos);
-            _size = baos.toByteArray().length;
-        } while (_size >= size);
+            newBm.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+        }
+
         return baos.toByteArray();
     }
 
