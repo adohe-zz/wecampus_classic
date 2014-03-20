@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
-import com.westudio.wecampus.ui.user.UserMoreProfile;
+import com.westudio.wecampus.ui.user.UserMoreProfileActivity;
 
 /**
  * Created by martian on 14-3-3.
@@ -38,8 +38,8 @@ public class UserMoreMenuActivity extends BaseMenuActivity implements View.OnCli
         if (view.getId() == R.id.save_as_contact) {
             saveAsContact(mUser);
         } else if (view.getId() == R.id.more_profile_info) {
-            Intent intent = new Intent(this, UserMoreProfile.class);
-            intent.putExtra(UserMoreProfile.EXTRA_USER, mUser);
+            Intent intent = new Intent(this, UserMoreProfileActivity.class);
+            intent.putExtra(UserMoreProfileActivity.EXTRA_USER, mUser);
             startActivity(intent);
             finish();
         }

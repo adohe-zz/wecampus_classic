@@ -42,14 +42,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
             <View
@@ -80,13 +72,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -151,14 +136,6 @@
                     android:hint="@string/not_filed"
                     android:maxLines="2"
                     android:ellipsize="end"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -194,14 +171,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
             <View
@@ -232,13 +201,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -271,13 +233,6 @@
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
 
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
             <View
@@ -308,13 +263,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
 
             </LinearLayout>
 
@@ -347,13 +295,6 @@
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
 
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
             <View
@@ -384,14 +325,6 @@
                     android:layout_weight="2"
                     android:background="#00000000"
                     android:hint="@string/not_filed"/>
-
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/detail_pointer"/>
-
             </LinearLayout>
 
         </LinearLayout>

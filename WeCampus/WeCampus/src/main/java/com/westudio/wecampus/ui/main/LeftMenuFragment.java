@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +140,11 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener,
     private void updateUI() {
         tvName.setText(mUser.nickname);
         tvWord.setVisibility(View.VISIBLE);
-        tvWord.setText(mUser.words);
+        if (TextUtils.isEmpty(mUser.words)) {
+            tvWord.setText(R.string.come_to_add_words);
+        } else {
+            tvWord.setText(mUser.words);
+        }
         mUserSection.setVisibility(View.VISIBLE);
         mBtnSignIn.setVisibility(View.GONE);
         mBtnSignOut.setVisibility(View.VISIBLE);

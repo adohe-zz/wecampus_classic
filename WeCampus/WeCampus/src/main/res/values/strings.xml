@@ -310,5 +310,6 @@
     <string name="more_profile_info">更多资料</string>
     <string name="not_filed">未填写</string>
 
-    <string name="not_say_words">Ta什么都没说~</string>
+    <string name="not_say_words">这个人很懒，什么都没有说~</string>
+    <string name="come_to_add_words">赶快去添加个性签名吧~</string>
 </resources>

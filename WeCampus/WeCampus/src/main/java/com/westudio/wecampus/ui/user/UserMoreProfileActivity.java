@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseGestureActivity;
@@ -17,7 +18,7 @@ import com.westudio.wecampus.ui.base.BaseGestureActivity;
 /**
  * Created by martian on 14-3-3.
  */
-public class UserMoreProfile extends BaseGestureActivity {
+public class UserMoreProfileActivity extends BaseGestureActivity {
     public static final String EXTRA_USER = "extra_user";
 
     private User mUser;
@@ -26,6 +27,7 @@ public class UserMoreProfile extends BaseGestureActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_more_profile);
         setTitle(R.string.more_profile_info);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mUser = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
@@ -87,6 +89,14 @@ public class UserMoreProfile extends BaseGestureActivity {
                 saveAsContact(mUser);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void saveAsContact(User user) {

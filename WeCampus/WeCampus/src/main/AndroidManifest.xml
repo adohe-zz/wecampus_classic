@@ -196,7 +196,7 @@
         <activity android:name=".ui.user.PickBirthdayActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.user.UserMoreProfile"
+        <activity android:name=".ui.user.UserMoreProfileActivity"
             android:screenOrientation="portrait"/>
 
         <provider

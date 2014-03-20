@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,6 +183,11 @@ public class  MyHomepageFragment extends BaseFragment implements OnRefreshListen
      */
     private void updateUI() {
         tvUserName.setText(mUser.nickname);
+        if (TextUtils.isEmpty(mUser.words)) {
+            tvUserWords.setText(R.string.come_to_add_words);
+        } else {
+            tvUserWords.setText(mUser.words);
+        }
         tvUserWords.setText(mUser.words);
         tvUserFollow.setText(String.valueOf(mUser.count_of_followings));
         tvUserFans.setText(String.valueOf(mUser.count_of_fans));
