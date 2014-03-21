@@ -19,7 +19,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.westudio.wecampus.R;
 import com.westudio.wecampus.ui.base.BaseApplication;
 import com.westudio.wecampus.ui.base.ShareMenuActivity;
-import com.westudio.wecampus.ui.dev_tool.DevelopInfoPage;
+import com.westudio.wecampus.ui.devtool.DevelopInfoPage;
 import com.westudio.wecampus.util.CacheUtil;
 import com.westudio.wecampus.util.Config;
 

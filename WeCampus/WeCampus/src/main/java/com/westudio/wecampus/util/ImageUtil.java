@@ -96,8 +96,8 @@ public class ImageUtil {
         return Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
     }
 
-    public static byte[] cropBitmap(Bitmap bitmap) {
-        return cropBitmapToSize(bitmap, 32 * 1024);
+    public static byte[] cropCenterSquareToSize(Bitmap bitmap) {
+        return cropCenterSquareToSize(bitmap, 32 * 1024);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ImageUtil {
      * @param maxSize
      * @return
      */
-    public static byte[] cropBitmapToSize(Bitmap source, int maxSize) {
+    public static byte[] cropCenterSquareToSize(Bitmap source, int maxSize) {
         Bitmap bm = cropCenterSquare(source);
         int w = bm.getWidth();
         int h = bm.getHeight();
@@ -132,6 +132,43 @@ public class ImageUtil {
         }
 
         return baos.toByteArray();
+    }
+
+    /**
+     * 调整Bitmap到指定大小
+     * @param source
+     * @param size
+     * @return
+     */
+    public static Bitmap resizeImageTo(Bitmap source, int size) {
+        int w = source.getWidth();
+        int h = source.getHeight();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        source.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+
+        // 额外多减去1K，防止超出范围
+        Bitmap newBm = source;
+        if (b.length > (size)) {
+            double i = b.length / (size - 1024);
+            double newWidth = w / Math.sqrt(i);
+            double newHeight = h / Math.sqrt(i);
+            Matrix matrix = new Matrix();
+            float scaleWidth = ((float) newWidth) / w;
+            float scaleHeight = ((float) newHeight) / h;
+            matrix.postScale(scaleWidth, scaleHeight);
+            newBm = Bitmap.createBitmap(source, 0, 0, w,
+                    h, matrix, true);
+        }
+
+
+        return newBm;
+    }
+
+    public static void saveBitmapToPath(String path, Bitmap source) throws IOException{
+            FileOutputStream fos = new FileOutputStream(new File(path));
+            source.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
     }
 
     /**

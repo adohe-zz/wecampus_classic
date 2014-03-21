@@ -219,7 +219,7 @@
         </activity>
 
         <!-- 开发工具界面 -->
-        <activity android:name=".ui.dev_tool.DevelopInfoPage" />
+        <activity android:name=".ui.devtool.DevelopInfoPage" />
 
         <meta-data android:value="52d156f956240b7a260bf0a8" android:name="UMENG_APPKEY"/>
         <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>

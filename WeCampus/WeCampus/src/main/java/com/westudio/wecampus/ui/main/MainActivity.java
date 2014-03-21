@@ -174,7 +174,7 @@ public class MainActivity extends SherlockFragmentActivity {
                 titleRes = R.string.fragment_title_activities;
             } else if (type == ContentType.USERS) {
                 clazz = FriendsListFragment.class;
-                titleRes = R.string.follow_earch_other;
+                titleRes = R.string.menu_people;
             } else if (type == ContentType.SQUARE) {
                 clazz = SquareFragment.class;
                 titleRes = R.string.menu_square;

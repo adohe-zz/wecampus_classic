@@ -21,7 +21,7 @@ public class Config {
 
     public static String WB_APP_KEY() {
         if (IS_TEST){
-            return "2393509052";
+            return "3126350995";
         } else {
             return "2393509052";
         }

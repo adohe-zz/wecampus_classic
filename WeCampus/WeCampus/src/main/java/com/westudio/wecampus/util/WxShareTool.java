@@ -47,7 +47,7 @@ public class WxShareTool {
         mMessage.title = title;
         mMessage.mediaObject = webpageObject;
         if (thumb != null) {
-            mMessage.thumbData = ImageUtil.cropBitmap(thumb);
+            mMessage.thumbData = ImageUtil.cropCenterSquareToSize(thumb);
         }
         return this;
     }

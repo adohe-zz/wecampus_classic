@@ -1,4 +1,4 @@
-package com.westudio.wecampus.ui.dev_tool;
+package com.westudio.wecampus.ui.devtool;
 
 import android.content.Context;
 import android.os.Bundle;
