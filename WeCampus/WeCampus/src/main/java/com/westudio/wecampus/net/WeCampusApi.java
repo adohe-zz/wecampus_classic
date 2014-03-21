@@ -22,7 +22,6 @@ import com.westudio.wecampus.data.model.ActivityList;
 import com.westudio.wecampus.data.model.Advertisement;
 import com.westudio.wecampus.data.model.OrgFans;
 import com.westudio.wecampus.data.model.Organization;
-import com.westudio.wecampus.data.model.Participants;
 import com.westudio.wecampus.data.model.School;
 import com.westudio.wecampus.data.model.User;
 import com.westudio.wecampus.ui.base.BaseApplication;
@@ -105,7 +104,7 @@ public class WeCampusApi {
      */
     public static void getActivityList(Object tag, final int page, Response.Listener listener,
                 Response.ErrorListener errorListener) {
-        Request request = new GsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
+        Request request = new AuthedGsonRequest<Activity.ActivityRequestData>(Request.Method.GET,
                 HttpUtil.getActivityByIdWithOp(0, HttpUtil.ActivityOp.LIST, page),
                 Activity.ActivityRequestData.class, listener, errorListener);
 
