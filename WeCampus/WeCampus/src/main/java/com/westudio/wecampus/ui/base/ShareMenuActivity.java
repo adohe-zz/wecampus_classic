@@ -231,8 +231,8 @@ public class ShareMenuActivity extends BaseMenuActivity implements View.OnClickL
         if (isShareApp) {
             tool.sendShareAppMsg();
         } else {
-            final String title = "我在“" + getString(R.string.app_name) + "”发现了一个活动";
-            final String text = activity.title + "【" + activity.organization.name + "】，快来一起参加吧>>>";
+            final String title = "我在@WeCampus校园社交 发现了一个活动";
+            final String text = title + activity.title + "【" + activity.organization.name + "】，快来一起参加吧>>>";
             WeCampusApi.requestImage(activity.image, new ImageLoader.ImageListener() {
 
                 @Override

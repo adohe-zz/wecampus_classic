@@ -17,7 +17,7 @@
         android:lines="6"
         android:maxLines="10"
         android:scrollbars="vertical"
-        android:maxLength="200"
+        android:maxLength="25"
         android:gravity="top"
         android:id="@+id/update_nick_name"
         android:background="@drawable/shape_edittext_profile"/>
